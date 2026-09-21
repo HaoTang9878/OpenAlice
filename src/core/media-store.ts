@@ -42,7 +42,7 @@ const WORDS = [
   'ski','sky','sly','sob','sod','son',
 ] as const
 
-const MEDIA_DIR = dataPath('media')
+export const MEDIA_DIR = dataPath('media')
 
 /** YYYY-MM-DD date folder for today. */
 function datePath(): string {

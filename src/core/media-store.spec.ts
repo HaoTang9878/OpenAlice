@@ -1,16 +1,31 @@
 import { describe, it, expect } from 'vitest'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { writeFile, mkdir } from 'node:fs/promises'
 import { randomUUID } from 'node:crypto'
-import { resolveMediaPath, persistMedia } from './media-store.js'
+import { resolveMediaPath, persistMedia, MEDIA_DIR } from './media-store.js'
 
 // ==================== resolveMediaPath ====================
 
 describe('resolveMediaPath', () => {
-  it('should join MEDIA_DIR with the given name', () => {
-    const result = resolveMediaPath('2026-01-01/ace-aim-air.png')
+  it('resolves an existing file inside MEDIA_DIR', async () => {
+    // 造一个真实文件: 新实现走 realpath 包含性校验, 文件必须存在
+    const rel = '2026-01-01/ace-aim-air.png'
+    const abs = join(MEDIA_DIR, rel)
+    await mkdir(dirname(abs), { recursive: true })
+    await writeFile(abs, 'png')
+    const result = await resolveMediaPath(rel)
     expect(result).toContain(join('data', 'media', '2026-01-01', 'ace-aim-air.png'))
+  })
+
+  it('rejects traversal outside MEDIA_DIR', async () => {
+    // 安全回归(2026-09-21): ../ 穿越必须返回 null
+    expect(await resolveMediaPath('../../config/auth.json')).toBeNull()
+    expect(await resolveMediaPath('2026-01-01/../../sealing.key')).toBeNull()
+  })
+
+  it('returns null for a missing file', async () => {
+    expect(await resolveMediaPath('2026-01-01/no-such-file.png')).toBeNull()
   })
 })
 
