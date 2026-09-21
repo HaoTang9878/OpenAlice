@@ -1,6 +1,6 @@
 {
   "name": "open-alice",
-  "version": "0.93.1-beta",
+  "version": "0.1.0",
   "description": "File-based trading agent engine",
   "type": "module",
   "imports": {
@@ -131,8 +131,8 @@
     "zod": "^4.3.6"
   },
   "build": {
-    "appId": "com.traderalice.openalice",
-    "productName": "OpenAlice",
+    "appId": "top.openalpha.desktop",
+    "productName": "OpenAlpha",
     "directories": {
       "output": "dist/electron-app"
     },
@@ -187,8 +187,9 @@
     },
     "publish": [
       {
-        "provider": "generic",
-        "url": "https://download.openalice.ai/"
+        "provider": "github",
+        "owner": "HaoTang9878",
+        "repo": "OpenAlice"
       }
     ],
     "asarUnpack": [
@@ -213,7 +214,8 @@
         ]
       }
     ],
-    "afterPack": "../../scripts/desktop-after-pack.mjs"
+    "afterPack": "../../scripts/desktop-after-pack.mjs",
+    "artifactName": "OpenAlpha.Setup.${version}.${ext}"
   },
   "devDependencies": {
     "@ai-sdk/provider": "^3.0.8",

@@ -1,3 +1,7 @@
+> **OpenAlpha Desktop** — 本仓库是 [OpenAlice](https://github.com/TraderAlice/OpenAlice)
+> 的 AGPL-3.0 衍生版本（fork），仅做品牌置换（产品名/图标/窗口标题/发布渠道），
+> 功能与交互与上游保持一致。上游版权与许可证见 LICENSE / THIRD_PARTY_NOTICES.md。
+
 <p align="center">
   <img src="docs/images/alice-full.png" alt="OpenAlice" width="88">
 </p>
