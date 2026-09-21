@@ -7,9 +7,9 @@
  * Same content always maps to the same name. Files stored in `data/media/`.
  */
 import { createHash } from 'node:crypto'
-import { readFile, copyFile, mkdir } from 'node:fs/promises'
+import { readFile, copyFile, mkdir, realpath, stat } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
-import { extname, join, posix } from 'node:path'
+import { extname, join, posix, resolve, sep } from 'node:path'
 import { dataPath } from '@/core/paths.js'
 
 /** 256 short, common English words — one per byte value. */
@@ -82,7 +82,23 @@ export async function persistMedia(filePath: string): Promise<string> {
   return posix.join(dateDir, name)
 }
 
-/** Resolve a media relative path to its absolute path on disk. */
-export function resolveMediaPath(name: string): string {
-  return join(MEDIA_DIR, name)
+/**
+ * Resolve a media relative path to its absolute path on disk.
+ *
+ * 安全修复(2026-09-21): 旧实现是裸 join(MEDIA_DIR, name) —— Hono 会把路由
+ * 参数里的 %2F 解码, 于是 /api/media/..%2Fconfig/auth.json 能穿越到
+ * data/config/auth.json(含 admin token)。改为 realpath 包含性校验:
+ * 解析符号链接后必须仍在 MEDIA_DIR 内且是普通文件, 否则返回 null(404)。
+ * 与 src/core/inbox-files.ts 的同类防护保持一致。
+ */
+export async function resolveMediaPath(name: string): Promise<string | null> {
+  try {
+    const root = await realpath(MEDIA_DIR)
+    const target = await realpath(resolve(root, name))
+    if (!target.startsWith(root + sep)) return null
+    if (!(await stat(target)).isFile()) return null
+    return target
+  } catch {
+    return null
+  }
 }

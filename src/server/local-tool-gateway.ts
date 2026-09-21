@@ -43,8 +43,17 @@ export class LocalToolGatewayPlugin implements Plugin {
 
   async start(_ctx: EngineContext) {
     const app = new Hono()
+    // 安全收紧(2026-09-21): 旧为 origin:'*' + 零鉴权, 任意网页可跨源调用
+    // 本地工具网关。收敛为仅回环来源(浏览器场景), 非浏览器客户端(Node CLI/
+    // MCP)不发 Origin, CORS 不参与, 功能不受影响。
     app.use('*', cors({
-      origin: '*',
+      origin: (origin: string) => {
+        if (!origin) return origin
+        try {
+          const host = new URL(origin).hostname
+          return ['127.0.0.1', 'localhost', '::1'].includes(host) ? origin : undefined
+        } catch { return undefined }
+      },
       allowMethods: ['GET', 'POST', 'OPTIONS'],
       allowHeaders: ['Content-Type', 'x-openalice-run', 'x-openalice-session'],
     }))

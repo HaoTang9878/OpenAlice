@@ -24,7 +24,9 @@ export function createMediaRoutes() {
 
   app.get('/:date/:name', async (c) => {
     const { date, name } = c.req.param()
-    const filePath = resolveMediaPath(join(date, name))
+    // 包含性校验在 resolveMediaPath 内(realpath + 前缀检查); null → 404
+    const filePath = await resolveMediaPath(join(date, name))
+    if (!filePath) return c.notFound()
 
     try {
       const buf = await readFile(filePath)
