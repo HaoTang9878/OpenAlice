@@ -1,7 +1,7 @@
 /**
  * MCP Server settings — separate from external notification connectors.
  *
- * The MCP server exports OpenAlice's ToolCenter to external MCP clients
+ * The MCP server exports OpenAlpha's ToolCenter to external MCP clients
  * (Claude Desktop, codex inside workspaces, anything that speaks MCP
  * over streamable-http). It is an exported tool protocol, while Connector
  * Service owns optional outbound notifications to external IM platforms.

@@ -3,7 +3,7 @@
  *
  * This is presentation-grade state for the browser, not a persisted store.
  * Each runtime's own transcript (Pi JSONL, Claude project files, Codex
- * rollouts, ACP agent storage) stays the durable conversation; Alice keeps one
+ * rollouts, ACP agent storage) stays the durable conversation; OpenAlpha keeps one
  * live process per Session record and projects its protocol into this shape.
  * The shape borrows Pi's minimal message model on purpose: every supported
  * wire maps onto it without inventing a new schema, and the browser presenter

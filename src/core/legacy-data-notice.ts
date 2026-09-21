@@ -26,7 +26,7 @@ export function legacyDataNoticeLines(opts?: { cwd?: string }): string[] {
   if (existsSync(dataPath('config'))) return []
   return [
     `Found an existing data/ store in this checkout (${resolve(cwd, 'data')}).`,
-    `OpenAlice now keeps user data in ${defaultUserDataHome}/data — shared across checkouts and the desktop app.`,
+    `OpenAlpha now keeps user data in ${defaultUserDataHome}/data — shared across checkouts and the desktop app.`,
     `To adopt this checkout's data:  mv "${resolve(cwd, 'data')}" "${defaultUserDataHome}/data"`,
     `Continuing with a fresh store. (Pin the old behavior with OPENALICE_HOME="$PWD".)`,
   ]

@@ -9,7 +9,7 @@ import {
 } from './launch-context.ts'
 
 describe('ResolvedLaunchContext', () => {
-  it('resolves defaults < machine < AliceProject < env < CLI with field provenance', () => {
+  it('resolves defaults < machine < OpenAlphaProject < env < CLI with field provenance', () => {
     const context = resolveLaunchContext({
       homeDir: '/Users/alice',
       cwd: '/repo',
@@ -51,7 +51,7 @@ describe('ResolvedLaunchContext', () => {
       port: 44_000,
       appDir: resolve('/repo', 'flag-app'),
       updateChecks: true,
-      supervisorRoot: join('/Users/alice', 'Library', 'Application Support', 'OpenAlice', 'Supervisor'),
+      supervisorRoot: join('/Users/alice', 'Library', 'Application Support', 'OpenAlpha', 'Supervisor'),
       managedPi: {
         codingAgentDir: join(resolve('/repo', 'flag-home'), 'runtime', 'pi'),
         sessionDir: join(resolve('/repo', 'flag-home'), 'runtime', 'pi', 'sessions'),
@@ -117,7 +117,7 @@ describe('ResolvedLaunchContext', () => {
     })
     expect(installed.provenance.appDir).toEqual({
       source: 'installed-runtime',
-      detail: 'installed OpenAlice Runtime',
+      detail: 'installed OpenAlpha Runtime',
     })
 
     const configured = resolveLaunchContext({
@@ -197,7 +197,7 @@ describe('ResolvedLaunchContext', () => {
     })).toThrow(/CONTENT_IDENTITY/)
   })
 
-  it('requires a complete home for a named non-default AliceProject', () => {
+  it('requires a complete home for a named non-default OpenAlphaProject', () => {
     expect(() => resolveLaunchContext({
       homeDir: '/home/alice',
       env: { OPENALICE_INSTANCE: 'research' },
@@ -225,7 +225,7 @@ describe('ResolvedLaunchContext', () => {
     })).toThrow(/must be one of/)
   })
 
-  it('projects AliceProject-private Pi roots without mutating the caller environment', () => {
+  it('projects OpenAlphaProject-private Pi roots without mutating the caller environment', () => {
     const base = {
       PATH: '/bin',
       OPENALICE_MANAGED_PI_PATH: '/managed/pi/cli.js',

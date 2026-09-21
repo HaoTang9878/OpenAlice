@@ -44,11 +44,11 @@ export function authRetryDelayMs(attempt: number): number {
 interface AuthContextValue {
   state: AuthState
   status: AuthStatus | null
-  /** The last status check was inconclusive because Alice is unavailable.
+  /** The last status check was inconclusive because OpenAlpha is unavailable.
    *  Keep the last confirmed auth decision while retrying. */
   backendUnavailable: boolean
   /** Monotonic signal for consumers with their own transport. Increments only
-   *  when Alice answers again after a confirmed transport outage. */
+   *  when OpenAlpha answers again after a confirmed transport outage. */
   backendRecoveryGeneration: number
   /** Re-check /api/auth/status. Called after login success. */
   refresh: () => Promise<void>
@@ -113,7 +113,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch {
       if (!mountedRef.current || generation !== requestGenerationRef.current) return
       // Absence of an answer is not an authentication decision. Preserve the
-      // last confirmed status (and therefore the mounted App) while Alice's
+      // last confirmed status (and therefore the mounted App) while OpenAlpha's
       // watch process comes back, then retry with a short capped backoff.
       backendUnavailableRef.current = true
       setBackendUnavailable(true)
@@ -146,7 +146,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => window.clearTimeout(timer)
   }, [backendUnavailable, refresh, retryAttempt])
 
-  // Once Alice has answered at least once, keep a cheap core heartbeat. This
+  // Once OpenAlpha has answered at least once, keep a cheap core heartbeat. This
   // detects a quiet backend shutdown even when the current page makes no API
   // requests. The auth status route is side-effect free and does not extend a
   // session.

@@ -170,16 +170,16 @@ function agyToolEvents(step: Record<string, unknown>): readonly HeadlessOutputEv
  * stays on the existing CliAdapter contract: PATH `agy` only, argv flags, and
  * env projection. Never spawn `antigravity` or `gemini` — those names are not
  * the installed binary. Do not pass `--agent` (Antigravity custom agents, not
- * Alice AgentId), `--add-dir` / `--new-project` / `--project` (spawn cwd is
+ * OpenAlpha AgentId), `--add-dir` / `--new-project` / `--project` (spawn cwd is
  * enough), `--sandbox`, `--json-schema`, `--resume` (unknown; resume is
  * `--conversation` / `--continue`), or `--trust` / `--force`. Headless uses
  * `--output-format stream-json --dangerously-skip-permissions -p <prompt>`.
  * Do not put the prompt after `--`: live 1.1.13 on the Gemini key path
  * exits immediately with "Agent execution terminated due to error." There
- * is no Alice-owned Antigravity project file, so this adapter has no
+ * is no OpenAlpha-owned Antigravity project file, so this adapter has no
  * deprecated `writeAiConfig` export: managed Sessions use `sessionRuntime`
  * env only. `GEMINI_API_KEY` alone has no effect unless the user already
- * set `modelProvider: "gemini"` in settings.json — Alice does not write
+ * set `modelProvider: "gemini"` in settings.json — OpenAlpha does not write
  * that file. First-party `--model` suggestions live in `./agy-models.ts`;
  * this adapter does not validate the id.
  */

@@ -30,12 +30,12 @@ import { SidebarChildRow, SidebarChildRowButton } from '../SidebarChildRow';
  *
  * Originally ported wholesale from the standalone auto-quant launcher with
  * its own hand-written `.sidebar-*` CSS (a GitHub-dark island). Migrated to
- * OpenAlice's Tailwind + semantic-token idiom so it reads as a native
+ * OpenAlpha's Tailwind + semantic-token idiom so it reads as a native
  * secondary sidebar — same row/active-bar/header conventions as Inbox.
  * Behaviour is unchanged: select workspace/session, spawn (with multi-agent
  * menu), configure, delete, pause/resume (state-as-action), and the
  * collapsed headless-runs group. The shared `SessionRow` is also used by the
- * "Ask Alice" chat sidebar.
+ * "Ask OpenAlpha" chat sidebar.
  */
 
 const HEADLESS_POLL_MS = 5000;

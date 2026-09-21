@@ -11,10 +11,10 @@ export interface BootstrapInvocation {
 
 /**
  * A Bun-compiled executable cannot interpret an external `.mjs` file merely
- * by re-executing `process.execPath`: that path is Alice itself. Re-enter the
+ * by re-executing `process.execPath`: that path is OpenAlpha itself. Re-enter the
  * same executable through a private role so the embedded Bun runtime imports
  * the bootstrap without requiring a system Node or Bun installation. Packaged
- * Electron also re-enters Alice: its physical templates cannot resolve the
+ * Electron also re-enters OpenAlpha: its physical templates cannot resolve the
  * dependencies inside app.asar through normal parent-directory lookup.
  */
 export function resolveMjsBootstrapInvocation(

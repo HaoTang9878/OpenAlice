@@ -67,8 +67,8 @@ describe('runtimePath', () => {
 
 describe('defaultPath', () => {
   it('joins parts under <APP_RESOURCES_HOME>/default/', async () => {
-    const { defaultPath } = await loadPaths({ OPENALICE_APP_HOME: '/Apps/OpenAlice.app/Contents/Resources' })
-    expect(defaultPath('assets', 'example.txt')).toBe(resolve('/Apps/OpenAlice.app/Contents/Resources', 'default', 'assets', 'example.txt'))
+    const { defaultPath } = await loadPaths({ OPENALICE_APP_HOME: '/Apps/OpenAlpha.app/Contents/Resources' })
+    expect(defaultPath('assets', 'example.txt')).toBe(resolve('/Apps/OpenAlpha.app/Contents/Resources', 'default', 'assets', 'example.txt'))
   })
 
   it('falls back to process.cwd() when OPENALICE_APP_HOME is unset', async () => {
@@ -119,13 +119,13 @@ describe('two homes are independent', () => {
 
   it('both env vars can be set together (packaged-app shape)', async () => {
     const { dataPath, defaultPath, uiBundlePath, templatesPath } = await loadPaths({
-      OPENALICE_HOME: '/Users/x/Library/Application Support/OpenAlice',
-      OPENALICE_APP_HOME: '/Applications/OpenAlice.app/Contents/Resources',
+      OPENALICE_HOME: '/Users/x/Library/Application Support/OpenAlpha',
+      OPENALICE_APP_HOME: '/Applications/OpenAlpha.app/Contents/Resources',
     })
-    expect(dataPath('config')).toBe(resolve('/Users/x/Library/Application Support/OpenAlice', 'data', 'config'))
-    expect(defaultPath('assets', 'example.txt')).toBe(resolve('/Applications/OpenAlice.app/Contents/Resources', 'default', 'assets', 'example.txt'))
-    expect(uiBundlePath()).toBe(resolve('/Applications/OpenAlice.app/Contents/Resources', 'ui', 'dist'))
-    expect(templatesPath()).toBe(resolve('/Applications/OpenAlice.app/Contents/Resources', 'src', 'workspaces', 'templates'))
+    expect(dataPath('config')).toBe(resolve('/Users/x/Library/Application Support/OpenAlpha', 'data', 'config'))
+    expect(defaultPath('assets', 'example.txt')).toBe(resolve('/Applications/OpenAlpha.app/Contents/Resources', 'default', 'assets', 'example.txt'))
+    expect(uiBundlePath()).toBe(resolve('/Applications/OpenAlpha.app/Contents/Resources', 'ui', 'dist'))
+    expect(templatesPath()).toBe(resolve('/Applications/OpenAlpha.app/Contents/Resources', 'src', 'workspaces', 'templates'))
   })
 })
 

@@ -2,7 +2,7 @@
  * Reference-data routes — `/api/reference/*`.
  *
  * Thin HTTP adapters over the reference-data contract
- * (`domain/market-data/reference/`). This namespace is OpenAlice's own
+ * (`domain/market-data/reference/`). This namespace is OpenAlpha's own
  * low-frequency data standard — new frontend surfaces consume THIS, never
  * the OpenBB-compatible `/api/market-data-v1` passthrough (which is on its
  * way out).

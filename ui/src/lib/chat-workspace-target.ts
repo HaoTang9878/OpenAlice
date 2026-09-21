@@ -9,7 +9,7 @@ export function workspaceActivityMs(workspace: Pick<Workspace, 'createdAt' | 'se
   return Number.isFinite(created) ? created : 0
 }
 
-/** Resolve Ask Alice's current Chat workspace. Explicit selection wins, then
+/** Resolve Ask OpenAlpha's current Chat workspace. Explicit selection wins, then
  *  the persisted recent Chat workspace, then latest activity when that pointer
  *  is missing or stale. */
 export function resolveChatWorkspaceTarget(

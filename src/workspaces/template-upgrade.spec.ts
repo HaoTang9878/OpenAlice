@@ -320,7 +320,7 @@ describe('TemplateUpgradeManager', () => {
     expect(JSON.parse(await readFile(join(workspace.dir, '.alice/alice-harness-config.json'), 'utf8')).cli.alice.enabled).toBe(false);
   });
 
-  it('upgrades Alice skills without changing a source-owned Harness or local config', async () => {
+  it('upgrades OpenAlpha skills without changing a source-owned Harness or local config', async () => {
     template = { ...template, upgradeStrategy: undefined };
     await mkdir(join(workspace.dir, '.agents/skills/alice'), { recursive: true });
     await writeFile(join(workspace.dir, '.agents/skills/alice/SKILL.md'), 'alice v1');
@@ -338,7 +338,7 @@ describe('TemplateUpgradeManager', () => {
     expect(await manager().currentVersion(workspace)).toBe('1.0.0');
   });
 
-  it('applies Alice Skill updates during an active Session', async () => {
+  it('applies OpenAlpha Skill updates during an active Session', async () => {
     incoming = { '.agents/skills/alice/SKILL.md': file('updated live skill') };
     const upgrade = manager(true, true);
     const plan = await upgrade.plan(workspace.id);
@@ -356,7 +356,7 @@ describe('TemplateUpgradeManager', () => {
       .rejects.toMatchObject({ code: 'staged_changes' });
   });
 
-  it('keeps Alice skills outside template upgrade and blocks busy config writes', async () => {
+  it('keeps OpenAlpha skills outside template upgrade and blocks busy config writes', async () => {
     incoming = { ...incoming, '.agents/skills/alice/SKILL.md': file('not template-owned') };
     expect((await manager().plan(workspace.id)).files.some((file) => file.path.includes('/alice/'))).toBe(false);
     await expect(manager(true, true).configureHarness(workspace.id, { schemaVersion: 1, cli: {} })).rejects.toMatchObject({ code: 'busy' });

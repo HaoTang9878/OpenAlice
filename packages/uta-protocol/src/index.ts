@@ -1,8 +1,8 @@
 /**
- * UTA-Alice wire protocol.
+ * UTA-OpenAlpha wire protocol.
  *
  * Contract package shared by:
- *   - Alice main process (consumed as client SDK + types)
+ *   - OpenAlpha main process (consumed as client SDK + types)
  *   - UTA service (consumed as runtime schema validators + handler types)
  *
  * The protocol is treated as a long-term public API — even though UTA today

@@ -104,7 +104,7 @@ async function presentExistingOwnerDialog(
   const buttons = dialogButtons(decision)
   const { response } = await showMessageBox({
     type: decision.heartbeatStale ? 'warning' : 'question',
-    title: 'OpenAlice is already running',
+    title: 'OpenAlpha is already running',
     message: dialogMessage(decision),
     detail: dialogDetail(decision),
     buttons,
@@ -121,15 +121,15 @@ async function presentExistingOwnerDialog(
       return { action: 'quit' }
     } catch (error) {
       showErrorBox(
-        'OpenAlice — could not open the existing Runtime',
-        `${error instanceof Error ? error.message : String(error)}\n\nThe original AliceProject was left running.`,
+        'OpenAlpha — could not open the existing Runtime',
+        `${error instanceof Error ? error.message : String(error)}\n\nThe original OpenAlphaProject was left running.`,
       )
       return presentExistingOwnerDialog(decision, dependencies)
     }
   }
   if (chosen === 'Choose another data location') return { action: 'choose-another' }
-  if (chosen === 'Stop the other AliceProject and start this one'
-    || chosen === 'Stop it and start this AliceProject') {
+  if (chosen === 'Stop the other OpenAlphaProject and start this one'
+    || chosen === 'Stop it and start this OpenAlphaProject') {
     return { action: 'continue', takeover: true }
   }
   return { action: 'quit' }
@@ -137,14 +137,14 @@ async function presentExistingOwnerDialog(
 
 export function dialogButtons(decision: ExistingOwnerStartupDecision): string[] {
   const takeover = decision.kind === 'handoff'
-    ? 'Stop the other AliceProject and start this one'
-    : 'Stop it and start this AliceProject'
+    ? 'Stop the other OpenAlphaProject and start this one'
+    : 'Stop it and start this OpenAlphaProject'
   const buttons: string[] = []
   if (decision.allowOpenBrowser) buttons.push('Open in browser')
   // Keep a real cancel path even when browser handoff is the recommended
   // action. Electron maps window close/Escape to cancelId; pointing that at
   // Open in browser would turn dismissal into an unexpected side effect.
-  buttons.push('Keep existing AliceProject')
+  buttons.push('Keep existing OpenAlphaProject')
   if (decision.allowChooseAnother) buttons.push('Choose another data location')
   if (decision.allowTakeover) buttons.push(takeover)
   return buttons
@@ -158,14 +158,14 @@ export function dialogDefaultId(
   if (decision.defaultAction === 'takeover') {
     return Math.max(0, buttons.findIndex((button) => button.startsWith('Stop ')))
   }
-  return Math.max(0, buttons.indexOf('Keep existing AliceProject'))
+  return Math.max(0, buttons.indexOf('Keep existing OpenAlphaProject'))
 }
 
 export function dialogCancelId(
   decision: ExistingOwnerStartupDecision,
   buttons: readonly string[] = dialogButtons(decision),
 ): number {
-  const keep = buttons.indexOf('Keep existing AliceProject')
+  const keep = buttons.indexOf('Keep existing OpenAlphaProject')
   if (keep >= 0) return keep
   return Math.max(0, buttons.indexOf('Open in browser'))
 }
@@ -174,7 +174,7 @@ function dialogMessage(decision: ExistingOwnerStartupDecision): string {
   if (decision.kind === 'handoff') {
     return `A ${ownerLabel(decision.surface)} is already using this data location.`
   }
-  return `Another AliceProject (${decision.surface}) is using this data.`
+  return `Another OpenAlphaProject (${decision.surface}) is using this data.`
 }
 
 function dialogDetail(decision: ExistingOwnerStartupDecision): string {

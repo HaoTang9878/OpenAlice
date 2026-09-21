@@ -1,7 +1,7 @@
 /**
- * BFF proxy for `/api/trading/*` — Alice → UTA.
+ * BFF proxy for `/api/trading/*` — OpenAlpha → UTA.
  *
- * UI talks to Alice on a single origin (decision #2 of UTA-split v1); this
+ * UI talks to OpenAlpha on a single origin (decision #2 of UTA-split v1); this
  * route forwards every trading request unchanged to the UTA service. v1
  * has no auth between the two — UTA is bound to 127.0.0.1 only, so the
  * trust boundary is the host, not the request.
@@ -19,7 +19,7 @@ import { decodeUTAHealth } from '../../services/uta-supervisor/health.js'
 
 // Total request timeout. UTA is on the loopback interface so connect is
 // instant — this guards against handlers that legitimately take seconds
-// (broker queries, contract searches) hanging Alice forever. 30s is
+// (broker queries, contract searches) hanging OpenAlpha forever. 30s is
 // well above the typical broker-API SLA without being a footgun.
 const PROXY_TIMEOUT_MS = 30_000
 const STATUS_TIMEOUT_MS = 1_000
@@ -132,7 +132,7 @@ export function createTradingProxyRoutes(opts: {
       return c.json({
         error: 'UTA unavailable',
         detail: 'UTA URL is not configured',
-        hint: 'Trading service is not reachable. Alice is running in lite mode.',
+        hint: 'Trading service is not reachable. OpenAlpha is running in lite mode.',
       }, 503)
     }
     const incoming = c.req.raw
@@ -168,7 +168,7 @@ export function createTradingProxyRoutes(opts: {
       return c.json({
         error: 'UTA unavailable',
         detail: msg,
-        hint: 'Trading service is not reachable. Alice is running in lite mode.',
+        hint: 'Trading service is not reachable. OpenAlpha is running in lite mode.',
       }, 502)
     } finally {
       clearTimeout(connectTimer)

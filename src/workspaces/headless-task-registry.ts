@@ -8,9 +8,9 @@
  * SessionRegistry).
  *
  * v1 liveness is EPHEMERAL: a headless task is an in-process child, so it dies
- * when Alice restarts. `reconcile()` on boot marks any leftover `running` record
+ * when OpenAlpha restarts. `reconcile()` on boot marks any leftover `running` record
  * `interrupted` (its process is gone) — so the panel never shows a zombie
- * "running" from a previous Alice life. (Durable/detached runs are a later
+ * "running" from a previous OpenAlpha life. (Durable/detached runs are a later
  * upgrade; see project_workspace_automation_design.)
  */
 import { randomBytes } from 'node:crypto'
@@ -186,7 +186,7 @@ export class HeadlessTaskRegistry {
     }
   }
 
-  /** Boot fixup: a leftover `running` task is a zombie from a dead Alice (v1 in-process). */
+  /** Boot fixup: a leftover `running` task is a zombie from a dead OpenAlpha (v1 in-process). */
   private async reconcile(): Promise<void> {
     let changed = false
     for (const t of this.tasks) {

@@ -1,6 +1,6 @@
 /**
- * Observe failed OpenAlice API requests without confusing a single subsystem
- * failure with an unavailable Alice process.
+ * Observe failed OpenAlpha API requests without confusing a single subsystem
+ * failure with an unavailable OpenAlpha process.
  *
  * A failed request only asks AuthProvider to run its independent
  * `/api/auth/status` probe. AuthProvider remains the authority that decides

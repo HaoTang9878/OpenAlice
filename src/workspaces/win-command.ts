@@ -99,7 +99,7 @@ export function resolveLaunchCommand(
     // gets a chance to re-parse &, |, %, ^, and friends.
     const standalone = opts.bunStandalone
       ?? (globalThis as typeof globalThis & { __OPENALICE_BUN_STANDALONE__?: boolean }).__OPENALICE_BUN_STANDALONE__ === true;
-    // A compiled OpenAlice executable is not a general Node interpreter.
+    // A compiled OpenAlpha executable is not a general Node interpreter.
     // External npm agents retain their own host Node requirement.
     const node = opts.nodeExecPath ?? (standalone
       ? lookupExactOnWindowsPath('node.exe', env)

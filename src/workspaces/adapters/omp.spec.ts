@@ -28,7 +28,7 @@ function ctx(extra: Partial<SpawnContext> = {}): SpawnContext {
 describe('omp session layout', () => {
   it('encodes a home-relative cwd the way 17.3.4 stores sessions', () => {
     expect(encodeOmpSessionDirName(
-      '/Users/ame/.cursor/worktrees/OpenAlice/grok',
+      '/Users/ame/.cursor/worktrees/OpenAlpha/grok',
       '/Users/ame',
       '/var/folders/xx/tmp',
     )).toBe('-.cursor-worktrees-OpenAlice-grok');
@@ -190,7 +190,7 @@ describe('omp sessionRuntime', () => {
     expect(JSON.stringify(projected.interactiveArgs)).not.toContain(SECRET);
   });
 
-  it('rejects ultra and maps the remaining Alice efforts', () => {
+  it('rejects ultra and maps the remaining OpenAlpha efforts', () => {
     expect(ompThinkingArg('high')).toBe('high');
     expect(ompThinkingArg('none')).toBe('off');
     expect(() => ompThinkingArg('ultra')).toThrow(/ultra/);

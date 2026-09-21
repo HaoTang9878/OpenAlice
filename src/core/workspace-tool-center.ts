@@ -5,8 +5,8 @@
  * concrete tool instances that don't care who is calling. WorkspaceToolCenter
  * holds *factories* — each one takes a workspace identity (wsId, label,
  * shared deps) and returns a concrete Tool whose execute() closes over that
- * identity. This is how OpenAlice exposes the "workspace's reverse channel
- * back to OpenAlice" surface (inbox_push and future workspace-scoped tools)
+ * identity. This is how OpenAlpha exposes the "workspace's reverse channel
+ * back to OpenAlpha" surface (inbox_push and future workspace-scoped tools)
  * without ever asking the AI agent to traffic its own workspaceId.
  *
  * The MCP server's `/mcp/:wsId` route invokes every factory with the URL's
@@ -17,9 +17,9 @@
  *
  * Why a separate registry instead of marking ToolCenter tools as
  * "workspace-scoped": the surface areas are genuinely different. ToolCenter
- * is "OpenAlice's services for anyone with an MCP client" — trading, market
+ * is "OpenAlpha's services for anyone with an MCP client" — trading, market
  * data, news, brain. WorkspaceToolCenter is "this specific workspace's
- * communication back to OpenAlice." Mixing them under one registry with a
+ * communication back to OpenAlpha." Mixing them under one registry with a
  * scope flag would tangle access control with tool execution, and external
  * MCP consumers would see workspace-shaped tools they can't sensibly use.
  */

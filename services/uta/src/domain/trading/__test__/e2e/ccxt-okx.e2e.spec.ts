@@ -1,7 +1,7 @@
 /**
  * CcxtBroker e2e — real calls against OKX demo trading.
  *
- * Reads Alice's config, picks the first OKX account whose preset
+ * Reads OpenAlpha's config, picks the first OKX account whose preset
  * resolves to a paper/demo mode (isPaperPreset === true). If none
  * configured, the entire suite skips.
  *

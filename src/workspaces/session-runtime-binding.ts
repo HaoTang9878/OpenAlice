@@ -47,7 +47,7 @@ export interface SessionRuntimeSelection {
  * Sessions may adopt a Workspace-local creation default, while an existing
  * legacy Session whose identity predates runtime bindings must not silently
  * adopt whatever provider happens to be in that Workspace today. Native auth,
- * model, and provider discovery remain owned by the child runtime; OpenAlice
+ * model, and provider discovery remain owned by the child runtime; OpenAlpha
  * may still project an independently persisted model or effort override.
  */
 export function createNativeSessionRuntimeBinding(input: {

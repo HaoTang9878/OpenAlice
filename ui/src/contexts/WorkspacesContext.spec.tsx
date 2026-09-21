@@ -254,7 +254,7 @@ describe('WorkspacesProvider conversation routing', () => {
     })
   })
 
-  it('opens a persistent headless-first Session on the Ask Alice surface', async () => {
+  it('opens a persistent headless-first Session on the Ask OpenAlpha surface', async () => {
     render(
       <ToastProvider>
         <WorkspacesProvider>

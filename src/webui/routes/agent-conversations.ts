@@ -1,7 +1,7 @@
 /**
  * Read-only Web UI projection of the private Agent conversation event log.
  *
- * The route is mounted below OpenAlice's normal auth gate and exposes joined,
+ * The route is mounted below OpenAlpha's normal auth gate and exposes joined,
  * typed records only. It never exposes the launcher path or a filesystem read
  * primitive, and it owns no replay/resume/delete operations.
  */

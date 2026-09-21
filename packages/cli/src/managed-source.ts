@@ -87,14 +87,14 @@ export async function inspectManagedSource(
   if (!layout) {
     throw managedSourceError(
       'EMANAGEDSOURCEUNAVAILABLE',
-      'Managed source preparation is available from an installed OpenAlice CLI. This source-run CLI should use its current checkout.',
+      'Managed source preparation is available from an installed OpenAlpha CLI. This source-run CLI should use its current checkout.',
     )
   }
   const appDir = join(
     layout.installRoot,
     'sources',
     managedSourceKey(source),
-    'OpenAlice',
+    'OpenAlpha',
   )
   const inspect = dependencies.inspectCheckout ?? inspectSourceCheckout
   return {
@@ -117,14 +117,14 @@ export async function prepareManagedSource(
   if (plan.state === 'invalid') {
     throw managedSourceError(
       'EMANAGEDSOURCECOLLISION',
-      `The managed source path exists but is not an OpenAlice checkout: ${plan.appDir}`,
+      `The managed source path exists but is not an OpenAlpha checkout: ${plan.appDir}`,
     )
   }
 
   const parent = dirname(plan.appDir)
   const temporary = join(
     parent,
-    `.OpenAlice.prepare.${process.pid}.${randomUUID()}`,
+    `.OpenAlpha.prepare.${process.pid}.${randomUUID()}`,
   )
   await mkdir(parent, { recursive: true, mode: 0o700 })
   const runGit = dependencies.runGit ?? runGitChecked
@@ -149,7 +149,7 @@ export async function prepareManagedSource(
     if (await inspectSourceCheckout(temporary) !== 'present') {
       throw managedSourceError(
         'EMANAGEDSOURCEINVALID',
-        'The downloaded repository is not a valid OpenAlice source checkout.',
+        'The downloaded repository is not a valid OpenAlpha source checkout.',
       )
     }
     await rename(temporary, plan.appDir)
@@ -161,7 +161,7 @@ export async function prepareManagedSource(
     if (isManagedSourceError(error)) throw error
     throw managedSourceError(
       'EMANAGEDSOURCEPREPARE',
-      `Could not prepare the managed OpenAlice source: ${errorMessage(error)}`,
+      `Could not prepare the managed OpenAlpha source: ${errorMessage(error)}`,
     )
   }
 
@@ -215,7 +215,7 @@ function runGitChecked(
     child.once('error', (error) => {
       if (isNodeError(error, 'ENOENT')) {
         rejectPromise(new Error(
-          'Git is required to prepare the managed source. Re-run the OpenAlice installer with --with-runtime-deps, or install Git and retry.',
+          'Git is required to prepare the managed source. Re-run the OpenAlpha installer with --with-runtime-deps, or install Git and retry.',
         ))
       } else {
         rejectPromise(error)

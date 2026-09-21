@@ -18,7 +18,7 @@
  *   - Short positions are not modeled — spot holdings are long-only.
  *   - Splits / rebases / token migrations: not modeled.
  *   - FIFO lot tracking for tax accounting: WAC only.
- *   - Pre-Alice deposits: handled via `reconcileBalance`, but the cost
+ *   - Pre-OpenAlpha deposits: handled via `reconcileBalance`, but the cost
  *     attribution will be "current price at first observation" rather
  *     than the user's true acquisition cost.
  */

@@ -7,7 +7,7 @@
  * community-reported "fred 配不下来" failure modes live.
  *
  * Run: pnpm test:external:readonly
- * Skips if OpenAlice config has no `fred` key configured.
+ * Skips if OpenAlpha config has no `fred` key configured.
  */
 
 import { describe, it, expect, beforeAll, beforeEach } from 'vitest'

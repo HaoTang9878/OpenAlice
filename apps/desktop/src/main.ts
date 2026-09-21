@@ -1,17 +1,17 @@
 /**
- * Electron main process — OpenAlice's desktop guardian.
+ * Electron main process — OpenAlpha's desktop guardian.
  *
  * Supervises the same optional-service topology as scripts/guardian/prod.mjs:
  *   1. UTA service  (services/uta/dist/uta.js, bind 127.0.0.1)
  *   2. Connector Service (services/connector/dist/connector.js, optional)
- *   3. Alice main   (dist/main.js)
+ *   3. OpenAlpha main   (dist/main.js)
  * plus the desktop-only concerns: data relocation, BrowserWindow, quit UX.
  *
  * Lifecycle:
  *   relocate data → resolve ports → spawn UTA unless lite mode disables it
- *   → spawn Alice (UTA URL or lite env injected) → wait Alice ready
+ *   → spawn OpenAlpha (UTA URL or lite env injected) → wait OpenAlpha ready
  *   → open window. Watch `data/control/restart-uta.flag` → respawn UTA.
- *   On quit or unexpected Alice exit: cascade tree-kill both children.
+ *   On quit or unexpected OpenAlpha exit: cascade tree-kill both children.
  *
  * The port + supervision logic is an inline mirror of
  * scripts/guardian/{shared.ts,prod.mjs} — the desktop package is a separate
@@ -96,7 +96,7 @@ function showFatalDesktopError(title: string, message: string): void {
   const logDetail = desktopDiagnostics ? `\n\nDiagnostic log:\n${desktopDiagnostics.path}` : ''
   dialog.showErrorBox(
     title,
-    `${message}${childDetail ? `\n\nLast Alice output:\n${childDetail}` : ''}${logDetail}`,
+    `${message}${childDetail ? `\n\nLast OpenAlpha output:\n${childDetail}` : ''}${logDetail}`,
   )
 }
 
@@ -134,7 +134,7 @@ if (existingOwnerSmokeMode()) {
 }
 
 // ── Cross-platform process-tree kill ─────────────────────────
-// Inline mirror of scripts/guardian/shared.ts:killTree. UTA and Alice each
+// Inline mirror of scripts/guardian/shared.ts:killTree. UTA and OpenAlpha each
 // spawn grandchildren (node-pty terminals, workspace CLIs). On Windows
 // `child.kill()` reaps only the direct child and orphans those grandchildren
 // — they keep holding their ports, breaking UTA restart and leaving zombies
@@ -261,7 +261,7 @@ async function resolveChildProxyEnv(): Promise<Record<string, string>> {
   try {
     // Chromium already understands the host system proxy, including PAC.
     // Resolve one representative HTTPS API URL and pass a concrete proxy to
-    // the pure-Node Alice/UTA children, whose fetch does not consult Chromium.
+    // the pure-Node OpenAlpha/UTA children, whose fetch does not consult Chromium.
     const rules = await session.defaultSession.resolveProxy('https://api.openai.com/')
     return proxyEnvFromRules(rules, process.env)
   } catch (err) {
@@ -304,7 +304,7 @@ async function waitForAliceReady(timeoutMs = READY_TIMEOUT_MS): Promise<void> {
     }
     await new Promise((r) => setTimeout(r, 200))
   }
-  throw new Error(`Alice did not become ready over Electron IPC within ${timeoutMs}ms`)
+  throw new Error(`OpenAlpha did not become ready over Electron IPC within ${timeoutMs}ms`)
 }
 
 async function waitForUTA(utaUrl: string, timeoutMs = UTA_READY_TIMEOUT_MS): Promise<boolean> {
@@ -556,7 +556,7 @@ async function runRendererOnboardingSmoke(win: BrowserWindow): Promise<void> {
 
 app.whenReady().then(async () => {
   desktopDiagnostics = new DesktopDiagnostics(join(app.getPath('logs'), 'desktop.log'))
-  desktopDiagnostics.write('desktop', `starting OpenAlice ${app.getVersion()} pid=${process.pid}`)
+  desktopDiagnostics.write('desktop', `starting OpenAlpha ${app.getVersion()} pid=${process.pid}`)
   const updateAttemptPath = join(app.getPath('userData'), UPDATE_ATTEMPT_FILE)
   try {
     const previousUpdate = await inspectPreviousUpdateAttempt(updateAttemptPath, app.getVersion())
@@ -571,9 +571,9 @@ app.whenReady().then(async () => {
         `handoff did not complete ${previousUpdate.attempt.fromVersion} -> ${previousUpdate.attempt.toVersion}; evidence=${previousUpdate.archivedPath}`,
       )
       dialog.showErrorBox(
-        'OpenAlice update did not finish',
-        `The previous update to OpenAlice ${previousUpdate.attempt.toVersion} did not complete. ` +
-          `OpenAlice is still running ${app.getVersion()}.\n\n` +
+        'OpenAlpha update did not finish',
+        `The previous update to OpenAlpha ${previousUpdate.attempt.toVersion} did not complete. ` +
+          `OpenAlpha is still running ${app.getVersion()}.\n\n` +
           `You can retry from Settings, or install the release manually.\n\nDiagnostic log:\n${desktopDiagnostics.path}`,
       )
     }
@@ -585,7 +585,7 @@ app.whenReady().then(async () => {
   }
 
   // Build output lives at <repo>/dist/electron/main.js, <repo>/dist/main.js
-  // (Alice), <repo>/services/uta/dist/uta.js (UTA), and the optional
+  // (OpenAlpha), <repo>/services/uta/dist/uta.js (UTA), and the optional
   // <repo>/services/connector/dist/connector.js. The desktop package
   // source is at apps/desktop/src/ but tsconfig.outDir is ../../dist/electron,
   // so these repo-relative resolves are unchanged from the pre-split layout.
@@ -595,7 +595,7 @@ app.whenReady().then(async () => {
   const connectorEntry = resolve(repoRoot, 'services', 'connector', 'dist', 'connector.cjs')
 
   // User state and app resources have independent lifecycles. The desktop
-  // remembers its selected OpenAlice home under Electron's machine-local
+  // remembers its selected OpenAlpha home under Electron's machine-local
   // userData directory, because the selected home cannot safely own the
   // pointer to itself. OPENALICE_HOME remains authoritative for automation and
   // packaged smokes. App resources stay in the package (or repo in dev).
@@ -612,8 +612,8 @@ app.whenReady().then(async () => {
     })
   } catch (error) {
     dialog.showErrorBox(
-      'OpenAlice — data location failed',
-      `${dataHomeErrorDetail(error)}\n\nOpenAlice did not start or modify another data location.`,
+      'OpenAlpha — data location failed',
+      `${dataHomeErrorDetail(error)}\n\nOpenAlpha did not start or modify another data location.`,
     )
     app.quit()
     return
@@ -654,8 +654,8 @@ app.whenReady().then(async () => {
         `inspection failed: ${error instanceof Error ? error.stack ?? error.message : String(error)}`,
       )
       dialog.showErrorBox(
-        'OpenAlice — existing AliceProject',
-        `${error instanceof Error ? error.message : String(error)}\n\nOpenAlice did not take over the running AliceProject.`,
+        'OpenAlpha — existing OpenAlphaProject',
+        `${error instanceof Error ? error.message : String(error)}\n\nOpenAlpha did not take over the running OpenAlphaProject.`,
       )
       app.quit()
       return
@@ -677,8 +677,8 @@ app.whenReady().then(async () => {
     if (!chosen) continue
     if (chosen.path === userDataHome) {
       dialog.showErrorBox(
-        'OpenAlice — choose another location',
-        'That folder is the complete home already owned by the running AliceProject.',
+        'OpenAlpha — choose another location',
+        'That folder is the complete home already owned by the running OpenAlphaProject.',
       )
       continue
     }
@@ -686,7 +686,7 @@ app.whenReady().then(async () => {
       dataHomePreferences = rememberDataHome(dataHomePreferences, chosen.path, { startupPromptCompleted: true })
       await writeDataHomePreferences(preferencePath, dataHomePreferences)
     } catch (error) {
-      dialog.showErrorBox('OpenAlice — could not remember data location', dataHomeErrorDetail(error))
+      dialog.showErrorBox('OpenAlpha — could not remember data location', dataHomeErrorDetail(error))
       continue
     }
     userDataHome = chosen.path
@@ -718,11 +718,11 @@ app.whenReady().then(async () => {
         shutdown()
       },
     })
-    if (takeover) console.log('[guardian] takeover → previous OpenAlice runtime stopped')
+    if (takeover) console.log('[guardian] takeover → previous OpenAlpha runtime stopped')
   } catch (err) {
     dialog.showErrorBox(
-      'OpenAlice — recovery failed',
-      `${err instanceof Error ? err.message : String(err)}\n\nThe previous writer was not confirmed stopped, so OpenAlice did not unlock the data directory.`,
+      'OpenAlpha — recovery failed',
+      `${err instanceof Error ? err.message : String(err)}\n\nThe previous writer was not confirmed stopped, so OpenAlpha did not unlock the data directory.`,
     )
     app.quit()
     return
@@ -738,7 +738,7 @@ app.whenReady().then(async () => {
       await relocateLegacyData(app.getPath('userData'), userDataHome)
     } catch (err) {
       dialog.showErrorBox(
-        'OpenAlice — data relocation failed',
+        'OpenAlpha — data relocation failed',
         `Could not move the user data store from\n${app.getPath('userData')}/data\nto\n${userDataHome}/data\n\n` +
           `${err instanceof Error ? err.message : String(err)}\n\nNothing was deleted. Please move the directory manually, then relaunch.`,
       )
@@ -861,7 +861,7 @@ app.whenReady().then(async () => {
         ...proxyEnv,
       },
       // The fourth fd opens Node child_process IPC. Electron app mode uses it
-      // as the local PTY transport between BrowserWindow/preload and Alice's
+      // as the local PTY transport between BrowserWindow/preload and OpenAlpha's
       // WorkspaceService, while HTTP/WS remains the browser/dev/Docker plane.
       stdio: ['inherit', 'inherit', 'pipe', 'ipc'],
       serialization: 'advanced',
@@ -879,14 +879,14 @@ app.whenReady().then(async () => {
     })
     child.once('exit', (code, signal) => {
       if (appQuitting) return
-      const message = `Alice exited unexpectedly code=${code} signal=${signal}`
+      const message = `OpenAlpha exited unexpectedly code=${code} signal=${signal}`
       console.error(`[guardian] ${message}`)
       desktopDiagnostics?.write('guardian', message)
       showFatalDesktopError(
-        aliceBecameReady ? 'OpenAlice stopped unexpectedly' : 'OpenAlice could not start',
+        aliceBecameReady ? 'OpenAlpha stopped unexpectedly' : 'OpenAlpha could not start',
         aliceBecameReady
-          ? 'The local Alice service stopped, so OpenAlice must close.'
-          : 'The local Alice service exited before the desktop window was ready.',
+          ? 'The local OpenAlpha service stopped, so OpenAlpha must close.'
+          : 'The local OpenAlpha service exited before the desktop window was ready.',
       )
       process.exitCode = 1
       shutdown()
@@ -894,7 +894,7 @@ app.whenReady().then(async () => {
     return child
   }
 
-  // ── Boot order: UTA first, then Alice pointed at it ─────────
+  // ── Boot order: UTA first, then OpenAlpha pointed at it ─────────
   // Keep this banner explicit: desktop logs are often the only thing a user
   // sees when debugging startup, and "Electron app loading local HTTP" looks
   // deceptively similar to Docker/prod unless the launcher mode is named.
@@ -905,7 +905,7 @@ app.whenReady().then(async () => {
   console.log(`[guardian] runtime  →  ${piRuntime}`)
   console.log(`[guardian] UTA      →  ${tradingMode.mode === 'lite' ? 'disabled (trading mode lite)' : utaUrl}`)
   console.log(`[guardian] Connector→  ${connectorUrl} (optional)`)
-  console.log(`[guardian] Alice    →  app://openalice (Electron IPC)`)
+  console.log(`[guardian] OpenAlpha    →  app://openalice (Electron IPC)`)
   console.log(`[guardian] Tools    →  ${toolSocketPath}`)
   console.log(`[guardian] MCP      →  ${mcpPort !== null ? `http://127.0.0.1:${mcpPort}/mcp` : 'disabled'}`)
   console.log('')
@@ -966,11 +966,11 @@ app.whenReady().then(async () => {
   }
 
   alice = spawnAlice()
-  console.log(`[guardian] Alice pid=${alice.pid} web=ipc mcpPort=${mcpPort ?? 'disabled'}`)
+  console.log(`[guardian] OpenAlpha pid=${alice.pid} web=ipc mcpPort=${mcpPort ?? 'disabled'}`)
   await waitForAliceReady()
   aliceBecameReady = true
 
-  // Alice migrations can create connector-service.json from the retired
+  // OpenAlpha migrations can create connector-service.json from the retired
   // Telegram config. Reconcile after readiness so this upgrade starts the
   // independent service without requiring a second app launch.
   if (!connector && await readConnectorServiceEnabled(homeEnv.OPENALICE_HOME)) {
@@ -978,7 +978,7 @@ app.whenReady().then(async () => {
   }
 
   // ── Restart-flag watcher: broker config changes touch the flag; SIGTERM
-  // + respawn UTA without restarting Alice (mirrors prod.mjs). ────────────
+  // + respawn UTA without restarting OpenAlpha (mirrors prod.mjs). ────────────
   void startFlagWatcher(homeEnv.OPENALICE_HOME, {
     uta: () => { void (async () => {
       tradingMode = await resolveGuardianTradingMode(process.env, homeEnv.OPENALICE_HOME)
@@ -1154,18 +1154,18 @@ app.whenReady().then(async () => {
       desktopDiagnostics?.write('updater', `handing ${version} to the native installer`)
       if (Notification.isSupported()) {
         new Notification({
-          title: 'OpenAlice is updating',
-          body: `Installing ${version}. OpenAlice will reopen automatically; this can take up to a minute.`,
+          title: 'OpenAlpha is updating',
+          body: `Installing ${version}. OpenAlpha will reopen automatically; this can take up to a minute.`,
         }).show()
       }
     },
     onInstallFailure: (error) => {
       desktopDiagnostics?.write('updater', `installer handoff failed: ${error.stack ?? error.message}`)
       const recoveryMessage = appQuitting
-        ? 'OpenAlice will restart on the current version.'
-        : 'OpenAlice is still running on the current version.'
+        ? 'OpenAlpha will restart on the current version.'
+        : 'OpenAlpha is still running on the current version.'
       dialog.showErrorBox(
-        'OpenAlice update failed',
+        'OpenAlpha update failed',
         `${error.message}\n\n${recoveryMessage}\n\nDiagnostic log:\n${desktopDiagnostics?.path ?? app.getPath('logs')}`,
       )
       if (appQuitting) {
@@ -1178,7 +1178,7 @@ app.whenReady().then(async () => {
   const message = error instanceof Error ? error.stack ?? error.message : String(error)
   console.error('[guardian] desktop startup failed:', error)
   desktopDiagnostics?.write('guardian', `desktop startup failed: ${message}`)
-  showFatalDesktopError('OpenAlice could not start', error instanceof Error ? error.message : String(error))
+  showFatalDesktopError('OpenAlpha could not start', error instanceof Error ? error.message : String(error))
   process.exitCode = 1
   shutdown()
 })

@@ -70,7 +70,7 @@ describe('injectWorkspaceContext — instructions', () => {
 
     expect(await read('CLAUDE.md')).toBe(instruction);
     expect(await read('AGENTS.md')).toBe(instruction);
-    expect(instruction).toContain('You are Alice, an autonomous agent from the OpenAlice project.');
+    expect(instruction).toContain('You are OpenAlpha, an autonomous agent from the OpenAlpha project.');
   });
 
   it('does not touch CLAUDE.md / AGENTS.md when injectInstructions is false', async () => {
@@ -84,7 +84,7 @@ describe('injectWorkspaceContext — instructions', () => {
     expect(instruction.split('\n').length).toBeLessThan(120);
     expect(instruction).toContain('Every price, return, date, ratio');
     expect(instruction).toContain('A comment is a board');
-    expect(instruction).toContain('OpenAlice does not wrap');
+    expect(instruction).toContain('OpenAlpha does not wrap');
     expect(instruction).toContain('The `alice` skill contains the exact commands');
     expect(instruction).not.toContain('alice issue comment --text');
     expect(instruction).not.toContain('alice inbox push --doc');

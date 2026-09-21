@@ -43,7 +43,7 @@ export interface IssuesSnapshotIssue {
   assignee: string
   /** Adapter id for the scheduled fire (frontmatter `agent`), if set. */
   agent?: string
-  /** Secret-free OpenAlice vault slug selected for a fresh Session. */
+  /** Secret-free OpenAlpha vault slug selected for a fresh Session. */
   credential?: string
   /** Explicit native Agent login selected for a fresh Session. */
   credentialSource?: 'native'
@@ -375,7 +375,7 @@ export interface IssueRunRecord {
   /** Read-side explanation for non-successful scheduled execution. Derived
    * from durable fields so old registry entries need no migration. */
   failure?: IssueRunFailure
-  /** Whether OpenAlice currently has a native runtime mapping for resumeId. */
+  /** Whether OpenAlpha currently has a native runtime mapping for resumeId. */
   resumable: boolean
 }
 

@@ -16,8 +16,8 @@ import { CronExpressionParser } from 'cron-parser'
 import { parseDuration } from './duration.js'
 
 /** `local` is a product-level sentinel, not an IANA timezone. It deliberately
- * means "the machine running OpenAlice" so local-life reminders retain their
- * intent when a user runs Alice somewhere else. Market-clock schedules should
+ * means "the machine running OpenAlpha" so local-life reminders retain their
+ * intent when a user runs OpenAlpha somewhere else. Market-clock schedules should
  * name their real IANA zone instead (for example `America/New_York`) so DST is
  * part of the schedule rather than an undocumented UTC offset. */
 export const LOCAL_SCHEDULE_TIMEZONE = 'local' as const
@@ -42,7 +42,7 @@ export function scheduleCatchesUp(schedule: Schedule): boolean {
   return schedule.kind !== 'cron' || schedule.catchUp !== false
 }
 
-/** True for OpenAlice's `local` sentinel or a timezone understood by Intl.
+/** True for OpenAlpha's `local` sentinel or a timezone understood by Intl.
  * Kept next to evaluation so file validation and the scanner cannot disagree. */
 export function isValidScheduleTimezone(timezone: string): boolean {
   if (timezone === LOCAL_SCHEDULE_TIMEZONE) return true
@@ -79,7 +79,7 @@ export function computeNextRun(schedule: Schedule, afterMs: number): number | nu
 }
 
 /**
- * Parse OpenAlice's deliberately narrow 5-field cron contract (minute hour dom
+ * Parse OpenAlpha's deliberately narrow 5-field cron contract (minute hour dom
  * month dow). cron-parser supplies calendar/DST correctness; the field-count
  * guard prevents its optional seconds field and aliases from silently widening
  * the Issue file format.

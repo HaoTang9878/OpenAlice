@@ -59,7 +59,7 @@ export function createChannelsRoutes({ sessions, sseByChannel }: ChannelsDeps) {
    */
   app.get('/', async (c) => {
     const subChannels = await readWebSubchannels()
-    const defaultEntry = subChannels.find((ch) => ch.id === 'default') ?? { id: 'default', label: 'Alice' }
+    const defaultEntry = subChannels.find((ch) => ch.id === 'default') ?? { id: 'default', label: 'OpenAlpha' }
     const others = subChannels.filter((ch) => ch.id !== 'default')
     return c.json({ channels: [defaultEntry, ...others] })
   })
@@ -85,8 +85,8 @@ export function createChannelsRoutes({ sessions, sseByChannel }: ChannelsDeps) {
     const existing = await readWebSubchannels()
 
     // Effective channel list includes the default's fallback label so the
-    // user can't accidentally create a duplicate of "Alice".
-    const defaultEntry = existing.find((c) => c.id === 'default') ?? { id: 'default', label: 'Alice' } as WebChannel
+    // user can't accidentally create a duplicate of "OpenAlpha".
+    const defaultEntry = existing.find((c) => c.id === 'default') ?? { id: 'default', label: 'OpenAlpha' } as WebChannel
     const effective = [defaultEntry, ...existing.filter((c) => c.id !== 'default')]
 
     const labelLc = label.toLowerCase()
@@ -138,7 +138,7 @@ export function createChannelsRoutes({ sessions, sseByChannel }: ChannelsDeps) {
       if (id !== 'default') return c.json({ error: 'channel not found' }, 404)
       const inserted: WebChannel = {
         id: 'default',
-        label: body.label?.trim() || 'Alice',
+        label: body.label?.trim() || 'OpenAlpha',
         ...(body.systemPrompt ? { systemPrompt: body.systemPrompt } : {}),
         ...(body.profile ? { profile: body.profile } : {}),
         ...(body.disabledTools?.length ? { disabledTools: body.disabledTools } : {}),

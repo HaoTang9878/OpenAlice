@@ -56,7 +56,7 @@ export async function requestGuardianControl(
     socket.setEncoding('utf8')
     socket.setTimeout(timeoutMs, () => finish(controlError(
       'ETIMEDOUT',
-      `Timed out waiting for OpenAlice Guardian at ${endpoint}`,
+      `Timed out waiting for OpenAlpha Guardian at ${endpoint}`,
     )))
     socket.once('error', (error) => finish(error))
     socket.once('connect', () => socket.write(request))
@@ -64,7 +64,7 @@ export async function requestGuardianControl(
       if (settled) return
       body += String(chunk)
       if (Buffer.byteLength(body, 'utf8') > MAX_RESPONSE_BYTES) {
-        finish(controlError('ERESPONSETOOLARGE', 'OpenAlice Guardian control response is too large'))
+        finish(controlError('ERESPONSETOOLARGE', 'OpenAlpha Guardian control response is too large'))
         return
       }
       const newline = body.indexOf('\n')
@@ -79,11 +79,11 @@ export async function requestGuardianControl(
       try {
         response = JSON.parse(body.slice(0, newline)) as typeof response
       } catch {
-        finish(controlError('EINVALIDRESPONSE', 'OpenAlice Guardian returned invalid JSON'))
+        finish(controlError('EINVALIDRESPONSE', 'OpenAlpha Guardian returned invalid JSON'))
         return
       }
       if (response?.protocol !== 1 || response?.id !== id) {
-        finish(controlError('EINCOMPATIBLE', 'OpenAlice Guardian control protocol is incompatible'))
+        finish(controlError('EINCOMPATIBLE', 'OpenAlpha Guardian control protocol is incompatible'))
         return
       }
       if (response.ok !== true) {
@@ -91,7 +91,7 @@ export async function requestGuardianControl(
           typeof response?.error?.code === 'string' ? response.error.code : 'ECONTROL',
           typeof response?.error?.message === 'string'
             ? response.error.message
-            : 'OpenAlice Guardian control request failed',
+            : 'OpenAlpha Guardian control request failed',
         ))
         return
       }
@@ -101,7 +101,7 @@ export async function requestGuardianControl(
       if (!settled) {
         finish(controlError(
           'EUNEXPECTEDEND',
-          'OpenAlice Guardian closed the control connection without a response',
+          'OpenAlpha Guardian closed the control connection without a response',
         ))
       }
     })

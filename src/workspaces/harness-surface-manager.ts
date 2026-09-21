@@ -280,7 +280,7 @@ export class HarnessSurfaceManager {
       try {
         await terminateProcessTree(child.pid, { gracefulMs: 4_000, forceMs: 4_000 })
       } catch (err) {
-        appendLog(runtime, Buffer.from(`OpenAlice cleanup: ${err instanceof Error ? err.message : String(err)}\n`))
+        appendLog(runtime, Buffer.from(`OpenAlpha cleanup: ${err instanceof Error ? err.message : String(err)}\n`))
       }
     }
     // `exit` only means the process ended. `close` additionally means Node has

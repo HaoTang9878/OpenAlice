@@ -3,7 +3,7 @@
  *
  * Browser/dev/Docker keep using `/api/workspaces/pty` WebSocket. In Electron,
  * the renderer talks to Electron main through a MessagePort, and Electron main
- * talks to this Alice child process over Node child_process IPC. This keeps
+ * talks to this OpenAlpha child process over Node child_process IPC. This keeps
  * the PersistentSession byte semantics in one place while removing the
  * renderer → localhost WebSocket hop in app mode.
  */

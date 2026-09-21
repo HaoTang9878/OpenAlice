@@ -37,7 +37,7 @@ export const designProjects: DesignProject[] = [
     status: 'Current implementation',
     updatedAt: '2026-07-18',
     context: {
-      why: 'OpenAlice used separate physical color names, Tailwind palette shades, chart literals, and Workspace aliases. This project renders the shared semantic contract that now drives the product UI without requiring a component library.',
+      why: 'OpenAlpha used separate physical color names, Tailwind palette shades, chart literals, and Workspace aliases. This project renders the shared semantic contract that now drives the product UI without requiring a component library.',
       goals: [
         'Keep the core CSS vocabulary aligned with Orca and shadcn.',
         'Ship two light and two dark cards with user-selected day and night pairings.',
@@ -69,11 +69,11 @@ export const designProjects: DesignProject[] = [
   {
     slug: 'first-run-onboarding',
     title: 'First-run onboarding',
-    eyebrow: 'OpenAlice setup',
+    eyebrow: 'OpenAlpha setup',
     status: 'Exploration',
     updatedAt: '2026-07-06',
     context: {
-      why: 'OpenAlice can run in Lite without UTA, but a fresh user currently meets too many silent prerequisites at once: agent runtimes, AI credentials, trading mode, UTA availability, and broker permissions. This project explores a first-launch guide that explains the product without turning setup into a wall of configuration.',
+      why: 'OpenAlpha can run in Lite without UTA, but a fresh user currently meets too many silent prerequisites at once: agent runtimes, AI credentials, trading mode, UTA availability, and broker permissions. This project explores a first-launch guide that explains the product without turning setup into a wall of configuration.',
       goals: [
         'Make Lite feel intentional and usable, not broken or incomplete.',
         'Explain when Readonly and Pro become useful without pushing users there immediately.',
@@ -82,7 +82,7 @@ export const designProjects: DesignProject[] = [
       ],
       constraints: [
         'The route is internal and hidden: direct URL only, no navigation entry.',
-        'Do not require UTA, broker accounts, or local command-line tools before Alice can be opened.',
+        'Do not require UTA, broker accounts, or local command-line tools before OpenAlpha can be opened.',
         'Avoid dense card walls, repeated explanatory blocks, and accidental setup pressure.',
         'The production guide must be testable with the onboarding sandbox and a fresh storage key.',
       ],
@@ -96,7 +96,7 @@ export const designProjects: DesignProject[] = [
       {
         id: 'A',
         name: 'Safe Launch',
-        summary: 'One large statement: Alice is usable now, broker systems stay off.',
+        summary: 'One large statement: OpenAlpha is usable now, broker systems stay off.',
         intent: 'Best when trust is the first problem. It makes Lite mode feel like a deliberate safe start before any configuration.',
         risk: 'It may under-explain what the user should do next if they came in specifically for portfolio or trading workflows.',
         layout: 'safe-launch',
@@ -105,8 +105,8 @@ export const designProjects: DesignProject[] = [
         id: 'B',
         name: 'Mode Ladder',
         summary: 'Shows Lite, Readonly, and Pro as a progression with the current rung selected.',
-        intent: 'Best when users need a mental model of OpenAlice permissions before they configure brokers.',
-        risk: 'Can feel like product taxonomy too early if the user just wants to start asking Alice things.',
+        intent: 'Best when users need a mental model of OpenAlpha permissions before they configure brokers.',
+        risk: 'Can feel like product taxonomy too early if the user just wants to start asking OpenAlpha things.',
         layout: 'mode-ladder',
       },
       {

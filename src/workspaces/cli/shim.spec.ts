@@ -29,7 +29,7 @@ function runCli(name: string, args: string[], env: NodeJS.ProcessEnv) {
         env: {
           ...env,
           // Deliberately remove host command lookup: the packaged launcher must
-          // be able to use OpenAlice's Electron Node on a clean machine.
+          // be able to use OpenAlpha's Electron Node on a clean machine.
           PATH: '',
           OPENALICE_MANAGED_PI_NODE_PATH: process.execPath,
         },
@@ -105,7 +105,7 @@ describe('CLI launchers and payload', () => {
       expect(stderr).toContain('[openalice-cli-debug] socket.response')
       expect(stderr).toContain('Warning: Skills are outdated; run alice harness upgrade --apply.')
       expect(stdout).not.toContain('Warning:')
-      expect(stdout).toContain('OpenAlice CLI')
+      expect(stdout).toContain('OpenAlpha CLI')
       expect(stdout).toContain('market')
       expect(stdout).toContain('Discover symbols and bar sources')
       expect(stdout).not.toContain('MCP-only tool')
@@ -180,7 +180,7 @@ describe('CLI launchers and payload', () => {
           OPENALICE_TOOL_SOCKET: socketPath,
           OPENALICE_TOOL_URL: '/cli',
       })).rejects.toMatchObject({
-        stderr: expect.stringContaining('invalid OpenAlice CLI manifest'),
+        stderr: expect.stringContaining('invalid OpenAlpha CLI manifest'),
       })
     } finally {
       await new Promise<void>((resolve) => server.close(() => resolve()))

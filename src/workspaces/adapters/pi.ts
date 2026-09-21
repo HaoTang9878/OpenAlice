@@ -85,9 +85,9 @@ export async function syncPiWindowsShellPath(
 }
 
 /**
- * OpenAlice Workspaces are created, registered, and launched through the
+ * OpenAlpha Workspaces are created, registered, and launched through the
  * Workspace service. Pi 0.79+ otherwise stops its first interactive launch at
- * a project-resource trust selector because OpenAlice injects `.agents/skills`.
+ * a project-resource trust selector because OpenAlpha injects `.agents/skills`.
  * Record the managed Workspace as trusted before either the TUI or WebPi RPC
  * process starts, while preserving any explicit trust/no-trust decision the
  * user already saved for this directory or one of its parents.
@@ -189,7 +189,7 @@ function piHeadlessApproveArgs(env: Readonly<Record<string, string | undefined>>
  * the IBKR-superset dual-vendor stance). Verified against pi 0.78.1.
  *
  * TOOL ACCESS: Pi has no native MCP, and the launcher injects NO MCP into
- * workspaces at all — Pi reaches OpenAlice purely through the `alice*` CLI
+ * workspaces at all — Pi reaches OpenAlpha purely through the `alice*` CLI
  * shims on PATH (`service.ts`) + the `alice*` / `traderhub` skills
  * copied to the shared `<cwd>/.agents/skills` path (`context-injector.ts`);
  * Pi's built-in `bash`
@@ -199,7 +199,7 @@ function piHeadlessApproveArgs(env: Readonly<Record<string, string | undefined>>
  * `.pi/extensions/openalice-bridge.ts` MCP bridge was removed when the launcher
  * went CLI-only. See memory feedback_cli_injection_over_mcp_bridge.
  *
- * PROVIDER override: Pi has no project-local `models.json`, so OpenAlice writes
+ * PROVIDER override: Pi has no project-local `models.json`, so OpenAlpha writes
  * one generic managed extension under `<cwd>/.pi/extensions/`. It registers the
  * provider stored in the sensitive local binding sidecar, while native project
  * settings select the model. Pi's global models/auth/settings/packages/sessions
@@ -335,7 +335,7 @@ export const piAdapter: CliAdapter = {
   // runtime. RPC stays completely separate from the TUI argv above: selecting
   // it cannot change ordinary Pi startup, trust prompts, input handling, or
   // PTY behavior. It is always by-id so switching surfaces reopens the exact
-  // conversation that the OpenAlice resume registry already owns.
+  // conversation that the OpenAlpha resume registry already owns.
   composeWebCommand(_base: readonly string[], ctx: SpawnContext): readonly string[] {
     if (!ctx.resume || ctx.resume === 'last') {
       throw new Error('the Pi Web surface requires a concrete Pi session id');
@@ -492,7 +492,7 @@ export const piAdapter: CliAdapter = {
   },
 
   composeEnv(_ctx: SpawnContext): Record<string, string> {
-    // Do not force PI_OFFLINE. OpenAlice is a networked product and Pi may
+    // Do not force PI_OFFLINE. OpenAlpha is a networked product and Pi may
     // download missing runtime tools during startup. A user or launcher can
     // still opt into Pi's offline behavior by setting PI_OFFLINE in the base
     // process environment, which composeSpawnInputs preserves.

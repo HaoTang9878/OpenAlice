@@ -1,4 +1,4 @@
-/** SSH transport for the AliceProject transfer stream. */
+/** SSH transport for the OpenAlphaProject transfer stream. */
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
 
@@ -13,7 +13,7 @@ import type { ProjectTransferPlan } from './project-transfer.ts'
 const MAX_RECEIPT_BYTES = 1024 * 1024
 const REMOTE_RECEIVE_COMMAND = `set -eu
 cli=$(command -v openalice 2>/dev/null || { [ ! -x "$HOME/.openalice/bin/openalice" ] || printf '%s\\n' "$HOME/.openalice/bin/openalice"; })
-[ -n "$cli" ] || { printf '%s\\n' 'OpenAlice CLI is not installed' >&2; exit 127; }
+[ -n "$cli" ] || { printf '%s\\n' 'OpenAlpha CLI is not installed' >&2; exit 127; }
 exec "$cli" project transfer-receive`
 
 export async function transferProjectOverSsh(input: {

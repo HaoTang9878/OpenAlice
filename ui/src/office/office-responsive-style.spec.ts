@@ -254,7 +254,7 @@ describe('Office responsive style contract', () => {
     )
   })
 
-  it('keeps auto-route markers readable, static, and anchored to Alice feet', () => {
+  it('keeps auto-route markers readable, static, and anchored to OpenAlpha feet', () => {
     expect(css).toMatch(/\.oa-office-route-trail__step\s*\{[\s\S]*?width: 12px;[\s\S]*?height: 12px;[\s\S]*?opacity: 0\.68;[\s\S]*?calc\(-50% \+ 22px\)/)
     expect(css).toMatch(/\.oa-office-route-trail__step img\s*\{[\s\S]*?drop-shadow\(1px 1px 0 color-mix\(in srgb, var\(--gba-ink\) 62%, transparent\)\);/)
     expect(css).toMatch(/\.oa-office-route-trail__step\[data-destination="true"\]\s*\{[\s\S]*?opacity: 0\.86;/)

@@ -1,7 +1,7 @@
 import { waitForOptionalCarrier } from '../optional-carrier/health.js'
 
 /**
- * Poll UTA `/__uta/health` until it returns 200 or timeout. Used by Alice and
+ * Poll UTA `/__uta/health` until it returns 200 or timeout. Used by OpenAlpha and
  * Guardian for observability only: UTA is an optional carrier, so callers can
  * continue in lite mode when this returns null.
  */

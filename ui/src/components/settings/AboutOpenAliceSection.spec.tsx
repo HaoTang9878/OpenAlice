@@ -54,7 +54,7 @@ const currentVersion = {
 const currentProject = {
   id: 'alice-project-test',
   key: 'research',
-  displayName: 'Research AliceProject',
+  displayName: 'Research OpenAlphaProject',
   home: '/tmp/openalice-research',
   appRoot: '/tmp/openalice-app',
 }
@@ -78,14 +78,14 @@ afterEach(() => {
   vi.clearAllMocks()
 })
 
-describe('AboutOpenAliceSection', () => {
+describe('AboutOpenAlphaSection', () => {
   it('shows the running version and performs a forced manual check', async () => {
     render(<AboutOpenAliceSection />)
 
     expect(await screen.findByText('v0.82.0-beta')).toBeTruthy()
     expect(screen.getByText('You’re up to date.')).toBeTruthy()
     expect(screen.getByText('Browser / server')).toBeTruthy()
-    expect(await screen.findByText('Research AliceProject')).toBeTruthy()
+    expect(await screen.findByText('Research OpenAlphaProject')).toBeTruthy()
     expect(screen.getByText('/tmp/openalice-research')).toBeTruthy()
     expect(screen.getByText('alice-project-test')).toBeTruthy()
     expect(screen.getByRole('button', { name: 'Check for updates' }).className).toContain('min-h-10')
@@ -110,7 +110,7 @@ describe('AboutOpenAliceSection', () => {
     expect(await screen.findByText('Development channel')).toBeTruthy()
   })
 
-  it('refreshes Runtime and AliceProject identity after backend recovery without remounting', async () => {
+  it('refreshes Runtime and OpenAlphaProject identity after backend recovery without remounting', async () => {
     const recoveredVersion = {
       ...currentVersion,
       current: '0.91.0-beta.3',
@@ -119,13 +119,13 @@ describe('AboutOpenAliceSection', () => {
     }
     const recoveredProject = {
       ...currentProject,
-      displayName: 'Remote AliceProject',
+      displayName: 'Remote OpenAlphaProject',
       appRoot: '/data/home/.local/share/openalice/releases/0.91.0-beta.3',
     }
     const view = render(<AboutOpenAliceSection />)
 
     expect(await screen.findByText('v0.82.0-beta')).toBeTruthy()
-    expect(await screen.findByText('Research AliceProject')).toBeTruthy()
+    expect(await screen.findByText('Research OpenAlphaProject')).toBeTruthy()
 
     mocks.backendUnavailable = true
     view.rerender(<AboutOpenAliceSection />)
@@ -137,7 +137,7 @@ describe('AboutOpenAliceSection', () => {
     view.rerender(<AboutOpenAliceSection />)
 
     expect(await screen.findByText('v0.91.0-beta.3')).toBeTruthy()
-    expect(await screen.findByText('Remote AliceProject')).toBeTruthy()
+    expect(await screen.findByText('Remote OpenAlphaProject')).toBeTruthy()
     expect(screen.getByText('/data/home/.local/share/openalice/releases/0.91.0-beta.3')).toBeTruthy()
     expect(mocks.getVersion).toHaveBeenCalledTimes(2)
     expect(mocks.getAliceProject).toHaveBeenCalledTimes(2)
@@ -146,7 +146,7 @@ describe('AboutOpenAliceSection', () => {
   it('hides the previous Runtime identity when recovery reads fail', async () => {
     const view = render(<AboutOpenAliceSection />)
     expect(await screen.findByText('v0.82.0-beta')).toBeTruthy()
-    expect(await screen.findByText('Research AliceProject')).toBeTruthy()
+    expect(await screen.findByText('Research OpenAlphaProject')).toBeTruthy()
 
     mocks.backendUnavailable = true
     view.rerender(<AboutOpenAliceSection />)
@@ -158,9 +158,9 @@ describe('AboutOpenAliceSection', () => {
     view.rerender(<AboutOpenAliceSection />)
 
     expect(screen.queryByText('v0.82.0-beta')).toBeNull()
-    expect(screen.queryByText('Research AliceProject')).toBeNull()
+    expect(screen.queryByText('Research OpenAlphaProject')).toBeNull()
     expect(await screen.findByText('Couldn’t check for updates.')).toBeTruthy()
-    expect(await screen.findByText('AliceProject information is unavailable.')).toBeTruthy()
+    expect(await screen.findByText('OpenAlphaProject information is unavailable.')).toBeTruthy()
   })
 
   it('shows the healthy SSH route that owns this browser surface', async () => {
@@ -183,7 +183,7 @@ describe('AboutOpenAliceSection', () => {
 
   it.each([
     ['service', 'dev', 'Updates are managed by this deployment service.'],
-    ['cli', 'dev', 'Use the OpenAlice CLI to check this development build for updates.'],
+    ['cli', 'dev', 'Use the OpenAlpha CLI to check this development build for updates.'],
     ['none', 'pinned', 'This installation does not follow an automatic update channel.'],
   ] as const)('shows %s update ownership without offering a no-op Web check', async (
     updateAuthority,
@@ -241,7 +241,7 @@ describe('AboutOpenAliceSection', () => {
             transport: 'electron-ipc',
             ports: { web: null, mcp: null, uta: null },
             userDataHome: '/tmp/openalice',
-            appHome: '/Applications/OpenAlice.app',
+            appHome: '/Applications/OpenAlpha.app',
           }),
         },
         updater,
@@ -253,10 +253,10 @@ describe('AboutOpenAliceSection', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Check for updates' }))
 
-    expect(await screen.findByText('OpenAlice v0.83.0-beta is ready to install.')).toBeTruthy()
+    expect(await screen.findByText('OpenAlpha v0.83.0-beta is ready to install.')).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'Restart and update' }))
     await waitFor(() => expect(updater.installAndRestart).toHaveBeenCalledOnce())
-    expect(await screen.findByText('Safely stopping OpenAlice services…')).toBeTruthy()
+    expect(await screen.findByText('Safely stopping OpenAlpha services…')).toBeTruthy()
     expect(screen.getByRole('progressbar')).toBeTruthy()
     expect(screen.getByText(/OpenAlice will close while the system installs/)).toBeTruthy()
   })

@@ -116,7 +116,7 @@ describe('TelegramDeskPanel', () => {
     expect(screen.queryByLabelText('Workspace')).toBeNull()
   })
 
-  it('defaults the unbound picker to the Ask Alice Chat workspace', () => {
+  it('defaults the unbound picker to the Ask OpenAlpha Chat workspace', () => {
     render(<TelegramDeskPanel linked online label="Telegram" />)
     expect((screen.getByLabelText('Workspace') as HTMLSelectElement).value).toBe('ws-b')
     const toggle = screen.getByRole('switch', { name: 'Turn Chat on Telegram on or off' })
@@ -125,13 +125,13 @@ describe('TelegramDeskPanel', () => {
     expect(screen.getByText('Off')).toBeTruthy()
   })
 
-  it('falls back to the active Chat workspace when Ask Alice has no remembered target', () => {
+  it('falls back to the active Chat workspace when Ask OpenAlpha has no remembered target', () => {
     launchMocks.recentChatWorkspaceId = null
     render(<TelegramDeskPanel linked online label="Telegram" />)
     expect((screen.getByLabelText('Workspace') as HTMLSelectElement).value).toBe('ws-c')
   })
 
-  it('enables the desk in the Ask Alice workspace without a manual pick', async () => {
+  it('enables the desk in the Ask OpenAlpha workspace without a manual pick', async () => {
     render(<TelegramDeskPanel linked online label="Telegram" />)
     fireEvent.click(screen.getByRole('switch', { name: 'Turn Chat on Telegram on or off' }))
     await waitFor(() => expect(mocks.desk.enable).toHaveBeenCalledWith('ws-b'))

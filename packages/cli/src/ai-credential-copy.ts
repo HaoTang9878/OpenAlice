@@ -1,5 +1,5 @@
 /**
- * Copy AI vault credentials between AliceProject complete homes.
+ * Copy AI vault credentials between OpenAlphaProject complete homes.
  *
  * The vault is `<home>/data/config/ai-provider-manager.json`. Broker
  * accounts and sealing keys stay untouched. Secrets are never logged.
@@ -124,7 +124,7 @@ export async function copyAiCredentials(input: {
   toHome: string
 }): Promise<AiCredentialCopyResult> {
   if (input.fromKey === input.toKey) {
-    throw Object.assign(new Error('Source and destination AliceProjects must be different.'), {
+    throw Object.assign(new Error('Source and destination OpenAlphaProjects must be different.'), {
       code: 'EUSAGE',
       exitCode: 2,
     })

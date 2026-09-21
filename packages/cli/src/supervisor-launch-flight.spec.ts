@@ -78,7 +78,7 @@ describe('Supervisor launch flight recorder', () => {
       machineKey: 'local',
       machineName: 'This computer',
       projectKey: 'default',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       transport: 'loopback' as const,
     }
     const flight = failSupervisorLaunchFlight(
@@ -92,7 +92,7 @@ describe('Supervisor launch flight recorder', () => {
     const text = lines.join('\n')
 
     expect(text).toContain('LOCAL START · RECOVERABLE FAILURE · T+01:01')
-    expect(text).toContain('× RECOVERABLE FAILURE · This computer → Default AliceProject')
+    expect(text).toContain('× RECOVERABLE FAILURE · This computer → Default OpenAlphaProject')
     expect(text).toContain('✓ 01  Validate local target · DONE')
     expect(text).toContain('× 02  Prepare and start Runtime · FAILED')
     expect(text).toContain('◇ 03  Bind local target · WAITING')
@@ -108,7 +108,7 @@ describe('Supervisor launch flight recorder', () => {
           machineKey: 'local',
           machineName: 'This computer',
           projectKey: 'default',
-          projectName: 'Default AliceProject',
+          projectName: 'Default OpenAlphaProject',
           transport: 'loopback',
         }, startedAt),
         'start-runtime',
@@ -130,7 +130,7 @@ describe('Supervisor launch flight recorder', () => {
       machineKey: 'local',
       machineName: 'This computer',
       projectKey: 'default',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       transport: 'loopback' as const,
     }
     const flight = advanceSupervisorLaunchFlight(
@@ -140,7 +140,7 @@ describe('Supervisor launch flight recorder', () => {
     const lines = renderSupervisorLaunchFlight(flight, 80, startedAt, undefined, current)
     const text = lines.join('\n')
 
-    expect(text).toContain('● FROM  This computer / Default AliceProject · LOCAL · LIVE')
+    expect(text).toContain('● FROM  This computer / Default OpenAlphaProject · LOCAL · LIVE')
     expect(text).toContain('◆ TO    Cloud Lab / Research · SSH FORWARD')
     expect(text).not.toContain('⌁ cloud/research · SSH FORWARD')
     expect(lines.every((line) => displayWidth(line) <= 80)).toBe(true)
@@ -151,7 +151,7 @@ describe('Supervisor launch flight recorder', () => {
       machineKey: 'local',
       machineName: 'This computer',
       projectKey: 'default',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       transport: 'loopback' as const,
     }
     const flight = advanceSupervisorLaunchFlight(

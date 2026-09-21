@@ -74,9 +74,9 @@ describe('desktop existing-owner dialog', () => {
     expect(electron.showMessageBox).toHaveBeenCalledWith(expect.objectContaining({
       buttons: [
         'Open in browser',
-        'Keep existing AliceProject',
+        'Keep existing OpenAlphaProject',
         'Choose another data location',
-        'Stop the other AliceProject and start this one',
+        'Stop the other OpenAlphaProject and start this one',
       ],
       defaultId: 0,
       cancelId: 1,
@@ -130,9 +130,9 @@ describe('desktop existing-owner dialog', () => {
     expect(electronDecision.kind).toBe('conflict')
     if (electronDecision.kind !== 'conflict') throw new Error('expected conflict')
     expect(dialogButtons(electronDecision)).toEqual([
-      'Keep existing AliceProject',
+      'Keep existing OpenAlphaProject',
       'Choose another data location',
-      'Stop it and start this AliceProject',
+      'Stop it and start this OpenAlphaProject',
     ])
     expect(dialogCancelId(electronDecision)).toBe(0)
     expect(dialogDefaultId(electronDecision)).toBe(0)
@@ -148,8 +148,8 @@ describe('desktop existing-owner dialog', () => {
     if (stale.kind !== 'conflict') throw new Error('expected conflict')
     expect(stale.defaultAction).toBe('takeover')
     expect(dialogButtons(stale)).toEqual([
-      'Keep existing AliceProject',
-      'Stop it and start this AliceProject',
+      'Keep existing OpenAlphaProject',
+      'Stop it and start this OpenAlphaProject',
     ])
     expect(dialogDefaultId(stale)).toBe(1)
     expect(dialogCancelId(stale)).toBe(0)

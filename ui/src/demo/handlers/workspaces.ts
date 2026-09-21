@@ -375,7 +375,7 @@ const demoSkillProjection = () => ({
   injectedVersion: '1.0.0+previous', injectedAt: '2026-07-08T00:00:00.000Z',
   name: 'alice', enabled: true, installed: true, canonicalPresent: true,
   customized: true, sourceChanged: true, mirrorDiverged: false,
-  files: ['.agents', '.claude'].map((root) => ({ path: `${root}/skills/alice/SKILL.md`, currentPreview: '# Alice\n\nLocal research instructions.', sourcePreview: '# Alice\n\nProject-provided collaboration and data CLI guidance.', differs: true, truncated: false, unverified: false })),
+  files: ['.agents', '.claude'].map((root) => ({ path: `${root}/skills/alice/SKILL.md`, currentPreview: '# OpenAlpha\n\nLocal research instructions.', sourcePreview: '# OpenAlpha\n\nProject-provided collaboration and data CLI guidance.', differs: true, truncated: false, unverified: false })),
 })
 
 const demoTemplateUpgradePlan = (workspaceId: string) => ({
@@ -392,8 +392,8 @@ const demoTemplateUpgradePlan = (workspaceId: string) => ({
   files: [
     {
       path: 'README.md', status: 'ready', operation: 'update', canUseTemplate: true,
-      currentPreview: '# Chat workspace\n\nUse the OpenAlice CLI.',
-      templatePreview: '# Chat workspace\n\nUse the OpenAlice CLI and sign durable work.',
+      currentPreview: '# Chat workspace\n\nUse the OpenAlpha CLI.',
+      templatePreview: '# Chat workspace\n\nUse the OpenAlpha CLI and sign durable work.',
       currentTruncated: false, templateTruncated: false,
     },
     {
@@ -676,7 +676,7 @@ export const workspacesHandlers = [
   http.get('/api/workspaces/alice-harness/catalog', () => HttpResponse.json({
     version: '1.0.0+demo-skills',
     commands: { alice: { rss: ['glob', 'grep', 'read'], harness: ['upgrade'] }, traderhub: { equity: ['profile'] }, 'alice-uta': { account: ['list'] } },
-    skills: [{ name: 'alice', files: [{ path: 'SKILL.md', content: '# Alice\n\nProject-provided collaboration and data CLI guidance.' }] }],
+    skills: [{ name: 'alice', files: [{ path: 'SKILL.md', content: '# OpenAlpha\n\nProject-provided collaboration and data CLI guidance.' }] }],
     workspaces: demoWorkspaces.map((ws) => ({ id: ws.id, name: ws.tag, template: ws.template, projections: [demoSkillProjection()], plan: {
       ...demoTemplateUpgradePlan(ws.id), template: 'alice-harness',
       fromVersion: 'unversioned', toVersion: '1.0.0+demo-skills',
@@ -701,7 +701,7 @@ export const workspacesHandlers = [
     const files = demoSkillProjection().files.map((file) => ({
       path: file.path, status: action === 'restore' || action === 'install' ? 'ready' : 'conflict',
       operation: action === 'remove' ? 'remove' : 'update', currentPreview: file.currentPreview,
-      basePreview: '# Alice\n\nPrevious Project guidance.', baseTruncated: false,
+      basePreview: '# OpenAlpha\n\nPrevious Project guidance.', baseTruncated: false,
       templatePreview: action === 'remove' ? null : file.sourcePreview,
       currentTruncated: false, templateTruncated: false, canUseTemplate: true,
     }))
@@ -1327,7 +1327,7 @@ export const workspacesHandlers = [
   // Quick-chat launch — honor an explicit Chat Workspace target and otherwise
   // reuse the recent demo Chat workspace. Runtimes with a structured protocol
   // open in the real Web conversation UI with a recorded response; runtimes
-  // without one keep the TUI placeholder so visitors still see that OpenAlice
+  // without one keep the TUI placeholder so visitors still see that OpenAlpha
   // is multi-runtime.
   http.post('/api/workspaces/quick-chat', async ({ request }) => {
     const body = (await request.json().catch(() => null)) as {

@@ -174,7 +174,7 @@ export function MarketDataPage() {
   const hub = (config?.hub ?? { enabled: true, baseUrl: 'https://traderhub.openalice.ai' }) as { enabled: boolean; baseUrl: string }
 
   // Ping the hub via the backend (server-side fetch — the dot reports
-  // Alice's connectivity, which is what the fallback chain actually uses).
+  // OpenAlpha's connectivity, which is what the fallback chain actually uses).
   // Debounced so URL edits don't fire a probe per keystroke.
   useEffect(() => {
     if (!hub.enabled) return

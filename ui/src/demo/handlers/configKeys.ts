@@ -161,7 +161,7 @@ export const demoCredentialPresets = [
     description: 'Google AI via API key',
     category: 'third-party',
     defaultName: 'Google Gemini',
-    hint: 'OpenAlice uses Google’s native Gemini API. AQ and AIza credentials work with Pi and opencode.',
+    hint: 'OpenAlpha uses Google’s native Gemini API. AQ and AIza credentials work with Pi and opencode.',
     setup: {
       apiKeyLabel: 'Google AI API key',
       apiKeyPlaceholder: 'AQ... or AIza...',

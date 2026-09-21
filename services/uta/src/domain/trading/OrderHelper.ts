@@ -45,7 +45,7 @@ const SENTINEL_DECIMAL_FIELDS = [
 
 /**
  * Narrow nullable view for broker-internal consumption. Only the fields
- * OpenAlice actually uses across brokers — the full 200-field Order remains
+ * OpenAlpha actually uses across brokers — the full 200-field Order remains
  * the broker interface contract (IBKR-as-superset principle).
  */
 export interface OrderView {

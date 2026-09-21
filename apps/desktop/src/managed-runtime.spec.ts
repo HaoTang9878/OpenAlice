@@ -29,11 +29,11 @@ describe('resolveManagedRuntimeEnv', () => {
         launcherMode: 'electron-packaged',
         platform: 'darwin',
         arch: 'arm64',
-        execPath: '/Applications/OpenAlice.app/Contents/MacOS/OpenAlice',
+        execPath: '/Applications/OpenAlpha.app/Contents/MacOS/OpenAlpha',
       })
 
       expect(env.OPENALICE_MANAGED_PI_PATH).toBe(piCli)
-      expect(env.OPENALICE_MANAGED_PI_NODE_PATH).toContain('/Applications/OpenAlice.app')
+      expect(env.OPENALICE_MANAGED_PI_NODE_PATH).toContain('/Applications/OpenAlpha.app')
       expect(env.OPENALICE_MANAGED_TOOLCHAIN_PATH).toBe(toolsBin)
     } finally {
       rmSync(appHome, { recursive: true, force: true })
@@ -75,7 +75,7 @@ describe('resolveManagedRuntimeEnv', () => {
         launcherMode: 'electron-packaged',
         platform: 'win32',
         arch: 'x64',
-        execPath: 'C:\\OpenAlice\\OpenAlice.exe',
+        execPath: 'C:\\OpenAlpha\\OpenAlpha.exe',
       })
 
       const toolchain = env.OPENALICE_MANAGED_TOOLCHAIN_PATH?.split(delimiter) ?? []

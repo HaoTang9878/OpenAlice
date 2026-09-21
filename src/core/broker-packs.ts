@@ -1,6 +1,6 @@
 /**
- * Broker-pack installed-state contract shared by Alice and UTA.
- * Alice installs and activates immutable releases; UTA only resolves them.
+ * Broker-pack installed-state contract shared by OpenAlpha and UTA.
+ * OpenAlpha installs and activates immutable releases; UTA only resolves them.
  */
 
 import { readFile, realpath } from 'node:fs/promises'
@@ -61,7 +61,7 @@ export class BrokerPackApiVersionMismatchError extends Error {
   ) {
     super(
       `Installed broker pack ${engine} uses API ${installedApiVersion}; ` +
-      `this OpenAlice runtime requires API ${BROKER_PACK_API_VERSION}`,
+      `this OpenAlpha runtime requires API ${BROKER_PACK_API_VERSION}`,
     )
     this.name = 'BrokerPackApiVersionMismatchError'
   }
@@ -155,7 +155,7 @@ function parseInstalledManifest(raw: unknown, engine: InstallableBrokerEngine): 
     row.schemaVersion !== BROKER_PACK_SCHEMA_VERSION
     || row.engine !== engine
   ) {
-    throw new Error(`Installed broker pack ${engine} is incompatible with this OpenAlice runtime`)
+    throw new Error(`Installed broker pack ${engine} is incompatible with this OpenAlpha runtime`)
   }
   for (const key of ['version', 'entry', 'contentId', 'installedAt'] as const) {
     if (typeof row[key] !== 'string' || row[key].length === 0) {

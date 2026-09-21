@@ -64,7 +64,7 @@ export function parseTelegramUtaControl(data: string): TelegramUtaControl | unde
   return undefined
 }
 
-export function formatTelegramUtaLoadingPage(reason = 'Asking OpenAlice for the current UTA review…'): TelegramForm {
+export function formatTelegramUtaLoadingPage(reason = 'Asking OpenAlpha for the current UTA review…'): TelegramForm {
   return { text: ['UTA', '', reason].join('\n'), actions: [] }
 }
 
@@ -83,7 +83,7 @@ export function formatTelegramUtaListPage(
       text: fitPageText([
         'UTA',
         '',
-        'No trading accounts. Add one in OpenAlice → Trading.',
+        'No trading accounts. Add one in OpenAlpha → Trading.',
       ].join('\n')),
       actions: [[button('Refresh', 'u:r')]],
     }
@@ -110,7 +110,7 @@ export function formatTelegramUtaListPage(
     accountButtons.push([button(`${index + 1} · ${account.label}`, `u:a:${index}`)])
   }
   if (review.hiddenAccountCount) {
-    lines.push(`And ${review.hiddenAccountCount} more in OpenAlice → Trading as Git.`)
+    lines.push(`And ${review.hiddenAccountCount} more in OpenAlpha → Trading as Git.`)
   }
   return {
     text: fitPageText(lines.join('\n')),
@@ -132,7 +132,7 @@ export function formatTelegramUtaDetailPage(
       ? [
         '',
         `${account.stagedCount} operations · ${account.hiddenOperationCount} not shown.`,
-        'Approve from OpenAlice → Trading as Git.',
+        'Approve from OpenAlpha → Trading as Git.',
       ]
       : []),
   ]
@@ -184,7 +184,7 @@ export function transitionTelegramUta(
     const next: TelegramUtaSession = {
       accountIds: session?.accountIds ?? [],
       review: session?.review,
-      view: { kind: 'loading', reason: 'Asking OpenAlice for the current UTA review…' },
+      view: { kind: 'loading', reason: 'Asking OpenAlpha for the current UTA review…' },
     }
     return {
       kind: 'enqueue',

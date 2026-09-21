@@ -351,28 +351,28 @@ export class TelegramConnectorAdapter implements ConnectorAdapter {
   private attachBot(bot: Bot, context: ConnectorAdapterContext): void {
     bot.command('model', async ctx => {
       if (ctx.chat.type !== 'private' || !this.isOwner(String(ctx.from?.id ?? ''))) return
-      if (!context.sessionModel) { await ctx.reply('Model controls are unavailable. Update OpenAlice.'); return }
+      if (!context.sessionModel) { await ctx.reply('Model controls are unavailable. Update OpenAlpha.'); return }
       await this.modelControls.open(ctx, context.sessionModel, typeof ctx.match === 'string' ? ctx.match.trim() || undefined : undefined)
     })
     bot.command('inbox', async (ctx) => {
       if (ctx.chat.type !== 'private' || !ctx.from) return
       await this.presentInbox(ctx, context, { stack: [], scope: 'unread' }).catch(async (error) => {
         this.tracker.degraded(error)
-        await ctx.reply('Could not load Inbox. Check OpenAlice logs.').catch(() => undefined)
+        await ctx.reply('Could not load Inbox. Check OpenAlpha logs.').catch(() => undefined)
       })
     })
     bot.command('settings', async (ctx) => {
       if (ctx.chat.type !== 'private' || !ctx.from) return
       await this.presentSettings(ctx, context).catch(async (error) => {
         this.tracker.degraded(error)
-        await ctx.reply('Could not open settings. Check OpenAlice logs.').catch(() => undefined)
+        await ctx.reply('Could not open settings. Check OpenAlpha logs.').catch(() => undefined)
       })
     })
     bot.command('uta', async (ctx) => {
       if (ctx.chat.type !== 'private' || !ctx.from) return
       await this.presentUtaCommand(ctx, context).catch(async (error) => {
         this.tracker.degraded(error)
-        await ctx.reply('Could not open UTA. Check OpenAlice logs.').catch(() => undefined)
+        await ctx.reply('Could not open UTA. Check OpenAlpha logs.').catch(() => undefined)
       })
     })
     bot.on('callback_query:data', async (ctx) => {
@@ -394,7 +394,7 @@ export class TelegramConnectorAdapter implements ConnectorAdapter {
           reply: async (message) => { await ctx.reply(message) },
         }).catch(async (error) => {
           this.tracker.degraded(error)
-          await ctx.reply('Connector command failed. Check OpenAlice logs.').catch(() => undefined)
+          await ctx.reply('Connector command failed. Check OpenAlpha logs.').catch(() => undefined)
           return true
         })
         if (!handled) await ctx.reply('Unknown connector command.')
@@ -414,7 +414,7 @@ export class TelegramConnectorAdapter implements ConnectorAdapter {
         })
       } catch (error) {
         this.tracker.degraded(error)
-        await ctx.reply('OpenAlice could not accept this message. Check Connector Settings and logs.')
+        await ctx.reply('OpenAlpha could not accept this message. Check Connector Settings and logs.')
           .catch(() => undefined)
       }
     })
@@ -473,11 +473,11 @@ export class TelegramConnectorAdapter implements ConnectorAdapter {
       this.chatId = chatId
       await context.updateSettings({ ownerUserId: userId, chatId })
       this.tracker.healthy(userId)
-      await reply('Telegram is linked to this OpenAlice installation.')
+      await reply('Telegram is linked to this OpenAlpha installation.')
     })
     context.commands.register('status', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply(`OpenAlice Connector Service: ${context.getServiceStatus()}. Telegram: ${this.health().status}.`)
+      await reply(`OpenAlpha Connector Service: ${context.getServiceStatus()}. Telegram: ${this.health().status}.`)
     })
     context.commands.register('test', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
@@ -526,7 +526,7 @@ export class TelegramConnectorAdapter implements ConnectorAdapter {
     }
     const session: TelegramUtaSession = {
       accountIds: [],
-      view: { kind: 'loading', reason: 'Asking OpenAlice for the current UTA review…' },
+      view: { kind: 'loading', reason: 'Asking OpenAlpha for the current UTA review…' },
     }
     const form = formatTelegramUtaLoadingPage()
     const sent = await this.presentForm(ctx, form, 'reply')

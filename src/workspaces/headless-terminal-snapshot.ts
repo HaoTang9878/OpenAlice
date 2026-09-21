@@ -43,7 +43,7 @@ const DEFAULT_SCROLLBACK_ROWS = 10_000
  * Server-side xterm mirror used to turn a raw PTY byte stream into a compact,
  * authoritative ANSI snapshot for a fresh renderer.
  *
- * Adapted from stablyai/orca's HeadlessEmulator. OpenAlice deliberately keeps
+ * Adapted from stablyai/orca's HeadlessEmulator. OpenAlpha deliberately keeps
  * its raw ReplayBuffer beside this mirror: raw bytes remain the persistence
  * and hot-attach contract, while cold attaches can restore the current screen
  * without replaying every historical TUI redraw.

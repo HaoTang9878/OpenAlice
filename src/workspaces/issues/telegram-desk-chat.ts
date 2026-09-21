@@ -166,7 +166,7 @@ export async function ingestConnectorOwnerMessages(
       issue: appended.issue,
       conversationId: appended.comment.id,
       phase: 'failed',
-      text: `OpenAlice could not start the Agent: ${reason}`,
+      text: `OpenAlpha could not start the Agent: ${reason}`,
       client,
     }).catch(() => undefined)
   }

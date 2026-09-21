@@ -116,7 +116,7 @@ export const publicConnectorAdapterMutationResultSchema = z.object({
 export type PublicConnectorAdapterMutationResult = z.infer<typeof publicConnectorAdapterMutationResultSchema>
 
 /** Keep inline delivery bounded below both Discord's ordinary upload limit and
- * Telegram's document limit. Alice reads only the small Markdown reports that
+ * Telegram's document limit. OpenAlpha reads only the small Markdown reports that
  * Inbox already exposes; Connector Service never reaches back into a Workspace. */
 export const MAX_CONNECTOR_ATTACHMENT_BYTES = 1024 * 1024
 export const MAX_CONNECTOR_ATTACHMENTS = 5
@@ -133,7 +133,7 @@ export const connectorAttachmentSchema = z.object({
   mediaType: z.string().min(1).max(128),
   sizeBytes: z.number().int().min(0).max(MAX_CONNECTOR_ATTACHMENT_BYTES),
   contentSha256: z.string().regex(/^[a-f0-9]{64}$/),
-  // Source evidence remains distinct when Alice creates an encoding-normalized
+  // Source evidence remains distinct when OpenAlpha creates an encoding-normalized
   // delivery copy. The Workspace file itself is never rewritten.
   source: connectorAttachmentSourceSchema.optional(),
   // One MiB is at most 1,398,104 base64 characters. The small allowance keeps
@@ -227,7 +227,7 @@ export type ClaimedInboundOwnerMessage = InboundOwnerMessage & { queueId: string
 export interface ConnectorWorkClaim<T> { claimId: string; items: T[] }
 export type ConnectorDeliveryReceipt = z.infer<typeof connectorDeliveryReceiptSchema>
 
-/** Bounded Connector → Alice work that is not phone-desk inbound chat. */
+/** Bounded Connector → OpenAlpha work that is not phone-desk inbound chat. */
 export const MAX_CONNECTOR_ACTION_REQUESTS = 20
 export const CONNECTOR_ACTION_TTL_MS = 60_000
 export const MAX_CONNECTOR_DOC_INDEX = 999
@@ -384,7 +384,7 @@ export function utaFailureMessage(reason: ConnectorUtaFailureReason): string {
     case 'expired':
       return 'That UTA review expired. Send /uta again.'
     case 'unavailable':
-      return 'Trading is not available. Check OpenAlice trading mode and UTA.'
+      return 'Trading is not available. Check OpenAlpha trading mode and UTA.'
     case 'not_found':
       return 'That trading account is no longer available. Send /uta again.'
     case 'conflict':
@@ -392,7 +392,7 @@ export function utaFailureMessage(reason: ConnectorUtaFailureReason): string {
     case 'readonly':
       return 'Trading mode is readonly. Reject is still available; push is not.'
     case 'delivery_failed':
-      return 'OpenAlice could not refresh the UTA panel. Send /uta again.'
+      return 'OpenAlpha could not refresh the UTA panel. Send /uta again.'
   }
 }
 
@@ -407,7 +407,7 @@ export function artifactFailureMessage(
     case 'entry_not_found':
       return 'That Inbox item is no longer available. Send /inbox again.'
     case 'workspace_unavailable':
-      return 'OpenAlice could not open that Workspace. Try again when it is available.'
+      return 'OpenAlpha could not open that Workspace. Try again when it is available.'
     case 'doc_not_found':
       return 'That file is no longer listed on this Inbox item. Send /inbox again.'
     case 'path_escape':
@@ -421,7 +421,7 @@ export function artifactFailureMessage(
     case 'unsupported':
       return 'This connector cannot send Inbox files yet.'
     case 'delivery_failed':
-      return 'OpenAlice could not send the file. Try again.'
+      return 'OpenAlpha could not send the file. Try again.'
   }
 }
 

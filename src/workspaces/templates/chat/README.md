@@ -4,14 +4,14 @@ version: 1.8.9
 
 # Chat
 
-A general-purpose Alice workspace. The agent boots with Alice's full tool
+A general-purpose OpenAlpha workspace. The agent boots with OpenAlpha's full tool
 surface — market/research data plus trading, through the `alice*` / `traderhub`
-CLIs on its PATH — with the Workspace-owned Alice instruction contract loaded
+CLIs on its PATH — with the Workspace-owned OpenAlpha instruction contract loaded
 as CLAUDE.md / AGENTS.md.
 
 ## What this workspace does
 
-This is the closest equivalent to "talk to Alice about anything
+This is the closest equivalent to "talk to OpenAlpha about anything
 trading-related," but it is still a workspace, not a stateless chat room. The
 agent can quote tickers, pull boards and fundamentals, search the collected-RSS
 archive, run indicators, write research files, track entities with `[[name]]`,
@@ -33,20 +33,20 @@ headless workspace run.
 
 ## When to spawn this
 
-- You want a long-running thread with Alice that isn't tied to a specific research artifact or autoresearch loop.
+- You want a long-running thread with OpenAlpha that isn't tied to a specific research artifact or autoresearch loop.
 - You're exploring an idea and don't yet know which workspace the job needs — Chat is the no-commitment starting point.
-- You want quick access to Alice's full data surface without setting up Auto-Quant clones or finance-skill trees.
+- You want quick access to OpenAlpha's full data surface without setting up Auto-Quant clones or finance-skill trees.
 - You want to turn a loose market concern into a durable issue, tracked entity, Inbox report, or scheduled check.
 
 ## What you'll see in Inbox
 
 Inbox keeps durable report delivery separate from the live terminal. A user or
 peer agent can ask the attributable sender about a report; when only the
-Workspace is known, OpenAlice creates a fresh Session and labels its provenance
+Workspace is known, OpenAlpha creates a fresh Session and labels its provenance
 honestly instead of pretending it found the original author. Reconstruction
 instructions are added only when the caller explicitly requests them.
 
-Things Alice will route here:
+Things OpenAlpha will route here:
 - Research notes, thesis updates, and market snapshots worth re-reading later.
 - Reports produced by scheduled issues or headless runs.
 - Trade execution summaries or staged-operation notes when trading work happens.

@@ -183,7 +183,7 @@ async function fulfillUtaRequest(
       return present(deps, request, await buildConnectorUtaReview(deps.utaManager, policy), {
         kind: 'error',
         utaId: request.utaId,
-        message: `This commit has ${status.staged.length} operations. Approve it in OpenAlice → Trading as Git.`,
+        message: `This commit has ${status.staged.length} operations. Approve it in OpenAlpha → Trading as Git.`,
       })
     }
 

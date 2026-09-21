@@ -116,7 +116,7 @@ describe('Office interaction targets', () => {
     })
   })
 
-  it('selects only an object in Alice’s facing cone', () => {
+  it('selects only an object in OpenAlpha’s facing cone', () => {
     const targets = [
       {
         id: 'cabinet:up',
@@ -238,7 +238,7 @@ describe('Office interaction targets', () => {
     }
   })
 
-  it('keeps Alice inside the camera safe area without escaping map bounds', () => {
+  it('keeps OpenAlpha inside the camera safe area without escaping map bounds', () => {
     expect(officeCameraFollowingAlice(
       { x: 900, y: 620 },
       { x: 0, y: 0 },
@@ -273,7 +273,7 @@ describe('Office interaction targets', () => {
     )).toEqual({ x: 120, y: 64 })
   })
 
-  it('centers Alice in a short landscape viewport', () => {
+  it('centers OpenAlpha in a short landscape viewport', () => {
     expect(officeCameraCenteredOn(
       { x: 480, y: 336 },
       { width: 750, height: 272 },

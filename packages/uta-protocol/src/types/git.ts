@@ -26,7 +26,7 @@ export type Operation =
   | { action: 'cancelOrder'; orderId: string; orderCancel?: OrderCancel }
   | { action: 'syncOrders' }
   | {
-      // Wallet-only event: an open order observed on the broker that Alice
+      // Wallet-only event: an open order observed on the broker that OpenAlpha
       // never placed (user trading on the exchange app directly). The log is
       // a faithful record, not the source of final state — untracked orders
       // are themselves "commits without a message": N of them observed in
@@ -38,8 +38,8 @@ export type Operation =
       order: Order
     }
   | {
-      // Wallet-only event: bridges the gap between Alice's order log and a
-      // broker-reported balance change Alice did not initiate (first-sight
+      // Wallet-only event: bridges the gap between OpenAlpha's order log and a
+      // broker-reported balance change OpenAlpha did not initiate (first-sight
       // bootstrap, external transfer, staking reward, off-platform trade).
       // Treated as a virtual market buy/sell at observed price for cost-basis
       // purposes — sign of quantityDelta determines direction.

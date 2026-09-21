@@ -1,5 +1,5 @@
 /**
- * Immutable AliceProject product birth (Trader vs Nano).
+ * Immutable OpenAlphaProject product birth (Trader vs Nano).
  *
  * Authority is the complete-home stamp. Missing file means trader so released
  * homes keep their existing behavior. First write wins; callers must not
@@ -88,16 +88,16 @@ async function readExistingStamp(home: string): Promise<AliceProjectProductStamp
     text = await readFile(path, 'utf8')
   } catch (error) {
     if (isNodeError(error, 'ENOENT')) return null
-    throw new Error(`Could not read AliceProject product stamp at ${path}`, { cause: error })
+    throw new Error(`Could not read OpenAlphaProject product stamp at ${path}`, { cause: error })
   }
   let parsed: unknown
   try {
     parsed = JSON.parse(text) as unknown
   } catch (error) {
-    throw new Error(`Invalid AliceProject product stamp at ${path}`, { cause: error })
+    throw new Error(`Invalid OpenAlphaProject product stamp at ${path}`, { cause: error })
   }
   const stamp = parseAliceProjectProductStamp(parsed)
-  if (!stamp) throw new Error(`Invalid AliceProject product stamp at ${path}`)
+  if (!stamp) throw new Error(`Invalid OpenAlphaProject product stamp at ${path}`)
   return stamp
 }
 

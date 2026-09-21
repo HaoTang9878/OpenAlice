@@ -117,7 +117,7 @@ export function decideExistingOwnerStartup(
     return {
       kind: 'conflict',
       ...base,
-      reason: 'Another desktop AliceProject already owns this data location.',
+      reason: 'Another desktop OpenAlphaProject already owns this data location.',
       defaultAction: 'keep',
       allowOpenBrowser: false,
     }
@@ -127,7 +127,7 @@ export function decideExistingOwnerStartup(
     kind: 'conflict',
     ...base,
     reason: input.discovered?.detail
-      ?? `Another AliceProject (${surface}) is using this data location.`,
+      ?? `Another OpenAlphaProject (${surface}) is using this data location.`,
     defaultAction: 'keep',
     allowOpenBrowser: false,
   }
@@ -136,6 +136,6 @@ export function decideExistingOwnerStartup(
 export function ownerLabel(surface: string): string {
   if (surface === 'dev') return 'development Runtime'
   if (surface === 'cli-server') return 'CLI Server Runtime'
-  if (isElectronOwnerSurface(surface)) return 'desktop AliceProject'
-  return `${surface} AliceProject`
+  if (isElectronOwnerSurface(surface)) return 'desktop OpenAlphaProject'
+  return `${surface} OpenAlphaProject`
 }

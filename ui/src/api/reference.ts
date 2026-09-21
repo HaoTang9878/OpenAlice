@@ -1,7 +1,7 @@
 /**
  * Reference-data API — `/api/reference/*`.
  *
- * OpenAlice's own low-frequency data contract (boards: movers, macro,
+ * OpenAlpha's own low-frequency data contract (boards: movers, macro,
  * calendar, …). New market surfaces consume THIS namespace — never the
  * legacy OpenBB-compatible `/api/market-data-v1` passthrough.
  */

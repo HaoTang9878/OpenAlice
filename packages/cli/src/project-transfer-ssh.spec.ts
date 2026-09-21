@@ -8,7 +8,7 @@ import { describe, expect, it } from 'vitest'
 import { transferProjectOverSsh } from './project-transfer-ssh.ts'
 import type { ProjectTransferPlan } from './project-transfer.ts'
 
-describe('AliceProject SSH transfer transport', () => {
+describe('OpenAlphaProject SSH transfer transport', () => {
   it('streams to the registered target and accepts only the matching receipt', async () => {
     const calls: Array<{ command: string; args: readonly string[] }> = []
     const receipt = matchingReceipt()

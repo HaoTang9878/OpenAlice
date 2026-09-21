@@ -29,7 +29,7 @@ afterEach(async () => {
   })))
 })
 
-describe('AliceProject transfer planner', () => {
+describe('OpenAlphaProject transfer planner', () => {
   it('builds a secret-free portable manifest and excludes the complete Session plane', async () => {
     const home = await fixtureHome()
     const destinationRoot = await mkdtemp(join(tmpdir(), 'oa-transfer-destination-'))
@@ -262,7 +262,7 @@ describe('AliceProject transfer planner', () => {
     await writeFile(join(repository, 'README.md'), 'linked workspace\n')
     await execFile('git', ['add', 'README.md'], { cwd: repository })
     await execFile('git', [
-      '-c', 'user.name=OpenAlice Test',
+      '-c', 'user.name=OpenAlpha Test',
       '-c', 'user.email=openalice@example.test',
       'commit', '-qm', 'fixture',
     ], { cwd: repository })
@@ -354,7 +354,7 @@ describe('AliceProject transfer planner', () => {
     ], { cwd: workspace })
     await execFile('git', ['add', '.gitmodules', 'vendor/module'], { cwd: workspace })
     await execFile('git', [
-      '-c', 'user.name=OpenAlice Test',
+      '-c', 'user.name=OpenAlpha Test',
       '-c', 'user.email=openalice@example.test',
       'commit', '-qm', 'add submodule',
     ], { cwd: workspace })
@@ -579,7 +579,7 @@ async function initCommittedRepository(repository: string, file: string): Promis
   await execFile('git', ['init', '-q'], { cwd: repository })
   await execFile('git', ['add', file], { cwd: repository })
   await execFile('git', [
-    '-c', 'user.name=OpenAlice Test',
+    '-c', 'user.name=OpenAlpha Test',
     '-c', 'user.email=openalice@example.test',
     'commit', '-qm', 'fixture',
   ], { cwd: repository })

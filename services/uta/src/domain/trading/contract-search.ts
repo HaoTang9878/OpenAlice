@@ -19,7 +19,7 @@ import {
   type AssetClassHint,
 } from './contract-search-rules.js'
 
-// Canonical wire shape lives in the shared protocol package so Alice's SDK
+// Canonical wire shape lives in the shared protocol package so OpenAlpha's SDK
 // types against the same thing this route returns.
 export type { ContractSearchHit } from '@traderalice/uta-protocol'
 import type { ContractSearchHit } from '@traderalice/uta-protocol'

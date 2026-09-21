@@ -60,7 +60,7 @@ export function issueRunFailure(
     return {
       kind: 'launcher_restarted',
       title: 'Launcher restarted',
-      message: 'OpenAlice stopped while this run was active. It was not automatically retried.',
+      message: 'OpenAlpha stopped while this run was active. It was not automatically retried.',
       retryable: true,
     }
   }
@@ -72,7 +72,7 @@ export function issueRunFailure(
       return {
         kind: 'system_paused',
         title: 'Computer or launcher was paused',
-        message: `The ${compactDuration(timeoutMs)} watchdog ran ${compactDuration(lateByMs)} late. The computer likely slept or OpenAlice was paused; this run was not automatically retried.`,
+        message: `The ${compactDuration(timeoutMs)} watchdog ran ${compactDuration(lateByMs)} late. The computer likely slept or OpenAlpha was paused; this run was not automatically retried.`,
         retryable: true,
       }
     }

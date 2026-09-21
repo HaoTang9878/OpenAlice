@@ -38,7 +38,7 @@ export function renderSupervisorSourceLaunchBay(
   const safeWidth = Math.max(24, width)
   const state = phaseState(view.phase)
   const inspectorRows = [
-    '◆ OpenAlice checkout',
+    '◆ OpenAlpha checkout',
     ...view.fieldLines,
     '',
     view.detail,
@@ -66,7 +66,7 @@ export function renderSupervisorSourceLaunchBay(
     )
     const inspector = renderSupervisorPanel(
       'Runtime Source',
-      'AliceProject setting',
+      'OpenAlphaProject setting',
       padRows(inspectorRows, height),
       inspectorWidth,
     )
@@ -96,7 +96,7 @@ export function renderSupervisorSourceLaunchBay(
       '',
       ...renderSupervisorPanel(
         'Runtime Source',
-        'AliceProject setting',
+        'OpenAlphaProject setting',
         inspectorRows,
         safeWidth,
       ),

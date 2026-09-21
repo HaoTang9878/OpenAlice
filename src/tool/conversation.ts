@@ -20,7 +20,7 @@ const MAX_PROMPT_CHARS = 16_000
 const AWAIT_POLL_MS = 250
 
 const conversationSelectionShape = {
-  credential: z.string().min(1).optional().describe('OpenAlice vault credential slug, never an API key. Omit to retain the Session or Workspace selection.'),
+  credential: z.string().min(1).optional().describe('OpenAlpha vault credential slug, never an API key. Omit to retain the Session or Workspace selection.'),
   credentialSource: z.literal('native').optional().describe('Use the runtime own authentication; mutually exclusive with credential.'),
   model: z.string().min(1).optional().describe('Optional model id; custom model ids are accepted.'),
   effort: z.enum(MODEL_REASONING_EFFORTS).optional().describe('Optional reasoning effort.'),
@@ -36,7 +36,7 @@ export const conversationAskCommonShape = {
   await: z.boolean().optional().default(false)
     .describe('Wait server-side for a reply needed now; omit for asynchronous delegation and use the returned taskId later.'),
   reconstruct: z.boolean().optional().default(false)
-    .describe('Explicitly add artifact-reconstruction guidance if OpenAlice must recruit a fallback worker.'),
+    .describe('Explicitly add artifact-reconstruction guidance if OpenAlpha must recruit a fallback worker.'),
 }
 
 export function taskProjection(task: WorkspaceConversationTask, mode: 'summary' | 'detailed') {

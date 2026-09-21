@@ -23,7 +23,7 @@ reloadOnHotUpdate('live/inbox-read')
  * frontend only applies optimistic `readAt` updates into the loaded feed; the
  * next `/api/inbox/history` poll remains authoritative. This matters for the
  * desktop app: Electron, browser dev, and Docker/self-hosted clients should all
- * see the same attention state when they share the same OpenAlice data root.
+ * see the same attention state when they share the same OpenAlpha data root.
  */
 
 interface InboxReadActions {

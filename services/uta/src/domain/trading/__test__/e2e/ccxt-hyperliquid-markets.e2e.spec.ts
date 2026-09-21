@@ -1,7 +1,7 @@
 /**
  * CcxtBroker hyperliquid markets loading e2e.
  *
- * Verifies that OpenAlice's CcxtBroker can load ALL hyperliquid market types
+ * Verifies that OpenAlpha's CcxtBroker can load ALL hyperliquid market types
  * (spot AND swap), not just the subset that intersects with bybit-style
  * type names (linear/inverse).
  *

@@ -85,7 +85,7 @@ export interface AgentProviderVendorPolicy {
   readonly legacyRequestedWireFallbacks?: Readonly<Partial<Record<WireShape, WireShape>>>;
 }
 
-/** Alice-side transport that projects a runtime's live protocol onto the Web surface. */
+/** OpenAlpha-side transport that projects a runtime's live protocol onto the Web surface. */
 export type WebSessionWire = 'pi-rpc' | 'acp' | 'claude-stream-json' | 'codex-app-server';
 
 export interface WebSurfaceCapability {
@@ -103,7 +103,7 @@ export interface WebSurfaceCapability {
 export interface AgentProviderCapabilities {
   /**
    * Whether the runtime can start from its own native/global login, or needs a
-   * concrete Workspace provider binding before OpenAlice launches it.
+   * concrete Workspace provider binding before OpenAlpha launches it.
    */
   readonly credentialSource: 'runtime-or-workspace' | 'workspace-required';
   /** Wire protocols this runtime can consume, in native preference order. */
@@ -316,7 +316,7 @@ export interface CliAdapter {
     /**
      * The adapter can serve the browser Web conversation surface through a
      * long-lived structured process (`composeWebCommand`). `wire` selects the
-     * Alice transport that speaks the runtime's protocol; the UI reads this to
+     * OpenAlpha transport that speaks the runtime's protocol; the UI reads this to
      * decide whether a Session may open in the Web surface. Omit for runtimes
      * whose only interactive mode is the TUI.
      */
@@ -375,7 +375,7 @@ export interface CliAdapter {
    * interactive TUI that waits for input). The adapter places `prompt` at the
    * CLI-correct position (claude right after `-p`; codex/opencode/pi trailing).
    * MUST keep the same tool-access strategy as `composeCommand`: modern
-   * OpenAlice workspaces prefer the injected `alice*` / `traderhub` CLI shims,
+   * OpenAlpha workspaces prefer the injected `alice*` / `traderhub` CLI shims,
    * while adapter-native MCP is optional and adapter-specific. Present iff
    * `capabilities.headless` is true.
    *   claude:   [...base, -p, <prompt>, --output-format, json]   // never --bare
@@ -451,9 +451,9 @@ export interface CliAdapter {
 
   /**
    * Read/write a deprecated compatibility export in the CLI's native project
-   * config. Managed OpenAlice Sessions use the persisted Session binding and
+   * config. Managed OpenAlpha Sessions use the persisted Session binding and
    * per-spawn `sessionRuntime` projection instead. Retained so users may export
-   * configuration for launching the CLI outside OpenAlice and so legacy
+   * configuration for launching the CLI outside OpenAlpha and so legacy
    * Session bindings can still be resumed.
    *
    * @deprecated Compatibility export only; do not use as a managed launch

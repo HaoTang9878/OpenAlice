@@ -2,7 +2,7 @@
  * Agent Client Protocol (https://agentclientprotocol.com) over stdio.
  *
  * Cursor Agent (`agent acp`), Grok Build (`grok agent stdio`) and opencode
- * (`opencode acp`) implement the agent side natively. Alice is the client: it
+ * (`opencode acp`) implement the agent side natively. OpenAlpha is the client: it
  * advertises no filesystem or terminal capabilities, so agents keep using
  * their own tools, and only permission requests round-trip to the browser.
  */
@@ -48,7 +48,7 @@ export class AcpTransport implements WebSessionTransport {
     const init = await this.peer.request('initialize', {
       protocolVersion: ACP_PROTOCOL_VERSION,
       clientCapabilities: { fs: { readTextFile: false, writeTextFile: false }, terminal: false },
-      clientInfo: { name: 'openalice', title: 'OpenAlice', version: '1' },
+      clientInfo: { name: 'openalice', title: 'OpenAlpha', version: '1' },
     })
     const capabilities = isJsonObject(init) && isJsonObject(init['agentCapabilities']) ? init['agentCapabilities'] : {}
     const canLoad = capabilities['loadSession'] === true
@@ -192,7 +192,7 @@ export class AcpTransport implements WebSessionTransport {
     if (method === 'session/request_permission' && isJsonObject(params)) {
       return this.requestPermission(params, id)
     }
-    const error = new Error(`OpenAlice does not implement ${method}`) as Error & { code: number }
+    const error = new Error(`OpenAlpha does not implement ${method}`) as Error & { code: number }
     error.code = -32601
     throw error
   }

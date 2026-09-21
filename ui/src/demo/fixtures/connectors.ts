@@ -37,7 +37,7 @@ export const demoConnectorSnapshot: ConnectorSettingsSnapshot = {
           required: false,
           group: 'preferences',
           defaultValue: true,
-          description: 'When off, new Inbox items stay in OpenAlice until you open them there or run /inbox.',
+          description: 'When off, new Inbox items stay in OpenAlpha until you open them there or run /inbox.',
         },
       ],
       commands: [
@@ -90,7 +90,7 @@ export const demoConnectorSnapshot: ConnectorSettingsSnapshot = {
           required: false,
           group: 'preferences',
           defaultValue: true,
-          description: 'When off, new Inbox items stay in OpenAlice until you run /inbox.',
+          description: 'When off, new Inbox items stay in OpenAlpha until you run /inbox.',
         },
       ],
       commands: [
@@ -141,7 +141,7 @@ export const demoConnectorSnapshot: ConnectorSettingsSnapshot = {
           required: false,
           group: 'preferences',
           defaultValue: true,
-          description: 'When off, new Inbox items stay in OpenAlice until you open them there or run /inbox.',
+          description: 'When off, new Inbox items stay in OpenAlpha until you open them there or run /inbox.',
         },
       ],
       commands: [
@@ -213,7 +213,7 @@ export const demoConnectorSnapshot: ConnectorSettingsSnapshot = {
           required: false,
           group: 'preferences',
           defaultValue: true,
-          description: 'When off, new Inbox items stay in OpenAlice until you open them there or run /inbox.',
+          description: 'When off, new Inbox items stay in OpenAlpha until you open them there or run /inbox.',
         },
       ],
       commands: [

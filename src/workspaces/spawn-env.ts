@@ -93,7 +93,7 @@ export function buildSpawnEnv(
   // happens to be running there. On resume, `--continue` looks in the
   // workspace's own projectKey, finds it empty, and exits 1 → PTY respawn
   // loop into the circuit breaker. Verified end-to-end against the
-  // `path.trace` log: pre-fix `envPWD` was the OpenAlice repo root while
+  // `path.trace` log: pre-fix `envPWD` was the OpenAlpha repo root while
   // `spawnCwd` was the workspace dir.
   if (cwd) out['PWD'] = cwd;
   // Caller-supplied per-session env (e.g. AQ_WS_ID, AQ_LAUNCHER_REPO_ROOT)
@@ -107,7 +107,7 @@ export function buildSpawnEnv(
   // not. A typical host contributes `Path`; adding a separate `PATH` leaves two
   // entries in node-pty's environment block. The first Pi process can still
   // launch, but Node normalizes the duplicate back to the unaugmented `Path`,
-  // so Pi's nested bash tool loses the OpenAlice CLI shim directory. Keep one
+  // so Pi's nested bash tool loses the OpenAlpha CLI shim directory. Keep one
   // canonical spelling before crossing the process boundary.
   for (const key of Object.keys(out)) {
     if (key.toUpperCase() === 'PATH') delete out[key];

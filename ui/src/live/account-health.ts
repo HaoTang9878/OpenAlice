@@ -9,7 +9,7 @@ reloadOnHotUpdate('live/account-health')
  * Live broker-health map: accountId → BrokerHealthInfo.
  *
  * Shared by TradingPage, PortfolioPage, and UTADetailPage. Health lives in the
- * separate UTA process, so Alice refreshes the authoritative UTA summaries
+ * separate UTA process, so OpenAlpha refreshes the authoritative UTA summaries
  * instead of pretending its retired event stream carries UTA-local records.
  */
 

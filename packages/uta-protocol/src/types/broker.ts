@@ -140,7 +140,7 @@ export interface Position {
    * - `'broker'`: broker reported it directly (Alpaca avg_entry_price,
    *   IBKR EWrapper, CCXT derivative entryPrice). Authoritative.
    * - `'wallet'`: broker has no real cost basis (e.g. CCXT spot synthesized
-   *   from fetchBalance) — UTA must reconstruct from Alice's git log,
+   *   from fetchBalance) — UTA must reconstruct from OpenAlpha's git log,
    *   bootstrapping unknown qty via reconcileBalance at observed markPrice.
    * Undefined defaults to `'broker'` (current behavior, back-compat).
    */
@@ -159,7 +159,7 @@ export interface Position {
 /**
  * A protective child order the venue created alongside the entry (bracket
  * TP/SL legs). Surfaced so the ledger can track the legs from birth —
- * otherwise they exist only on the exchange and every Alice surface
+ * otherwise they exist only on the exchange and every OpenAlpha surface
  * (order list, sync poller, cancel) is blind to them.
  */
 export interface PlaceOrderLeg {
@@ -282,7 +282,7 @@ export interface AccountInfo {
  *   - 'spot'        a cash / spot wallet
  *   - 'derivatives' a futures / swap / margin wallet
  *   - 'unified'     a single cross-margin account that IS the whole thing
- * Funding / earn / staking wallets are deliberately NOT enumerated — Alice
+ * Funding / earn / staking wallets are deliberately NOT enumerated — OpenAlpha
  * trades; it does not custody-manage them.
  */
 export interface SubAccountRef {
@@ -320,7 +320,7 @@ export interface MarketClock {
 }
 
 /**
- * Normalized bar interval — Alice-facing enum. Each broker maps this to its
+ * Normalized bar interval — OpenAlpha-facing enum. Each broker maps this to its
  * native bar-size / period / timeframe string. Keep this list small and
  * additive; brokers declare which subset they support via
  * `AccountCapabilities.historicalBars.supportedBarSizes`.
@@ -576,7 +576,7 @@ export interface IBroker<TMeta = unknown> {
    */
   getOrder(orderId: string, symbolHint?: string): Promise<OpenOrder | null>
   /**
-   * List ALL currently-open orders on the account — including ones Alice
+   * List ALL currently-open orders on the account — including ones OpenAlpha
    * never placed (user trading on the exchange app directly). Optional:
    * brokers without a broad open-orders API simply don't declare it, and
    * external-order observation degrades to off for that account. Returns

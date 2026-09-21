@@ -30,7 +30,7 @@ export async function injectWorkspaceContext(opts: {
 
   if (template.injectInstructions) {
     // One template-owned instruction source, written byte-identically to both
-    // native filenames. Alice's baseline identity is intentionally frozen in
+    // native filenames. OpenAlpha's baseline identity is intentionally frozen in
     // the Chat template instead of coming from a mutable global brain file.
     // Existing Workspaces keep their durable files; future edits belong to the
     // Workspace/template upgrade boundary rather than a hidden global prompt.
@@ -39,7 +39,7 @@ export async function injectWorkspaceContext(opts: {
     await writeWorkspaceFile(dir, 'AGENTS.md', instruction);
   }
 
-  // Template-owned skills remain separate from Project-provided Alice Harness skills.
+  // Template-owned skills remain separate from Project-provided OpenAlpha Harness skills.
   const skills = [
     ...new Set([
       ...template.bundledSkills.filter((skill) => !ALICE_HARNESS_SKILLS.includes(skill as typeof ALICE_HARNESS_SKILLS[number])),

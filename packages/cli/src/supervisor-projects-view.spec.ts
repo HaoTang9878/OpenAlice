@@ -8,23 +8,23 @@ import {
 } from './supervisor-projects-view.ts'
 import { createSupervisorTuiTheme } from './supervisor-tui-theme.ts'
 
-describe('Supervisor AliceProject Switchboard', () => {
+describe('Supervisor OpenAlphaProject Switchboard', () => {
   const items: SupervisorProjectSwitchboardItem[] = [
-    { key: 'default', label: 'Default AliceProject', kind: 'project', home: '/Users/alice/.openalice', port: 47331, portAutomatic: true, current: true, isDefault: true },
+    { key: 'default', label: 'Default OpenAlphaProject', kind: 'project', home: '/Users/alice/.openalice', port: 47331, portAutomatic: true, current: true, isDefault: true },
     { key: 'research', label: 'Research', kind: 'project', home: '/Users/alice/.openalice-research', port: 48001, portAutomatic: false },
-    { key: '__create__', label: '+ Create AliceProject…', kind: 'create' },
+    { key: '__create__', label: '+ Create OpenAlphaProject…', kind: 'create' },
   ]
 
   it('renders a wide project map and Inspector with split-pane targets', () => {
     const rendered = renderSupervisorProjectSwitchboard({
-      currentProjectName: 'Default AliceProject',
-      message: 'Selecting an AliceProject also makes it the next bare-start default.',
+      currentProjectName: 'Default OpenAlphaProject',
+      message: 'Selecting an OpenAlphaProject also makes it the next bare-start default.',
       locked: false,
       items,
       selected: 1,
     }, 100)
     const output = rendered.lines.join('\n')
-    expect(output).toContain('AliceProject Switchboard · 2 PROJECTS')
+    expect(output).toContain('OpenAlphaProject Switchboard · 2 PROJECTS')
     expect(output).toContain('Inspector · 2/3 · SELECT & CREATE')
     expect(output).toContain('› Research')
     expect(output).toContain('Home · /Users/alice/.openalice-research')
@@ -36,13 +36,13 @@ describe('Supervisor AliceProject Switchboard', () => {
   it('stacks the complete read-only model at the 80-column baseline', () => {
     const rendered = renderSupervisorProjectSwitchboard({
       currentProjectName: 'Research',
-      message: 'AliceProject selection is read-only. Locked by --instance.',
+      message: 'OpenAlphaProject selection is read-only. Locked by --instance.',
       locked: true,
       items: items.slice(0, 2),
       selected: 0,
     }, 72)
     const output = rendered.lines.join('\n')
-    expect(output).toContain('AliceProject Switchboard · 2 PROJECTS')
+    expect(output).toContain('OpenAlphaProject Switchboard · 2 PROJECTS')
     expect(output).toContain('Inspector · 1/2 · READ ONLY')
     expect(output).toContain('Role · CURRENT CONTEXT · BARE-START DEFAULT')
     expect(output).toContain('Switchboard status · Research')
@@ -73,7 +73,7 @@ describe('Supervisor AliceProject Switchboard', () => {
 
     const narrow = renderSupervisorProjectSwitchboard({
       currentProjectName: 'Project 9',
-      message: 'Selecting an AliceProject also makes it the next bare-start default. Copy credentials separately.',
+      message: 'Selecting an OpenAlphaProject also makes it the next bare-start default. Copy credentials separately.',
       locked: false,
       items: many,
       selected: 9,
@@ -95,14 +95,14 @@ describe('Supervisor AliceProject Switchboard', () => {
 
     const compactStage = renderSupervisorProjectSwitchboard({
       currentProjectName: 'Project 9',
-      message: 'Selecting an AliceProject also makes it the next bare-start default.',
+      message: 'Selecting an OpenAlphaProject also makes it the next bare-start default.',
       locked: false,
       items: many,
       selected: 9,
     }, 80, true)
     expect(compactStage.lines.length).toBeLessThanOrEqual(18)
     expect(compactStage.lines.join('\n')).toContain(
-      '◇ Project 9 · Selecting an AliceProject also makes it the next',
+      '◇ Project 9 · Selecting an OpenAlphaProject also makes it the next',
     )
   })
 

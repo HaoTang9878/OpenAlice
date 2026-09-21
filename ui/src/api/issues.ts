@@ -8,7 +8,7 @@ import type { ModelReasoningEffort } from './types'
 export const ISSUE_TIMEOUTS = ['15m', '30m', '45m', '60m'] as const
 export type IssueTimeout = (typeof ISSUE_TIMEOUTS)[number]
 
-/** Must stay in sync with `DEFAULT_ISSUE_COMMENT_PROMPT` in Alice. */
+/** Must stay in sync with `DEFAULT_ISSUE_COMMENT_PROMPT` in OpenAlpha. */
 export const DEFAULT_ISSUE_COMMENT_PROMPT = [
   'A new comment was left on Issue {workspaceId}/{id} ({title}) by {author}.',
   '',
@@ -133,7 +133,7 @@ export interface IssueListItem {
   assignee: string
   /** Adapter id for the scheduled fire override, if set. */
   agent?: string
-  /** Secret-free OpenAlice vault slug for a fresh scheduled Session. */
+  /** Secret-free OpenAlpha vault slug for a fresh scheduled Session. */
   credential?: string
   /** Explicitly use the Agent runtime's own login. Omission inherits Workspace. */
   credentialSource?: 'native'

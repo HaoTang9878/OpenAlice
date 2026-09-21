@@ -1,4 +1,4 @@
-/** Bounded, checksum-verified AliceProject transfer stream and remote importer. */
+/** Bounded, checksum-verified OpenAlphaProject transfer stream and remote importer. */
 import { createHash, randomBytes } from 'node:crypto'
 import { constants } from 'node:fs'
 import {
@@ -150,7 +150,7 @@ export async function receiveProjectTransferStream(input: {
   availableBytes?: (path: string) => Promise<number>
 }): Promise<ProjectTransferReceipt> {
   const reader = new AsyncByteReader(input.source)
-  if (await reader.readLine() !== MAGIC) throw transferStreamError('Invalid AliceProject transfer stream.')
+  if (await reader.readLine() !== MAGIC) throw transferStreamError('Invalid OpenAlphaProject transfer stream.')
   const plan = parseTransferPlan(await reader.readLine())
   assertTransferPlan(plan)
   if (!plan.readyToApply) throw transferStreamError('Transfer plan has unresolved blockers.')
@@ -172,7 +172,7 @@ export async function receiveProjectTransferStream(input: {
       || existingReceipt.credentials !== expectedCredentials
       || existingReceipt.sessionsImported !== 0
     ) {
-      throw transferStreamError(`Destination already contains another AliceProject: ${destination}`)
+      throw transferStreamError(`Destination already contains another OpenAlphaProject: ${destination}`)
     }
     const retryCredentialBytes = await verifyAndDiscardPayload(reader, plan)
     await verifyPublishedDestination(destination, plan, retryCredentialBytes)

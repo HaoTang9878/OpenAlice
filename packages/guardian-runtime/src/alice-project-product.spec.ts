@@ -17,7 +17,7 @@ afterEach(async () => {
   await Promise.all(temporary.splice(0).map((path) => rm(path, { recursive: true, force: true })))
 })
 
-describe('AliceProject product stamp', () => {
+describe('OpenAlphaProject product stamp', () => {
   it('treats a missing stamp as trader', async () => {
     const home = await mkdtemp(join(tmpdir(), 'alice-product-missing-'))
     temporary.push(home)

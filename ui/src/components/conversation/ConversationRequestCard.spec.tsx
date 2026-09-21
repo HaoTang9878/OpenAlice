@@ -10,13 +10,13 @@ it('retains the draft after an error and permits a retry', async () => {
   const respond = vi.fn().mockRejectedValueOnce(new Error('Connection lost')).mockResolvedValue(undefined)
   render(<ConversationRequestCard request={question} queued={0} respond={respond} />)
   const field = screen.getByLabelText('Your answer') as HTMLTextAreaElement
-  fireEvent.change(field, { target: { value: 'Alice research' } })
+  fireEvent.change(field, { target: { value: 'OpenAlpha research' } })
   fireEvent.click(screen.getByRole('button', { name: 'Send answer' }))
   await screen.findByRole('alert')
-  expect(field.value).toBe('Alice research')
+  expect(field.value).toBe('OpenAlpha research')
   fireEvent.click(screen.getByRole('button', { name: 'Send answer' }))
   await waitFor(() => expect(respond).toHaveBeenCalledTimes(2))
-  expect(respond).toHaveBeenLastCalledWith('q1', '', 'Alice research')
+  expect(respond).toHaveBeenLastCalledWith('q1', '', 'OpenAlpha research')
 })
 
 it('masks secret input and does not expose text fields on permissions', () => {

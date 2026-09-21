@@ -169,7 +169,7 @@ export const claudeAdapter: CliAdapter = {
     //   - multiple jsonl coexist in the dir (claude picks ambiguously and
     //     bails with "No conversation found to continue")
     //   - the most-recent session lacks a deferred-tool marker
-    // It's also irrelevant to OpenAlice's model: we already track session
+    // It's also irrelevant to OpenAlpha's model: we already track session
     // identity at the record layer, so "resume by id" is the only mode
     // that fits the workbench. Records without a resolved id get a fresh
     // spawn — better than a respawn loop into the circuit breaker.
@@ -199,7 +199,7 @@ export const claudeAdapter: CliAdapter = {
       // settings after inheriting the child process environment. A managed
       // Vault binding must exclude user and local sources so an unrelated
       // global login or deprecated `.claude/settings.local.json` export cannot
-      // replace ANTHROPIC_BASE_URL / auth / model after OpenAlice projects the
+      // replace ANTHROPIC_BASE_URL / auth / model after OpenAlpha projects the
       // immutable Session binding. Keep the project source enabled: Claude
       // owns the native loading semantics for the Workspace's CLAUDE.md and
       // `.claude/skills`, and treating those files as a synthetic plugin loses
@@ -208,7 +208,7 @@ export const claudeAdapter: CliAdapter = {
       // remains available.
       //
       // Native bindings intentionally keep Claude's normal settings chain:
-      // choosing Agent login means the runtime, not OpenAlice, owns provider
+      // choosing Agent login means the runtime, not OpenAlpha, owns provider
       // discovery and authentication.
       const managedCredentialArgs = runtime.binding.credential.source === 'vault'
         ? ['--setting-sources=project']
@@ -410,10 +410,10 @@ export const claudeAdapter: CliAdapter = {
     }
     // Write the key into exactly one env var. Bearer-mode gateways read
     // ANTHROPIC_AUTH_TOKEN; x-api-key mode reads ANTHROPIC_API_KEY. Those
-    // provider paths plus effortLevel are the OpenAlice ownership boundary —
+    // provider paths plus effortLevel are the OpenAlpha ownership boundary —
     // permissions and every unknown project setting remain untouched and reset
     // reversibly. effortLevel is sidecar-owned only; it is intentionally absent
-    // from the legacy fallback because older OpenAlice versions never wrote it.
+    // from the legacy fallback because older OpenAlpha versions never wrote it.
     await writeOwnedJsonConfig({
       cwd,
       configPath: CLAUDE_SETTINGS_PATH,

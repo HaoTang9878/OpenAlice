@@ -2,7 +2,7 @@
  * Workspace template catalog.
  *
  * Grid of TemplateCards — one per discovered template — answering "what
- * kinds of coworkers can OpenAlice hire for you?". Click a card to drill
+ * kinds of coworkers can OpenAlpha hire for you?". Click a card to drill
  * into its README and spawn form (TemplateDetailPage).
  *
  * This page is the discovery surface for the Workspace ecosystem. Official

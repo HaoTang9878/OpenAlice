@@ -27,7 +27,7 @@ export const LEGACY_PI_AGENT_DIR = '.pi-agent';
 export const PI_AUTOMATIC_THEME_PAIR = 'light/dark';
 
 export const PI_PROVIDER_PREFIX = 'openalice-workspace-';
-const PI_PROVIDER_NAME_PREFIX = 'OpenAlice workspace provider';
+const PI_PROVIDER_NAME_PREFIX = 'OpenAlpha workspace provider';
 const PI_GLOBAL_MODELS_FILENAME = 'models.json';
 const PI_GLOBAL_SETTINGS_FILENAME = 'settings.json';
 const PI_GLOBAL_AUTH_FILENAME = 'auth.json';
@@ -77,11 +77,11 @@ export default function openAliceWorkspaceProvider(pi: {
   const providerId = state['providerId']
   const provider = state['provider']
   if (typeof providerId !== 'string' || !provider || typeof provider !== 'object' || Array.isArray(provider)) {
-    throw new Error(\`Invalid OpenAlice Pi provider state: \${statePath}\`)
+    throw new Error(\`Invalid OpenAlpha Pi provider state: \${statePath}\`)
   }
   // Pi's models.json loader supplies compatibility defaults, while the
   // extension API deliberately requires complete model objects. Keep the
-  // durable sidecar limited to facts OpenAlice actually knows, then project
+  // durable sidecar limited to facts OpenAlpha actually knows, then project
   // the same Pi defaults only at registration time.
   const models = Array.isArray((provider as Record<string, unknown>)['models'])
     ? (provider as Record<string, unknown>)['models'] as Array<Record<string, unknown>>
@@ -377,7 +377,7 @@ export async function syncPiWorkspaceTheme(cwd: string): Promise<boolean> {
 
 async function readBindingState(cwd: string): Promise<PiBindingState | null> {
   const path = join(cwd, PI_BINDING_STATE_PATH);
-  const parsed = await readJsonRecord(path, 'OpenAlice Pi binding state');
+  const parsed = await readJsonRecord(path, 'OpenAlpha Pi binding state');
   if (!parsed) return null;
   if (
     (parsed['version'] !== 1 && parsed['version'] !== 2) ||
@@ -386,7 +386,7 @@ async function readBindingState(cwd: string): Promise<PiBindingState | null> {
     !isRecord(parsed['injected']) ||
     (parsed['version'] === 2 && (!isRecord(parsed['provider']) || typeof parsed['extensionSha256'] !== 'string'))
   ) {
-    throw new Error(`Unsupported OpenAlice Pi binding state: ${path}`);
+    throw new Error(`Unsupported OpenAlpha Pi binding state: ${path}`);
   }
   return parsed as unknown as PiBindingState;
 }
@@ -690,7 +690,7 @@ async function mergeLegacyModels(
   const legacyProviders = providersObject(legacy, legacyPath);
   const rawWorkspaceProvider = legacyProviders['workspace'];
   if (rawWorkspaceProvider !== undefined && !isRecord(rawWorkspaceProvider)) {
-    throw new Error(`Legacy OpenAlice Pi workspace provider must be an object: ${legacyPath}`);
+    throw new Error(`Legacy OpenAlpha Pi workspace provider must be an object: ${legacyPath}`);
   }
   const workspaceProvider = rawWorkspaceProvider ?? null;
   delete legacyProviders['workspace'];

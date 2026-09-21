@@ -34,7 +34,7 @@ afterEach(async () => {
   await Promise.all(roots.splice(0).map((path) => rm(path, { recursive: true, force: true })))
 })
 
-describe('AliceProject transfer stream', () => {
+describe('OpenAlphaProject transfer stream', () => {
   it('stages, verifies, re-seals, and atomically publishes portable state', async () => {
     const { source, destination, plan } = await fixture()
     const sourceKey = await readFile(join(source, 'sealing.key'), 'utf8')
@@ -210,7 +210,7 @@ describe('AliceProject transfer stream', () => {
     await execFile('git', ['init', '-q'], { cwd: workspace })
     await execFile('git', ['add', 'README.md'], { cwd: workspace })
     await execFile('git', [
-      '-c', 'user.name=OpenAlice Test',
+      '-c', 'user.name=OpenAlpha Test',
       '-c', 'user.email=openalice@example.test',
       'commit', '-qm', 'fixture',
     ], { cwd: workspace })

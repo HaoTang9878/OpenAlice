@@ -329,7 +329,7 @@ function SemanticColorCard() {
       </div>
 
       <ColorTokenGroup title="Orca / shadcn core" tokens={CORE_COLOR_TOKENS} />
-      <ColorTokenGroup title="OpenAlice extensions" tokens={PRODUCT_COLOR_TOKENS} />
+      <ColorTokenGroup title="OpenAlpha extensions" tokens={PRODUCT_COLOR_TOKENS} />
       <ColorTokenGroup title="Sidebar projection" tokens={SIDEBAR_COLOR_TOKENS} />
       <ColorTokenGroup title="Data visualization" tokens={CHART_COLOR_TOKENS} />
       <ColorTokenGroup title="Terminal projection" tokens={TERMINAL_COLOR_TOKENS} />
@@ -393,7 +393,7 @@ function SafeLaunchMock() {
         </div>
       </div>
       <div className="min-w-0 rounded-lg border border-border bg-background px-3 py-3">
-        <MockStatusRow icon={Bot} label="Alice" value="Ready" state="ok" />
+        <MockStatusRow icon={Bot} label="OpenAlpha" value="Ready" state="ok" />
         <MockStatusRow icon={WalletCards} label="UTA" value="Off" />
         <MockStatusRow icon={LockKeyhole} label="Broker writes" value="Blocked" state="ok" />
       </div>
@@ -444,7 +444,7 @@ function ModeLadderMock() {
 
 function GoalPickerMock() {
   const goals = [
-    { icon: Sparkles, title: 'Research', body: 'Ask Alice to read, compare, and explain.', badge: 'Lite' },
+    { icon: Sparkles, title: 'Research', body: 'Ask OpenAlpha to read, compare, and explain.', badge: 'Lite' },
     { icon: WalletCards, title: 'Portfolio', body: 'Bring positions into analysis safely.', badge: 'Readonly' },
     { icon: TerminalSquare, title: 'Trading', body: 'Use approvals before broker writes.', badge: 'Pro' },
   ]

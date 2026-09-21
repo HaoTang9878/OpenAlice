@@ -310,7 +310,7 @@ function summarizeRuntimeReadinessFailure(
     return 'The runtime did not finish the readiness probe before the timeout.';
   }
   if (status === 'output_unrecognized') {
-    return 'The runtime exited successfully, but OpenAlice could not read an assistant reply from its structured output.';
+    return 'The runtime exited successfully, but OpenAlpha could not read an assistant reply from its structured output.';
   }
   const structuredError = latestStructuredRuntimeError(result);
   const tail = `${structuredError || result.stderrTail || result.stdoutTail}`.trim().replace(/\s+/g, ' ');

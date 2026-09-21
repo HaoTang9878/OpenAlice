@@ -72,7 +72,7 @@ describe('AuthProvider backend recovery', () => {
     )
 
     expect(screen.getByRole('alertdialog', {
-      name: 'OpenAlice lost its connection to alice@example.com:2222',
+      name: 'OpenAlpha lost its connection to alice@example.com:2222',
     })).toBeTruthy()
     expect(screen.getByText('SSH tunnel')).toBeTruthy()
     expect(screen.getByText('127.0.0.1:40123')).toBeTruthy()
@@ -108,7 +108,7 @@ describe('AuthProvider backend recovery', () => {
     expect(screen.queryByRole('status')).toBeNull()
   })
 
-  it('keeps an authenticated app mounted while Alice restarts, then recovers', async () => {
+  it('keeps an authenticated app mounted while OpenAlpha restarts, then recovers', async () => {
     vi.useFakeTimers()
     mocks.getStatus
       .mockResolvedValueOnce({ authed: true, tokenConfigured: true })

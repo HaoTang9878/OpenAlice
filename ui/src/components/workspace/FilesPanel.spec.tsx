@@ -46,7 +46,7 @@ beforeEach(() => {
 afterEach(cleanup)
 
 describe('FilesPanel navigation provenance', () => {
-  it('carries the Ask Alice Session into a file drill-in', async () => {
+  it('carries the Ask OpenAlpha Session into a file drill-in', async () => {
     render(
       <FilesPanel
         wsId="chat-1"

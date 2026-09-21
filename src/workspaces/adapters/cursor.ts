@@ -171,13 +171,13 @@ function cursorToolEvents(record: Record<string, unknown>): readonly HeadlessOut
  * Cursor Agent is Cursor's coding-agent CLI. Launch stays on the existing
  * CliAdapter contract: PATH `cursor-agent` only and argv flags. Authentication
  * may remain owned by Cursor (`cursor-agent login` or Cursor's own environment),
- * or OpenAlice may project a normal `vendor: cursor` provider credential into
+ * or OpenAlpha may project a normal `vendor: cursor` provider credential into
  * `CURSOR_API_KEY`. That provider is consumed directly by this adapter rather
  * than pretending it exposes an OpenAI-compatible wire. Never spawn `agent` —
  * Grok Build's installer occupies that
  * name on purpose (`~/.grok/bin/agent`). Do not pass `--worktree` /
  * `--workspace` (they leave the managed Workspace), `--api-key` (secrets
- * stay in env), `--plugin-dir` (Cursor plugins, not Alice skills),
+ * stay in env), `--plugin-dir` (Cursor plugins, not OpenAlpha skills),
  * `--stream-partial-output` (duplicate assistant flushes), or `create-chat`
  * (prints a UUID then hangs; empty stores are deleted on dispose).
  * `--session-id` is unknown; `--new-session-id` is create-only and is not
@@ -276,7 +276,7 @@ export const cursorAdapter: CliAdapter = {
     if (process.platform === 'win32' || !ctx.env['PATH']) return {};
     // Cursor 2026.09.08 snapshots a login shell, then evaluates this hook
     // after restoring that snapshot in Bash/Zsh (including print/ACP mode).
-    // Keep Alice's already-resolved CLI/toolchain precedence over host profiles.
+    // Keep OpenAlpha's already-resolved CLI/toolchain precedence over host profiles.
     // This is a vendor-internal seam; retain live shell acceptance on upgrades.
     const path = `'${ctx.env['PATH'].replace(/'/g, `'"'"'`)}'`;
     const inherited = ctx.env['__CURSOR_SANDBOX_ENV_RESTORE']?.trim();

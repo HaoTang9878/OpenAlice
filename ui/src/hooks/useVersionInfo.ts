@@ -22,7 +22,7 @@ function errorMessage(cause: unknown): string {
 }
 
 /**
- * Recovery-aware read boundary for the running OpenAlice version and update
+ * Recovery-aware read boundary for the running OpenAlpha version and update
  * channel. A confirmed backend outage invalidates every pending request; the
  * recovery generation then starts a fresh passive read against the new owner.
  */

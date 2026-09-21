@@ -261,7 +261,7 @@ export const BITGET_PRESET: BrokerPresetDef = {
   label: 'Bitget',
   description: 'Bitget — spot and USDT-M perpetuals.',
   category: 'crypto',
-  hint: 'Bitget requires API key + secret + passphrase (set when creating the key). OpenAlice currently supports Classic accounts; Bitget Unified Trading Account (v3) is not yet supported. Demo Trading routes orders to a simulated environment using the production domain.',
+  hint: 'Bitget requires API key + secret + passphrase (set when creating the key). OpenAlpha currently supports Classic accounts; Bitget Unified Trading Account (v3) is not yet supported. Demo Trading routes orders to a simulated environment using the production domain.',
   defaultName: 'bitget-main',
   badge: 'BG',
   badgeColor: 'text-primary',
@@ -503,7 +503,7 @@ export const SIMULATOR_PRESET: BrokerPresetDef = {
 export const BROKER_PRESET_CATALOG: BrokerPresetDef[] = [
   // ---- Recommended ----
   // Real-money-grade brokers first, then Hyperliquid (grandfathered into
-  // Recommended out of product history — Alice's earliest paper-trading
+  // Recommended out of product history — OpenAlpha's earliest paper-trading
   // prototype was modeled on its API).
   IBKR_PRESET,
   ALPACA_PRESET,

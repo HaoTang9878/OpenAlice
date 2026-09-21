@@ -129,7 +129,7 @@ describe('Supervisor machine registry', () => {
 
   it('distinguishes newer schema and rejects unsafe known fields', () => {
     expect(() => parseMachineRegistry({ schemaVersion: 2 })).toThrow(
-      'requires a newer OpenAlice',
+      'requires a newer OpenAlpha',
     )
     expect(() => parseMachineRegistry({
       schemaVersion: 1,

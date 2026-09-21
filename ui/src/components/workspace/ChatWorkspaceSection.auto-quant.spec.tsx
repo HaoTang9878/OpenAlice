@@ -133,7 +133,7 @@ beforeEach(async () => {
 
 afterEach(cleanup)
 
-describe('Ask Alice sidebar in AutoQuant mode', () => {
+describe('Ask OpenAlpha sidebar in AutoQuant mode', () => {
   it('keeps the office visible but withholds research and Studio until the default is ready', () => {
     const state = { ...context(), autoQuantDefaultWorkspaceId: null }
     render(<WorkspacesContext.Provider value={state}><ChatWorkspaceSection mode="auto-quant" placement="navigation" /></WorkspacesContext.Provider>)

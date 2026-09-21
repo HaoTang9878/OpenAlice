@@ -14,13 +14,13 @@ venue evidence, develops semantic hypotheses, runs the repository's checks,
 and maintains research artifacts and local Git history. Auto Prediction owns
 its SQLite state, campaigns, evidence model, internal workers, and Studio.
 
-OpenAlice supplies native Agent Sessions, collaboration, Inbox, market-data
+OpenAlpha supplies native Agent Sessions, collaboration, Inbox, market-data
 tools, Workspace lifecycle, and the managed Studio route around the desk.
-OpenAlice supervises only the command declared by `harness.json`; Auto
+OpenAlpha supervises only the command declared by `harness.json`; Auto
 Prediction retains its complete Studio and control-plane ownership.
 
 The exact upstream source is recorded in `.alice/harness-source.json`.
-OpenAlice pins each approved release tag to its verified commit while retaining
+OpenAlpha pins each approved release tag to its verified commit while retaining
 earlier qualified versions for explicit selection and rollback.
 
 The current approved release is `v0.1.2` at commit
@@ -41,7 +41,7 @@ formats owned by Auto Prediction.
 
 - Auto Prediction owns prediction-market research truth and application state.
 - The Coding Agent owns dependency installation and repository iteration.
-- OpenAlice owns Workspace, Session, source receipt, and collaboration state.
+- OpenAlpha owns Workspace, Session, source receipt, and collaboration state.
 - Studio uses the shared managed web-surface contract; no AP-specific business
   API is implied by this template.
 - Harness upgrades are never automatic; create-time source selection is exact.

@@ -145,7 +145,7 @@ export function renderSupervisorHeaderLayout(
   const prefix = '╭─ '
   const suffix = ' ─╮'
   const innerWidth = Math.max(1, width - displayWidth(prefix) - displayWidth(suffix))
-  const left = width < 54 ? '◆ OpenAlice' : '◆ OpenAlice Supervisor'
+  const left = width < 54 ? '◆ OpenAlpha' : '◆ OpenAlpha Supervisor'
   const release = `${interactiveRelease
     ? width >= 72 ? '[ u ]' : '↗'
     : width >= 72 ? '◇ BUILD' : '◇'} v${version} · ${channel.toUpperCase()}${notice}`
@@ -207,13 +207,13 @@ function renderEmergencySessionStage(
   const signal = (view.inboxUnread ?? 0) > 0
     ? homeAttentionRow(view)
     : homeConnectionRow(view)
-  return renderCard('Alice Session · OpenAlice', [
+  return renderCard('OpenAlpha Session · OpenAlpha', [
     labelAndTail(homeHotspotLabel(view.projectName, 'project', view), state, innerWidth),
     sessionRoute(view),
     `NEXT  ${homeNowHeadline(view)}`,
     primaryLaunchRow(
       view,
-      view.state === 'absent' ? 'Start OpenAlice' : view.primaryAction,
+      view.state === 'absent' ? 'Start OpenAlpha' : view.primaryAction,
     ),
     `STATUS  ${signal}`,
   ], width)
@@ -245,7 +245,7 @@ function renderWideSessionStage(
   const body = Array.from({ length: bodyHeight }, (_, index) => (
     `${fillLine(left[index] ?? '', identityWidth)}${gutter}${truncateDisplayWidth(right[index] ?? '', taskWidth)}`
   ))
-  return renderCard('Alice Session · OpenAlice', body, width)
+  return renderCard('OpenAlpha Session · OpenAlpha', body, width)
 }
 
 function renderCompactSessionStage(
@@ -256,7 +256,7 @@ function renderCompactSessionStage(
   const innerWidth = width - 4
   const guidance = wrapDisplayText(homeGuidance(view).join(' '), innerWidth).slice(0, 2)
   const recent = homeRecentRows(view, innerWidth).slice(0, 1)
-  return renderCard('Alice Session · OpenAlice', [
+  return renderCard('OpenAlpha Session · OpenAlpha', [
     labelAndTail(homeHotspotLabel(view.projectName, 'project', view), state, innerWidth),
     sessionRoute(view),
     '',
@@ -356,7 +356,7 @@ function homeNowHeadline(view: SupervisorHomeView): string {
   if (
     view.projectAvailable === false
     && (view.state === 'running' || view.state === 'owned_elsewhere')
-  ) return 'Runtime is live; AliceProject home is missing'
+  ) return 'Runtime is live; OpenAlphaProject home is missing'
   if (view.state === 'running' || view.state === 'owned_elsewhere') return 'Workspace is ready'
   if (view.state === 'absent') return 'Your workspace is one step away'
   if (view.state === 'incompatible') return 'Review Runtime Doctor before changing anything'
@@ -541,7 +541,7 @@ function homeGuidance(view: SupervisorHomeView): string[] {
   if (view.inboxPrimary) {
     const count = view.inboxUnread ?? 0
     return [
-      `${count} unread ${count === 1 ? 'report is' : 'reports are'} waiting in this AliceProject.`,
+      `${count} unread ${count === 1 ? 'report is' : 'reports are'} waiting in this OpenAlphaProject.`,
       'Enter reviews Inbox; o opens the Web UI.',
     ]
   }
@@ -550,7 +550,7 @@ function homeGuidance(view: SupervisorHomeView): string[] {
     && (view.state === 'running' || view.state === 'owned_elsewhere')
   ) {
     return [
-      'Runtime is live, but the AliceProject home is missing.',
+      'Runtime is live, but the OpenAlphaProject home is missing.',
       'Open still uses the verified Web route.',
     ]
   }
@@ -699,7 +699,7 @@ export function renderSupervisorDock(
             view.pulse ?? false,
             view.projectAvailable,
           )
-  const fullProjectName = view.projectName ?? 'AliceProject'
+  const fullProjectName = view.projectName ?? 'OpenAlphaProject'
   const contextBudget = Math.max(1, width - 6 - displayWidth(controls) - 3)
   const contextBreadcrumb = view.launcher ? ' › ' : breadcrumb
   const panelSuffix = `${contextBreadcrumb}${panelIdentity}`
@@ -817,14 +817,14 @@ export function renderSupervisorContextTip(
     : view.panel === 'fleet'
       ? view.launcher
         ? view.directLauncher
-          ? 'Enter starts OpenAlice; this TUI verifies readiness and brings you Home. / shows commands.'
+          ? 'Enter starts OpenAlpha; this TUI verifies readiness and brings you Home. / shows commands.'
           : '↑↓ selects; Tab/←→ changes pane; click selection again to activate.'
         : view.directConnection
           ? view.switchSelection
             ? 'Enter switches the only candidate; the current target stays live until ready.'
             : view.targetKind === 'ssh'
               ? 'Enter returns Home; x disconnects this SSH forward; ←→ changes view.'
-              : 'Enter returns Home; m transfers this AliceProject; ←→ changes view.'
+              : 'Enter returns Home; m transfers this OpenAlphaProject; ←→ changes view.'
         : view.activeSelection
           ? '←→ changes pane; ↑↓ chooses; Enter returns Home from the active target.'
           : view.switchSelection

@@ -51,8 +51,8 @@ export function renderSupervisorProjectSwitchboard(
   const item = view.items[selected]
   if (!item) {
     return {
-      lines: renderSupervisorPanel('AliceProject Switchboard', view.currentProjectName, [
-        'No AliceProjects are available.',
+      lines: renderSupervisorPanel('OpenAlphaProject Switchboard', view.currentProjectName, [
+        'No OpenAlphaProjects are available.',
         '◆ [ Esc ] Done',
       ], width),
       targets: [],
@@ -96,7 +96,7 @@ export function renderSupervisorProjectSwitchboard(
   if (wide) {
     const bodyHeight = Math.max(mapRows.length, inspectorRows.length)
     const map = renderSupervisorPanel(
-      'AliceProject Switchboard',
+      'OpenAlphaProject Switchboard',
       projectCountLabel,
       padRows(mapRows, bodyHeight),
       mapWidth,
@@ -129,7 +129,7 @@ export function renderSupervisorProjectSwitchboard(
   }
 
   const map = renderSupervisorPanel(
-    'AliceProject Switchboard',
+    'OpenAlphaProject Switchboard',
     projectCountLabel,
     mapRows,
     width,
@@ -208,11 +208,11 @@ function projectInspectorRows(
   const contentWidth = Math.max(1, width - 4)
   if (item.kind === 'create') {
     const description = wrapDisplayText(
-      'Register a named AliceProject with its own complete Home.',
+      'Register a named OpenAlphaProject with its own complete Home.',
       contentWidth,
     ).slice(0, 2)
     return rowsWithBottomAction([
-      `◆ New AliceProject · ${selected + 1}/${total}`,
+      `◆ New OpenAlphaProject · ${selected + 1}/${total}`,
       'Home · separate and complete',
       ...description,
     ], '◆ [ Enter ] Create  │  [ Esc ] Done', 6)

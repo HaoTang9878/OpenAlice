@@ -224,7 +224,7 @@ export interface AppConfig {
   [key: string]: unknown
 }
 
-/** MCP server config exports OpenAlice's ToolCenter to external clients. */
+/** MCP server config exports OpenAlpha's ToolCenter to external clients. */
 export interface McpConfig {
   enabled: boolean
   port: number
@@ -479,11 +479,11 @@ export interface OrderHistoryEntry {
   status: OrderHistoryStatus
   filledQty?: string
   avgFillPrice?: string
-  /** 'external' = observed on the broker, not placed through Alice. */
+  /** 'external' = observed on the broker, not placed through OpenAlpha. */
   source: OrderHistorySource
   /** Commit that introduced the order — the audit pointer. */
   commitHash: string
-  /** Commit message (user intent for Alice orders; [observed] for external). */
+  /** Commit message (user intent for OpenAlpha orders; [observed] for external). */
   message: string
   error?: string
 }

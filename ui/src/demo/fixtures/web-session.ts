@@ -302,7 +302,7 @@ export function demoWebPermissionOutcome(
         role: 'assistant',
         content: [{
           type: 'text',
-          text: `Understood — I won’t read ${DEMO_REQUEST_FILE}. This public preview of ${label} in the Web surface does not call a live model, so this reply is simulated; install OpenAlice locally to continue with your own runtime.`,
+          text: `Understood — I won’t read ${DEMO_REQUEST_FILE}. This public preview of ${label} in the Web surface does not call a live model, so this reply is simulated; install OpenAlpha locally to continue with your own runtime.`,
         }],
       },
     ]
@@ -339,7 +339,7 @@ export function demoWebFollowUp(agent: string, message: string): readonly WebCon
         },
         {
           type: 'text',
-          text: `This is the real **Web conversation surface** for ${label} backed by recorded demo data. The public preview does not call a live model, so this reply is simulated; install OpenAlice locally to continue the research with your own runtime and data sources.\n\nWorkspace guidance: [[AGENTS.md]]`,
+          text: `This is the real **Web conversation surface** for ${label} backed by recorded demo data. The public preview does not call a live model, so this reply is simulated; install OpenAlpha locally to continue the research with your own runtime and data sources.\n\nWorkspace guidance: [[AGENTS.md]]`,
         },
       ],
     },

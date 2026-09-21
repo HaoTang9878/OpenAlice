@@ -101,7 +101,7 @@ describe('configureAutoUpdate', () => {
 
   it('deduplicates an active native check and exposes a manual check handler', async () => {
     mocks.app.isPackaged = true
-    mocks.capability = { enabled: true, configPath: '/Applications/OpenAlice.app/app-update.yml' }
+    mocks.capability = { enabled: true, configPath: '/Applications/OpenAlpha.app/app-update.yml' }
     let resolveCheck!: () => void
     const pendingCheck = new Promise<void>((resolve) => {
       resolveCheck = resolve
@@ -126,7 +126,7 @@ describe('configureAutoUpdate', () => {
   it('reports visible install stages before handing off to the native updater', async () => {
     mocks.app.isPackaged = true
     mocks.app.getVersion.mockReturnValue('0.87.0-beta')
-    mocks.capability = { enabled: true, configPath: '/Applications/OpenAlice.app/app-update.yml' }
+    mocks.capability = { enabled: true, configPath: '/Applications/OpenAlpha.app/app-update.yml' }
     const send = vi.fn()
     const setProgressBar = vi.fn()
     const beforeInstall = vi.fn(async (_version, report) => {
@@ -160,7 +160,7 @@ describe('configureAutoUpdate', () => {
 
   it('reports an installer handoff failure once', async () => {
     mocks.app.isPackaged = true
-    mocks.capability = { enabled: true, configPath: '/Applications/OpenAlice.app/app-update.yml' }
+    mocks.capability = { enabled: true, configPath: '/Applications/OpenAlpha.app/app-update.yml' }
     const onInstallFailure = vi.fn(async () => {})
     configureAutoUpdate({
       isDestroyed: () => false,

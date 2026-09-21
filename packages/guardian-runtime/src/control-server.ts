@@ -110,7 +110,7 @@ export async function startGuardianControlServer(
       }
       if (request.method === 'runtime.stop') {
         if (!options.allowStop) {
-          fail(id, 'stop_not_supported', 'This OpenAlice owner does not accept server stop requests')
+          fail(id, 'stop_not_supported', 'This OpenAlpha owner does not accept server stop requests')
           return
         }
         finish({
@@ -175,7 +175,7 @@ async function prepareUnixEndpoint(endpoint: string): Promise<void> {
     }
     throw error
   }
-  throw new Error(`OpenAlice Guardian control endpoint is already active at ${endpoint}`)
+  throw new Error(`OpenAlpha Guardian control endpoint is already active at ${endpoint}`)
 }
 
 function probeEndpoint(endpoint: string, timeoutMs: number): Promise<void> {
@@ -204,10 +204,10 @@ async function endpointFileIdentity(endpoint: string): Promise<string> {
 async function secureFallbackDirectory(directory: string): Promise<void> {
   const stats = await lstat(directory)
   if (!stats.isDirectory() || stats.isSymbolicLink()) {
-    throw new Error(`OpenAlice Guardian control directory is not a private directory: ${directory}`)
+    throw new Error(`OpenAlpha Guardian control directory is not a private directory: ${directory}`)
   }
   if (typeof process.getuid === 'function' && stats.uid !== process.getuid()) {
-    throw new Error(`OpenAlice Guardian control directory is owned by another user: ${directory}`)
+    throw new Error(`OpenAlpha Guardian control directory is owned by another user: ${directory}`)
   }
   await chmod(directory, 0o700)
 }
@@ -222,5 +222,5 @@ async function waitForEndpointPath(endpoint: string): Promise<void> {
     }
     await new Promise((resolvePromise) => setTimeout(resolvePromise, 10))
   }
-  throw new Error(`OpenAlice Guardian control endpoint was not published at ${endpoint}`)
+  throw new Error(`OpenAlpha Guardian control endpoint was not published at ${endpoint}`)
 }

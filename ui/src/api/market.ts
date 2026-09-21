@@ -95,7 +95,7 @@ export interface SectorRotationResult {
 }
 
 export const marketApi = {
-  /** Alice's aggregated heuristic search across all asset classes. */
+  /** OpenAlpha's aggregated heuristic search across all asset classes. */
   async search(query: string, limit = 20): Promise<SearchResponse> {
     const qs = new URLSearchParams({ query, limit: String(limit) })
     return fetchJson(`/api/market/search?${qs}`)
@@ -126,7 +126,7 @@ export const marketApi = {
     return fetchJson(`/api/market-data-v1/${assetClass}/price/historical?${qs}`)
   },
 
-  /** Equity-specific endpoints — Alice infers provider from config, no ?provider=. */
+  /** Equity-specific endpoints — OpenAlpha infers provider from config, no ?provider=. */
   equity: {
     profile: (symbol: string) => equityEndpoint<EquityProfile>('profile', { symbol }),
     quote: (symbol: string) => quoteEndpoint<EquityQuote>(symbol),

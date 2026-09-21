@@ -144,7 +144,7 @@ export interface OfficeDayRecord {
   evidenceReceipts: OfficeDayEvidenceReceipt[]
 }
 
-/** Server-clock envelope shared by every renderer of one AliceProject. */
+/** Server-clock envelope shared by every renderer of one OpenAlphaProject. */
 export interface OfficeDayEnvelope {
   serverNow: number
   dayKey: string

@@ -12,7 +12,7 @@ afterEach(async () => {
 })
 
 describe('proxyHarnessSurface', () => {
-  it('streams the response while stripping OpenAlice credentials', async () => {
+  it('streams the response while stripping OpenAlpha credentials', async () => {
     const server = createServer((req, res) => {
       expect(req.headers.cookie).toBeUndefined()
       expect(req.headers.authorization).toBeUndefined()

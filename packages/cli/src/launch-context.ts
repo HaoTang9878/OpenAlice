@@ -121,7 +121,7 @@ export function resolveLaunchContext(
   if (projectConfig.name !== undefined && projectConfig.name !== project.value) {
     throw launchContextError(
       'EPROJECTCONFIG',
-      `AliceProject config "${projectConfig.name}" does not match selected project "${project.value}".`,
+      `OpenAlphaProject config "${projectConfig.name}" does not match selected project "${project.value}".`,
     )
   }
 
@@ -141,7 +141,7 @@ export function resolveLaunchContext(
   ) {
     throw launchContextError(
       'EPROJECTHOME',
-      `AliceProject "${project.value}" needs an explicit complete home in project config, OPENALICE_HOME, or --home.`,
+      `OpenAlphaProject "${project.value}" needs an explicit complete home in project config, OPENALICE_HOME, or --home.`,
     )
   }
 
@@ -159,7 +159,7 @@ export function resolveLaunchContext(
     nullablePathCandidate(
       env['OPENALICE_MANAGED_RUNTIME_PATH'],
       'installed-runtime',
-      'installed OpenAlice Runtime',
+      'installed OpenAlpha Runtime',
       cwd,
       homeDir,
     ),
@@ -318,7 +318,7 @@ function resolveProject(
   machine: MachineSupervisorConfig,
 ): Candidate<string> {
   const selected = resolveField<string>(
-    candidate('default', 'default', 'implicit default AliceProject'),
+    candidate('default', 'default', 'implicit default OpenAlphaProject'),
     stringCandidate(machine.defaultProject ?? machine.defaultInstance, 'machine-config', 'machine.defaultProject'),
     stringCandidate(env['OPENALICE_INSTANCE'], 'environment', 'OPENALICE_INSTANCE'),
     stringCandidate(env['OPENALICE_PROJECT'], 'environment', 'OPENALICE_PROJECT'),
@@ -328,7 +328,7 @@ function resolveProject(
   if (!PROJECT_KEY_PATTERN.test(selected.value)) {
     throw launchContextError(
       'EPROJECTNAME',
-      `Invalid AliceProject "${selected.value}". Use a lowercase key beginning with a letter and containing only letters, numbers, "_" or "-".`,
+      `Invalid OpenAlphaProject "${selected.value}". Use a lowercase key beginning with a letter and containing only letters, numbers, "_" or "-".`,
     )
   }
   return selected
@@ -352,11 +352,11 @@ function resolveSupervisorRootCandidate(
     const root = localAppData
       ? resolveUserPath(localAppData, cwd, homeDir)
       : join(homeDir, 'AppData', 'Local')
-    return candidate(join(root, 'OpenAlice', 'Supervisor'), 'default', 'platform user config directory')
+    return candidate(join(root, 'OpenAlpha', 'Supervisor'), 'default', 'platform user config directory')
   }
   if (platform === 'darwin') {
     return candidate(
-      join(homeDir, 'Library', 'Application Support', 'OpenAlice', 'Supervisor'),
+      join(homeDir, 'Library', 'Application Support', 'OpenAlpha', 'Supervisor'),
       'default',
       'platform user config directory',
     )

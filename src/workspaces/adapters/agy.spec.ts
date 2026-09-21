@@ -73,7 +73,7 @@ describe('agy composeCommand', () => {
     }))).toEqual(['agy', '--dangerously-skip-permissions', '--continue']);
   });
 
-  it('ignores Alice skills and role prompts (no native flags)', () => {
+  it('ignores OpenAlpha skills and role prompts (no native flags)', () => {
     expect(agyAdapter.composeCommand(['agy'], ctx({
       appendSystemPrompt: 'Stay in the Workspace.',
       skills: ['/tmp/skill'],

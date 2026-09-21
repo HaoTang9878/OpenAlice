@@ -10,7 +10,7 @@ const nonce = () => randomBytes(6).toString('hex')
 const key = (ctx: Context) => `${ctx.chat?.id}:${ctx.callbackQuery?.message?.message_id}`
 const label = (value: string) => value.length > 60 ? `${value.slice(0, 57)}…` : value
 
-/** Telegram owns transient UI state only. Alice owns options, validation and persistence. */
+/** Telegram owns transient UI state only. OpenAlpha owns options, validation and persistence. */
 export class TelegramModelControls {
   private readonly states = new Map<string, State>()
   constructor(private readonly now: () => number = Date.now) {}

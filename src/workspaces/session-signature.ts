@@ -1,5 +1,5 @@
 /**
- * OpenAlice Session signatures are human-readable, product-owned identities.
+ * OpenAlpha Session signatures are human-readable, product-owned identities.
  *
  * A signature is written as `@<resumeId>` in self-contained artifacts. The
  * leading `@` is presentation/authoring syntax; ResumeRegistry continues to

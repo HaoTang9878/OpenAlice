@@ -1264,7 +1264,7 @@ export class CcxtBroker implements IBroker<CcxtBrokerMeta> {
       const limit = Math.min(5000, params.limit == null ? 5000 : Math.max(1, Math.floor(params.limit)))
       const lowerBound = params.start?.getTime()
       const upperBound = Math.min(params.end?.getTime() ?? Date.now(), Date.now())
-      // CCXT exchanges return the FIRST `limit` rows at/after `since`. Alice's
+      // CCXT exchanges return the FIRST `limit` rows at/after `since`. OpenAlpha's
       // BarParams contract is the opposite: limit truncates to the MOST RECENT
       // rows in the requested window. Anchor `since` immediately before that
       // trailing window so one exchange page contains the latest bars instead

@@ -10,7 +10,7 @@ import { piAdapter } from './pi.js';
 import { shellAdapter } from './shell.js';
 
 /**
- * One registration point for the native runtimes shipped with OpenAlice.
+ * One registration point for the native runtimes shipped with OpenAlpha.
  * Adding an adapter here makes its declared capabilities available to the
  * launcher, config routes, and serialized `/agents` metadata.
  */

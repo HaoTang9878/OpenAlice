@@ -82,7 +82,7 @@ export async function readPublicConnectorConfig(): Promise<PublicConnectorConfig
   return { serviceEnabled, adapters }
 }
 
-/** Mutate exactly one adapter against the latest sealed file. Alice UI writes
+/** Mutate exactly one adapter against the latest sealed file. OpenAlpha UI writes
  * and adapter-owned `/link` or `/settings` writes share this cross-process
  * lease, so atomic rename cannot hide a lost read-modify-write race. */
 export async function mutatePublicConnectorAdapter(

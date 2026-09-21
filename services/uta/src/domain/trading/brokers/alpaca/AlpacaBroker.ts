@@ -352,7 +352,7 @@ export class AlpacaBroker implements IBroker {
       // Bracket legs: surface child order ids so the ledger tracks them from
       // birth. The held stop leg never appears in the open-orders listing
       // (Alpaca keeps it 'held' while the TP works), so place-time is the
-      // ONLY moment Alice can learn it exists.
+      // ONLY moment OpenAlpha can learn it exists.
       const legs = (result.legs ?? [])
         .filter((l) => l.id)
         .map((l) => ({
@@ -605,7 +605,7 @@ export class AlpacaBroker implements IBroker {
     const baseOpts: Record<string, unknown> = { timeframe, adjustment: 'all' }
     if (params.start) baseOpts.start = params.start.toISOString()
     if (params.end) baseOpts.end = params.end.toISOString()
-    // Alpaca applies limit to the FIRST rows after start. For a bounded Alice
+    // Alpaca applies limit to the FIRST rows after start. For a bounded OpenAlpha
     // request, drain the window and tail-slice locally so BarParams.limit keeps
     // its "most recent N" contract. Preserve the direct limit-only call shape
     // for callers that provide no explicit bounds.

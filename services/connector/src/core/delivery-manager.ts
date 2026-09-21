@@ -146,9 +146,9 @@ export class DeliveryManager {
       id: probeId,
       createdAt: new Date().toISOString(),
       workspaceId: 'openalice',
-      workspaceLabel: 'OpenAlice',
+      workspaceLabel: 'OpenAlpha',
       title: 'Connector test',
-      body: `Your OpenAlice Connector Service is working. Probe: ${probeId}`,
+      body: `Your OpenAlpha Connector Service is working. Probe: ${probeId}`,
     }
     await this.deliverToAdapter(adapter, notification, probeId)
     return probeId
@@ -314,7 +314,7 @@ export class DeliveryManager {
           parsed.result?.message
           ?? parsed.review.unavailable
           ?? (waiting > 0
-            ? `UTA: ${waiting} account${waiting === 1 ? '' : 's'} waiting for approval. Open /uta in Telegram or Trading as Git in OpenAlice.`
+            ? `UTA: ${waiting} account${waiting === 1 ? '' : 's'} waiting for approval. Open /uta in Telegram or Trading as Git in OpenAlpha.`
             : 'UTA: nothing waiting for approval.'),
         )
       }
@@ -401,7 +401,7 @@ export class DeliveryManager {
     queueMicrotask(() => {
       if (this.stopped) return
       void this.sendOwnerChat(message, deliveryId).catch((error) => {
-        // The Issue comment is already durable before Alice projects it here.
+        // The Issue comment is already durable before OpenAlpha projects it here.
         // Keep owner-chat delivery best-effort like ordinary Inbox projection:
         // a stopped/unlinked adapter or external outage must not become an
         // unhandled rejection that can terminate Connector Service.

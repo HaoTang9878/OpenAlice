@@ -73,7 +73,7 @@ export interface LoadConfigOptions {
   readonly env?: NodeJS.ProcessEnv;
 }
 
-/** Keep workspace state inside the selected OpenAlice home unless the user
+/** Keep workspace state inside the selected OpenAlpha home unless the user
  *  explicitly splits it with AQ_LAUNCHER_ROOT. */
 export function resolveLauncherRoot(env: NodeJS.ProcessEnv = process.env): string {
   return resolve(
@@ -177,12 +177,12 @@ function parseIntEnv(raw: string | undefined, fallback: number, lo: number, hi: 
 /**
  * Compute the launcher repo root.
  *
- * In OpenAlice, both `pnpm dev` (tsx watch src/main.ts) and `node dist/main.js`
- * are invoked from the OpenAlice repo root, so `process.cwd()` is the
+ * In OpenAlpha, both `pnpm dev` (tsx watch src/main.ts) and `node dist/main.js`
+ * are invoked from the OpenAlpha repo root, so `process.cwd()` is the
  * authoritative answer. The original launcher used relative-to-import-url
  * (`server/src/config.ts → ../../`) which assumed the build preserved
  * source layout — that holds for the launcher's `tsc` output but breaks
- * OpenAlice's tsup single-file bundle (`dist/main.js`'s relative `../../`
+ * OpenAlpha's tsup single-file bundle (`dist/main.js`'s relative `../../`
  * would resolve to the parent of the repo).
  */
 function computeLauncherRepoRoot(): string {

@@ -1,7 +1,7 @@
 /**
  * WorkspacesContext — shared state for the Workspaces feature.
  *
- * Session selection is driven entirely by OpenAlice's tab system: a session
+ * Session selection is driven entirely by OpenAlpha's tab system: a session
  * tab carries `{ kind: 'workspace', params: { wsId, sessionId } }`, and
  * which session is "active" is whichever tab is focused. The provider's
  * job is to:

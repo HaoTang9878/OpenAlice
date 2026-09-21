@@ -1351,7 +1351,7 @@ export function OfficeBuilding({
     if (shiftCloseoutAvailable || routeObjectiveRef.current !== 'shift-closeout') return
 
     // Closeout reflects the currently settled shift. New work or a source
-    // transition invalidates that destination before Alice reaches the board.
+    // transition invalidates that destination before OpenAlpha reaches the board.
     cancelAutoWalk()
     setInteractionAnchorTargetId(null)
   // The objective ref distinguishes this route from an ambient Operations trip.

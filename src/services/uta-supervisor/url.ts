@@ -1,9 +1,9 @@
 /**
  * Resolve the UTA carrier URL from process env.
  *
- * UTA is optional: Alice can boot without a live UTA process, but it still
+ * UTA is optional: OpenAlpha can boot without a live UTA process, but it still
  * needs a stable target URL so the proxy can recover automatically if UTA
- * starts later. Guardian injects OPENALICE_UTA_URL; bare Alice defaults to the
+ * starts later. Guardian injects OPENALICE_UTA_URL; bare OpenAlpha defaults to the
  * conventional local carrier port. OPENALICE_LITE_MODE=1 intentionally
  * disables the carrier path.
  */

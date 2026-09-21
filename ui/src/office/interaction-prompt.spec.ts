@@ -11,7 +11,7 @@ const map = { width: 960, height: 720 }
 const camera = { x: 0, y: 0 }
 
 describe('officeInteractionPromptPlacement', () => {
-  it('places the callout beyond the target and away from Alice', () => {
+  it('places the callout beyond the target and away from OpenAlpha', () => {
     expect(officeInteractionPromptPlacement(
       { x: 480, y: 360 },
       { x: 420, y: 390 },
@@ -27,7 +27,7 @@ describe('officeInteractionPromptPlacement', () => {
     )).toEqual({ side: 'above', x: 490, y: 246, width: 176, tailShift: 0 })
   })
 
-  it('uses a visible perpendicular side at every edge before covering Alice', () => {
+  it('uses a visible perpendicular side at every edge before covering OpenAlpha', () => {
     expect(officeInteractionPromptPlacement(
       { x: 300, y: 360 },
       { x: 180, y: 360 },
@@ -77,7 +77,7 @@ describe('officeInteractionPromptPlacement', () => {
     ).side).toBe('above')
   })
 
-  it('uses the opposite side only when it has room without covering Alice', () => {
+  it('uses the opposite side only when it has room without covering OpenAlpha', () => {
     expect(officeInteractionPromptPlacement(
       { x: 620, y: 360 },
       { x: 180, y: 360 },

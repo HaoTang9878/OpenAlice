@@ -58,7 +58,7 @@ async function init(): Promise<TestApp> {
 }
 
 /**
- * Check whether OpenAlice config has a key configured for a given user-key
+ * Check whether OpenAlpha config has a key configured for a given user-key
  * provider name (`fred`, `fmp`, …) — i.e. the field as the user types it
  * in the Settings UI, not the SDK-prefixed form.
  */

@@ -627,7 +627,7 @@ export interface WorkspaceService {
   provenanceStore: ArtifactProvenanceStore;
   /** Global Inbox delivery source used to prove Office routine-report identity. */
   inboxStore?: IInboxStore;
-  /** AliceProject-owned daily Office patrol and exact evidence receipts. */
+  /** OpenAlphaProject-owned daily Office patrol and exact evidence receipts. */
   officeDayStore: OfficeDayStore;
   /** Durable human-carried queue for scheduled reports that need a decision. */
   routineFollowUpStore: RoutineFollowUpStore;
@@ -723,7 +723,7 @@ export async function createWorkspaceService(opts: CreateWorkspaceServiceOptions
   );
 
   // The headless-task management plane. load() reconciles leftover `running`
-  // records (zombies from a previous Alice life) → `interrupted`. Each task's
+  // records (zombies from a previous OpenAlpha life) → `interrupted`. Each task's
   // full stdout/stderr lands in `headlessLogsDir` and is retained with history.
   const headlessLogsDir = join(config.launcherRoot, 'state', 'headless-logs');
   const headlessTasks = await HeadlessTaskRegistry.load(
@@ -815,7 +815,7 @@ export async function createWorkspaceService(opts: CreateWorkspaceServiceOptions
     launcherLogger.child({ scope: 'issue-change-tracker' }),
   );
   const activeResumeIds = new Set<string>();
-  // Settings owns the one-per-AliceProject phone desk. Serialize its
+  // Settings owns the one-per-OpenAlphaProject phone desk. Serialize its
   // read-check-write lifecycle so two browser tabs cannot both pass the
   // uniqueness check before either Issue file reaches disk.
   let telegramDeskMutationTail: Promise<unknown> = Promise.resolve();

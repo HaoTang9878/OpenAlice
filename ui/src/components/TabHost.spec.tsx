@@ -114,7 +114,7 @@ afterEach(() => {
 })
 
 describe('TabHost shared product shells', () => {
-  it('keeps the Ask Alice shell mounted across Session → file → Session navigation', async () => {
+  it('keeps the Ask OpenAlpha shell mounted across Session → file → Session navigation', async () => {
     const view = render(<TabHost />)
 
     await waitFor(() => expect(mocks.shellMounted).toHaveBeenCalledTimes(1))

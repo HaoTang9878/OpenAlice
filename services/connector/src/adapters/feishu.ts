@@ -310,11 +310,11 @@ export class FeishuConnectorAdapter implements ConnectorAdapter {
       this.chatId = chatId
       await context.updateSettings({ ownerUserId: userId, chatId })
       this.tracker.healthy(userId)
-      await reply('Feishu is linked to this OpenAlice installation.')
+      await reply('Feishu is linked to this OpenAlpha installation.')
     })
     context.commands.register('status', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply(`OpenAlice Connector Service: ${context.getServiceStatus()}. Feishu: ${this.health().status}.`)
+      await reply(`OpenAlpha Connector Service: ${context.getServiceStatus()}. Feishu: ${this.health().status}.`)
     })
     context.commands.register('test', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
@@ -323,15 +323,15 @@ export class FeishuConnectorAdapter implements ConnectorAdapter {
     })
     context.commands.register('inbox', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('Inbox browsing is not implemented for Feishu yet. Open Inbox in OpenAlice.')
+      await reply('Inbox browsing is not implemented for Feishu yet. Open Inbox in OpenAlpha.')
     })
     context.commands.register('settings', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('Feishu settings buttons are not implemented yet. Change Inbox push in OpenAlice → Settings → Connectors.')
+      await reply('Feishu settings buttons are not implemented yet. Change Inbox push in OpenAlpha → Settings → Connectors.')
     })
     context.commands.register('uta', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('UTA review buttons are not implemented for Feishu yet. Approve pending trades in OpenAlice → Trading as Git.')
+      await reply('UTA review buttons are not implemented for Feishu yet. Approve pending trades in OpenAlpha → Trading as Git.')
     })
   }
 
@@ -356,7 +356,7 @@ export class FeishuConnectorAdapter implements ConnectorAdapter {
         reply: async (messageText) => { await this.replyToChat(chatId, messageText) },
       }).catch(async (error) => {
         this.tracker.degraded(error)
-        await this.replyToChat(chatId, 'Connector command failed. Check OpenAlice logs.').catch(() => undefined)
+        await this.replyToChat(chatId, 'Connector command failed. Check OpenAlpha logs.').catch(() => undefined)
       })
       return
     }
@@ -370,7 +370,7 @@ export class FeishuConnectorAdapter implements ConnectorAdapter {
       })
     } catch (error) {
       this.tracker.degraded(error)
-      await this.replyToChat(chatId, 'OpenAlice could not accept this message. Check Connector Settings and logs.')
+      await this.replyToChat(chatId, 'OpenAlpha could not accept this message. Check Connector Settings and logs.')
         .catch(() => undefined)
     }
   }

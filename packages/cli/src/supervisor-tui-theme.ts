@@ -295,7 +295,7 @@ export function decorateSupervisorFrame(
     if (
       line === 'Machines'
       || line.startsWith('Machines ')
-      || line.startsWith('AliceProjects')
+      || line.startsWith('OpenAlphaProjects')
       || line.startsWith('Runtime logs')
       || line.startsWith('Supervisor controls')
       || line.startsWith('Supervisor recovery controls')
@@ -641,7 +641,7 @@ function decorateHeader(
   introFrame?: number,
   releaseHovered = false,
 ): string {
-  const brands = ['◆ OpenAlice Supervisor', '◆  OpenAlice Supervisor', '◆ OpenAlice']
+  const brands = ['◆ OpenAlpha Supervisor', '◆  OpenAlpha Supervisor', '◆ OpenAlpha']
   const brand = brands.find((candidate) => line.includes(candidate))
   if (!brand) return theme.brand(line, introFrame)
   const brandOffset = line.indexOf(brand)

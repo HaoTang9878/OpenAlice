@@ -66,7 +66,7 @@ export const demoIssuesSnapshot: IssueSnapshot = {
           nextDueAtMs: now + HOUR / 2,
           automationHealth: {
             state: 'interrupted',
-            message: 'The 30m watchdog ran 14m late. The computer likely slept or OpenAlice was paused; this run was not automatically retried.',
+            message: 'The 30m watchdog ran 14m late. The computer likely slept or OpenAlpha was paused; this run was not automatically retried.',
             latestTaskId: 'demo-run-thesis-1',
           },
         },
@@ -302,7 +302,7 @@ const demoIssueExtras: Record<string, IssueDetailExtras> = {
         failure: {
           kind: 'system_paused',
           title: 'Computer or launcher was paused',
-          message: 'The 30m watchdog ran 14m late. The computer likely slept or OpenAlice was paused; this run was not automatically retried.',
+          message: 'The 30m watchdog ran 14m late. The computer likely slept or OpenAlpha was paused; this run was not automatically retried.',
           retryable: true,
         },
       },

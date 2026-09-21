@@ -1,10 +1,10 @@
 /**
- * Reversible ownership for the small JSON nodes OpenAlice injects into native
+ * Reversible ownership for the small JSON nodes OpenAlpha injects into native
  * runtime config files. The surrounding file belongs to the runtime/user.
  *
  * On first write we snapshot each owned path. Later writes keep that original
  * snapshot while updating the injected value. Reset restores a path only when
- * its current value still equals OpenAlice's last injection; user edits made
+ * its current value still equals OpenAlpha's last injection; user edits made
  * after injection win. Unknown sibling keys are never touched.
  */
 
@@ -131,10 +131,10 @@ async function readState(cwd: string, statePath: string): Promise<OwnedJsonState
   try {
     value = JSON.parse(raw) as unknown
   } catch {
-    throw new Error(`OpenAlice JSON ownership state is not valid JSON: ${join(cwd, statePath)}`)
+    throw new Error(`OpenAlpha JSON ownership state is not valid JSON: ${join(cwd, statePath)}`)
   }
   if (!isRecord(value) || value['version'] !== 1 || !Array.isArray(value['entries'])) {
-    throw new Error(`Unsupported OpenAlice JSON ownership state: ${join(cwd, statePath)}`)
+    throw new Error(`Unsupported OpenAlpha JSON ownership state: ${join(cwd, statePath)}`)
   }
   const entries: OwnedJsonStateEntry[] = []
   for (const rawEntry of value['entries']) {
@@ -148,7 +148,7 @@ async function readState(cwd: string, statePath: string): Promise<OwnedJsonState
       typeof rawEntry['previous']['present'] !== 'boolean' ||
       typeof rawEntry['injected']['present'] !== 'boolean'
     ) {
-      throw new Error(`Unsupported OpenAlice JSON ownership state: ${join(cwd, statePath)}`)
+      throw new Error(`Unsupported OpenAlpha JSON ownership state: ${join(cwd, statePath)}`)
     }
     entries.push(rawEntry as unknown as OwnedJsonStateEntry)
   }
@@ -169,7 +169,7 @@ export async function writeOwnedJsonConfig(opts: {
 
   for (const desired of opts.entries) {
     if (!isSafeOwnedPath(desired.path)) {
-      throw new Error(`Invalid OpenAlice JSON ownership path: ${pathId(desired.path)}`)
+      throw new Error(`Invalid OpenAlpha JSON ownership path: ${pathId(desired.path)}`)
     }
     const existing = priorByPath.get(pathId(desired.path))
     const previous = existing?.previous ?? snapshot(config, desired.path)
@@ -192,7 +192,7 @@ export async function resetOwnedJsonConfig(opts: {
   readonly configPath: string
   readonly statePath: string
   readonly label: string
-  /** Paths owned by pre-state OpenAlice versions; removed when no state exists. */
+  /** Paths owned by pre-state OpenAlpha versions; removed when no state exists. */
   readonly legacyOwnedPaths?: readonly (readonly string[])[]
 }): Promise<void> {
   const { value: config, exists: configExists } = await readJsonObject(

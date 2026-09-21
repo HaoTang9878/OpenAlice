@@ -23,7 +23,7 @@ export interface OrderSyncPollerOptions {
   intervalMs?: number
   /** External-order observation cadence (the slow lane), in ms. Default
    *  15min — observation is narrative fidelity for orders placed outside
-   *  Alice, not a primary flow; once observed, an order's lifecycle moves
+   *  OpenAlpha, not a primary flow; once observed, an order's lifecycle moves
    *  to the fast (pending) lane automatically. 0 or negative disables.
    *  Configured via data/config/trading.json observeExternalOrdersEvery. */
   observeIntervalMs?: number

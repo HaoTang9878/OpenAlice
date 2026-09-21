@@ -59,7 +59,7 @@ describe('Windows workspace shell preference', () => {
   it('auto mode clears the override and resolves the managed shell', () => {
     const env: NodeJS.ProcessEnv = {
       OPENALICE_WORKSPACE_SHELL_PATH: 'D:\\Git\\bin\\bash.exe',
-      OPENALICE_MANAGED_SHELL_PATH: 'C:\\OpenAlice\\vendor\\git\\bin\\bash.exe',
+      OPENALICE_MANAGED_SHELL_PATH: 'C:\\OpenAlpha\\vendor\\git\\bin\\bash.exe',
     }
     applyWindowsWorkspaceShellPreference(
       { version: 1, mode: 'auto', customPath: null },
@@ -87,7 +87,7 @@ describe('Windows workspace shell preference', () => {
   it('reports a deleted custom shell and does not silently fall back to Auto', () => {
     const customPath = 'D:\\Moved Git\\bin\\bash.exe'
     const env: NodeJS.ProcessEnv = {
-      OPENALICE_MANAGED_SHELL_PATH: 'C:\\OpenAlice\\vendor\\git\\bin\\bash.exe',
+      OPENALICE_MANAGED_SHELL_PATH: 'C:\\OpenAlpha\\vendor\\git\\bin\\bash.exe',
     }
     const preference = { version: 1, mode: 'custom', customPath } as const
 

@@ -951,7 +951,7 @@ export class UnifiedTradingAccount {
   }
 
   /**
-   * Faithful-record pass for orders Alice didn't place: diff the broker's
+   * Faithful-record pass for orders OpenAlpha didn't place: diff the broker's
    * open orders against every orderId the log has ever seen, and squash the
    * unknowns into one [observed] commit. The log is the narrative, not the
    * state engine — this exists so "怎么回事" is always answerable from the
@@ -976,7 +976,7 @@ export class UnifiedTradingAccount {
       observed: unknown.map((o) => ({ contract: o.contract, order: o.order, orderId: o.orderId! })),
       stateAfter,
     })
-    console.warn(`UTA[${this.id}]: recorded ${unknown.length} external order(s) not placed through Alice`)
+    console.warn(`UTA[${this.id}]: recorded ${unknown.length} external order(s) not placed through OpenAlpha`)
     return { observed: unknown.length }
   }
 
@@ -995,7 +995,7 @@ export class UnifiedTradingAccount {
    * unrealizedPnL ALWAYS equals the sum over reconciled positions. Brokers
    * can't uphold this themselves — wallet-sourced spot positions (CCXT
    * synthesis from fetchBalance) carry a placeholder unrealizedPnL of '0'
-   * at the broker layer because cost basis lives in Alice's order log, not
+   * at the broker layer because cost basis lives in OpenAlpha's order log, not
    * on the exchange. Trusting broker-reported account PnL therefore shows
    * 0 for spot-only accounts while the positions surface shows real PnL
    * (the Bybit-demo aggregation bug). Deriving from positions makes the
@@ -1032,7 +1032,7 @@ export class UnifiedTradingAccount {
 
   /**
    * For positions whose broker doesn't supply an authoritative avgCost
-   * (CCXT spot synthesis), reconstruct cost basis from Alice's order log
+   * (CCXT spot synthesis), reconstruct cost basis from OpenAlpha's order log
    * — bootstrapping any quantity drift via a synthesized `reconcileBalance`
    * commit at observed markPrice. Mutates `positions` in place: replaces
    * the placeholder avgCost and recomputes unrealizedPnL.

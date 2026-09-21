@@ -45,7 +45,7 @@ export function IssueSettingsPage() {
               descriptionId={runtimeDescriptionId}
               description={
                 installationDefault
-                  ? `Unset uses each target Workspace's Session default, then the Alice fallback (${installationDefault.displayName}), then the first registered runtime.`
+                  ? `Unset uses each target Workspace's Session default, then the OpenAlpha fallback (${installationDefault.displayName}), then the first registered runtime.`
                   : "Unset uses each target Workspace's Session default, then the first registered runtime."
               }
             >

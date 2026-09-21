@@ -205,7 +205,7 @@ export function supervisorFleetLaunchIntent(
   const project = selectedFleetProject(state)
   if (!machine) {
     return launchIntent('blocked', 'NO MACHINE SELECTED', 'Refresh Machine inventory before continuing.', 'r', 'Refresh', [
-      'Refresh inventory', 'Choose a Machine', 'Choose an AliceProject',
+      'Refresh inventory', 'Choose a Machine', 'Choose an OpenAlphaProject',
     ])
   }
   const machineReady = machine.connection === 'local' || machine.connection === 'online'
@@ -215,18 +215,18 @@ export function supervisorFleetLaunchIntent(
         machineReady ? 'attention' : 'blocked',
         machineReady ? 'NO ALICEPROJECTS FOUND' : `MACHINE ${machineStatus(machine).toUpperCase()}`,
         machine.issue?.message
-          ?? `${machine.displayName} reports no registered AliceProjects right now.`,
+          ?? `${machine.displayName} reports no registered OpenAlphaProjects right now.`,
         'r',
         'Refresh',
-        ['Refresh inventory', 'Find AliceProjects', 'Choose a target'],
+        ['Refresh inventory', 'Find OpenAlphaProjects', 'Choose a target'],
       )
     }
     return launchIntent(
       'select',
       machineReady ? 'CHOOSE AN ALICEPROJECT' : 'INSPECT LAST KNOWN TARGETS',
       machineReady
-        ? `${machine.displayName} is available with ${machine.projects.length} AliceProject${machine.projects.length === 1 ? '' : 's'}.`
-        : `${machine.displayName} is ${machineStatus(machine)}; its last known AliceProjects remain available to inspect.`,
+        ? `${machine.displayName} is available with ${machine.projects.length} OpenAlphaProject${machine.projects.length === 1 ? '' : 's'}.`
+        : `${machine.displayName} is ${machineStatus(machine)}; its last known OpenAlphaProjects remain available to inspect.`,
       'Enter',
       'Browse projects',
       ['Browse projects', 'Choose a target', machineReady ? 'Start or connect' : 'Refresh before launch'],
@@ -243,7 +243,7 @@ export function supervisorFleetLaunchIntent(
     )
   }
   if (!project) {
-    return launchIntent('blocked', 'NO ALICEPROJECT SELECTED', 'Choose a registered AliceProject before continuing.', 'r', 'Refresh', [
+    return launchIntent('blocked', 'NO ALICEPROJECT SELECTED', 'Choose a registered OpenAlphaProject before continuing.', 'r', 'Refresh', [
       'Refresh inventory', 'Choose a project', 'Start or connect',
     ])
   }
@@ -257,9 +257,9 @@ export function supervisorFleetLaunchIntent(
       project.available ? 'READY TO USE' : 'READY TO USE · HOME MISSING',
       project.available
         ? 'Use the verified local Runtime without restarting it or opening a browser.'
-        : 'Use the verified local Web route; the AliceProject home is currently missing.',
+        : 'Use the verified local Web route; the OpenAlphaProject home is currently missing.',
       'Enter',
-      'Use AliceProject',
+      'Use OpenAlphaProject',
       ['Verify endpoint', 'Bind local target', 'Enter connected Home'],
     )
   }
@@ -298,7 +298,7 @@ export function supervisorFleetLaunchIntent(
       return launchIntent(
         'blocked',
         'REMOTE START UNAVAILABLE',
-        `${machine.displayName} does not advertise the lifecycle capability required to start OpenAlice.`,
+        `${machine.displayName} does not advertise the lifecycle capability required to start OpenAlpha.`,
         'r',
         'Refresh',
         ['Refresh capability', 'Recover lifecycle', 'Start when ready'],
@@ -308,17 +308,17 @@ export function supervisorFleetLaunchIntent(
       ? launchIntent(
           'ready',
           'READY TO START',
-          'Start OpenAlice locally, verify readiness, and stay inside this terminal.',
+          'Start OpenAlpha locally, verify readiness, and stay inside this terminal.',
           'Enter',
-          'Start OpenAlice',
+          'Start OpenAlpha',
           ['Start Runtime', 'Verify Web endpoint', 'Enter connected Home'],
         )
       : launchIntent(
           'ready',
           'READY TO START REMOTELY',
-          'Start OpenAlice on the selected Machine, then continue through its SSH forward.',
+          'Start OpenAlpha on the selected Machine, then continue through its SSH forward.',
           'Enter',
-          'Start OpenAlice',
+          'Start OpenAlpha',
           ['Start remote Runtime', 'Refresh endpoint', 'Open SSH forward'],
         )
   }
@@ -409,7 +409,7 @@ export function renderSupervisorFleet(
     rowCount,
   )
   const rightPane = renderPane(
-    `AliceProjects · ${machine?.displayName ?? 'none'} · ${positionLabel(projectIndex, machine?.projects.length ?? 0)}`,
+    `OpenAlphaProjects · ${machine?.displayName ?? 'none'} · ${positionLabel(projectIndex, machine?.projects.length ?? 0)}`,
     projectRows,
     rightWidth,
     state.focus === 'projects',
@@ -454,10 +454,10 @@ function renderDirectConnectionBoard(
   const title = `${active ? 'Active Route' : 'Switch Route'} · ${mode} · ${location}`
   const primary = active
     ? 'Return Home'
-    : remote ? 'Connect & Switch' : 'Switch AliceProject'
+    : remote ? 'Connect & Switch' : 'Switch OpenAlphaProject'
   const secondary = remote
     ? active ? '· [ x ] Disconnect SSH forward' : '· Current target stays live'
-    : project.available ? '· [ m ] Transfer AliceProject' : '· Transfer unavailable'
+    : project.available ? '· [ m ] Transfer OpenAlphaProject' : '· Transfer unavailable'
   const identity = `${projectStatus(project, pulse)} ${project.displayName} · ${project.product === 'nano' ? 'NanoAlice' : 'TraderAlice'}`
   const route = `⌁ ${machine.displayName} → ${project.displayName}`
   const signal = compactConnectionSignals(project)
@@ -476,7 +476,7 @@ function renderDirectConnectionBoard(
     return renderPane(title, [
       identity,
       route,
-      active ? 'NOW  This is the active OpenAlice target.' : 'NOW  Current target stays live until this route is ready.',
+      active ? 'NOW  This is the active OpenAlpha target.' : 'NOW  Current target stays live until this route is ready.',
       action,
       signal,
       secondary,
@@ -525,7 +525,7 @@ function compactConnectionSignals(project: MachineProjectInventory): string {
   return [
     `${runtimeReady ? '●' : '○'} Runtime ${runtimeReady ? 'live' : project.runtime.class}`,
     `${webReady ? '●' : '○'} Web ${webReady ? 'ready' : 'off'}`,
-    `${aliceReady ? '●' : '◇'} Alice ${aliceReady ? 'ready' : '?'}`,
+    `${aliceReady ? '●' : '◇'} OpenAlpha ${aliceReady ? 'ready' : '?'}`,
   ].join(' · ')
 }
 
@@ -537,7 +537,7 @@ function renderDirectLaunchBoard(
   const machine = selectedFleetMachine(state)
   const project = selectedFleetProject(state)
   const intent = supervisorFleetLaunchIntent(state)
-  const route = `${machine?.displayName ?? 'No Machine'} → ${project?.displayName ?? 'No AliceProject'}`
+  const route = `${machine?.displayName ?? 'No Machine'} → ${project?.displayName ?? 'No OpenAlphaProject'}`
   const signal = intent.state === 'ready'
     ? '◆ READY TO LAUNCH'
     : intent.state === 'attention'
@@ -549,7 +549,7 @@ function renderDirectLaunchBoard(
 
   if (width < 96) {
     return renderPane(
-      `Launchpad · ${project?.displayName ?? 'AliceProject'}`,
+      `Launchpad · ${project?.displayName ?? 'OpenAlphaProject'}`,
       [
         `${signal} · ${route}`,
         intent.summary,
@@ -575,7 +575,7 @@ function renderDirectLaunchBoard(
     '',
     ...SUPERVISOR_BRAND_MARK_ROWS.map((row) => `${markInset}${row}`),
     '',
-    `⌂ ${project?.displayName ?? 'No AliceProject'}`,
+    `⌂ ${project?.displayName ?? 'No OpenAlphaProject'}`,
     `⌁ ${machine?.displayName ?? 'No Machine'} · ${machine?.key === 'local' ? 'LOCAL' : 'SSH'}`,
     launchRuntimeStep(
       machine,
@@ -607,7 +607,7 @@ function renderDirectLaunchBoard(
     gap,
   ))
   return renderPane(
-    `Launchpad · ${project?.displayName ?? 'AliceProject'}`,
+    `Launchpad · ${project?.displayName ?? 'OpenAlphaProject'}`,
     body,
     width,
     undefined,
@@ -642,7 +642,7 @@ function renderEmergencyLaunchCard(
     `OPENALICE LAUNCH · ${state.focus === 'machines' ? 'MACHINE' : 'ALICEPROJECT'}`,
     [
       `1 MACHINE ${machineReady ? '✓' : '○'} ${machine?.displayName ?? 'Choose a Machine'}`,
-      `2 ALICEPROJECT ${projectReady ? '✓' : '○'} ${project?.displayName ?? 'Choose an AliceProject'}`,
+      `2 ALICEPROJECT ${projectReady ? '✓' : '○'} ${project?.displayName ?? 'Choose an OpenAlphaProject'}`,
       `3 RUNTIME ${launchRuntimeStep(machine, project, projectReady)}`,
       `◆ [ ${intent.action.key} ] ${intent.action.label}`,
     ],
@@ -665,7 +665,7 @@ function renderLaunchSequence(state: SupervisorFleetState, width: number): strin
   const projectReady = Boolean(machineReady && project?.available)
   const runtime = launchRuntimeStep(machine, project, projectReady)
   const machineStep = `1 MACHINE ${machineReady ? '✓' : '○'} ${machine?.displayName ?? 'Choose a Machine'}`
-  const projectStep = `2 ALICEPROJECT ${projectReady ? '✓' : '○'} ${project?.displayName ?? 'Choose an AliceProject'}`
+  const projectStep = `2 ALICEPROJECT ${projectReady ? '✓' : '○'} ${project?.displayName ?? 'Choose an OpenAlphaProject'}`
   const runtimeStep = `3 RUNTIME ${runtime}`
   const inner = Math.max(12, width - 4)
   const compactSteps = compactLaunchSteps(machine, project, machineReady, projectReady)
@@ -763,7 +763,7 @@ function renderNarrowFleet(
   }
   return [
     ...renderPane(
-      `AliceProjects · ${machine?.displayName ?? 'none'} · ${positionLabel(state.selectedProjects[machine?.key ?? ''] ?? 0, machine?.projects.length ?? 0)}`,
+      `OpenAlphaProjects · ${machine?.displayName ?? 'none'} · ${positionLabel(state.selectedProjects[machine?.key ?? ''] ?? 0, machine?.projects.length ?? 0)}`,
       renderProjectRows(
         state,
         width - 4,
@@ -942,7 +942,7 @@ function renderProjectRows(
   if (machine.connection !== 'local' && machine.connection !== 'online') {
     return [`  ${machine.issue?.message ?? machineStatus(machine)}`]
   }
-  if (machine.projects.length === 0) return ['  No registered AliceProjects']
+  if (machine.projects.length === 0) return ['  No registered OpenAlphaProjects']
   const selectedIndex = state.selectedProjects[machine.key] ?? 0
   const start = visibleWindowStart(machine.projects.length, selectedIndex, visibleRows)
   const rows = visibleWindow(machine.projects, selectedIndex, visibleRows).map(({ item, index }) => {
@@ -976,7 +976,7 @@ function fleetSelectionDetail(
   if (state.focus === 'machines' || !project) {
     const target = machine.sshTarget ? ` · ${machine.sshTarget}` : ''
     const identity = `${machine.key === activeTarget?.machineKey ? '● ACTIVE MACHINE · ' : ''}${machineGlyph(machine)} ${machine.displayName} · ${machineStatus(machine)}${target}`
-    const facts = `${machine.platform ?? 'unknown'} / ${machine.arch ?? 'unknown'} · ${machine.projects.length} AliceProjects · checked ${formatChecked(state.generatedAt)}`
+    const facts = `${machine.platform ?? 'unknown'} / ${machine.arch ?? 'unknown'} · ${machine.projects.length} OpenAlphaProjects · checked ${formatChecked(state.generatedAt)}`
     const rows = expanded
       ? [identity, facts, '◆ [ Enter ] Browse projects']
       : [identity, '◆ [ Enter ] Browse projects']
@@ -990,11 +990,11 @@ function fleetSelectionDetail(
   const primary = active
     ? 'Return Home'
     : switching
-      ? machine.key === 'local' ? 'Switch AliceProject' : 'Connect & Switch'
+      ? machine.key === 'local' ? 'Switch OpenAlphaProject' : 'Connect & Switch'
     : project.runtime.class === 'absent'
-      ? 'Start OpenAlice'
+      ? 'Start OpenAlpha'
       : machine.key === 'local'
-        ? 'Use AliceProject'
+        ? 'Use OpenAlphaProject'
         : 'Connect'
   const action = [
     `◆ [ Enter ] ${primary}`,
@@ -1027,11 +1027,11 @@ function renderDetailCard(
     && project != null
     && !activeSelection
   const title = activeSelection
-    ? expanded ? 'Active Connection · AliceProject' : 'Active Connection'
+    ? expanded ? 'Active Connection · OpenAlphaProject' : 'Active Connection'
     : switchSelection
-      ? expanded ? 'Switch Target · AliceProject' : 'Switch Target'
+      ? expanded ? 'Switch Target · OpenAlphaProject' : 'Switch Target'
     : expanded
-      ? `Selection Constellation · ${state.focus === 'machines' ? 'Machine' : 'AliceProject'}`
+      ? `Selection Constellation · ${state.focus === 'machines' ? 'Machine' : 'OpenAlphaProject'}`
       : 'Selection'
   return renderPane(
     title,
@@ -1067,7 +1067,7 @@ function renderLaunchBriefing(
     : `${signal} · ${intent.headline} · ${route}`
   if (rowCount <= 2) {
     return renderPane(
-      `Launch Briefing · ${state.focus === 'machines' ? 'Machine' : 'AliceProject'}`,
+      `Launch Briefing · ${state.focus === 'machines' ? 'Machine' : 'OpenAlphaProject'}`,
       [
         briefingStatus,
         `◆ ${keycap} ${intent.action.label} · ${compactLaunchConsequence(intent)}`,
@@ -1080,7 +1080,7 @@ function renderLaunchBriefing(
   }
 
   return renderPane(
-    `Launch Briefing · ${state.focus === 'machines' ? 'Machine' : 'AliceProject'}`,
+    `Launch Briefing · ${state.focus === 'machines' ? 'Machine' : 'OpenAlphaProject'}`,
     [
       briefingStatus,
       intent.summary,
@@ -1112,10 +1112,10 @@ function fleetLauncherInventoryRows(
 
 function compactLaunchConsequence(intent: SupervisorFleetLaunchIntent): string {
   if (intent.action.key === 'r') return 'recheck target availability'
-  if (intent.action.label === 'Browse projects') return 'choose an AliceProject next'
-  if (intent.action.label === 'Start OpenAlice') return 'stay here through readiness'
+  if (intent.action.label === 'Browse projects') return 'choose an OpenAlphaProject next'
+  if (intent.action.label === 'Start OpenAlpha') return 'stay here through readiness'
   if (intent.action.label === 'Connect') return 'open its SSH forward into Home'
-  if (intent.action.label === 'Use AliceProject') return 'enter connected Home'
+  if (intent.action.label === 'Use OpenAlphaProject') return 'enter connected Home'
   return intent.summary
 }
 

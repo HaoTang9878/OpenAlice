@@ -218,7 +218,7 @@ describe('runScript platform branching', () => {
     );
   });
 
-  it('a Bun standalone re-enters Alice through the internal bootstrap role', async () => {
+  it('a Bun standalone re-enters OpenAlpha through the internal bootstrap role', async () => {
     setPlatform('darwin');
     vi.stubGlobal('__OPENALICE_BUN_STANDALONE__', true);
     const child = makeFakeChild();
@@ -239,7 +239,7 @@ describe('runScript platform branching', () => {
   it('an archived Electron backend supplies its Git executor to physical templates', async () => {
     const originalArgv = process.argv;
     const electronVersion = Object.getOwnPropertyDescriptor(process.versions, 'electron');
-    const entry = '/Applications/Open Alice.app/Contents/Resources/app.asar/dist/main.js';
+    const entry = '/Applications/Open OpenAlpha.app/Contents/Resources/app.asar/dist/main.js';
     try {
       Object.defineProperty(process.versions, 'electron', { value: '39.8.10', configurable: true });
       process.argv = [process.execPath, entry];

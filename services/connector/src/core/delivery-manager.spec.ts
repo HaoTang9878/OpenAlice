@@ -658,7 +658,7 @@ describe('DeliveryManager connector registry', () => {
     }
   })
 
-  it('leaves request expiry to Alice after a durable claim', async () => {
+  it('leaves request expiry to OpenAlpha after a durable claim', async () => {
     const now = Date.parse('2026-08-14T15:02:00.000Z')
     vi.useFakeTimers()
     vi.setSystemTime(now)

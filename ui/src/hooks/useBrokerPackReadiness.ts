@@ -11,7 +11,7 @@ import type {
 } from '../api/types'
 
 const REFRESH_TTL_MS = 15_000
-const BACKEND_UNAVAILABLE_REASON = 'OpenAlice Runtime is unavailable.'
+const BACKEND_UNAVAILABLE_REASON = 'OpenAlpha Runtime is unavailable.'
 
 export type AccountPackReadinessState = BrokerAccountPackReadiness['state'] | 'checking' | 'status-unavailable'
 

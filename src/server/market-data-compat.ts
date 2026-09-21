@@ -1,7 +1,7 @@
 /**
  * Embedded market-data compatibility mount.
  *
- * Mounts the remaining provider/model/router adapters into Alice's Hono app.
+ * Mounts the remaining provider/model/router adapters into OpenAlpha's Hono app.
  * This is an internal bridge for existing typed clients and compatibility HTTP
  * routes, not a standalone OpenTypeBB server or a new product contract.
  */

@@ -173,7 +173,7 @@ describe('Connector action bridge', () => {
     })
     expect(failArtifact).toHaveBeenCalledWith(expect.objectContaining({
       reason: 'delivery_failed',
-      message: 'OpenAlice could not send the file. Try again.',
+      message: 'OpenAlpha could not send the file. Try again.',
     }))
   })
 })

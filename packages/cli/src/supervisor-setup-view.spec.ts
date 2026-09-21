@@ -13,25 +13,25 @@ import { createSupervisorTuiTheme } from './supervisor-tui-theme.ts'
 
 describe('Supervisor Setup Studio', () => {
   const items: SupervisorSetupItem[] = [
-    { id: 'scope', label: 'Editing', value: 'AliceProject settings', description: 'Choose the configuration layer.', kind: 'choice' },
+    { id: 'scope', label: 'Editing', value: 'OpenAlphaProject settings', description: 'Choose the configuration layer.', kind: 'choice' },
     { id: 'home', label: 'Data home', value: '/Users/alice/.openalice', description: 'Complete home for settings, credentials, workspaces, and runtime state.', kind: 'editor' },
     { id: 'port', label: 'Browser port', value: 'automatic · resolved 47331', description: 'Blank chooses an available port automatically.', kind: 'editor' },
     { id: 'updates', label: 'Update checks', value: 'inherit · enabled', description: 'Controls cached update discovery.', kind: 'choice' },
-    { id: 'runtime', label: 'Installed Runtime', value: 'OpenAlice 0.91.0', description: 'Managed by the installer.', kind: 'readonly' },
+    { id: 'runtime', label: 'Installed Runtime', value: 'OpenAlpha 0.91.0', description: 'Managed by the installer.', kind: 'readonly' },
     { id: 'config', label: 'Advanced config', value: '/Users/alice/.openalice/supervisor/config.json', description: 'Read-only configuration location.', kind: 'readonly' },
   ]
 
   it('renders a wide map and Inspector with full-row targets', () => {
     const rendered = renderSupervisorSetupStudio({
-      projectName: 'Default AliceProject',
-      scope: 'AliceProject settings',
+      projectName: 'Default OpenAlphaProject',
+      scope: 'OpenAlphaProject settings',
       runtimeClass: 'running',
-      message: 'Changes apply to this AliceProject.',
+      message: 'Changes apply to this OpenAlphaProject.',
       items,
       selected: 1,
     }, 100)
     const output = rendered.lines.join('\n')
-    expect(output).toContain('Setup Studio · Default AliceProject')
+    expect(output).toContain('Setup Studio · Default OpenAlphaProject')
     expect(output).toContain('Setup status · ALICEPROJECT SETTINGS LAYER')
     expect(output).toContain('Inspection · 2/6 · ● LIVE')
     expect(output).toContain('› Data home')
@@ -42,15 +42,15 @@ describe('Supervisor Setup Studio', () => {
 
   it('stacks the same model within the 80-column overlay width', () => {
     const rendered = renderSupervisorSetupStudio({
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       scope: 'Machine defaults',
       runtimeClass: 'absent',
-      message: 'Machine defaults are inherited by AliceProjects without their own value.',
+      message: 'Machine defaults are inherited by OpenAlphaProjects without their own value.',
       items,
       selected: 4,
     }, 72)
     const output = rendered.lines.join('\n')
-    expect(output).toContain('Setup Studio · Default AliceProject')
+    expect(output).toContain('Setup Studio · Default OpenAlphaProject')
     expect(output).toContain('◇ MACHINE DEFAULTS LAYER · Machine defaults are inherited')
     expect(output).toContain('Inspection · 5/6')
     expect(output).toContain('◆ [ Esc ] Done')
@@ -78,14 +78,14 @@ describe('Supervisor Setup Studio', () => {
   it('keeps the active layer and field route beside the wide editor', () => {
     const lines = renderSupervisorSetupWorkbench({
       phase: 'edit',
-      projectName: 'Default AliceProject',
-      scope: 'AliceProject settings',
-      fieldTitle: 'Set AliceProject browser port',
+      projectName: 'Default OpenAlphaProject',
+      scope: 'OpenAlphaProject settings',
+      fieldTitle: 'Set OpenAlphaProject browser port',
       fieldPosition: '3/6',
       runtimeClass: 'absent',
       fieldLines: ['> 49002'],
       detail: 'Leave blank to inherit.',
-      message: 'AliceProject values override machine defaults.',
+      message: 'OpenAlphaProject values override machine defaults.',
     }, 100)
     const output = lines.join('\n')
     expect(output).toContain('Layer Context · PROJECT · EDIT')
@@ -101,7 +101,7 @@ describe('Supervisor Setup Studio', () => {
   it('stacks the rejected editor route without dropping context', () => {
     const lines = renderSupervisorSetupWorkbench({
       phase: 'error',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       scope: 'Machine defaults',
       fieldTitle: 'Set machine-default browser port',
       fieldPosition: '3/6',

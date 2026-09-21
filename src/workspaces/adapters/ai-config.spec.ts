@@ -288,7 +288,7 @@ describe('codexAdapter AI-config', () => {
     });
     expect(await read('.codex/openalice-home/config.toml')).toBe(
       'model = "gpt-x"\nmodel_provider = "workspace"\n\n'
-      + '[model_providers.workspace]\nname = "OpenAlice workspace provider"\n'
+      + '[model_providers.workspace]\nname = "OpenAlpha workspace provider"\n'
       + 'base_url = "https://oai.test/v1"\nenv_key = "OPENALICE_WORKSPACE_KEY"\nwire_api = "responses"\n',
     );
     expect(await read('.codex/openalice-home/env.json'))
@@ -536,7 +536,7 @@ describe('opencodeAdapter AI-config', () => {
     expect(await read('tui.jsonc')).toBe('{ // user-owned\n  "scroll_speed": 2\n}\n');
   });
 
-  it('keeps OpenAlice MCP out of opencode env even when an MCP URL is present', () => {
+  it('keeps OpenAlpha MCP out of opencode env even when an MCP URL is present', () => {
     const env = opencodeAdapter.composeEnv!({ cwd: dir, env: mcpEnv });
     expect(env['OPENCODE_DISABLE_MODELS_FETCH']).toBe('1');
     expect(env['OPENCODE_DISABLE_AUTOUPDATE']).toBe('1');
@@ -561,7 +561,7 @@ describe('opencodeAdapter AI-config', () => {
       provider: {
         workspace: {
           npm: '@ai-sdk/openai-compatible',
-          name: 'OpenAlice workspace provider',
+          name: 'OpenAlpha workspace provider',
           options: { baseURL: 'https://cn.test/v1', apiKey: 'sk-o' },
           models: {
             'deepseek-chat': {
@@ -981,7 +981,7 @@ describe('piAdapter AI-config', () => {
     expect(JSON.parse(await read('.pi/settings.json'))).toEqual({ theme: 'dark' });
   });
 
-  it('records a new OpenAlice workspace in Pi global trust without forcing agent-dir redirection', async () => {
+  it('records a new OpenAlpha workspace in Pi global trust without forcing agent-dir redirection', async () => {
     const home = join(dir, 'home');
     await syncPiProjectTrust(dir, { HOME: home });
     const canonicalDir = await realpath(dir);
@@ -1082,14 +1082,14 @@ describe('piAdapter AI-config', () => {
     const env = {
       ...mcpEnv,
       OPENALICE_MANAGED_PI_PATH: '/app/vendor/pi/node_modules/@earendil-works/pi-coding-agent/dist/cli.js',
-      OPENALICE_MANAGED_PI_NODE_PATH: '/Applications/OpenAlice.app/Contents/MacOS/OpenAlice',
+      OPENALICE_MANAGED_PI_NODE_PATH: '/Applications/OpenAlpha.app/Contents/MacOS/OpenAlpha',
     };
     expect(piAdapter.composeCommand(['ignored'], { cwd: dir, env })).toEqual([
-      '/Applications/OpenAlice.app/Contents/MacOS/OpenAlice',
+      '/Applications/OpenAlpha.app/Contents/MacOS/OpenAlpha',
       '/app/vendor/pi/node_modules/@earendil-works/pi-coding-agent/dist/cli.js',
     ]);
     expect(piAdapter.composeHeadlessCommand!([], { cwd: dir, env }, 'hello')).toEqual([
-      '/Applications/OpenAlice.app/Contents/MacOS/OpenAlice',
+      '/Applications/OpenAlpha.app/Contents/MacOS/OpenAlpha',
       '/app/vendor/pi/node_modules/@earendil-works/pi-coding-agent/dist/cli.js',
       '--approve',
       '-p',
@@ -1112,7 +1112,7 @@ describe('piAdapter AI-config', () => {
       baseUrl: 'https://cn.test/v1', apiKey: 'sk-p', model: 'deepseek-chat',
     });
     expect(await readWorkspaceProvider()).toEqual({
-      name: `OpenAlice workspace provider (${basename(dir)})`,
+      name: `OpenAlpha workspace provider (${basename(dir)})`,
       api: 'openai-completions',
       baseUrl: 'https://cn.test/v1',
       apiKey: 'sk-p',
@@ -1260,7 +1260,7 @@ describe('piAdapter AI-config', () => {
     });
   });
 
-  it('reset restores prior project defaults and removes only the OpenAlice provider', async () => {
+  it('reset restores prior project defaults and removes only the OpenAlpha provider', async () => {
     await mkdir(join(dir, '.pi'), { recursive: true });
     await writeFile(join(dir, '.pi/settings.json'), JSON.stringify({
       defaultProvider: 'user-provider',
@@ -1370,7 +1370,7 @@ describe('piAdapter AI-config', () => {
     await writeFile(join(dir, 'pi-user-agent/models.json'), JSON.stringify({
       providers: {
         [providerId]: {
-          name: `OpenAlice workspace provider (${basename(dir)})`,
+          name: `OpenAlpha workspace provider (${basename(dir)})`,
           api: 'openai-completions',
           baseUrl: 'https://provider.test/v1',
           apiKey: 'localize-key',
@@ -1399,7 +1399,7 @@ describe('piAdapter AI-config', () => {
     await writeFile(join(legacy, 'models.json'), JSON.stringify({
       providers: {
         workspace: {
-          name: 'OpenAlice workspace provider',
+          name: 'OpenAlpha workspace provider',
           api: 'openai-completions',
           baseUrl: 'https://legacy/v1',
           apiKey: 'legacy-key',

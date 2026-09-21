@@ -1,5 +1,5 @@
 /**
- * Version awareness route — exposes current app version + latest OpenAlice
+ * Version awareness route — exposes current app version + latest OpenAlpha
  * channel release for the UI's update banner.
  *
  * GET /api/version → VersionInfo (see core/version.ts)

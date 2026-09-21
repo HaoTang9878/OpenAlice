@@ -1,5 +1,5 @@
 /**
- * Maps OpenAlice provider key names to the SDK's credential field names.
+ * Maps OpenAlpha provider key names to the SDK's credential field names.
  *
  * Field names follow the provider's auto-prefixed credential
  * (`Provider` constructor at packages/opentypebb/src/core/provider/abstract/provider.ts:54-59

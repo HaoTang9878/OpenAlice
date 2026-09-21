@@ -12,15 +12,15 @@ describe('Supervisor Runtime Source Launch Bay', () => {
   it('pairs the complete source route with a focused inspector', () => {
     const rendered = renderSupervisorSourceLaunchBay({
       phase: 'select',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       provenance: 'project config',
-      fieldLines: ['> /Users/alice/OpenAlice'],
-      detail: 'Choose the OpenAlice source checkout.',
+      fieldLines: ['> /Users/alice/OpenAlpha'],
+      detail: 'Choose the OpenAlpha source checkout.',
       contract: 'Validate before saving; launch only follows a saved checkout.',
     }, 100)
     const output = rendered.lines.join('\n')
     expect(output).toContain('Source route · SELECT CHECKOUT')
-    expect(output).toContain('Runtime Source · AliceProject setting')
+    expect(output).toContain('Runtime Source · OpenAlphaProject setting')
     expect(output).toContain('◆ 01 Select')
     expect(output).toContain('· 04 Launch')
     expect(output).toContain('◆ [ Enter ] Save & start  │  [ Esc ] Cancel')
@@ -33,7 +33,7 @@ describe('Supervisor Runtime Source Launch Bay', () => {
   it('keeps rejection and the whole route visible at the narrow baseline', () => {
     const rendered = renderSupervisorSourceLaunchBay({
       phase: 'error',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       provenance: 'automatic',
       fieldLines: ['> /not/openalice'],
       detail: 'Could not use that checkout.',

@@ -27,7 +27,7 @@
  *         { kind: cron, cron, timezone?: local | IANA zone }  (OPTIONAL — present iff scheduled)
  *   what: <legacy fire prompt; migrated into the markdown What body>
  *   agent: <optional adapter id for the scheduled run>
- *   credential: <optional OpenAlice vault slug for one scheduled Session>
+ *   credential: <optional OpenAlpha vault slug for one scheduled Session>
  *   credentialSource: native <optional explicit Agent-runtime login>
  *   model: <optional native model id for one scheduled run>
  *   effort: none | minimal | low | medium | high | xhigh | max
@@ -384,7 +384,7 @@ export async function readWorkspaceIssues(wsDir: string): Promise<ReadIssuesResu
       if (extras.has(issue.id)) {
         invalid.push({
           id: issue.id,
-          error: `connectorDesk: only one ${issue.connectorDesk} phone-desk Issue is allowed in this Alice Project`,
+          error: `connectorDesk: only one ${issue.connectorDesk} phone-desk Issue is allowed in this OpenAlpha Project`,
         })
       } else {
         kept.push(issue)

@@ -40,7 +40,7 @@ export function renderSupervisorProjectFoundry(
   const workspaces = view.step === 'workspaces'
   const active = workspaces ? 2 : home ? 1 : 0
   const signal = workspaces ? 'WORKSPACES' : home ? 'COMPLETE HOME' : 'IDENTITY'
-  const field = workspaces ? 'Choose workspaces' : home ? 'Complete home' : 'AliceProject key'
+  const field = workspaces ? 'Choose workspaces' : home ? 'Complete home' : 'OpenAlphaProject key'
   const action = workspaces
     ? '◆ [ Enter ] Create & start  │  [ Esc ] Back'
     : '◆ [ Enter ] Continue  │  [ Esc ] Back'
@@ -70,7 +70,7 @@ export function renderSupervisorProjectFoundry(
       PATH_WIDTH,
     )
     const inspector = renderSupervisorPanel(
-      'Create AliceProject',
+      'Create OpenAlphaProject',
       active > 0 ? view.projectKey ?? 'Workspaces' : 'Project key',
       padRows(inspectorRows, height),
       inspectorWidth,
@@ -97,10 +97,10 @@ export function renderSupervisorProjectFoundry(
     : '◆ Identity  → Home  → Workspaces'
   return {
     lines: [
-      ...renderSupervisorPanel('AliceProject Foundry', `${active + 1}/3 · ${signal}`, [route], safeWidth),
+      ...renderSupervisorPanel('OpenAlphaProject Foundry', `${active + 1}/3 · ${signal}`, [route], safeWidth),
       '',
       ...renderSupervisorPanel(
-        'Create AliceProject',
+        'Create OpenAlphaProject',
         active > 0 ? view.projectKey ?? 'Workspaces' : 'Project key',
         inspectorRows,
         safeWidth,

@@ -169,7 +169,7 @@ export function renderSupervisorInbox(
         state: 'AWAITING TARGET',
         meta: 'DISCONNECTED',
         facts: [
-          { label: 'Source', value: 'Active AliceProject HTTP endpoint' },
+          { label: 'Source', value: 'Active OpenAlphaProject HTTP endpoint' },
           { label: 'State', value: 'Shared read/unread attention state' },
           { label: 'Safety', value: 'Read and mark only · no delete', compactValue: 'No destructive actions' },
         ],

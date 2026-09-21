@@ -2,8 +2,8 @@
  * Wire-shape broker error returned by every UTA HTTP endpoint on failure.
  *
  * Translation of the in-process `BrokerError` class (which lives in UTA's
- * domain/trading and is never visible to Alice). All four fields are
- * round-trip-lossless: AI tools on the Alice side rebuild the same hint /
+ * domain/trading and is never visible to OpenAlpha). All four fields are
+ * round-trip-lossless: AI tools on the OpenAlpha side rebuild the same hint /
  * transient signal from this wire shape that they used to receive from the
  * class directly.
  */

@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { main } from './main.ts'
 
-describe('OpenAlice TypeScript application entry', () => {
+describe('OpenAlpha TypeScript application entry', () => {
   it('continues native first-launch dependency installation before opening TUI', async () => {
     const calls: string[] = []
     expect(await main([], { standalone: true, runSetup: async () => { calls.push('setup'); return 0 }, runTui: async () => { calls.push('tui'); return 0 } })).toBe(0)

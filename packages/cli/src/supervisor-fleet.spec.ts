@@ -36,8 +36,8 @@ describe('Supervisor fleet state and presentation', () => {
       100,
     )
     expect(lines.join('\n')).toContain('Machines')
-    expect(lines.join('\n')).toContain('AliceProjects · This Mac')
-    expect(lines.join('\n')).toContain('Default AliceProject')
+    expect(lines.join('\n')).toContain('OpenAlphaProjects · This Mac')
+    expect(lines.join('\n')).toContain('Default OpenAlphaProject')
     expect(lines.every((line) => displayWidth(line) <= 100)).toBe(true)
   })
 
@@ -48,7 +48,7 @@ describe('Supervisor fleet state and presentation', () => {
         (_, index) => project(`local-${index}`, `Local ${index + 1}`),
       )),
       machine('cloud-dev', 'Cloud Dev', 'online', [
-        project('remote-default', 'Default AliceProject'),
+        project('remote-default', 'Default OpenAlphaProject'),
         project('remote-main', 'Main Cloud'),
       ]),
     ]
@@ -90,13 +90,13 @@ describe('Supervisor fleet state and presentation', () => {
     ).join('\n')
 
     expect(output).toContain('Active Route · LIVE · LOCAL')
-    expect(output).toContain('● running Default AliceProject · TraderAlice')
-    expect(output).toContain('⌁ This Mac → Default AliceProject')
-    expect(output).toContain('● Runtime live · ● Web ready · ● Alice ready')
+    expect(output).toContain('● running Default OpenAlphaProject · TraderAlice')
+    expect(output).toContain('⌁ This Mac → Default OpenAlphaProject')
+    expect(output).toContain('● Runtime live · ● Web ready · ● OpenAlpha ready')
     expect(output).toContain('[ Enter ] Return Home')
-    expect(output).toContain('[ m ] Transfer AliceProject')
+    expect(output).toContain('[ m ] Transfer OpenAlphaProject')
     expect(output).not.toContain('Machines · 1/1')
-    expect(output).not.toContain('AliceProjects · This Mac · 1/1')
+    expect(output).not.toContain('OpenAlphaProjects · This Mac · 1/1')
     expect(supervisorFleetTargetAt(state, 80, 20, 2, 5, false, true)).toBeUndefined()
     expect(supervisorFleetRailTargetAt(state, 80, 78, 2, 5, false, true)).toBeUndefined()
   })
@@ -120,7 +120,7 @@ describe('Supervisor fleet state and presentation', () => {
     expect(output).toContain('● ACTIVE TARGET · ● running Research')
     expect(output).toContain('Active Connection')
     expect(output).toContain('[ Enter ] Return Home')
-    expect(output).not.toContain('[ Enter ] Use AliceProject')
+    expect(output).not.toContain('[ Enter ] Use OpenAlphaProject')
   })
 
   it('frames a different connected target as a switch before activation', () => {
@@ -148,17 +148,17 @@ describe('Supervisor fleet state and presentation', () => {
     let state = createSupervisorFleetState('2026-08-23T00:00:00Z', machines())
     const machinesFocused = renderSupervisorFleet(state, 100).join('\n')
     expect(machinesFocused).toContain('╭ ◆ Machines · 1/2')
-    expect(machinesFocused).toContain('╭ ◇ AliceProjects · This Mac · 1/1')
+    expect(machinesFocused).toContain('╭ ◇ OpenAlphaProjects · This Mac · 1/1')
     expect(machinesFocused).toContain('│ ▶ This Mac')
-    expect(machinesFocused).toContain('│ ◁ Default AliceProject')
+    expect(machinesFocused).toContain('│ ◁ Default OpenAlphaProject')
     expect(machinesFocused).toContain('╭ Selection ')
 
     state = setFleetFocus(state, 'projects')
     const projectsFocused = renderSupervisorFleet(state, 100).join('\n')
     expect(projectsFocused).toContain('╭ ◇ Machines · 1/2')
-    expect(projectsFocused).toContain('╭ ◆ AliceProjects · This Mac · 1/1')
+    expect(projectsFocused).toContain('╭ ◆ OpenAlphaProjects · This Mac · 1/1')
     expect(projectsFocused).toContain('│ ◁ This Mac')
-    expect(projectsFocused).toContain('│ ▶ Default AliceProject')
+    expect(projectsFocused).toContain('│ ▶ Default OpenAlphaProject')
     expect(projectsFocused).not.toContain('◇ Selection')
   })
 
@@ -168,12 +168,12 @@ describe('Supervisor fleet state and presentation', () => {
     expect(renderSupervisorFleet(state, 40).join('\n')).toContain('▶ This Mac')
     state = setFleetFocus(state, 'projects')
     const lines = renderSupervisorFleet(state, 40)
-    expect(lines.join('\n')).toContain('◆ AliceProjects · This Mac')
-    expect(lines.join('\n')).toContain('▶ Default Alice')
+    expect(lines.join('\n')).toContain('◆ OpenAlphaProjects · This Mac')
+    expect(lines.join('\n')).toContain('▶ Default OpenAlpha')
     expect(lines.every((line) => displayWidth(line) <= 40)).toBe(true)
   })
 
-  it('shows independent scroll rails for overflowing Machine and AliceProject panes', () => {
+  it('shows independent scroll rails for overflowing Machine and OpenAlphaProject panes', () => {
     const inventory = Array.from({ length: 7 }, (_, index) => machine(
       `machine-${index}`,
       `Machine ${index + 1}`,
@@ -262,16 +262,16 @@ describe('Supervisor fleet state and presentation', () => {
     const output = expanded.join('\n')
 
     expect(expanded).toHaveLength(22)
-    expect(output).toContain('Selection Constellation · AliceProject')
+    expect(output).toContain('Selection Constellation · OpenAlphaProject')
     expect(output).toContain('◇ CONTROL ROUTE')
     expect(output).toContain('● This Mac')
-    expect(output).toContain('● running Default AliceProject')
+    expect(output).toContain('● running Default OpenAlphaProject')
     expect(output).toContain('↗ WEB  http://127.0.0.1:47331')
     expect(output).toContain('PRODUCT  TraderAlice')
     expect(output).toContain('PORT  47331 · AUTO')
     expect(output).toContain('OWNER    cli-server')
     expect(output).toContain('UPTIME  12s')
-    expect(output).toContain('SERVICES Alice ready')
+    expect(output).toContain('SERVICES OpenAlpha ready')
     expect(output).toContain('CAPS     inspect · lifecycle · tunnel')
     expect(expanded.every((line) => displayWidth(line) <= 120)).toBe(true)
     expect(supervisorFleetTargetAt(state, 120, 40, 14, 15)).toBeUndefined()
@@ -319,24 +319,24 @@ describe('Supervisor fleet state and presentation', () => {
     expect(intent).toMatchObject({
       state: 'ready',
       headline: 'READY TO START',
-      action: { key: 'Enter', label: 'Start OpenAlice' },
+      action: { key: 'Enter', label: 'Start OpenAlpha' },
     })
     expect(output).toContain('OPENALICE LAUNCH · READY → START → CONNECT')
-    expect(output).toContain('Launchpad · Default AliceProject')
+    expect(output).toContain('Launchpad · Default OpenAlphaProject')
     expect(output).toContain('◆ READY TO LAUNCH · READY TO START')
-    expect(output).toContain('This Mac → Default AliceProject')
-    expect(output).toContain('Start OpenAlice locally, verify readiness, and stay inside this terminal.')
+    expect(output).toContain('This Mac → Default OpenAlphaProject')
+    expect(output).toContain('Start OpenAlpha locally, verify readiness, and stay inside this terminal.')
     expect(output).toContain('1 Start Runtime')
     expect(output).toContain('2 Verify Web endpoint')
     expect(output).toContain('3 Enter connected Home')
-    expect(output).toContain('◆ [ Enter ] Start OpenAlice')
+    expect(output).toContain('◆ [ Enter ] Start OpenAlpha')
     expect(output).not.toContain('Selection Constellation')
     expect(output).not.toContain('OWNER    ')
     expect(output).not.toContain('PORT  ')
     expect(output).not.toContain('Machines · 1/1')
-    expect(output).not.toContain('AliceProjects · This Mac · 1/1')
+    expect(output).not.toContain('OpenAlphaProjects · This Mac · 1/1')
     expect(launcher).toHaveLength(15)
-    expect(launcher.at(-2)).toContain('◆ [ Enter ] Start OpenAlice')
+    expect(launcher.at(-2)).toContain('◆ [ Enter ] Start OpenAlpha')
     expect(launcher.every((line) => displayWidth(line) <= 120)).toBe(true)
     expect(supervisorFleetTargetAt(state, 120, 10, 2, 15, true)).toBeUndefined()
     expect(supervisorFleetRailTargetAt(state, 120, 118, 2, 15, true)).toBeUndefined()
@@ -351,15 +351,15 @@ describe('Supervisor fleet state and presentation', () => {
       true,
     ).join('\n')
     expect(compactLauncher).toContain('1 ✓ This Mac')
-    expect(compactLauncher).toContain('2 ✓ Default AliceProject')
+    expect(compactLauncher).toContain('2 ✓ Default OpenAlphaProject')
     expect(compactLauncher).toContain('3 ○ READY TO START')
     expect(compactLauncher).toContain('NEXT  stay here through readiness')
-    expect(compactLauncher).toContain('◆ [ Enter ] Start OpenAlice')
+    expect(compactLauncher).toContain('◆ [ Enter ] Start OpenAlpha')
     expect(compactLauncher).not.toContain('Start Runtime → Verify Web endpoint')
 
     const connectedManager = renderSupervisorFleet(state, 120, undefined, false, 15)
       .join('\n')
-    expect(connectedManager).toContain('Selection Constellation · AliceProject')
+    expect(connectedManager).toContain('Selection Constellation · OpenAlphaProject')
     expect(connectedManager).toContain('OWNER    none')
   })
 
@@ -402,7 +402,7 @@ describe('Supervisor fleet state and presentation', () => {
     ).join('\n')
     expect(localOutput).toContain('3 ● READY TO USE')
     expect(localOutput).toContain('NEXT  enter connected Home')
-    expect(localOutput).toContain('◆ [ Enter ] Use AliceProject')
+    expect(localOutput).toContain('◆ [ Enter ] Use OpenAlphaProject')
 
     let remote = createSupervisorFleetState('2026-08-23T00:00:00Z', machines())
     remote = selectFleetIndex(remote, 'machines', 1)
@@ -414,7 +414,7 @@ describe('Supervisor fleet state and presentation', () => {
     expect(remoteOutput).toContain('◆ [ Enter ] Connect · open its SSH forward into Home')
   })
 
-  it('maps pointer rows to visible Machine and AliceProject selections', () => {
+  it('maps pointer rows to visible Machine and OpenAlphaProject selections', () => {
     let state = createSupervisorFleetState('2026-08-23T00:00:00Z', machines())
     expect(supervisorFleetTargetAt(state, 80, 4, 3)).toEqual({
       focus: 'machines',
@@ -473,8 +473,8 @@ describe('Supervisor fleet state and presentation', () => {
       { focus: 'projects', index: 0, surface: 'pane' },
     ).join('\n')
     expect(hovered).toContain('╭ ◆ Machines')
-    expect(hovered).toContain('╭ » AliceProjects')
-    expect(hovered).not.toContain('» Default AliceProject')
+    expect(hovered).toContain('╭ » OpenAlphaProjects')
+    expect(hovered).not.toContain('» Default OpenAlphaProject')
   })
 
   it('keeps unauthorized and incompatible Machines as truthful rows', () => {
@@ -499,7 +499,7 @@ describe('Supervisor fleet state and presentation', () => {
     expect(output).toContain('incompatible')
   })
 
-  it('keeps an active Runtime visible when its AliceProject home is missing', () => {
+  it('keeps an active Runtime visible when its OpenAlphaProject home is missing', () => {
     const missingHome = {
       ...machines()[0]!,
       projects: [{
@@ -523,7 +523,7 @@ describe('Supervisor fleet state and presentation', () => {
 
 function machines(): MachineInventory[] {
   return [
-    machine('local', 'This Mac', 'local', [project('default', 'Default AliceProject')]),
+    machine('local', 'This Mac', 'local', [project('default', 'Default OpenAlphaProject')]),
     machine('cloud', '云端开发机', 'online', [
       project('research', 'Research'),
       project('nano', 'Nano Lab'),

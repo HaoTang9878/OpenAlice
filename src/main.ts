@@ -124,7 +124,7 @@ async function main() {
   // ==================== UTA SDK (HTTP boundary) ====================
   //
   // Trading domain lives in the UTA carrier. Guardian normally spawns it
-  // beside Alice, but UTA is optional: Alice can boot in lite mode while the
+  // beside OpenAlpha, but UTA is optional: OpenAlpha can boot in lite mode while the
   // proxy reports trading unavailable. Explicit OPENALICE_LITE_MODE disables
   // SDK carrier calls locally; ordinary offline mode can recover when the
   // carrier appears at the resolved URL.
@@ -231,7 +231,7 @@ async function main() {
   equityClient = withHubCalendars(equityClient, config.marketData.hub)
 
   // Reference-data contract — board-shaped low-frequency data (movers, macro,
-  // calendar, …). Alice's own standard; the future hosted-hub seam.
+  // calendar, …). OpenAlpha's own standard; the future hosted-hub seam.
   const reference = createReferenceData({
     equityClient,
     economyClient,
@@ -317,7 +317,7 @@ async function main() {
     },
   })
 
-  // Snapshot scheduler lives in UTA after Step 6 — Alice no longer
+  // Snapshot scheduler lives in UTA after Step 6 — OpenAlpha no longer
   // drives the periodic equity-curve writes. The UTA service starts
   // its own scheduler at boot.
 
@@ -389,7 +389,7 @@ async function main() {
   }
 
   // Optional in-process plugins — none today. External IM connections live in
-  // the independently supervised Connector Service, never in Alice.
+  // the independently supervised Connector Service, never in OpenAlpha.
   const optionalPlugins = new Map<string, Plugin>()
 
   // ==================== Engine Context ====================
@@ -487,7 +487,7 @@ export async function startAliceRuntime(): Promise<void> {
     ...(guardianPid ? { guardianPid } : {}),
     ...(guardianStartedAt ? { guardianStartedAt } : {}),
     onOwnershipLost: (err) => {
-      console.error('fatal: OpenAlice runtime ownership lost:', err)
+      console.error('fatal: OpenAlpha runtime ownership lost:', err)
       try { process.kill(process.pid, 'SIGTERM') } catch { process.exit(1) }
     },
   })

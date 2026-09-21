@@ -198,7 +198,7 @@ export class ScheduleScanner {
       if (extras.has(`${ws.id}:${issue.id}`)) {
         throw new ScheduledIssueRunNowError(
           'not_fireable',
-          `Only one ${issue.connectorDesk} phone-desk Issue may fire in this Alice Project.`,
+          `Only one ${issue.connectorDesk} phone-desk Issue may fire in this OpenAlpha Project.`,
         )
       }
     }

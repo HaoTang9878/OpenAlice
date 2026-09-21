@@ -271,7 +271,7 @@ export class WorkspaceAbsorbManager {
       ].join('\n')
       await runGit(target.dir, [
         '-c', 'user.email=launcher@local',
-        '-c', 'user.name=OpenAlice',
+        '-c', 'user.name=OpenAlpha',
         'commit', '--allow-empty', '-q', '-m', message,
       ])
       const commit = (await runGit(target.dir, ['rev-parse', 'HEAD'])).trim()

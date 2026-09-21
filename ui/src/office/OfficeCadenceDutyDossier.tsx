@@ -46,8 +46,8 @@ function localizedHealthMessage(message: string, t: TFunction): string {
     'Assigned Session is deleted. Reassign the Issue before its next run.': t('office.cadenceDeletedSession'),
     'Assigned Session has no resumable runtime conversation yet.': t('issues.detail.healthMessage.unboundSession'),
     'Schedule has no future fire. Check its expression and timestamp.': t('issues.detail.healthMessage.noFutureRun'),
-    'OpenAlice stopped while this run was active. It was not automatically retried.': t('office.cadenceInterruptedDefault'),
-    'OpenAlice stopped while the latest scheduled run was active. It was not automatically retried.': t('office.cadenceInterruptedDefault'),
+    'OpenAlpha stopped while this run was active. It was not automatically retried.': t('office.cadenceInterruptedDefault'),
+    'OpenAlpha stopped while the latest scheduled run was active. It was not automatically retried.': t('office.cadenceInterruptedDefault'),
     'Latest scheduled run failed. Inspect its Runs entry, then retry when ready.': t('office.cadenceFailedDefault'),
     'Latest scheduled run failed.': t('office.cadenceFailedDefault'),
   } as Record<string, string>

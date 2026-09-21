@@ -1,7 +1,7 @@
 /**
  * Aggregate Symbol Search
  *
- * Cross-asset-class heuristic search that respects Alice's per-asset-class
+ * Cross-asset-class heuristic search that respects OpenAlpha's per-asset-class
  * provider config. Used both by the AI tool (marketSearchForResearch) and the
  * HTTP route (/api/market/search) — both surfaces must return the same thing.
  *

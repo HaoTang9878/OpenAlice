@@ -16,7 +16,7 @@ afterEach(async () => {
   await Promise.all(temporary.splice(0).map((path) => rm(path, { recursive: true, force: true })))
 })
 
-describe('standalone CLI AliceProject product stamp', () => {
+describe('standalone CLI OpenAlphaProject product stamp', () => {
   it('publishes exactly one concurrent birth product', async () => {
     const home = await mkdtemp(join(tmpdir(), 'openalice-cli-product-race-'))
     temporary.push(home)

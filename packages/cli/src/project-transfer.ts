@@ -1,4 +1,4 @@
-/** Versioned local AliceProject → SSH Machine transfer planner. */
+/** Versioned local OpenAlphaProject → SSH Machine transfer planner. */
 import { createHash } from 'node:crypto'
 import { createReadStream } from 'node:fs'
 import {
@@ -150,7 +150,7 @@ export async function planProjectTransfer(
   if (launcherRoot && resolve(launcherRoot) !== join(sourceHome, 'workspaces')) {
     blockers.push({
       code: 'ESPLITROOT',
-      message: 'AQ_LAUNCHER_ROOT points outside the selected AliceProject; split-root transfer is not supported.',
+      message: 'AQ_LAUNCHER_ROOT points outside the selected OpenAlphaProject; split-root transfer is not supported.',
     })
   }
   const credentialsMode = input.credentials ?? 'include'
@@ -536,9 +536,9 @@ function exclusionReason(path: string): ProjectTransferExclusion['reason'] | nul
 }
 
 /**
- * Native Agent login/session/config files are deliberately not AliceProject
+ * Native Agent login/session/config files are deliberately not OpenAlphaProject
  * credentials. They may contain plaintext API keys or host-bound login state,
- * so the destination runtime must recreate them from the transferred Alice
+ * so the destination runtime must recreate them from the transferred OpenAlpha
  * vault or its own login flow. Shared skills and ordinary dot-directory files
  * remain portable.
  */

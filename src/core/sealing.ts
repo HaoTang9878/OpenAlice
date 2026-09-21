@@ -12,7 +12,7 @@
  *     dir" debugging) no longer leaks broker keys.
  *   - casual reads — grep, screenshots, an agent `cat`ing the file — see
  *     ciphertext.
- * What it does NOT buy: same-user malware or a compromised Alice process
+ * What it does NOT buy: same-user malware or a compromised OpenAlpha process
  * can read the key file exactly like we do. The structural answer to that
  * is the detached-UTA split, not at-rest crypto.
  *

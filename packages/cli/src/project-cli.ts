@@ -33,7 +33,7 @@ export async function runProjectCli(argv: string[]): Promise<number> {
   const endpointPath = join(context.home, 'state', 'cli-endpoint.json')
   let endpoint: { schemaVersion?: number; projectId?: string; home?: string; appRoot?: string; url?: string; socket?: string }
   try { endpoint = JSON.parse(await readFile(endpointPath, 'utf8')) }
-  catch { throw new Error(`No CLI endpoint in ${context.home}. Start or restart this Project with the updated OpenAlice Runtime.`) }
+  catch { throw new Error(`No CLI endpoint in ${context.home}. Start or restart this Project with the updated OpenAlpha Runtime.`) }
   if (endpoint.schemaVersion !== 1 || endpoint.projectId !== context.aliceProject.id || !endpoint.home || resolve(endpoint.home) !== resolve(context.home)) throw new Error('Project CLI endpoint identity does not match the selected Project')
   if (!endpoint.url) throw new Error('Project CLI endpoint has no URL')
   if (!endpoint.socket) {

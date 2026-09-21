@@ -7,7 +7,7 @@ import {
 import type { SessionRecord } from './session-registry.js';
 
 const rawReconstruction = [
-  'You are reconstructing a prior Alice Session.',
+  'You are reconstructing a prior OpenAlpha Session.',
   '{"target":{"kind":"issue","issueId":"telegram-phone-desk"}}',
 ].join('\n');
 

@@ -21,7 +21,7 @@ import type { AccountPackReadiness } from '../hooks/useBrokerPackReadiness'
 // ==================== External order monitoring cadence ====================
 //
 // data/config/trading.json observeExternalOrdersEvery — how often UTA lists
-// the broker's open orders to catch ones placed outside Alice. Saving
+// the broker's open orders to catch ones placed outside OpenAlpha. Saving
 // bounces the UTA process (boot-time config), same protocol as broker
 // edits; the health badges show the brief reconnect.
 
@@ -368,7 +368,7 @@ export function TradingPage() {
           envLocked: false,
           hasUTAConfig: false,
           reason: 'status_unreachable',
-          hint: 'Trading service status is not reachable. Alice is running in lite mode.',
+          hint: 'Trading service status is not reachable. OpenAlpha is running in lite mode.',
         })
       }
     }
@@ -568,7 +568,7 @@ function TradingServiceOfflineBanner({ status }: { status: TradingServiceStatus 
       <div className="min-w-0">
         <div className="text-[12px] font-medium text-foreground">Trading service offline</div>
         <div className="mt-0.5 text-[11px] text-muted-foreground leading-relaxed">
-          {status.hint ?? 'Alice is running in lite mode.'}
+          {status.hint ?? 'OpenAlpha is running in lite mode.'}
           {status.reason ? <span className="ml-1 font-mono text-muted-foreground/70">{status.reason}</span> : null}
         </div>
       </div>

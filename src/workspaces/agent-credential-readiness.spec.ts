@@ -72,7 +72,7 @@ beforeEach(() => {
 
 describe('agent credential readiness', () => {
   it.each(['claude', 'codex', 'cursor', 'agy', 'grok', 'omp', 'opencode', 'pi'])(
-    'treats %s as ready without an Alice credential because the runtime owns login state',
+    'treats %s as ready without an OpenAlpha credential because the runtime owns login state',
     async (agentId) => {
     const a = adapter(agentId);
     const row = await getAgentCredentialReadiness({ meta, agentId, adapter: a, credentials: {} });
@@ -83,7 +83,7 @@ describe('agent credential readiness', () => {
     expect(a.readAiConfig).toHaveBeenCalledOnce();
   });
 
-  it('accepts an existing usable workspace config even when the Alice vault is empty', async () => {
+  it('accepts an existing usable workspace config even when the OpenAlpha vault is empty', async () => {
     const a = adapter('opencode', {
       baseUrl: null,
       apiKey: 'sk-hand-written',
@@ -100,7 +100,7 @@ describe('agent credential readiness', () => {
     expect(a.writeAiConfig).not.toHaveBeenCalled();
   });
 
-  it('does not let an unreadable Alice vault block a native Workspace config', async () => {
+  it('does not let an unreadable OpenAlpha vault block a native Workspace config', async () => {
     const a = adapter('pi', {
       baseUrl: null,
       apiKey: 'native-project-key',

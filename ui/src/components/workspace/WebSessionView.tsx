@@ -65,7 +65,7 @@ function WebSession({ wsId, sessionId, agent, agents, label, headerActions, onSe
       busy={busy}
       ready={!!snapshot && snapshot.phase !== 'failed' && snapshot.phase !== 'starting' && !stopped}
       placeholder={`Message ${agentLabel}…`}
-      empty={snapshot ? 'What should Alice work on next?' : 'Opening conversation…'}
+      empty={snapshot ? 'What should OpenAlpha work on next?' : 'Opening conversation…'}
       controls={<span className="inline-flex items-center gap-1.5 px-1.5 py-1 text-xs text-muted-foreground" title={snapshot ? wireDescription(snapshot.wire) : 'Web conversation surface'}>
         <AgentRuntimeIcon agentId={agentId} className="h-[12px] w-[12px]" />
         {agentLabel} <span className="opacity-60">· Web</span>

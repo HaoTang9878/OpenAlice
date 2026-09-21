@@ -44,7 +44,7 @@ describe('HarnessSettingsPage', () => {
     const toggle = screen.getByRole('switch', { name: 'Show headless-born Sessions' })
     expect(toggle.getAttribute('aria-checked')).toBe('false')
     expect(screen.getByText('Shared Harness behavior')).toBeTruthy()
-    expect(screen.queryByText('Ask Alice')).toBeNull()
+    expect(screen.queryByText('Ask OpenAlpha')).toBeNull()
     expect(screen.queryByText('Auto Quant')).toBeNull()
     expect(screen.queryByText('Auto Prediction')).toBeNull()
 

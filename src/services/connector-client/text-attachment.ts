@@ -5,7 +5,7 @@ const UTF8_BOM = Buffer.from([0xef, 0xbb, 0xbf])
 // chardet is deliberately conservative for some short single-byte documents
 // (often scoring them in the 20-40 range). A low candidate floor is safe here
 // only because conversion must also pass text-likeness and byte round-trip
-// checks before Alice changes anything at the external delivery boundary.
+// checks before OpenAlpha changes anything at the external delivery boundary.
 const MIN_DETECTION_CONFIDENCE = 20
 
 export interface NormalizedTextAttachment {

@@ -58,7 +58,7 @@ export class DeltaNeutralContract {
  *
  * **NO new secTypes may be added without explicit project-lead sign-off.**
  * IBKR's catalog is the source of truth; if IBKR can't represent an asset,
- * OpenAlice doesn't represent it either. Brokers that work in non-IBKR
+ * OpenAlpha doesn't represent it either. Brokers that work in non-IBKR
  * universes are expected to map their native instruments INTO this set
  * (e.g. Longbridge HK warrants → 'WAR'; LeverUp synthetic-perps → 'CRYPTO_PERP').
  *
@@ -112,7 +112,7 @@ export type SecType =
   | 'NEWS'     // News
   | 'CFD'      // Contract for difference
   | 'CRYPTO'   // Crypto spot
-  // ─── OpenAlice extension — the ONLY allowed deviation from IBKR ───
+  // ─── OpenAlpha extension — the ONLY allowed deviation from IBKR ───
   | 'CRYPTO_PERP'
 
 export class Contract {

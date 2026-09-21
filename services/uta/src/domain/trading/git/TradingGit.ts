@@ -333,7 +333,7 @@ export class TradingGit implements ITradingGit {
    * The log is a faithful record, not the source of final state: once an
    * external order is in the log with orderId + submitted, the regular
    * pending scanner and sync poller track its fill/cancel like any
-   * Alice-placed order.
+   * OpenAlpha-placed order.
    */
   async recordObservedOrders(params: {
     observed: Array<{ contract: Contract; order: Order; orderId: string }>
@@ -354,7 +354,7 @@ export class TradingGit implements ITradingGit {
       status: 'submitted',
     }))
 
-    const message = `[observed] ${observed.length} external order(s) not placed through Alice`
+    const message = `[observed] ${observed.length} external order(s) not placed through OpenAlpha`
     const hash = generateCommitHash({ message, operations, timestamp, parentHash: this.head })
 
     const commit: GitCommit = {

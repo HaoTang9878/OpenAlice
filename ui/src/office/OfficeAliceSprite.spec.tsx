@@ -24,7 +24,7 @@ describe('OfficeAliceSprite', () => {
         direction="right"
         walking
         reducedMotion
-        label="Alice"
+        label="OpenAlpha"
         scale={1}
       />,
     )
@@ -36,7 +36,7 @@ describe('OfficeAliceSprite', () => {
         direction="left"
         walking
         reducedMotion
-        label="Alice"
+        label="OpenAlpha"
         scale={1}
       />,
     )
@@ -47,7 +47,7 @@ describe('OfficeAliceSprite', () => {
         direction="up"
         walking={false}
         reducedMotion
-        label="Alice"
+        label="OpenAlpha"
         scale={1}
       />,
     )
@@ -58,14 +58,14 @@ describe('OfficeAliceSprite', () => {
       .toBe('-48px -144px')
   })
 
-  it('advances the authored run cycle while Alice keeps moving', () => {
+  it('advances the authored run cycle while OpenAlpha keeps moving', () => {
     vi.useFakeTimers()
     const { container, rerender } = render(
       <OfficeAliceSprite
         direction="right"
         walking
         reducedMotion={false}
-        label="Alice"
+        label="OpenAlpha"
         scale={1}
       />,
     )
@@ -82,7 +82,7 @@ describe('OfficeAliceSprite', () => {
         walking
         sprinting
         reducedMotion={false}
-        label="Alice"
+        label="OpenAlpha"
         scale={1}
       />,
     )

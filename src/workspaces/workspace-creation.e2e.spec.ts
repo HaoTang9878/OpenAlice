@@ -184,7 +184,7 @@ describe('auto-quant workspace create: clone → branch → commit', () => {
       OPENALICE_TEMPLATE_SOURCE_VERSION: 'v0.8.27',
       OPENALICE_TEMPLATE_SOURCE_COMMIT: sourceCommit,
     });
-    // Preserve AutoQuant's own instructions; inject only OpenAlice CLI skills.
+    // Preserve AutoQuant's own instructions; inject only OpenAlpha CLI skills.
     await injectWorkspaceContext({ template: autoQuantMeta(), wsId: 'ws-aq-1', dir: aqDir });
     await commitInitial(aqDir, 'auto-quant-v2: aqtag');
 

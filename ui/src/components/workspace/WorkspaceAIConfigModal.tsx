@@ -320,7 +320,7 @@ export function WorkspaceAIConfigModal({
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [savedFlash, setSavedFlash] = useState(false)
-  // A Workspace-only hand-entered key can still be promoted to Alice's vault,
+  // A Workspace-only hand-entered key can still be promoted to OpenAlpha's vault,
   // but the choice must happen before the primary Save closes the dialog.
   const [dismissedCredentialKey, setDismissedCredentialKey] = useState<string | null>(null)
   const [savingCred, setSavingCred] = useState(false)

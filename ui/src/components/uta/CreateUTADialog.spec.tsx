@@ -126,7 +126,7 @@ describe('CreateUTADialog', () => {
     getBrokerPacks.mockResolvedValueOnce({
       packs: [{
         engine: 'ccxt', installed: false, source: 'broken',
-        reason: 'Installed broker pack targets another OpenAlice version', requiredBy: [],
+        reason: 'Installed broker pack targets another OpenAlpha version', requiredBy: [],
       }],
     })
     installBrokerPack.mockRejectedValueOnce(new Error('checksum mismatch'))

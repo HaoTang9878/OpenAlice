@@ -15,7 +15,7 @@ export interface UseTelegramConnectorDesk {
 }
 
 /**
- * Settings-owned bind for the Alice Project's one Telegram phone-desk Issue.
+ * Settings-owned bind for the OpenAlpha Project's one Telegram phone-desk Issue.
  * The board list omits this row; comments stay on the ordinary Issue detail.
  */
 export function useTelegramConnectorDesk(connectorId = 'telegram'): UseTelegramConnectorDesk {

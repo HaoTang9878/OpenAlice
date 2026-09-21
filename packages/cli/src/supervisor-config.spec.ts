@@ -83,7 +83,7 @@ describe('Supervisor configuration', () => {
     })
   })
 
-  it('falls back to an available AliceProject only after a stored default home becomes unavailable', async () => {
+  it('falls back to an available OpenAlphaProject only after a stored default home becomes unavailable', async () => {
     const root = await mkdtemp(join(tmpdir(), 'openalice-supervisor-recovery-'))
     temporaryPaths.push(root)
     const config = {
@@ -124,7 +124,7 @@ describe('Supervisor configuration', () => {
     })
   })
 
-  it('persists an AliceProject source atomically outside the selected home', async () => {
+  it('persists an OpenAlphaProject source atomically outside the selected home', async () => {
     const root = await mkdtemp(join(tmpdir(), 'openalice-supervisor-config-'))
     temporaryPaths.push(root)
     const context = await resolveStoredLaunchContext({}, {
@@ -135,7 +135,7 @@ describe('Supervisor configuration', () => {
     })
 
     await persistAliceProjectLaunchConfig(context, {
-      appDir: '/srv/OpenAlice',
+      appDir: '/srv/OpenAlpha',
     })
 
     const saved = JSON.parse(
@@ -146,7 +146,7 @@ describe('Supervisor configuration', () => {
       projects: {
         default: {
           name: 'default',
-          appDir: '/srv/OpenAlice',
+          appDir: '/srv/OpenAlpha',
         },
       },
     })
@@ -158,14 +158,14 @@ describe('Supervisor configuration', () => {
       platform: 'linux',
       env: { XDG_CONFIG_HOME: join(root, 'config') },
     })
-    expect(resolved.appDir).toBe(resolve('/srv/OpenAlice'))
+    expect(resolved.appDir).toBe(resolve('/srv/OpenAlpha'))
     expect(resolved.provenance.appDir).toEqual({
       source: 'project-config',
       detail: 'project.default.appDir',
     })
   })
 
-  it('removes an AliceProject override when a setting returns to inheritance', async () => {
+  it('removes an OpenAlphaProject override when a setting returns to inheritance', async () => {
     const root = await mkdtemp(join(tmpdir(), 'openalice-supervisor-inherit-'))
     temporaryPaths.push(root)
     const context = await resolveStoredLaunchContext({}, {
@@ -191,7 +191,7 @@ describe('Supervisor configuration', () => {
     })
   })
 
-  it('persists machine defaults below AliceProject, environment, and CLI layers', async () => {
+  it('persists machine defaults below OpenAlphaProject, environment, and CLI layers', async () => {
     const root = await mkdtemp(join(tmpdir(), 'openalice-supervisor-machine-'))
     temporaryPaths.push(root)
     const homeDir = join(root, 'user')
@@ -254,7 +254,7 @@ describe('Supervisor configuration', () => {
     await expect(readMachineLaunchConfig(context)).resolves.toEqual({})
   })
 
-  it('creates, lists, selects, and remembers named complete-home AliceProjects', async () => {
+  it('creates, lists, selects, and remembers named complete-home OpenAlphaProjects', async () => {
     const root = await mkdtemp(join(tmpdir(), 'openalice-supervisor-projects-'))
     temporaryPaths.push(root)
     const homeDir = join(root, 'user')
@@ -284,7 +284,7 @@ describe('Supervisor configuration', () => {
       projects: [
         {
           key: 'default',
-          displayName: 'Default AliceProject',
+          displayName: 'Default OpenAlphaProject',
           home: resolve(homeDir, '.openalice'),
           port: 47_331,
           portAutomatic: true,
@@ -322,7 +322,7 @@ describe('Supervisor configuration', () => {
     expect(saved.projects.research.product).toBeUndefined()
   })
 
-  it('registers a transferred AliceProject without changing the remote default', async () => {
+  it('registers a transferred OpenAlphaProject without changing the remote default', async () => {
     const root = await mkdtemp(join(tmpdir(), 'openalice-supervisor-transfer-register-'))
     temporaryPaths.push(root)
     const homeDir = join(root, 'user')
@@ -346,7 +346,7 @@ describe('Supervisor configuration', () => {
         homeDir,
         cwd: root,
         platform: 'linux',
-        displayName: 'Migrated Alice',
+        displayName: 'Migrated OpenAlpha',
         select: false,
       },
     )
@@ -358,7 +358,7 @@ describe('Supervisor configuration', () => {
     })
     expect(registry.defaultProject).toBe('research')
     expect(registry.projects.find((project) => project.key === 'migrated')).toMatchObject({
-      displayName: 'Migrated Alice',
+      displayName: 'Migrated OpenAlpha',
       isDefault: false,
     })
   })
@@ -426,7 +426,7 @@ describe('Supervisor configuration', () => {
     expect(saved.projects.map((project) => project.key)).not.toContain('office')
   })
 
-  it('rejects duplicate, overlapping, and home-less named AliceProjects', async () => {
+  it('rejects duplicate, overlapping, and home-less named OpenAlphaProjects', async () => {
     const root = await mkdtemp(join(tmpdir(), 'openalice-supervisor-collision-'))
     temporaryPaths.push(root)
     const homeDir = join(root, 'user')
@@ -459,7 +459,7 @@ describe('Supervisor configuration', () => {
 
     const unrelated = join(root, 'unrelated')
     await mkdir(unrelated)
-    await writeFile(join(unrelated, 'notes.txt'), 'not OpenAlice')
+    await writeFile(join(unrelated, 'notes.txt'), 'not OpenAlpha')
     await expect(createSupervisorAliceProject(
       context,
       'unsafe',
@@ -633,7 +633,7 @@ describe('Supervisor configuration', () => {
     })
   })
 
-  it('reads the released v1 instance shape and canonicalizes it as AliceProject v2', () => {
+  it('reads the released v1 instance shape and canonicalizes it as OpenAlphaProject v2', () => {
     expect(parseSupervisorConfig({
       schemaVersion: 1,
       defaultInstance: 'research',

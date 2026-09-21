@@ -85,7 +85,7 @@ describe('Supervisor Inbox', () => {
     expect(rendered.lines.every((line) => line.length <= 120)).toBe(true)
   })
 
-  it('builds an encoded Workspace route on the active AliceProject endpoint', () => {
+  it('builds an encoded Workspace route on the active OpenAlphaProject endpoint', () => {
     expect(supervisorInboxWorkspaceUrl(
       'http://127.0.0.1:2026/#openalice-remote=1&target=alice%40cloud',
       'desk/a',

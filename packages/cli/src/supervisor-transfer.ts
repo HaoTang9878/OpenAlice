@@ -83,7 +83,7 @@ export function renderTransferPlanReview(plan: ProjectTransferPlan, width: numbe
     ? 'Omitted; integrations need setup'
     : `${plan.credentials.ai.count} AI · ${plan.credentials.broker.count} broker · ${plan.credentials.connector.count} Connector · ${plan.credentials.providerKeys.count} provider`
   const lines = [
-    'Review AliceProject transfer',
+    'Review OpenAlphaProject transfer',
     '',
     `From      ${plan.source.displayName} (${plan.source.key})`,
     `To        ${plan.destination.machineKey} / ${plan.destination.displayName}`,
@@ -112,7 +112,7 @@ export function renderTransferResult(
   width: number,
 ): string[] {
   return [
-    'AliceProject transfer complete',
+    'OpenAlphaProject transfer complete',
     '',
     `${machineName} / ${projectName}`,
     receipt.destinationHome,

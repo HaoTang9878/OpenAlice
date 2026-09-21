@@ -8,7 +8,7 @@ import {
   resolveAliceProjectIdentity,
 } from './alice-project.js'
 
-describe('AliceProject identity', () => {
+describe('OpenAlphaProject identity', () => {
   it('derives stable identity from the complete home rather than name or port', () => {
     const home = resolve('/tmp/openalice/research')
     expect(deriveAliceProjectId(home)).toBe(deriveAliceProjectId(home))
@@ -25,7 +25,7 @@ describe('AliceProject identity', () => {
     })
   })
 
-  it('keeps distinct complete homes in distinct AliceProjects', () => {
+  it('keeps distinct complete homes in distinct OpenAlphaProjects', () => {
     expect(deriveAliceProjectId('/tmp/openalice/project-a')).not.toBe(
       deriveAliceProjectId('/tmp/openalice/project-b'),
     )
@@ -59,7 +59,7 @@ describe('AliceProject identity', () => {
     expect(resolveAliceProjectIdentity({
       home: '/Users/alice/.openalice',
       env: {},
-    }).displayName).toBe('Default AliceProject')
+    }).displayName).toBe('Default OpenAlphaProject')
     expect(resolveAliceProjectIdentity({
       home: '/srv/openalice/fund-research',
       env: {},

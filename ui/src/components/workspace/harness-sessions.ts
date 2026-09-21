@@ -103,7 +103,7 @@ export function toHarnessSession(
 
 /**
  * A Session that was born on a headless turn and has never opened a TUI or
- * Web conversation. Ask Alice / Auto Quant hide these by default; the Issue page still
+ * Web conversation. Ask OpenAlpha / Auto Quant hide these by default; the Issue page still
  * owns them.
  */
 export function isHeadlessBornWithoutInteractive(
@@ -121,7 +121,7 @@ export function isHeadlessBornWithoutInteractive(
 
 export interface HarnessSessionJoinOptions {
   readonly presence?: SessionPresence
-  /** When false (Ask Alice / Auto Quant default), hide headless-born never-TUI rows. */
+  /** When false (Ask OpenAlpha / Auto Quant default), hide headless-born never-TUI rows. */
   readonly includeHeadlessBornSessions?: boolean
   /** When false (shared Harness default), keep current Issue owners/workers on Issue surfaces. */
   readonly includeIssueAttachedSessions?: boolean

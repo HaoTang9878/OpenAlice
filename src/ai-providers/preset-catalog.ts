@@ -324,7 +324,7 @@ export const GEMINI: PresetDef = {
   description: 'Google AI via API key',
   category: 'third-party',
   defaultName: 'Google Gemini',
-  hint: 'OpenAlice uses Google’s native Gemini API so both legacy AIza keys and current AQ authorization keys work. This credential can drive Pi and opencode, not Claude Code or Codex.',
+  hint: 'OpenAlpha uses Google’s native Gemini API so both legacy AIza keys and current AQ authorization keys work. This credential can drive Pi and opencode, not Claude Code or Codex.',
   zodSchema: z.object({
     backend: z.literal('vercel-ai-sdk'),
     provider: z.literal('google'),
@@ -391,7 +391,7 @@ export const MINIMAX: PresetDef = {
     apiKeyLabel: 'MiniMax API key',
     apiKeyHelp: 'Use the API key issued by the MiniMax platform selected above. China and International keys are not interchangeable.',
     modelHelp: 'MiniMax model IDs are case-sensitive. Pick a suggestion or paste the exact model ID shown by the selected platform.',
-    regionHelp: 'Choose the platform that issued this key. OpenAlice stores both provider endpoints, while current coding runtimes use the Anthropic-compatible path for complete reasoning capture and replay.',
+    regionHelp: 'Choose the platform that issued this key. OpenAlpha stores both provider endpoints, while current coding runtimes use the Anthropic-compatible path for complete reasoning capture and replay.',
   },
   writeOnlyFields: ['apiKey'],
 }
@@ -426,8 +426,8 @@ export const GLM: PresetDef = {
   setup: {
     apiKeyLabel: 'GLM API key',
     apiKeyHelp: 'Use the API key issued by the Zhipu platform selected above. China and International keys are region-bound.',
-    modelHelp: 'Use the exact GLM model ID available to this account. OpenAlice remembers it as this credential’s default.',
-    regionHelp: 'Choose the platform that issued this key; it determines the endpoints OpenAlice injects.',
+    modelHelp: 'Use the exact GLM model ID available to this account. OpenAlpha remembers it as this credential’s default.',
+    regionHelp: 'Choose the platform that issued this key; it determines the endpoints OpenAlpha injects.',
   },
   writeOnlyFields: ['apiKey'],
 }
@@ -471,7 +471,7 @@ export const KIMI: PresetDef = {
     apiKeyLabel: 'Moonshot API key',
     apiKeyHelp: 'Use the API key issued by the Moonshot platform selected above. China and International keys are region-bound.',
     modelHelp: 'Use the exact Moonshot model ID available on the selected platform; model IDs can differ by region and rollout.',
-    regionHelp: 'Choose the platform that issued this key; OpenAlice cannot use a China key against the International endpoint or vice versa.',
+    regionHelp: 'Choose the platform that issued this key; OpenAlpha cannot use a China key against the International endpoint or vice versa.',
   },
   writeOnlyFields: ['apiKey'],
 }
@@ -538,7 +538,7 @@ export const LONGCAT: PresetDef = {
   ]),
   setup: {
     apiKeyLabel: 'LongCat API key',
-    apiKeyHelp: 'Use a key accepted by api.longcat.chat. OpenAlice stores both LongCat-compatible protocol endpoints with this credential.',
+    apiKeyHelp: 'Use a key accepted by api.longcat.chat. OpenAlpha stores both LongCat-compatible protocol endpoints with this credential.',
     modelHelp: 'Use the exact LongCat API model ID. The saved value is tested now and reused as the credential default.',
   },
   writeOnlyFields: ['apiKey'],
@@ -569,7 +569,7 @@ export const CURSOR_DASHBOARD: PresetDef = {
   ],
   setup: {
     apiKeyLabel: 'Cursor Dashboard API key',
-    apiKeyHelp: 'Create an API key in the Cursor Dashboard. OpenAlice passes it only to Cursor Agent as CURSOR_API_KEY.',
+    apiKeyHelp: 'Create an API key in the Cursor Dashboard. OpenAlpha passes it only to Cursor Agent as CURSOR_API_KEY.',
     modelHelp: 'Cursor owns the live model catalog. Auto follows Cursor routing; named models are passed through unchanged.',
   },
   writeOnlyFields: ['apiKey'],
@@ -596,7 +596,7 @@ export const CUSTOM: PresetDef = {
   setup: {
     apiKeyLabel: 'Endpoint API key',
     apiKeyHelp: 'Use a key accepted by this endpoint. Subscription logins and keyless local servers are configured in the agent CLI instead of this managed credential path.',
-    modelHelp: 'Enter the exact, case-sensitive model ID exposed by the endpoint. OpenAlice cannot discover custom model names automatically.',
+    modelHelp: 'Enter the exact, case-sensitive model ID exposed by the endpoint. OpenAlpha cannot discover custom model names automatically.',
   },
   writeOnlyFields: ['apiKey'],
 }

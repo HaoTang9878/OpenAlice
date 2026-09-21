@@ -119,7 +119,7 @@ export const workspaceTemplateUpgradeFactory: WorkspaceToolFactory = {
           .describe('Conflict path to keep from the Workspace (repeatable; requires --apply).'),
         useTemplate: z.array(z.string().min(1)).optional()
           .describe('Conflict path to replace with the template copy (repeatable; requires --apply).'),
-        skill: z.enum(ALICE_HARNESS_SKILLS).optional().describe('Alice Harness only: scope the operation to this Skill.'),
+        skill: z.enum(ALICE_HARNESS_SKILLS).optional().describe('OpenAlpha Harness only: scope the operation to this Skill.'),
         action: z.enum(['install', 'update', 'remove', 'restore']).optional().describe('Requires --skill. Defaults to update; restore replaces local files with the Project copy.'),
         mode: z.enum(['summary', 'detailed']).optional().default('summary')
           .describe('Detailed includes conflict file previews; summary is the compact default.'),
@@ -236,6 +236,6 @@ export const aliceHarnessUpgradeFactory: WorkspaceToolFactory = {
   name: 'alice_harness_upgrade',
   build(ctx) {
     const result = workspaceTemplateUpgradeFactory.build({ ...ctx, templateUpgrades: ctx.aliceHarnessUpgrades })
-    return { ...result, description: result.description?.replace('managed template upgrade', 'Alice Harness Skills file update (respects Workspace Skill preferences; CLI runtime updates with the Project, independently of this operation)') }
+    return { ...result, description: result.description?.replace('managed template upgrade', 'OpenAlpha Harness Skills file update (respects Workspace Skill preferences; CLI runtime updates with the Project, independently of this operation)') }
   },
 }

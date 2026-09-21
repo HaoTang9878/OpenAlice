@@ -182,9 +182,9 @@ const OPPOSITE_SIDE: Record<OfficeInteractionPromptSide, OfficeInteractionPrompt
 }
 
 /**
- * Put the action callout on the far side of its target from Alice. When that
+ * Put the action callout on the far side of its target from OpenAlpha. When that
  * side leaves the camera, prefer a perpendicular edge with enough room before
- * falling back toward Alice. The prompt stays attached to its world object
+ * falling back toward OpenAlpha. The prompt stays attached to its world object
  * without trading edge legibility for a callout painted over the player.
  */
 export function officeInteractionPromptPlacement(

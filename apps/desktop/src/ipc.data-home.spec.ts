@@ -45,7 +45,7 @@ function register() {
   registerOpenAliceIpc({
     mode: 'electron-packaged',
     userDataHome: status.currentHome,
-    appHome: '/Applications/OpenAlice.app',
+    appHome: '/Applications/OpenAlpha.app',
     webPort: null,
     mcpPort: null,
     utaPort: null,
@@ -60,7 +60,7 @@ beforeEach(() => {
   vi.clearAllMocks()
 })
 
-describe('OpenAlice data-home IPC', () => {
+describe('OpenAlpha data-home IPC', () => {
   it('exposes the bounded keyboard input-source probe', async () => {
     register()
 

@@ -25,7 +25,7 @@ vi.mock('../auth/AuthContext', () => ({
 const project = {
   id: 'alice-project-0123456789abcdef',
   key: 'research',
-  displayName: 'Research AliceProject',
+  displayName: 'Research OpenAlphaProject',
   home: '/tmp/research',
   appRoot: '/tmp/source',
 }
@@ -52,7 +52,7 @@ afterEach(() => {
   Reflect.deleteProperty(window, 'openAlice')
 })
 
-describe('useAliceProject', () => {
+describe('useOpenAlphaProject', () => {
   it('selects the browser-backed project with loading semantics', async () => {
     const { result } = renderHook(() => useAliceProject())
     expect(result.current.loading).toBe(true)
@@ -84,7 +84,7 @@ describe('useAliceProject', () => {
   it('preserves the confirmed project during an outage and reloads it after recovery', async () => {
     const recoveredProject = {
       ...project,
-      displayName: 'Recovered AliceProject',
+      displayName: 'Recovered OpenAlphaProject',
       appRoot: '/tmp/recovered-source',
     }
     const { result, rerender } = renderHook(() => useAliceProject())
@@ -110,8 +110,8 @@ describe('useAliceProject', () => {
   })
 
   it('ignores an old request that settles after the recovery refresh', async () => {
-    const staleProject = { ...project, displayName: 'Stale AliceProject' }
-    const recoveredProject = { ...project, displayName: 'Recovered AliceProject' }
+    const staleProject = { ...project, displayName: 'Stale OpenAlphaProject' }
+    const recoveredProject = { ...project, displayName: 'Recovered OpenAlphaProject' }
     const stale = deferred<{ project: typeof project }>()
     const recovered = deferred<{ project: typeof project }>()
     const { result, rerender } = renderHook(() => useAliceProject())

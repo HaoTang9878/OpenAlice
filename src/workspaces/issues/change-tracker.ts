@@ -1,7 +1,7 @@
 /**
  * Issue change observation and field-level audit details.
  *
- * Issue markdown is intentionally editable outside OpenAlice's mutation APIs.
+ * Issue markdown is intentionally editable outside OpenAlpha's mutation APIs.
  * The tracker therefore keeps a compact launcher-owned snapshot and compares
  * every later scan. Known UI/CLI mutations use the same diff + fingerprint, so
  * an observer pass cannot duplicate a mutation that was already attributed.
@@ -169,7 +169,7 @@ export class IssueChangeTracker {
       input.issues.map((issue) => [issue.id, issueAuditSnapshot(issue)] as const),
     )
     // The first sight of a Workspace establishes a baseline. Persisting it
-    // means edits made while OpenAlice is offline are visible on next startup.
+    // means edits made while OpenAlpha is offline are visible on next startup.
     if (!previous) {
       this.workspaces.set(input.workspaceId, current)
       await this.flush()

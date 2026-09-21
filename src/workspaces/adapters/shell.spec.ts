@@ -15,10 +15,10 @@ describe('composeShellCommand', () => {
 
   it('uses the managed shell when provided', () => {
     expect(composeShellCommand({
-      OPENALICE_MANAGED_SHELL_PATH: 'C:\\OpenAlice\\vendor\\git\\win32-x64\\bin\\bash.exe',
+      OPENALICE_MANAGED_SHELL_PATH: 'C:\\OpenAlpha\\vendor\\git\\win32-x64\\bin\\bash.exe',
       SHELL: '/bin/zsh',
     }, 'win32')).toEqual([
-      'C:\\OpenAlice\\vendor\\git\\win32-x64\\bin\\bash.exe',
+      'C:\\OpenAlpha\\vendor\\git\\win32-x64\\bin\\bash.exe',
       '--login',
     ]);
   });

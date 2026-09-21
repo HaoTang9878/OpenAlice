@@ -282,7 +282,7 @@ describe('Telegram inbox control transitions', () => {
     expect(resolution.form.text).not.toContain('research/close.md')
   })
 
-  it('confirms a selected file and only then asks Alice to send it', async () => {
+  it('confirms a selected file and only then asks OpenAlpha to send it', async () => {
     const getEntry = async () => listed
     const session = { stack: [] as string[], entryIds: ['entry-1'], view: { kind: 'files' as const, entryId: 'entry-1', page: 0 } }
     const confirm = await transitionTelegramInbox(session, { kind: 'inbox-doc', docIndex: 1 }, { isOwner: true, getEntry })

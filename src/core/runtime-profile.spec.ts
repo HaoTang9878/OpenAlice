@@ -31,10 +31,10 @@ describe('runtimeProfileFromEnv', () => {
   it('parses managed runtime capability paths from env', () => {
     const env = {
       OPENALICE_RUNTIME_PROFILE: 'electron-packaged',
-      OPENALICE_APP_HOME: '/Applications/OpenAlice.app/Contents/Resources/app',
+      OPENALICE_APP_HOME: '/Applications/OpenAlpha.app/Contents/Resources/app',
       OPENALICE_HOME: '/Users/alice/.openalice',
       OPENALICE_MANAGED_PI_PATH: '/app/vendor/pi/pi',
-      OPENALICE_MANAGED_PI_NODE_PATH: '/Applications/OpenAlice.app/Contents/MacOS/OpenAlice',
+      OPENALICE_MANAGED_PI_NODE_PATH: '/Applications/OpenAlpha.app/Contents/MacOS/OpenAlpha',
       OPENALICE_MANAGED_GIT_DIR: '/app/vendor/git/win32-x64',
       OPENALICE_MANAGED_GIT_BIN: '/app/vendor/git/win32-x64/cmd/git.exe',
       OPENALICE_MANAGED_SHELL_PATH: '/app/vendor/git/win32-x64/bin/bash.exe',
@@ -46,11 +46,11 @@ describe('runtimeProfileFromEnv', () => {
       arch: 'arm64',
     })).toMatchObject({
       launcher: 'electron-packaged',
-      appHome: '/Applications/OpenAlice.app/Contents/Resources/app',
+      appHome: '/Applications/OpenAlpha.app/Contents/Resources/app',
       userDataHome: '/Users/alice/.openalice',
       nodeExecPath: '/electron',
       managedPiPath: '/app/vendor/pi/pi',
-      managedPiNodePath: '/Applications/OpenAlice.app/Contents/MacOS/OpenAlice',
+      managedPiNodePath: '/Applications/OpenAlpha.app/Contents/MacOS/OpenAlpha',
       managedGitDir: '/app/vendor/git/win32-x64',
       managedGitBin: '/app/vendor/git/win32-x64/cmd/git.exe',
       managedShellPath: '/app/vendor/git/win32-x64/bin/bash.exe',

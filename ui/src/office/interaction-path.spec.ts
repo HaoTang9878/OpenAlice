@@ -49,7 +49,7 @@ describe('Office interaction path', () => {
       .toBe(employee.id)
   })
 
-  it('returns a facing-only route when Alice can already interact', () => {
+  it('returns a facing-only route when OpenAlpha can already interact', () => {
     const layout = layoutOfficeMap([{ id: 'chat-1', harness: 'chat' }])
     const path = officeInteractionPath(
       { x: employee.x + 48, y: employee.y },

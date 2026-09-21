@@ -1,10 +1,10 @@
 import { fetchMarketChart } from './core/market-chart.js'
 import { fetchWorkspaceAttachment, fetchAliceJson } from './core/workspace-files.js'
 /**
- * OpenAlice Connector Service.
+ * OpenAlpha Connector Service.
  *
  * This optional, non-critical process owns external IM SDKs and long-lived
- * polling/gateway connections. Alice only hands it already-durable Inbox
+ * polling/gateway connections. OpenAlpha only hands it already-durable Inbox
  * notifications; a connector outage must never affect the original write.
  */
 import { Hono } from 'hono'

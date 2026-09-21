@@ -1,5 +1,5 @@
 /**
- * Reversible ownership for top-level scalar assignments OpenAlice injects into
+ * Reversible ownership for top-level scalar assignments OpenAlpha injects into
  * a native TOML config. Unknown assignments, sections, comments, and spacing
  * remain byte-for-byte untouched.
  *
@@ -97,10 +97,10 @@ async function readState(cwd: string, statePath: string): Promise<OwnedTomlState
   try {
     value = JSON.parse(raw) as unknown
   } catch {
-    throw new Error(`OpenAlice TOML ownership state is not valid JSON: ${join(cwd, statePath)}`)
+    throw new Error(`OpenAlpha TOML ownership state is not valid JSON: ${join(cwd, statePath)}`)
   }
   if (!isRecord(value) || value['version'] !== 1 || !Array.isArray(value['entries'])) {
-    throw new Error(`Unsupported OpenAlice TOML ownership state: ${join(cwd, statePath)}`)
+    throw new Error(`Unsupported OpenAlpha TOML ownership state: ${join(cwd, statePath)}`)
   }
   const entries: OwnedTomlStateEntry[] = []
   for (const entry of value['entries']) {
@@ -115,7 +115,7 @@ async function readState(cwd: string, statePath: string): Promise<OwnedTomlState
       (entry['previous']['present'] === true && typeof entry['previous']['line'] !== 'string') ||
       (entry['injected']['present'] === true && typeof entry['injected']['line'] !== 'string')
     ) {
-      throw new Error(`Unsupported OpenAlice TOML ownership state: ${join(cwd, statePath)}`)
+      throw new Error(`Unsupported OpenAlpha TOML ownership state: ${join(cwd, statePath)}`)
     }
     entries.push(entry as unknown as OwnedTomlStateEntry)
   }
@@ -135,7 +135,7 @@ export async function writeOwnedTomlConfig(opts: {
   readonly configPath: string
   readonly statePath: string
   readonly entries: readonly OwnedTomlEntry[]
-  /** Keys written by an older OpenAlice release before ownership state existed. */
+  /** Keys written by an older OpenAlpha release before ownership state existed. */
   readonly legacyOwnedKeys?: readonly string[]
 }): Promise<void> {
   const raw = await readWorkspaceFile(opts.cwd, opts.configPath)
@@ -146,7 +146,7 @@ export async function writeOwnedTomlConfig(opts: {
   const nextEntries: OwnedTomlStateEntry[] = []
 
   for (const desired of opts.entries) {
-    if (!isSafeKey(desired.key)) throw new Error(`Invalid OpenAlice TOML ownership key: ${desired.key}`)
+    if (!isSafeKey(desired.key)) throw new Error(`Invalid OpenAlpha TOML ownership key: ${desired.key}`)
     const previous = priorByKey.get(desired.key)?.previous
       ?? (legacyOwned.has(desired.key) ? { present: false } : snapshot(lines, desired.key))
     const injected: SavedTomlLine = desired.value
@@ -167,7 +167,7 @@ export async function resetOwnedTomlConfig(opts: {
   readonly cwd: string
   readonly configPath: string
   readonly statePath: string
-  /** Keys written by an older OpenAlice release before ownership state existed. */
+  /** Keys written by an older OpenAlpha release before ownership state existed. */
   readonly legacyOwnedKeys?: readonly string[]
 }): Promise<void> {
   const raw = await readWorkspaceFile(opts.cwd, opts.configPath)

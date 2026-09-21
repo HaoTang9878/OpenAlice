@@ -66,10 +66,10 @@ export async function loadWorkspaceCapabilities(
     listFiles(wsId, ''),
     fetchJson<{ managedSkillNames: string[] }>(`/api/workspaces/${encodeURIComponent(wsId)}/alice-harness`)
       .then((value) => {
-        if (!value || !Array.isArray(value.managedSkillNames) || !value.managedSkillNames.every((name) => typeof name === 'string')) throw new Error('Alice Harness ownership inventory unavailable')
+        if (!value || !Array.isArray(value.managedSkillNames) || !value.managedSkillNames.every((name) => typeof name === 'string')) throw new Error('OpenAlpha Harness ownership inventory unavailable')
         return new Set(value.managedSkillNames)
       })
-      .catch((error) => { errors.push(`Alice Harness: ${error instanceof Error ? error.message : String(error)}`); return null }),
+      .catch((error) => { errors.push(`OpenAlpha Harness: ${error instanceof Error ? error.message : String(error)}`); return null }),
   ])
   await Promise.all(
     ['.agents', '.claude', '.pi'].map(async (parent) => {

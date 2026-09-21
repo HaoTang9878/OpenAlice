@@ -1,12 +1,12 @@
 /**
- * Trigger a Guardian-mediated UTA restart from Alice.
+ * Trigger a Guardian-mediated UTA restart from OpenAlpha.
  *
  * Protocol:
  *   1. Atomic-write `data/control/restart-uta.flag` (write to .tmp + rename)
  *      with content = ISO timestamp of the request.
  *   2. Guardian's fs.watch fires (debounced 100ms), Guardian SIGTERMs UTA,
  *      waits exit, and respawns it with fresh boot-time configuration.
- *   3. Alice polls `${OPENALICE_UTA_URL}/__uta/health` until `startedAt` is
+ *   3. OpenAlpha polls `${OPENALICE_UTA_URL}/__uta/health` until `startedAt` is
  *      newer than the pre-trigger value, or until timeout.
  */
 

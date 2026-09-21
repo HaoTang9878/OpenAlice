@@ -8,11 +8,11 @@ import {
 } from './supervisor-project-foundry-view.ts'
 import { createSupervisorTuiTheme } from './supervisor-tui-theme.ts'
 
-describe('Supervisor AliceProject Foundry', () => {
+describe('Supervisor OpenAlphaProject Foundry', () => {
   it('pairs a complete Build Path with the home Field Inspector', () => {
     const rendered = renderSupervisorProjectFoundry({
       step: 'home',
-      currentProjectName: 'Default AliceProject',
+      currentProjectName: 'Default OpenAlphaProject',
       projectKey: 'research',
       fieldLines: ['> /Users/alice/.openalice-research'],
       detail: 'Use a separate complete home.',
@@ -20,7 +20,7 @@ describe('Supervisor AliceProject Foundry', () => {
     }, 100)
     const output = rendered.lines.join('\n')
     expect(output).toContain('Foundry · 2/3 · COMPLETE HOME')
-    expect(output).toContain('Create AliceProject · research')
+    expect(output).toContain('Create OpenAlphaProject · research')
     expect(output).toContain('✓ 01 Identity')
     expect(output).toContain('◆ 02 Complete Home')
     expect(output).toContain('◆ [ Enter ] Continue  │  [ Esc ] Back')
@@ -33,15 +33,15 @@ describe('Supervisor AliceProject Foundry', () => {
   it('stacks the same identity step at the 80-column baseline', () => {
     const rendered = renderSupervisorProjectFoundry({
       step: 'identity',
-      currentProjectName: 'Default AliceProject',
+      currentProjectName: 'Default OpenAlphaProject',
       fieldLines: ['> research'],
       detail: 'Use a short lowercase name.',
-      message: 'Create a named AliceProject without leaving the Supervisor.',
+      message: 'Create a named OpenAlphaProject without leaving the Supervisor.',
     }, 72)
     const output = rendered.lines.join('\n')
-    expect(output).toContain('AliceProject Foundry · 1/3 · IDENTITY')
+    expect(output).toContain('OpenAlphaProject Foundry · 1/3 · IDENTITY')
     expect(output).toContain('◆ Identity  → Home  → Workspaces')
-    expect(output).toContain('Create AliceProject · Project key')
+    expect(output).toContain('Create OpenAlphaProject · Project key')
     expect(output).toContain('◆ CONTRACT')
     expect(rendered.lines).toHaveLength(14)
     expect(rendered.lines.every((line) => displayWidth(line) <= 72)).toBe(true)

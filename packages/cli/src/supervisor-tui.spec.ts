@@ -50,7 +50,7 @@ const pointerClick = (col: number, row: number) => ({
 } as const)
 
 describe('Supervisor TUI screen', () => {
-  it('makes the disconnected surface a three-step OpenAlice Launcher', () => {
+  it('makes the disconnected surface a three-step OpenAlpha Launcher', () => {
     const activated: string[] = []
     let viewportHeight = 32
     const originalLocal = fleetMachines()[0]!
@@ -85,15 +85,15 @@ describe('Supervisor TUI screen', () => {
     expect(frame).toContain('◆ [Connect]·1')
     expect(frame).toContain('OPENALICE LAUNCH · READY → START → CONNECT')
     expect(frame).toContain('1 MACHINE ✓ This computer')
-    expect(frame).toContain('2 ALICEPROJECT ✓ Default AliceProject')
+    expect(frame).toContain('2 ALICEPROJECT ✓ Default OpenAlphaProject')
     expect(frame).toContain('3 RUNTIME ○ READY TO START')
-    expect(frame).toContain('Launchpad · Default AliceProject')
+    expect(frame).toContain('Launchpad · Default OpenAlphaProject')
     expect(frame).toContain('◆ READY TO LAUNCH · READY TO START')
-    expect(frame).toContain('This computer → Default AliceProject')
-    expect(frame).toContain('◆ [ Enter ] Start OpenAlice')
-    expect(frame).toContain('[ Enter ] Start OpenAlice')
+    expect(frame).toContain('This computer → Default OpenAlphaProject')
+    expect(frame).toContain('◆ [ Enter ] Start OpenAlpha')
+    expect(frame).toContain('[ Enter ] Start OpenAlpha')
     expect(frame).not.toContain('Machines · 1/1')
-    expect(frame).not.toContain('AliceProjects · This computer · 1/1')
+    expect(frame).not.toContain('OpenAlphaProjects · This computer · 1/1')
     expect(frame).not.toContain('Inbox')
     const tipRow = plainLines.findIndex((line) => line.startsWith('◇  Tip:'))
     const spineRow = plainLines.findIndex((line) => line.includes('[ / ] Commands'))
@@ -111,7 +111,7 @@ describe('Supervisor TUI screen', () => {
     expect(themed.map((line) => line.replace(/\u001b\[[0-9;]*m/gu, '').trimEnd()))
       .toEqual(plainLines.map((line) => line.trimEnd()))
 
-    const actionRow = plainLines.findIndex((line) => line.includes('◆ [ Enter ] Start OpenAlice')) + 1
+    const actionRow = plainLines.findIndex((line) => line.includes('◆ [ Enter ] Start OpenAlpha')) + 1
     expect(screen.handlePointer(pointerClick(130, actionRow))).toBe(true)
     expect(activated).toEqual(['local/default'])
 
@@ -153,15 +153,15 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(46)
     const frame = lines.join('\n')
     expect(lines).toHaveLength(16)
-    expect(frame).toContain('◆ OpenAlice')
+    expect(frame).toContain('◆ OpenAlpha')
     expect(frame).toContain('[Connect]·1')
     expect(frame).toContain('OPENALICE LAUNCH · ALICEPROJECT')
     expect(frame).toContain('1 MACHINE ✓ This computer')
-    expect(frame).toContain('2 ALICEPROJECT ✓ Default AliceProject')
+    expect(frame).toContain('2 ALICEPROJECT ✓ Default OpenAlphaProject')
     expect(frame).toContain('3 RUNTIME ○ READY TO START')
-    expect(frame).toContain('◆ [ Enter ] Start OpenAlice')
-    expect(frame).not.toContain('AliceProjects · This computer')
-    const actionRow = lines.findIndex((line) => line.includes('[ Enter ] Start OpenAlice')) + 1
+    expect(frame).toContain('◆ [ Enter ] Start OpenAlpha')
+    expect(frame).not.toContain('OpenAlphaProjects · This computer')
+    const actionRow = lines.findIndex((line) => line.includes('[ Enter ] Start OpenAlpha')) + 1
     expect(screen.handlePointer(pointerClick(22, actionRow))).toBe(true)
     expect(activated).toEqual(['local/default'])
   })
@@ -186,11 +186,11 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(60)
     const frame = lines.join('\n')
     expect(lines).toHaveLength(20)
-    expect(frame).toContain('◆ OpenAlice Supervisor')
+    expect(frame).toContain('◆ OpenAlpha Supervisor')
     expect(frame).toContain('[Connect]·2')
     expect(frame).toContain('OPENALICE LAUNCH · SELECT → START → CONNECT')
     expect(frame).toContain('1 ✓ This computer')
-    expect(frame).toContain('2 ✓ Default AliceProject')
+    expect(frame).toContain('2 ✓ Default OpenAlphaProject')
     expect(frame).toContain('3 ● READY TO USE')
     expect(frame).toContain('Machines · 1/2')
     expect(frame).toContain('Launch Briefing · Machine')
@@ -247,7 +247,7 @@ describe('Supervisor TUI screen', () => {
       machineKey: 'local',
       machineName: 'This computer',
       projectKey: 'default',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       transport: 'loopback' as const,
     }
     const running = advanceSupervisorLaunchFlight(
@@ -301,7 +301,7 @@ describe('Supervisor TUI screen', () => {
     expect(failedFrame).toContain('[ Esc ] Back to targets')
     expect(failedFrame).toContain('Enter retries; Esc returns to targets')
     expect(failedFrame).not.toContain('×  ERROR')
-    expect(failedFrame).toContain('⌁ This computer / Default AliceProject · LOCAL › ○ COLD')
+    expect(failedFrame).toContain('⌁ This computer / Default OpenAlphaProject · LOCAL › ○ COLD')
     expect(screen.handleEscape()).toBe(true)
     expect(screen.snapshot.launchFlight).toBeNull()
     expect(screen.render(100).join('\n')).toContain('OPENALICE LAUNCH')
@@ -323,7 +323,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/tmp/openalice',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:2026',
@@ -347,7 +347,7 @@ describe('Supervisor TUI screen', () => {
     const home = homeLines.join('\n')
     expect(home).toContain('● Inbox·1')
     expect(home).toContain('1 unread report needs your attention')
-    expect(home).toContain('1 unread report is waiting in this AliceProject.')
+    expect(home).toContain('1 unread report is waiting in this OpenAlphaProject.')
     expect(home).toContain('[ Enter ]  Review 1 unread report')
     expect(home).toContain('Enter reviews')
     expect(home).toContain('Inbox; o opens the Web UI.')
@@ -443,7 +443,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/tmp/openalice',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:2026',
@@ -470,7 +470,7 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(46)
     const frame = lines.join('\n')
     expect(lines).toHaveLength(16)
-    expect(frame).toContain('◆ OpenAlice')
+    expect(frame).toContain('◆ OpenAlpha')
     expect(frame).toContain('[Inbox]·1')
     expect(frame).toContain('Inbox · 1 UNREAD · 1/1')
     expect(frame).toContain('SELECTED · UNREAD · Morning research')
@@ -497,7 +497,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/fixture/default',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:47331',
@@ -513,16 +513,16 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(46)
     const frame = lines.join('\n')
     expect(lines).toHaveLength(16)
-    expect(frame).toContain('◆ OpenAlice')
+    expect(frame).toContain('◆ OpenAlpha')
     expect(frame).toContain('[Link]·1')
     expect(frame).toContain('Active Route · LIVE · LOCAL')
-    expect(frame).toContain('● running Default AliceProject')
+    expect(frame).toContain('● running Default OpenAlphaProject')
     expect(frame).toContain('⌁ This computer · LOCAL')
-    expect(frame).toContain('● Runtime live · ● Web ready · ● Alice')
+    expect(frame).toContain('● Runtime live · ● Web ready · ● OpenAlpha')
     expect(frame).toContain('◆ [ Enter ] Return Home')
-    expect(frame).toContain('· [ m ] Transfer AliceProject')
+    expect(frame).toContain('· [ m ] Transfer OpenAlphaProject')
     expect(frame).not.toContain('Machines · 1/1')
-    expect(frame).not.toContain('AliceProjects ·')
+    expect(frame).not.toContain('OpenAlphaProjects ·')
     expect(frame).toContain('◇  Tip: Enter returns Home')
     expect(frame).toContain('[ / ] Commands')
 
@@ -557,7 +557,7 @@ describe('Supervisor TUI screen', () => {
       machineKey: 'local',
       machineName: 'This computer',
       projectKey: 'default',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       home: '/home/alice/default',
       transport: 'loopback' as const,
       endpoint: 'http://127.0.0.1:47331',
@@ -577,8 +577,8 @@ describe('Supervisor TUI screen', () => {
 
     const connections = screen.render(46)
     expect(connections).toHaveLength(16)
-    expect(connections[0]).toContain('◆ OpenAlice')
-    expect(connections.join('\n')).toContain('AliceProjects · Cloud · 1/1')
+    expect(connections[0]).toContain('◆ OpenAlpha')
+    expect(connections.join('\n')).toContain('OpenAlphaProjects · Cloud · 1/1')
 
     screen.update({
       launchFlight: advanceSupervisorLaunchFlight(
@@ -594,7 +594,7 @@ describe('Supervisor TUI screen', () => {
     })
     const flight = screen.render(46)
     expect(flight).toHaveLength(16)
-    expect(flight[0]).toContain('◆ OpenAlice')
+    expect(flight[0]).toContain('◆ OpenAlpha')
     expect(flight.join('\n')).toContain('◆ STEP 2/3 · Open SSH forward')
 
     const remoteRuntime = { class: 'running', endpoints: { web: 'http://127.0.0.1:45454' } }
@@ -620,7 +620,7 @@ describe('Supervisor TUI screen', () => {
     })
     const recovery = screen.render(46)
     expect(recovery).toHaveLength(16)
-    expect(recovery[0]).toContain('◆ OpenAlice')
+    expect(recovery[0]).toContain('◆ OpenAlpha')
     expect(recovery.join('\n')).toContain('NEXT  Active endpoint is unreachable')
     expect(recovery.join('\n')).toContain('STATUS  × Connection  unreachable')
   })
@@ -639,7 +639,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/fixture/default',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:47331',
@@ -698,7 +698,7 @@ describe('Supervisor TUI screen', () => {
     expect(frame).toContain('Active Route · LIVE · REMOTE')
     expect(frame).toContain(`⌁ ${remote.displayName} · REMOTE`)
     expect(frame).toContain('· [ x ] Disconnect SSH forward')
-    expect(frame).not.toContain('Transfer AliceProject')
+    expect(frame).not.toContain('Transfer OpenAlphaProject')
     expect(screen.handleKey('x', matchesKey)).toBe(true)
     expect(disconnects).toBe(1)
   })
@@ -723,7 +723,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/tmp/openalice',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:2026',
@@ -739,12 +739,12 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(46)
     const frame = lines.join('\n')
     expect(lines).toHaveLength(16)
-    expect(frame).toContain('◆ OpenAlice')
+    expect(frame).toContain('◆ OpenAlpha')
     expect(frame).toContain('[Runtime]')
     expect(frame).toContain('Runtime · LIVE · LOCAL · QUIET')
     expect(frame).toContain('● OPENALICE READY · source · 2h 3m')
-    expect(frame).toContain('⌁ This computer → Default AliceProject')
-    expect(frame).toContain('● Alice ready · ○ UTA off · ○ Conn off')
+    expect(frame).toContain('⌁ This computer → Default OpenAlphaProject')
+    expect(frame).toContain('● OpenAlpha ready · ○ UTA off · ○ Conn off')
     expect(frame).toContain('◆ [ o ] Open verified Web UI')
     expect(frame).toContain('· [ l ] Reload Runtime snapshot')
     expect(frame).toContain('◇  Tip:')
@@ -810,7 +810,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/tmp/openalice',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:2026',
@@ -824,13 +824,13 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(46)
     const frame = lines.join('\n')
     expect(lines).toHaveLength(16)
-    expect(frame).toContain('◆ OpenAlice')
+    expect(frame).toContain('◆ OpenAlpha')
     expect(frame).toContain('Home │ ● Inbox │ ◇ Connect │ ≋ Runtime')
     expect(frame).toContain('Control Guide · 1/3 · NAVIGATION')
     expect(frame).toContain('NEXT  [ Tab / → ] Next view')
     expect(frame).toContain('› ◆ Navigation  Move with intent')
     expect(frame).toContain('● Runtime  Read state, then act')
-    expect(frame).toContain('◇ AliceProject  Shape the workspace')
+    expect(frame).toContain('◇ OpenAlphaProject  Shape the workspace')
     expect(frame).toContain('◆ [ ? ] Close Help')
     expect(frame).toContain('◇  Tip:')
     expect(frame).toContain('[ / ] Commands')
@@ -866,7 +866,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/tmp/openalice',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:2026',
@@ -890,7 +890,7 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(46)
     const frame = lines.join('\n')
     expect(lines).toHaveLength(16)
-    expect(frame).toContain('◆ OpenAlice')
+    expect(frame).toContain('◆ OpenAlpha')
     expect(frame).toContain('Home │ ● Inbox │ ◇ Connect │ ≋ Runtime')
     expect(frame).toContain('Doctor · 1F/0W/0P · 1/1')
     expect(frame).toContain('× FAIL · Runtime protocol mismatch')
@@ -1036,7 +1036,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/tmp/openalice',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:47331',
@@ -1110,7 +1110,7 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(80)
 
     expect(lines[0]).toMatch(/^╭─ /u)
-    expect(lines[0]).toContain('OpenAlice Supervisor')
+    expect(lines[0]).toContain('OpenAlpha Supervisor')
     expect(lines[0]).toContain('v0.87.0-beta · DEV')
     expect(lines[0]).toContain('[ u ]')
     expect(lines[1]).toMatch(/^╰─ ◆ \[Home\].+─╯$/u)
@@ -1119,18 +1119,18 @@ describe('Supervisor TUI screen', () => {
     expect(lines[1]).toContain('≋ Runtime')
     expect(lines.slice(0, 2).every((line) => displayWidth(line) === 80)).toBe(true)
     expect(lines.join('\n')).toContain('○ STOPPED')
-    expect(lines.join('\n')).toContain('Alice Session · OpenAlice')
+    expect(lines.join('\n')).toContain('OpenAlpha Session · OpenAlpha')
     expect(lines.join('\n')).not.toContain('Runtime Signal Deck')
     expect(lines.join('\n')).not.toContain('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
     expect(lines.length).toBeLessThanOrEqual(24)
-    expect(lines.join('\n')).toContain('[ Enter ]  Start OpenAlice & open Workspace')
+    expect(lines.join('\n')).toContain('[ Enter ]  Start OpenAlpha & open Workspace')
     expect(lines.join('\n')).toContain('Your workspace is one step away')
     expect(lines.join('\n')).not.toContain('Enter starts and opens')
     expect(lines.join('\n')).not.toContain('◆ [ Enter ] Start & open')
     expect(lines.join('\n')).not.toContain('╭─ · [ s ] Start quietly')
     expect(screen.renderCommandPalette(80).lines.join('\n')).toContain('Start quietly')
     expect(lines.at(-1)).toContain('╰─ [ / ] Commands  ›  [ q ] Detach')
-    expect(lines.at(-1)).toContain('[ i ] AliceProject  ›  ○ COLD')
+    expect(lines.at(-1)).toContain('[ i ] OpenAlphaProject  ›  ○ COLD')
     expect(lines.at(-1)).toMatch(/─╯$/u)
     const compactNowRow = lines.findIndex((line) => line.includes('NEXT'))
     const compactActionRow = lines.findIndex((line) => line.includes('[ Enter ]'))
@@ -1151,15 +1151,15 @@ describe('Supervisor TUI screen', () => {
 
     const wideLines = screen.render(120)
     expect(wideLines[1]).toHaveLength(120)
-    expect(wideLines.join('\n')).toContain('Alice Session · OpenAlice')
+    expect(wideLines.join('\n')).toContain('OpenAlpha Session · OpenAlpha')
     expect(wideLines.join('\n')).toContain('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
-    expect(wideLines.join('\n')).toContain('⌂ Default AliceProject')
+    expect(wideLines.join('\n')).toContain('⌂ Default OpenAlphaProject')
     expect(wideLines.filter((line) => line.includes('○ READY TO START'))).toHaveLength(1)
     expect(wideLines.join('\n')).not.toContain('○ STOPPED')
     expect(wideLines.join('\n')).toContain('Your workspace is one step away')
     expect(wideLines.join('\n')).toContain('prepare the selected checkout, verify readiness')
     expect(wideLines.join('\n')).toContain('Need another checkout? Press c before launch.')
-    expect(wideLines.filter((line) => line.includes('Alice Session · OpenAlice'))).toHaveLength(1)
+    expect(wideLines.filter((line) => line.includes('OpenAlpha Session · OpenAlpha'))).toHaveLength(1)
     expect(wideLines.join('\n')).toContain('NEXT')
     expect(wideLines.join('\n')).toContain('STATUS')
     expect(wideLines.join('\n')).toContain('ACTIVITY')
@@ -1168,13 +1168,13 @@ describe('Supervisor TUI screen', () => {
     expect(wideLines.every((line) => displayWidth(line) <= 120)).toBe(true)
 
     const foldedLines = screen.render(99)
-    expect(foldedLines.join('\n')).toContain('Alice Session · OpenAlice')
+    expect(foldedLines.join('\n')).toContain('OpenAlpha Session · OpenAlpha')
     expect(foldedLines.join('\n')).not.toContain('Runtime Signal Deck')
     expect(foldedLines.join('\n')).not.toContain('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
     expect(foldedLines.every((line) => displayWidth(line) <= 99)).toBe(true)
 
     const compactLines = screen.render(71)
-    expect(compactLines.join('\n')).toContain('Alice Session · OpenAlice')
+    expect(compactLines.join('\n')).toContain('OpenAlpha Session · OpenAlpha')
     expect(compactLines.join('\n')).not.toContain('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
     expect(compactLines.every((line) => displayWidth(line) <= 71)).toBe(true)
 
@@ -1187,12 +1187,12 @@ describe('Supervisor TUI screen', () => {
     expect(screen.handlePointer({
       button: 35, col: 60, row: primaryRow, release: false, wheel: null, motion: true, leftClick: false,
     })).toBe(true)
-    expect(screen.render(80).join('\n')).toContain('│ › [ Enter ]  Start OpenAlice & open Workspace')
+    expect(screen.render(80).join('\n')).toContain('│ › [ Enter ]  Start OpenAlpha & open Workspace')
     expect(screen.handlePointer(pointerClick(60, primaryRow))).toBe(true)
     expect(actions).toEqual(['start-open'])
     expect(screen.handleKey(']', matchesKey)).toBe(true)
     expect(screen.handleKey('[', matchesKey)).toBe(true)
-    expect(screen.render(80).join('\n')).toContain('│ ◆ [ Enter ]  Start OpenAlice & open Workspace')
+    expect(screen.render(80).join('\n')).toContain('│ ◆ [ Enter ]  Start OpenAlpha & open Workspace')
 
     screen.update({
       update: {
@@ -1223,7 +1223,7 @@ describe('Supervisor TUI screen', () => {
     })
 
     const tall = screen.render(120).map((line) => line.replace(/\u001b\[[0-9;]*m/gu, ''))
-    const stageRow = tall.findIndex((line) => line.includes('Alice Session · OpenAlice'))
+    const stageRow = tall.findIndex((line) => line.includes('OpenAlpha Session · OpenAlpha'))
     const actionRow = tall.findIndex((line) => line.includes('[ Enter ]'))
     const cardBottomRow = tall.findIndex((line, index) => index > stageRow && line.startsWith('╰'))
     const tipRow = tall.findIndex((line) => line.startsWith('◇  Tip:'))
@@ -1264,7 +1264,7 @@ describe('Supervisor TUI screen', () => {
       .toBeGreaterThan(10)
 
     const folded = screen.render(99).map((line) => line.replace(/\u001b\[[0-9;]*m/gu, ''))
-    expect(folded.findIndex((line) => line.includes('Alice Session'))).toBeLessThan(20)
+    expect(folded.findIndex((line) => line.includes('OpenAlpha Session'))).toBeLessThan(20)
     expect(folded.join('\n')).not.toContain('CONTROL PATH')
     expect(folded.join('\n')).not.toContain(
       `│${' '.repeat(97)}│\n│${' '.repeat(97)}│`,
@@ -1284,7 +1284,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/fixture/default',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:47331',
@@ -1299,10 +1299,10 @@ describe('Supervisor TUI screen', () => {
     const lines = screen.render(46)
     const frame = lines.join('\n')
     expect(lines).toHaveLength(16)
-    expect(frame).toContain('◆ OpenAlice')
+    expect(frame).toContain('◆ OpenAlpha')
     expect(frame).toContain('[Home]')
-    expect(frame).toContain('Alice Session · OpenAlice')
-    expect(frame).toContain('Default AliceProject')
+    expect(frame).toContain('OpenAlpha Session · OpenAlpha')
+    expect(frame).toContain('Default OpenAlphaProject')
     expect(frame).toContain('● RUNNING')
     expect(frame).toContain('⌁ This computer · LOCAL')
     expect(frame).toContain('NEXT  Workspace is ready')
@@ -1336,8 +1336,8 @@ describe('Supervisor TUI screen', () => {
       },
     })
     const stoppedFrame = screen.render(46).join('\n')
-    expect(stoppedFrame).toContain('◆ [ Enter ]  Start OpenAlice')
-    expect(stoppedFrame).not.toContain('Start OpenAlice & open Works')
+    expect(stoppedFrame).toContain('◆ [ Enter ]  Start OpenAlpha')
+    expect(stoppedFrame).not.toContain('Start OpenAlpha & open Works')
   })
 
   it('keeps component diagnostics out of the task-oriented Home stage', () => {
@@ -1380,7 +1380,7 @@ describe('Supervisor TUI screen', () => {
     const wide = screen.render(120).join('\n')
     expect(wide).toContain('Workspace is ready')
     expect(wide).toContain('● LIVE TARGET')
-    expect(wide).not.toContain('Default AliceProject  ● RUNNING')
+    expect(wide).not.toContain('Default OpenAlphaProject  ● RUNNING')
     expect(wide).not.toContain('Component snapshot pending')
     expect(wide).not.toContain('not reported')
   })
@@ -1388,13 +1388,13 @@ describe('Supervisor TUI screen', () => {
   it('renders a responsive OMP-style Command Spine without adding a row', () => {
     const full = renderSupervisorDock({
       panel: 'doctor',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'running',
       pulse: true,
     }, 100)
     expect(full).toHaveLength(100)
     expect(full).toContain('[ / ] Commands')
-    expect(full).toContain('[ i ] Default AliceProject  ›  ◉ LIVE  ›  ✦ DOCTOR')
+    expect(full).toContain('[ i ] Default OpenAlphaProject  ›  ◉ LIVE  ›  ✦ DOCTOR')
     expect(full).toMatch(/^╰─ .* ─╯$/u)
     const themed = decorateSupervisorFrame([
       'header',
@@ -1406,7 +1406,7 @@ describe('Supervisor TUI screen', () => {
       runtimeClass: 'running',
     })[3]!
     expect(themed).toContain('\u001b[1;38;2;183;255;248;48;2;10;34;39m[ / ] Commands')
-    expect(themed).toContain('\u001b[1;38;2;240;249;255;48;2;10;34;39m[ i ] Default AliceProject')
+    expect(themed).toContain('\u001b[1;38;2;240;249;255;48;2;10;34;39m[ i ] Default OpenAlphaProject')
     expect(themed).toContain('\u001b[1;38;2;145;242;187;48;2;10;34;39m◉ LIVE')
     expect(themed).toContain('\u001b[1;38;2;213;179;255;48;2;10;34;39m✦ DOCTOR')
     expect(themed.replace(/\u001b\[[0-9;]*m/gu, '')).toBe(full)
@@ -1424,13 +1424,13 @@ describe('Supervisor TUI screen', () => {
       expect.objectContaining({ label: 'q', surface: '[ q ] Detach' }),
       expect.objectContaining({
         label: 'i',
-        surface: '[ i ] Default AliceProject',
+        surface: '[ i ] Default OpenAlphaProject',
       }),
     ]))
 
     const missingHome = renderSupervisorDock({
       panel: 'fleet',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'running',
       projectAvailable: false,
     }, 120)
@@ -1452,7 +1452,7 @@ describe('Supervisor TUI screen', () => {
 
     const connections = renderSupervisorDock({
       panel: 'fleet',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       machineName: 'This computer',
       targetKind: 'local',
       runtimeState: 'running',
@@ -1461,7 +1461,7 @@ describe('Supervisor TUI screen', () => {
     expect(connections).toContain('● LIVE  ›  ◇ CONN')
     expect(renderSupervisorDock({
       panel: 'fleet',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       machineName: 'This computer',
       targetKind: 'local',
       runtimeState: 'running',
@@ -1479,7 +1479,7 @@ describe('Supervisor TUI screen', () => {
 
     const compactRuntime = renderSupervisorDock({
       panel: 'logs',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       machineName: 'This computer',
       targetKind: 'local',
       runtimeState: 'running',
@@ -1488,7 +1488,7 @@ describe('Supervisor TUI screen', () => {
     expect(compactRuntime).toContain('● LIVE  ›  ≋ RUN ─╯')
     expect(renderSupervisorDock({
       panel: 'logs',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       machineName: 'This computer',
       targetKind: 'local',
       runtimeState: 'running',
@@ -1506,7 +1506,7 @@ describe('Supervisor TUI screen', () => {
 
     const compactInbox = renderSupervisorDock({
       panel: 'inbox',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       machineName: 'This computer',
       targetKind: 'local',
       runtimeState: 'running',
@@ -1515,7 +1515,7 @@ describe('Supervisor TUI screen', () => {
     expect(compactInbox).toContain('● LIVE  ›  ● BOX ─╯')
     expect(renderSupervisorDock({
       panel: 'inbox',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       machineName: 'This computer',
       targetKind: 'local',
       runtimeState: 'running',
@@ -1572,23 +1572,23 @@ describe('Supervisor TUI screen', () => {
     const localLauncher = renderSupervisorDock({
       panel: 'fleet',
       launcher: true,
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       machineName: 'This computer',
       targetKind: 'local',
       transport: 'loopback',
       runtimeState: 'absent',
     }, 80)
-    expect(localLauncher).toContain('⌁ Default AliceProject · LOCAL › ○ COLD')
+    expect(localLauncher).toContain('⌁ Default OpenAlphaProject · LOCAL › ○ COLD')
     expect(localLauncher).not.toContain('[ i ]')
 
     const focus = renderSupervisorDock({
       panel: 'overview',
       focusTask: 'setup',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'absent',
     }, 100)
     expect(focus).toContain('◆ FOCUS WORKSPACE  ›  [ Esc ] Back')
-    expect(focus).toContain('⌂ Default AliceProject  ›  ○ COLD  ›  ◆ SETUP')
+    expect(focus).toContain('⌂ Default OpenAlphaProject  ›  ○ COLD  ›  ◆ SETUP')
     expect(focus).not.toContain('[ / ] Commands')
     expect(focus).not.toContain('◆ HOME')
     expect(supervisorCommandTargets([focus]).map((target) => target.label)).toEqual(['Esc'])
@@ -1596,17 +1596,17 @@ describe('Supervisor TUI screen', () => {
     const transferFocus = renderSupervisorDock({
       panel: 'fleet',
       focusTask: 'transfer',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'absent',
     }, 100)
-    expect(transferFocus).toContain('⌂ Default AliceProject  ›  ○ COLD  ›  ◆ TRANSFER')
+    expect(transferFocus).toContain('⌂ Default OpenAlphaProject  ›  ○ COLD  ›  ◆ TRANSFER')
     expect(transferFocus).not.toContain('◇ CONNECTIONS')
 
     const confirmationFocus = renderSupervisorDock({
       panel: 'overview',
       focusTask: 'confirmation',
       focusLabel: 'Stop Runtime',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'absent',
     }, 100)
     expect(confirmationFocus).toContain('◆ DECISION GATE')
@@ -1616,7 +1616,7 @@ describe('Supervisor TUI screen', () => {
 
     const compact = renderSupervisorDock({
       panel: 'logs',
-      projectName: '研究 AliceProject with a very long name',
+      projectName: '研究 OpenAlphaProject with a very long name',
       runtimeState: 'absent',
     }, 60)
     expect(displayWidth(compact)).toBe(60)
@@ -1625,16 +1625,16 @@ describe('Supervisor TUI screen', () => {
 
     const palette = renderSupervisorDock({
       panel: 'overview',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'absent',
       commandPaletteOpen: true,
     }, 80)
     expect(palette).toContain('[ / ] Close  ›  [ q ] Detach')
-    expect(palette).toContain('[ i ] Default AliceProject  ›  ○ COLD')
+    expect(palette).toContain('[ i ] Default OpenAlphaProject  ›  ○ COLD')
     expect(palette).not.toContain('◆ HOME')
     const overview = renderSupervisorDock({
       panel: 'overview',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'absent',
     }, 100)
     const themedOverview = decorateSupervisorFrame([
@@ -1652,7 +1652,7 @@ describe('Supervisor TUI screen', () => {
 
     const narrow = renderSupervisorDock({
       panel: 'overview',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'absent',
     }, 52)
     expect(narrow).toHaveLength(52)
@@ -1753,7 +1753,7 @@ describe('Supervisor TUI screen', () => {
     viewportHeight = 10
     const short = screen.render(80)
     expect(short.length).toBeGreaterThan(10)
-    expect(short.join('\n')).toContain('Alice Session')
+    expect(short.join('\n')).toContain('OpenAlpha Session')
     expect(short.join('\n')).not.toContain('◇  Tip:')
     expect(short.at(-1)).toContain('╰─ [ / ] Commands')
 
@@ -1818,10 +1818,10 @@ describe('Supervisor TUI screen', () => {
     expect(launcher).toContain('↑↓ selects')
     expect(launcher).not.toContain('Enter runs Next')
     expect(launcher).toContain('Tab/←→ changes pane')
-    expect(directLauncher).toContain('Enter starts OpenAlice')
+    expect(directLauncher).toContain('Enter starts OpenAlpha')
     expect(directLauncher).toContain('brings you Home')
     expect(directLauncher).not.toContain('changes pane')
-    expect(directConnection).toContain('Enter returns Home; m transfers this AliceProject')
+    expect(directConnection).toContain('Enter returns Home; m transfers this OpenAlphaProject')
     expect(directConnection).toContain('←→ changes view')
     expect(directConnection).not.toContain('changes pane')
     expect(directRemoteConnection).toContain('x disconnects this SSH forward')
@@ -2003,7 +2003,7 @@ describe('Supervisor TUI screen', () => {
     expect(screen.handlePointer(pointerClick(6, spineRow))).toBe(true)
     lines = screen.render(80)
 
-    const actionRow = lines.findIndex((line) => line.includes('[ Enter ]  Start OpenAlice')) + 1
+    const actionRow = lines.findIndex((line) => line.includes('[ Enter ]  Start OpenAlpha')) + 1
     const actionLine = lines[actionRow - 1]?.replace(/\u001b\[[0-9;]*m/gu, '') ?? ''
     const actionCol = actionLine.indexOf('[ Enter ]') + 3
     expect(actionRow).toBeGreaterThan(0)
@@ -2033,7 +2033,7 @@ describe('Supervisor TUI screen', () => {
     expect(onDetach).toHaveBeenCalledTimes(1)
   })
 
-  it('keeps the AliceProject identity clickable without leaking Runtime setup into Home', () => {
+  it('keeps the OpenAlphaProject identity clickable without leaking Runtime setup into Home', () => {
     const actions: SupervisorAction[] = []
     let projectOpens = 0
     const screen = new SupervisorScreen({
@@ -2051,7 +2051,7 @@ describe('Supervisor TUI screen', () => {
     })
 
     let lines = screen.render(80)
-    const projectRow = lines.findIndex((line) => line.includes('⌂ Default AliceProject')) + 1
+    const projectRow = lines.findIndex((line) => line.includes('⌂ Default OpenAlphaProject')) + 1
     expect(projectRow).toBeGreaterThan(0)
     expect(lines.join('\n')).not.toContain('⑂ Provider')
     expect(lines.join('\n')).not.toContain('↗ Web')
@@ -2059,9 +2059,9 @@ describe('Supervisor TUI screen', () => {
     expect(screen.handlePointer({
       button: 35, col: 70, row: projectRow, release: false, wheel: null, motion: true, leftClick: false,
     })).toBe(true)
-    expect(screen.render(80).join('\n')).toContain('› Default AliceProject')
+    expect(screen.render(80).join('\n')).toContain('› Default OpenAlphaProject')
     expect(screen.render(80).join('\n')).toContain(
-      '◇  PREVIEW  AliceProject Switchboard',
+      '◇  PREVIEW  OpenAlphaProject Switchboard',
     )
     expect(screen.handlePointer(pointerClick(70, projectRow))).toBe(true)
     expect(projectOpens).toBe(1)
@@ -2071,17 +2071,17 @@ describe('Supervisor TUI screen', () => {
     })).toBe(true)
 
     lines = screen.render(100)
-    expect(lines.join('\n')).toContain('Alice Session · OpenAlice')
+    expect(lines.join('\n')).toContain('OpenAlpha Session · OpenAlpha')
     expect(lines.join('\n')).not.toContain('Provider')
 
     lines = screen.render(46)
-    const narrowProjectRow = lines.findIndex((line) => line.includes('⌂ Default AliceProject')) + 1
+    const narrowProjectRow = lines.findIndex((line) => line.includes('⌂ Default OpenAlphaProject')) + 1
     expect(narrowProjectRow).toBeGreaterThan(0)
     expect(lines.every((line) => displayWidth(line) <= 46)).toBe(true)
     expect(screen.handlePointer({
       button: 35, col: 40, row: narrowProjectRow, release: false, wheel: null, motion: true, leftClick: false,
     })).toBe(true)
-    expect(screen.render(46).join('\n')).toContain('› Default AliceProject')
+    expect(screen.render(46).join('\n')).toContain('› Default OpenAlphaProject')
     expect(screen.handlePointer(pointerClick(40, narrowProjectRow))).toBe(true)
     expect(projectOpens).toBe(2)
 
@@ -2186,7 +2186,7 @@ describe('Supervisor TUI screen', () => {
     let lines = screen.renderCommandPalette(80).lines
     expect(lines.join('\n')).toContain('Command Dock · 1/10 · ABSENT')
     expect(lines).toHaveLength(9)
-    expect(lines.join('\n')).toContain('› ◆ Start OpenAlice & open Workspace')
+    expect(lines.join('\n')).toContain('› ◆ Start OpenAlpha & open Workspace')
     expect(screen.render(80).join('\n')).toContain('[ / ] Close  ›  [ q ] Detach')
     screen.moveCommandPaletteSelection(1)
     expect(screen.renderCommandPalette(80).lines.join('\n')).toContain('›   Start quietly')
@@ -2229,7 +2229,7 @@ describe('Supervisor TUI screen', () => {
     expect(paletteChanges.at(-1)).toBe(false)
 
     lines = screen.render(80)
-    const projectRow = lines.findIndex((line) => line.includes('[ i ] AliceProject')) + 1
+    const projectRow = lines.findIndex((line) => line.includes('[ i ] OpenAlphaProject')) + 1
     const projectColumn = lines[projectRow - 1]!.indexOf('[ i ]') + 2
     expect(screen.handlePointer(pointerClick(projectColumn, projectRow))).toBe(true)
     expect(projectsOpened).toBe(1)
@@ -2265,7 +2265,7 @@ describe('Supervisor TUI screen', () => {
       .not.toBe(integratedMarkIntro)
     for (let frame = 0; frame < 8; frame += 1) screen.advanceMotion()
     expect(screen.hasActiveMotion()).toBe(true)
-    expect(screen.render(80)[0]).toContain('\u001b[1;38;2;116;235;226m◆ OpenAlice Supervisor')
+    expect(screen.render(80)[0]).toContain('\u001b[1;38;2;116;235;226m◆ OpenAlpha Supervisor')
     const settledHeader = screen.render(80)[0]
     const settledMark = screen.render(120).find((line) => (
       line.replace(/\u001b\[[0-9;]*m/gu, '').includes('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
@@ -2315,9 +2315,9 @@ describe('Supervisor TUI screen', () => {
     })
     const plainBeacon = reduced.render(120).join('\n')
     expect(plainBeacon).toContain('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
-    expect(plainBeacon).toContain('Default AliceProject')
+    expect(plainBeacon).toContain('Default OpenAlphaProject')
     expect(plainBeacon).not.toContain('\u001b[')
-    expect(reduced.render(99).join('\n')).toContain('Alice Session · OpenAlice')
+    expect(reduced.render(99).join('\n')).toContain('OpenAlpha Session · OpenAlpha')
     expect(reduced.render(99).join('\n')).not.toContain('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
     expect(reduced.render(71).join('\n')).not.toContain('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
     expect(reduced.hasActiveMotion()).toBe(false)
@@ -2343,7 +2343,7 @@ describe('Supervisor TUI screen', () => {
     const splash = screen.render(120)
     expect(splash).toHaveLength(32)
     expect(splash.join('\n')).toContain('O P E N A L I C E')
-    expect(splash.join('\n')).not.toContain('OpenAlice Supervisor')
+    expect(splash.join('\n')).not.toContain('OpenAlpha Supervisor')
     expect(screen.handlePointer({
       button: 35,
       col: 60,
@@ -2359,7 +2359,7 @@ describe('Supervisor TUI screen', () => {
     expect(screen.bootSequenceActive()).toBe(false)
     expect(actions).toEqual([])
     expect(screen.render(120).join('\n').replace(/\u001b\[[0-9;]*m/gu, ''))
-      .toContain('OpenAlice Supervisor')
+      .toContain('OpenAlpha Supervisor')
     expect(motionDemand).toHaveBeenCalledTimes(1)
 
     const clicked = new SupervisorScreen({
@@ -2394,7 +2394,7 @@ describe('Supervisor TUI screen', () => {
       bootSequence: true,
     })
     expect(reduced.bootSequenceActive()).toBe(false)
-    expect(reduced.render(80)[0]).toContain('OpenAlice Supervisor')
+    expect(reduced.render(80)[0]).toContain('OpenAlpha Supervisor')
   })
 
   it('keeps Mission Rail navigation immediate instead of animating application chrome', () => {
@@ -2469,7 +2469,7 @@ describe('Supervisor TUI screen', () => {
     expect(output).not.toContain('[ x ] Stop')
   })
 
-  it('renders and navigates the Machine to AliceProject fleet', () => {
+  it('renders and navigates the Machine to OpenAlphaProject fleet', () => {
     const activated: string[] = []
     const transfers: string[] = []
     let refreshes = 0
@@ -2489,7 +2489,7 @@ describe('Supervisor TUI screen', () => {
     })
 
     const localFleet = screen.render(100).join('\n')
-    expect(localFleet).toContain('AliceProjects · This computer')
+    expect(localFleet).toContain('OpenAlphaProjects · This computer')
     expect(localFleet).not.toContain('[ m ] Transfer')
     expect(localFleet).not.toContain('m Managed')
     expect(screen.handleKey('tab', matchesKey)).toBe(true)
@@ -2499,13 +2499,13 @@ describe('Supervisor TUI screen', () => {
     expect(screen.handleKey('shift+tab', matchesKey)).toBe(true)
     expect(screen.handleKey('down', matchesKey)).toBe(true)
     expect(screen.handleKey('tab', matchesKey)).toBe(true)
-    expect(screen.render(100).join('\n')).toContain('AliceProjects · Cloud')
+    expect(screen.render(100).join('\n')).toContain('OpenAlphaProjects · Cloud')
     expect(screen.handleKey('o', matchesKey)).toBe(true)
     expect(activated).toEqual(['cloud/research'])
     expect(screen.handleKey('r', matchesKey)).toBe(true)
     expect(refreshes).toBe(1)
     expect(screen.handleKey('s', matchesKey)).toBe(true)
-    expect(screen.snapshot.notice).toContain('only for a stopped remote AliceProject')
+    expect(screen.snapshot.notice).toContain('only for a stopped remote OpenAlphaProject')
     expect(screen.handleEscape()).toBe(true)
     expect(screen.snapshot.fleet?.focus).toBe('machines')
   })
@@ -2540,17 +2540,17 @@ describe('Supervisor TUI screen', () => {
     expect(output).toContain('◆ LIVE · HOME MISSING')
     expect(output).toContain('Selection')
     expect(output).not.toContain('[ m ] Transfer')
-    expect(screen.renderCommandPalette(120).lines.join('\n')).not.toContain('Transfer AliceProject')
+    expect(screen.renderCommandPalette(120).lines.join('\n')).not.toContain('Transfer OpenAlphaProject')
     expect(screen.handleKey('m', matchesKey)).toBe(true)
     expect(transfers).toEqual([])
-    expect(screen.snapshot.notice).toBe('Transfer requires an available AliceProject home.')
+    expect(screen.snapshot.notice).toBe('Transfer requires an available OpenAlphaProject home.')
 
     expect(screen.handleKey('[', matchesKey)).toBe(true)
     expect(screen.handleKey('[', matchesKey)).toBe(true)
     const overview = screen.render(120).join('\n')
-    expect(overview).toContain('Runtime is live; AliceProject home is missing')
+    expect(overview).toContain('Runtime is live; OpenAlphaProject home is missing')
     expect(overview).toContain('Runtime is live, but the')
-    expect(overview).toContain('AliceProject home is missing. Open')
+    expect(overview).toContain('OpenAlphaProject home is missing. Open')
     expect(overview).toContain('Web route.')
     expect(overview).not.toContain('/home/alice/default')
     expect(overview).not.toContain('LIVE SESSION · OPEN THE WORKSPACE')
@@ -2566,7 +2566,7 @@ describe('Supervisor TUI screen', () => {
         ...template,
         key: index === 0 ? 'default' : `local-${index + 1}`,
         id: `alice-project-local-${index + 1}`,
-        displayName: index === 0 ? 'Default AliceProject' : `Local Project ${index + 1}`,
+        displayName: index === 0 ? 'Default OpenAlphaProject' : `Local Project ${index + 1}`,
         home: `/home/alice/local-${index + 1}`,
         isDefault: index === 0,
       })),
@@ -2748,11 +2748,11 @@ describe('Supervisor TUI screen', () => {
     expect(fleetScreen.handlePointer({
       button: 35, col: 98, row: 8, release: false, wheel: null, motion: true, leftClick: false,
     })).toBe(true)
-    expect(fleetScreen.render(100).join('\n')).toContain('AliceProject 5/8')
+    expect(fleetScreen.render(100).join('\n')).toContain('OpenAlphaProject 5/8')
     expect(fleetScreen.handlePointer({
       button: 0, col: 98, row: 10, release: false, wheel: null, motion: false, leftClick: true,
     })).toBe(true)
-    expect(fleetScreen.render(100).join('\n')).toContain('AliceProjects · Machine 1 · 8/8')
+    expect(fleetScreen.render(100).join('\n')).toContain('OpenAlphaProjects · Machine 1 · 8/8')
     expect(fleetScreen.handlePointer({
       button: 32,
       col: 98,
@@ -2763,7 +2763,7 @@ describe('Supervisor TUI screen', () => {
       leftClick: false,
       leftDrag: true,
     })).toBe(true)
-    expect(fleetScreen.render(100).join('\n')).toContain('AliceProjects · Machine 1 · 1/8')
+    expect(fleetScreen.render(100).join('\n')).toContain('OpenAlphaProjects · Machine 1 · 1/8')
     fleetScreen.handlePointer({
       button: 0, col: 98, row: 6, release: true, wheel: null, motion: false, leftClick: false,
     })
@@ -2859,7 +2859,7 @@ describe('Supervisor TUI screen', () => {
         machineKey: 'local',
         machineName: 'This computer',
         projectKey: 'default',
-        projectName: 'Default AliceProject',
+        projectName: 'Default OpenAlphaProject',
         home: '/fixture/default',
         transport: 'loopback',
         endpoint: 'http://127.0.0.1:2024',
@@ -2884,7 +2884,7 @@ describe('Supervisor TUI screen', () => {
     expect(screen.handlePointer(pointerClick(50, 6))).toBe(true)
     expect(screen.snapshot.fleet?.focus).toBe('projects')
     expect(activated).toEqual([])
-    expect(screen.render(100).join('\n')).toContain('▶ Default AliceProject')
+    expect(screen.render(100).join('\n')).toContain('▶ Default OpenAlphaProject')
     expect(screen.render(100).join('\n')).toContain('Enter returns Home')
 
     expect(screen.handlePointer(pointerClick(8, 6))).toBe(true)
@@ -2922,7 +2922,7 @@ describe('Supervisor TUI screen', () => {
       button: 35, col: 50, row: 5, release: false, wheel: null, motion: true, leftClick: false,
     })).toBe(true)
     expect(screen.render(100).join('\n').replace(/\u001b\[[0-9;]*m/gu, ''))
-      .toContain('╭ » AliceProjects')
+      .toContain('╭ » OpenAlphaProjects')
 
     expect(screen.handlePointer(pointerClick(50, 5))).toBe(true)
     expect(screen.snapshot.fleet?.focus).toBe('projects')
@@ -2964,14 +2964,14 @@ describe('Supervisor TUI screen', () => {
         primary: false,
       },
     ])
-    const singleAction = '│ ◆ [ Enter ] Start OpenAlice'.padEnd(39, ' ') + '│'
+    const singleAction = '│ ◆ [ Enter ] Start OpenAlpha'.padEnd(39, ' ') + '│'
     expect(supervisorCommandTargets([singleAction])).toEqual([
       expect.objectContaining({
         row: 1,
         startColumn: 3,
         endColumn: 39,
         label: 'Enter',
-        surface: '◆ [ Enter ] Start OpenAlice',
+        surface: '◆ [ Enter ] Start OpenAlpha',
         primary: true,
       }),
     ])
@@ -3086,7 +3086,7 @@ describe('Supervisor TUI screen', () => {
     ], 76)
     const dock = renderSupervisorDock({
       panel: 'overview',
-      projectName: 'Default AliceProject',
+      projectName: 'Default OpenAlphaProject',
       runtimeState: 'absent',
     }, 80)
     const idle = renderSupervisorControlConsole(' '.repeat(80), actionLines, dock, 80)
@@ -3121,7 +3121,7 @@ describe('Supervisor TUI screen', () => {
   })
 
   it('contains Action Shelf color inside its framed column', () => {
-    const line = '│ ◆ [ Enter ]  Start OpenAlice & open Workspace │   │ Uptime      Waiting for Runtime │'
+    const line = '│ ◆ [ Enter ]  Start OpenAlpha & open Workspace │   │ Uptime      Waiting for Runtime │'
     const colorTheme = createSupervisorTuiTheme({ TERM: 'xterm-256color' })
     const decorated = decorateSupervisorActionShelf(line, colorTheme)
     const rightColumn = decorated.slice(decorated.indexOf('   │ Uptime'))
@@ -3202,11 +3202,11 @@ describe('Supervisor TUI screen', () => {
 
   it('styles active and contextual Fleet pane headers independently', () => {
     const theme = createSupervisorTuiTheme({ TERM: 'xterm-256color' })
-    const line = '╭ ◆ Machines · 1/2 ─────────╮   ╭ ◇ AliceProjects · This Mac · 1/1 ─────╮'
+    const line = '╭ ◆ Machines · 1/2 ─────────╮   ╭ ◇ OpenAlphaProjects · This Mac · 1/1 ─────╮'
     const decorated = decorateSupervisorFramedHeaders(line, theme)
 
     expect(decorated).toContain('\u001b[1;38;2;116;235;226m╭ ◆ Machines')
-    expect(decorated).toContain('\u001b[38;2;116;132;153m╭ ◇ AliceProjects')
+    expect(decorated).toContain('\u001b[38;2;116;132;153m╭ ◇ OpenAlphaProjects')
     expect(decorated.replace(/\u001b\[[0-9;]*m/gu, '')).toBe(line)
     expect(decorateSupervisorFramedHeaders(
       line,
@@ -3234,7 +3234,7 @@ describe('Supervisor TUI screen', () => {
       channel: 'dev',
       runtime: { class: 'absent', endpoints: {} },
     }, { theme, motionEnabled: false }).render(100)
-    expect(plain(overview.join('\n'))).toContain('Alice Session · OpenAlice')
+    expect(plain(overview.join('\n'))).toContain('OpenAlpha Session · OpenAlpha')
     expect(plain(overview.join('\n'))).toContain('NEXT')
     expect(plain(overview.join('\n'))).not.toContain('Runtime Telemetry')
 
@@ -3249,7 +3249,7 @@ describe('Supervisor TUI screen', () => {
     const fleetColumns = columnsFor(fleetRow!)
     expect(fleetColumns).toHaveLength(2)
     expect(fleetColumns[0]).toContain(selectedEscape)
-    expect(plain(fleetColumns[1]!)).toContain('◁ Default AliceProject')
+    expect(plain(fleetColumns[1]!)).toContain('◁ Default OpenAlphaProject')
     expect(fleetColumns[1]).toContain('\u001b[1;38;2;116;235;226m')
     expect(fleetColumns[1]).not.toContain('48;2;24;64;69m')
     expect(fleetRow).toContain(`\u001b[0m${baseStyle}│   │ `)
@@ -3531,7 +3531,7 @@ describe('Supervisor TUI screen', () => {
     expect(screen.render(80).join('\n')).toContain('Event Lens · LINE 1 · INFO · TEXT')
   })
 
-  it('offers Start for a stopped compatible remote AliceProject', () => {
+  it('offers Start for a stopped compatible remote OpenAlphaProject', () => {
     const machines = fleetMachines()
     machines[1]!.projects[0]!.runtime = {
       ...machines[1]!.projects[0]!.runtime,
@@ -3689,7 +3689,7 @@ describe('Supervisor TUI screen', () => {
 
     expect(screen.handleKey('enter', matchesKey)).toBe(true)
     expect(actions).toEqual(['start-open'])
-    expect(screen.render(100).join('\n')).toContain('[ Enter ]  Start OpenAlice & open Workspace')
+    expect(screen.render(100).join('\n')).toContain('[ Enter ]  Start OpenAlpha & open Workspace')
 
     screen.update({
       runtime: {
@@ -4150,7 +4150,7 @@ describe('Supervisor TUI screen', () => {
     expect(selectedFleet?.focus).toBe('projects')
   })
 
-  it('re-probes and starts a selected stopped remote AliceProject', async () => {
+  it('re-probes and starts a selected stopped remote OpenAlphaProject', async () => {
     let inputListener: ((data: string) => unknown) | undefined
     let screen: SupervisorScreen | undefined
     const observedStages: string[] = []
@@ -4344,7 +4344,7 @@ describe('Supervisor TUI screen', () => {
           focus: () => { void (async () => {
             await waitForOverlay('destination Machine')
             overlayComponent?.handleInput?.('\r')
-            await waitForOverlay('Destination AliceProject key')
+            await waitForOverlay('Destination OpenAlphaProject key')
             overlayComponent?.handleInput?.('\r')
             await waitForOverlay('Destination complete Home')
             overlayComponent?.handleInput?.('\r')
@@ -4356,7 +4356,7 @@ describe('Supervisor TUI screen', () => {
             overlayComponent?.handleInput?.('y')
             await waitForOverlay('synthetic checksum failure')
             overlayComponent?.handleInput?.('r')
-            await waitForOverlay('✓ AliceProject arrived · PUBLISHED')
+            await waitForOverlay('✓ OpenAlphaProject arrived · PUBLISHED')
             overlayComponent?.handleInput?.('\r')
             inputListener?.('\u0003')
           })() },
@@ -4431,7 +4431,7 @@ describe('Supervisor TUI screen', () => {
           focus: () => { void (async () => {
             for (const label of [
               'destination Machine',
-              'Destination AliceProject key',
+              'Destination OpenAlphaProject key',
               'Destination complete Home',
               'Credentials',
               'Exact-Session scheduled Issue owners',
@@ -4533,7 +4533,7 @@ describe('Supervisor TUI screen', () => {
       resolveContext: () => initialContext,
       inspect: async () => runtime,
       findSource: async () => {
-        throw new Error('No OpenAlice checkout was found.')
+        throw new Error('No OpenAlpha checkout was found.')
       },
       inspectManagedSource: async () => {
         calls.push('inspect-managed')
@@ -4657,7 +4657,7 @@ describe('Supervisor TUI screen', () => {
     expect(settingsRequests).toBe(2)
   })
 
-  it('opens AliceProject selection while stopped or running', () => {
+  it('opens OpenAlphaProject selection while stopped or running', () => {
     let projectRequests = 0
     const screen = new SupervisorScreen({
       version: 'dev',
@@ -4739,9 +4739,9 @@ describe('Supervisor TUI screen', () => {
     expect(screen.handlePointer({
       button: 35, col: 8, row: 8, release: false, wheel: null, motion: true, leftClick: false,
     })).toBe(true)
-    expect(screen.render(100).join('\n')).toContain('» ◇ AliceProject')
+    expect(screen.render(100).join('\n')).toContain('» ◇ OpenAlphaProject')
     expect(screen.handlePointer(pointerClick(8, 8))).toBe(true)
-    expect(screen.render(100).join('\n')).toContain('AliceProject · Shape the workspace')
+    expect(screen.render(100).join('\n')).toContain('OpenAlphaProject · Shape the workspace')
     expect(screen.handlePointer({
       button: 64, col: 8, row: 8, release: false, wheel: -1, motion: false, leftClick: false,
     })).toBe(true)
@@ -4765,7 +4765,7 @@ describe('Supervisor TUI screen', () => {
       runtime: null,
       mode: 'config-recovery',
       recoveryReason: 'newer-schema',
-      diagnostic: 'Supervisor configuration schemaVersion 3 is newer than this OpenAlice',
+      diagnostic: 'Supervisor configuration schemaVersion 3 is newer than this OpenAlpha',
     }, {
       onAction: (action) => actions.push(action),
       onSettings: () => {
@@ -4783,15 +4783,15 @@ describe('Supervisor TUI screen', () => {
     })
 
     const output = screen.render(100).join('\n')
-    expect(output).toContain('AliceProject configuration cannot be read.')
-    expect(output).toContain('requires a newer OpenAlice')
+    expect(output).toContain('OpenAlphaProject configuration cannot be read.')
+    expect(output).toContain('requires a newer OpenAlpha')
     expect(output).toContain('will not inspect, start, open, stop, restart, or configure a project')
     expect(output).toContain('Press u to choose a channel')
     expect(screen.renderCommandPalette(100).lines.join('\n')).toContain('Check for update')
     expect(screen.renderCommandPalette(100).lines.join('\n')).toContain('Recovery help')
     expect(output).not.toContain('Enter Start & open')
-    expect(output).not.toContain('i AliceProjects')
-    expect(output).not.toContain('Default AliceProject')
+    expect(output).not.toContain('i OpenAlphaProjects')
+    expect(output).not.toContain('Default OpenAlphaProject')
 
     expect(screen.handleKey('enter', matchesKey)).toBe(true)
     expect(screen.handleKey('s', matchesKey)).toBe(true)
@@ -4856,7 +4856,7 @@ describe('Supervisor TUI screen', () => {
     expect(actions).toEqual(['update', 'apply-update'])
   })
 
-  it('opens a recovery TUI when AliceProject config is unreadable', async () => {
+  it('opens a recovery TUI when OpenAlphaProject config is unreadable', async () => {
     const calls: string[] = []
     let inputListener: ((data: string) => unknown) | undefined
     class FakeTui {
@@ -4887,7 +4887,7 @@ describe('Supervisor TUI screen', () => {
       env: {},
       resolveContext: async () => {
         throw Object.assign(
-          new Error('Supervisor configuration schemaVersion 3 is newer than this OpenAlice (supports 2).'),
+          new Error('Supervisor configuration schemaVersion 3 is newer than this OpenAlpha (supports 2).'),
           { code: 'ESUPERVISORSCHEMA', exitCode: 2 },
         )
       },
@@ -4972,7 +4972,7 @@ describe('Supervisor TUI screen', () => {
       stdout: { isTTY: true } as NodeJS.WriteStream,
       resolveContext: async () => {
         throw Object.assign(
-          new Error('Supervisor configuration schemaVersion 3 is newer than this OpenAlice (supports 2).'),
+          new Error('Supervisor configuration schemaVersion 3 is newer than this OpenAlpha (supports 2).'),
           { code: 'ESUPERVISORSCHEMA', exitCode: 2 },
         )
       },
@@ -5194,7 +5194,7 @@ function fleetMachines(): MachineInventory[] {
   const project = (key: string): MachineInventory['projects'][number] => ({
     key,
     id: `alice-project-${key}`,
-    displayName: key === 'default' ? 'Default AliceProject' : 'Research',
+    displayName: key === 'default' ? 'Default OpenAlphaProject' : 'Research',
     home: `/home/alice/${key}`,
     port: 47_331,
     portAutomatic: true,
@@ -5247,8 +5247,8 @@ function transferPlan(sourceHome: string, destinationHome: string, destinationKe
     schemaVersion: 1 as const,
     transferId: 'tui-transfer-test',
     generatedAt: '2026-08-23T00:00:00Z',
-    source: { projectId: 'alice-project-default', key: 'default', displayName: 'Default AliceProject', home: sourceHome, product: 'trader' as const },
-    destination: { machineKey: 'cloud', projectId: 'alice-project-tui-destination', key: destinationKey, displayName: 'Default AliceProject', home: destinationHome, requiredFreeBytes: 64 * 1024 * 1024 },
+    source: { projectId: 'alice-project-default', key: 'default', displayName: 'Default OpenAlphaProject', home: sourceHome, product: 'trader' as const },
+    destination: { machineKey: 'cloud', projectId: 'alice-project-tui-destination', key: destinationKey, displayName: 'Default OpenAlphaProject', home: destinationHome, requiredFreeBytes: 64 * 1024 * 1024 },
     policy: { credentials: 'include' as const, scheduledIssues: 'keep-blocked' as const },
     portable: { entries: [], files: 0, directories: 0, symlinks: 0, bytes: 0 },
     excluded: [],

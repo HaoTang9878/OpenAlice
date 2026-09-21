@@ -94,7 +94,7 @@ export function useAliceProject(): AliceProjectSnapshot {
 
   useEffect(() => {
     if (backendUnavailable) {
-      // Preserve the last confirmed AliceProject while the shared offline UI
+      // Preserve the last confirmed OpenAlphaProject while the shared offline UI
       // owns outage presentation. Retire any request that may still resolve
       // after the transport has already disappeared.
       requestGenerationRef.current += 1

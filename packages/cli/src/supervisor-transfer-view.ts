@@ -106,7 +106,7 @@ export function renderSupervisorTransferProgress(
     '',
     'VERIFY · checksum gate → atomic publish',
     '◆ [ Esc ] Cancel',
-    'Ctrl+C cancels this transfer and detaches OpenAlice.',
+    'Ctrl+C cancels this transfer and detaches OpenAlpha.',
   ], width)
 }
 
@@ -133,7 +133,7 @@ export function renderSupervisorTransferArrival(
   width: number,
 ): string[] {
   return fitTransferRows([
-    '✓ AliceProject arrived · PUBLISHED',
+    '✓ OpenAlphaProject arrived · PUBLISHED',
     ...stripLegacyTransferCard(resultLines),
     '',
     '◆ Remote Runtime is stopped · source unchanged',
@@ -300,7 +300,7 @@ export function decorateSupervisorTransferFlightDeck(
       || line.includes('Transfer manifest · HOLD')
     ) return theme.danger(line)
     if (line.includes(' · FIX')) return theme.danger(line)
-    if (line.includes('Transfer manifest · READY') || line.includes('AliceProject arrived')) return theme.success(line)
+    if (line.includes('Transfer manifest · READY') || line.includes('OpenAlphaProject arrived')) return theme.success(line)
     if (
       line.includes('Transfer in flight')
       || line.includes('Building transfer manifest')

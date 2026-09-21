@@ -223,7 +223,7 @@ export async function resolveAvailableStoredLaunchContext(
     }
   }
   throw unavailable ?? configError(
-    'No available AliceProject could be selected.',
+    'No available OpenAlphaProject could be selected.',
   )
 }
 
@@ -255,7 +255,7 @@ export async function persistAliceProjectLaunchConfig(
     && patch.home === undefined
   ) {
     throw configError(
-      `AliceProject "${context.project}" must keep an explicit complete home.`,
+      `OpenAlphaProject "${context.project}" must keep an explicit complete home.`,
     )
   }
   const normalizedPatch = { ...patch }
@@ -362,11 +362,11 @@ export async function persistSelectedSupervisorAliceProject(
   const writeConfig = options.writeConfig ?? writeSupervisorConfig
   const current = parseSupervisorConfig(await readConfig(context.supervisorRoot))
   if (name !== 'default' && !current.projects?.[name]) {
-    throw configError(`AliceProject "${name}" is not registered.`)
+    throw configError(`OpenAlphaProject "${name}" is not registered.`)
   }
   if (name !== 'default' && !current.projects?.[name]?.home) {
     throw configError(
-      `AliceProject "${name}" needs an explicit complete home before it can become the default.`,
+      `OpenAlphaProject "${name}" needs an explicit complete home before it can become the default.`,
     )
   }
   await assertRegistryHomesSeparate(current, options)
@@ -375,7 +375,7 @@ export async function persistSelectedSupervisorAliceProject(
       .projects
       .find((entry) => entry.key === name)
     if (!selected) {
-      throw configError(`AliceProject "${name}" is not registered.`)
+      throw configError(`OpenAlphaProject "${name}" is not registered.`)
     }
     await assertStoredHomePresent(selected.home, name)
   }
@@ -399,14 +399,14 @@ export async function createSupervisorAliceProject(
 ): Promise<void> {
   requireProjectKey(name, 'project')
   if (name === 'default') {
-    throw configError('The implicit "default" AliceProject already exists.')
+    throw configError('The implicit "default" OpenAlphaProject already exists.')
   }
   const product = options.product ?? 'trader'
   const readConfig = options.readConfig ?? readSupervisorConfig
   const writeConfig = options.writeConfig ?? writeSupervisorConfig
   const current = parseSupervisorConfig(await readConfig(context.supervisorRoot))
   if (current.projects?.[name]) {
-    throw configError(`AliceProject "${name}" is already registered.`)
+    throw configError(`OpenAlphaProject "${name}" is already registered.`)
   }
   let normalizedHome = resolveConfiguredHome(name, home, options)
   const projectEntry: AliceProjectLaunchConfig = {
@@ -431,7 +431,7 @@ export async function createSupervisorAliceProject(
   const stampedProduct = await writeAliceProjectProductStamp(normalizedHome, product)
   if (stampedProduct !== product) {
     throw configError(
-      `AliceProject home ${normalizedHome} was born as ${stampedProduct}; it cannot be registered as ${product}`,
+      `OpenAlphaProject home ${normalizedHome} was born as ${stampedProduct}; it cannot be registered as ${product}`,
     )
   }
   const next: SupervisorConfigDocument = {
@@ -610,7 +610,7 @@ export function validateSupervisorAliceProjectKey(
     return 'Use 1-32 lowercase letters, numbers, "_" or "-", beginning with a letter.'
   }
   if (value === 'default') {
-    return 'The implicit "default" AliceProject already exists.'
+    return 'The implicit "default" OpenAlphaProject already exists.'
   }
   return undefined
 }
@@ -689,7 +689,7 @@ async function assertRegistryHomesSeparate(
         || pathContains(right.physicalHome, left.physicalHome)
       ) {
         throw configError(
-          `Complete home ${right.home} for AliceProject "${right.displayName}" overlaps AliceProject "${left.displayName}" at ${left.home}. Choose a separate directory.`,
+          `Complete home ${right.home} for OpenAlphaProject "${right.displayName}" overlaps OpenAlphaProject "${left.displayName}" at ${left.home}. Choose a separate directory.`,
         )
       }
     }
@@ -742,7 +742,7 @@ async function assertHomeCandidateUsable(path: string): Promise<void> {
     )
   }
   throw configError(
-    `Complete home ${path} is non-empty and is not an existing OpenAlice home. Choose an empty directory or an OpenAlice home.`,
+    `Complete home ${path} is non-empty and is not an existing OpenAlpha home. Choose an empty directory or an OpenAlpha home.`,
   )
 }
 
@@ -754,7 +754,7 @@ async function assertStoredHomePresent(
     const info = await stat(path)
     if (!info.isDirectory()) {
       throw configError(
-        `Registered complete home ${path} for AliceProject "${project}" is not a directory.`,
+        `Registered complete home ${path} for OpenAlphaProject "${project}" is not a directory.`,
         'ESTOREDHOMEUNAVAILABLE',
       )
     }
@@ -765,7 +765,7 @@ async function assertStoredHomePresent(
       ? 'is missing'
       : 'is unavailable or not writable'
     throw configError(
-      `Registered complete home ${path} for AliceProject "${project}" ${missing}. Reconnect it or choose another AliceProject.`,
+      `Registered complete home ${path} for OpenAlphaProject "${project}" ${missing}. Reconnect it or choose another OpenAlphaProject.`,
       isNodeError(error, 'ENOENT')
         ? 'ESTOREDHOMEMISSING'
         : 'ESTOREDHOMEUNAVAILABLE',
@@ -856,7 +856,7 @@ function parseLaunchValues(
 function assertCurrentSupervisorSchemaVersion(value: unknown): asserts value is 2 {
   if (isNewerSupervisorSchemaVersion(value)) {
     throw configError(
-      `Supervisor configuration schemaVersion ${value} is newer than this OpenAlice (supports ${CONFIG_SCHEMA_VERSION}). Update OpenAlice to read this AliceProject configuration.`,
+      `Supervisor configuration schemaVersion ${value} is newer than this OpenAlpha (supports ${CONFIG_SCHEMA_VERSION}). Update OpenAlpha to read this OpenAlphaProject configuration.`,
       'ESUPERVISORSCHEMA',
     )
   }
@@ -929,7 +929,7 @@ function requireDisplayName(value: unknown, label: string): string {
 }
 
 function humanizeProjectKey(value: string): string {
-  if (value === 'default') return 'Default AliceProject'
+  if (value === 'default') return 'Default OpenAlphaProject'
   return value
     .split(/[-_]+/u)
     .filter(Boolean)

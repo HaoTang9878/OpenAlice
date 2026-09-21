@@ -35,9 +35,9 @@ function openFileSink(path: string): WriteStream | null {
 }
 
 function getFileSink(): WriteStream | null {
-  // Importing Alice modules must stay read-only until the Runtime lifecycle
+  // Importing OpenAlpha modules must stay read-only until the Runtime lifecycle
   // fence has been validated and acquired. Defer the first filesystem write
-  // until Alice actually emits a Workspace log record after that gate.
+  // until OpenAlpha actually emits a Workspace log record after that gate.
   if (fileStream === undefined) fileStream = openFileSink(FILE_PATH);
   return fileStream;
 }

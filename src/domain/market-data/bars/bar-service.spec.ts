@@ -135,7 +135,7 @@ describe('getBars — barId forms', () => {
 })
 
 describe('getBars — UTA branch', () => {
-  // Bar.timestamp is typed Date, but it crosses the Alice↔UTA HTTP wire as an
+  // Bar.timestamp is typed Date, but it crosses the OpenAlpha↔UTA HTTP wire as an
   // ISO STRING (JSON has no Date) — the SDK does not revive it. Use the REAL
   // wire shape here so the conversion is exercised exactly as in production.
   const WIRE = [

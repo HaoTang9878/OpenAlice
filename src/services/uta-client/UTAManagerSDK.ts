@@ -1,6 +1,6 @@
 /**
  * UTAManagerSDK — HTTP-backed adapter mirroring `UTAManager`'s public
- * surface so Alice's `main.ts`, telegram-plugin, trading-config UI, and
+ * surface so OpenAlpha's `main.ts`, telegram-plugin, trading-config UI, and
  * tool layer keep working unchanged after UTA-split v1.
  *
  * Key design choices (memory:linear-vscode-hybrid, port-architecture-3-layers):
@@ -8,13 +8,13 @@
  *     become async. Callsites add a single `await` keyword.
  *   - State-mutating calls (`reconnectUTA`, `removeUTA`) trigger the
  *     Guardian flag protocol — Guardian SIGTERMs UTA and respawns,
- *     picking up whatever Alice wrote to `accounts.json`.
+ *     picking up whatever OpenAlpha wrote to `accounts.json`.
  *   - Setup hooks (`setSnapshotHooks`, `setFxService`,
  *     `registerCcxtToolsIfNeeded`, `initUTA`, `closeAll`) become no-ops
- *     in Alice — UTA owns those concerns end-to-end.
+ *     in OpenAlpha — UTA owns those concerns end-to-end.
  *
  * The SDK does NOT extend `UTAManager` (which lives in UTA's process,
- * not Alice's after the physical move). It mirrors the *shape* of the
+ * not OpenAlpha's after the physical move). It mirrors the *shape* of the
  * public API only.
  */
 
@@ -51,30 +51,30 @@ export class UTAManagerSDK {
 
   // ==================== Setup hooks — UTA owns these now ====================
 
-  /** No-op on the Alice side; UTA bootstraps its own snapshot scheduler. */
+  /** No-op on the OpenAlpha side; UTA bootstraps its own snapshot scheduler. */
   setSnapshotHooks(_hooks: unknown): void { /* no-op */ }
 
-  /** No-op on the Alice side; UTA owns its own FxService. */
+  /** No-op on the OpenAlpha side; UTA owns its own FxService. */
   setFxService(_fx: unknown): void { /* no-op */ }
 
-  /** No-op on the Alice side; UTA owns the CCXT tool registration. */
+  /** No-op on the OpenAlpha side; UTA owns the CCXT tool registration. */
   registerCcxtToolsIfNeeded(): void { /* no-op */ }
 
-  /** No-op on the Alice side — UTA reads accounts.json on boot. Alice
+  /** No-op on the OpenAlpha side — UTA reads accounts.json on boot. OpenAlpha
    *  triggering "initUTA" actually means: write accounts.json, touch the
    *  restart flag, let Guardian respawn UTA. That flow lives in
    *  trading-config routes, not here. */
   async initUTA(_cfg: unknown): Promise<UTAAccountSDK> {
-    throw new NotImplementedInSDK('initUTA', 'Alice does not bootstrap UTAs; write accounts.json + triggerUTARestart()')
+    throw new NotImplementedInSDK('initUTA', 'OpenAlpha does not bootstrap UTAs; write accounts.json + triggerUTARestart()')
   }
 
-  /** No-op — Alice has no in-process broker connections to add. */
+  /** No-op — OpenAlpha has no in-process broker connections to add. */
   add(_uta: unknown): void { /* no-op */ }
 
-  /** No-op — Alice has no in-process broker connections to remove. */
+  /** No-op — OpenAlpha has no in-process broker connections to remove. */
   remove(_id: string): void { /* no-op */ }
 
-  /** No-op shutdown — Alice has no broker connections. UTA's own
+  /** No-op shutdown — OpenAlpha has no broker connections. UTA's own
    *  SIGTERM handler closes its brokers. */
   async closeAll(): Promise<void> { /* no-op */ }
 

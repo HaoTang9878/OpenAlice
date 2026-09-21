@@ -139,7 +139,7 @@ export class NewsCollectorStore implements INewsProvider {
   /**
    * Ingest and return the durable record. Optional product integrations use
    * the returned identity to publish an activity fact without coupling this
-   * store to Office, Sonner, or a particular Alice product.
+   * store to Office, Sonner, or a particular OpenAlpha product.
    */
   async ingestRecord(item: {
     title: string

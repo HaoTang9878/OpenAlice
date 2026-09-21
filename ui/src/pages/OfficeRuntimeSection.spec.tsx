@@ -670,7 +670,7 @@ describe('OfficeRuntimeSection', () => {
   it('never clamps a report that has no expand command', async () => {
     const mediumReport = [
       'Office keyboard playtest is recorded, no code changed.',
-      'Alice walks off-grid on diagonals, overlaps the map bezel and north wall,',
+      'OpenAlpha walks off-grid on diagonals, overlaps the map bezel and north wall,',
       'disappears into the news desk, and the auto-path footsteps sit above her feet.',
       'Full log and frames remain available in the delivered report.',
     ].join(' ')

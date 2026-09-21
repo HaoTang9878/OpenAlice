@@ -150,7 +150,7 @@ describe('Office coworker sprite registry', () => {
     expect(reunited.get(collidingResumeId!)).toBe(newcomer.get(collidingResumeId!))
   })
 
-  it('keeps aliases intentional and unknown runtimes stable without returning Alice', () => {
+  it('keeps aliases intentional and unknown runtimes stable without returning OpenAlpha', () => {
     expect(officeCoworkerSpriteForAgent('cursor-agent')).toBe(OFFICE_COWORKER_SPRITES.codex)
     expect(officeCoworkerSpriteForAgent('omp')).toBe(OFFICE_COWORKER_SPRITES.opencode)
     expect(officeCoworkerSpriteForAgent('future-agent')).toBe(

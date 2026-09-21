@@ -45,7 +45,7 @@ interface TerminalKeyboardControllerOptions {
 }
 
 /**
- * Wires Orca's focused IME/xterm policy modules around the one OpenAlice
+ * Wires Orca's focused IME/xterm policy modules around the one OpenAlpha
  * boundary that remains: sending resolved bytes to the active PTY transport.
  */
 export function installTerminalKeyboardController(

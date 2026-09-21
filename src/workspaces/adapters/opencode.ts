@@ -189,7 +189,7 @@ function parseJsonRecord(raw: string | null): Record<string, unknown> | null {
 }
 
 async function ensureOpenCodeTuiConfigExcluded(cwd: string): Promise<void> {
-  // OpenAlice workspaces are Git repositories, but adapter tests and external
+  // OpenAlpha workspaces are Git repositories, but adapter tests and external
   // callers may prepare a plain directory. Do not manufacture a partial .git.
   try {
     if (!statSync(join(cwd, '.git')).isDirectory()) return;
@@ -204,7 +204,7 @@ async function ensureOpenCodeTuiConfigExcluded(cwd: string): Promise<void> {
 }
 
 /**
- * Select OpenCode's native terminal-derived theme for OpenAlice workspaces.
+ * Select OpenCode's native terminal-derived theme for OpenAlpha workspaces.
  * The dedicated tui.json layer is supported by OpenCode 1.16+ and has higher
  * precedence than global TUI settings. Existing native project configuration,
  * including the legacy opencode.json theme that OpenCode migrates itself,
@@ -240,7 +240,7 @@ export async function syncOpenCodeWorkspaceTheme(cwd: string): Promise<boolean> 
  * 1.17.18 (`opencode --help`, provider config, headless resume, CLI tool calls,
  * and live traderhub data; 2026-07):
  *
- *   - Tool access: OpenAlice tools are exposed through the injected
+ *   - Tool access: OpenAlpha tools are exposed through the injected
  *     `alice*` / `traderhub` CLI shims, not opencode's native MCP config.
  *     We intentionally do not set `OPENCODE_CONFIG_CONTENT`: leaving opencode's
  *     native config surface alone avoids hidden app-mode ports and keeps the
@@ -249,7 +249,7 @@ export async function syncOpenCodeWorkspaceTheme(cwd: string): Promise<boolean> 
  *   - Provider override: `opencode.json` `provider.<name>` with a custom
  *     `baseURL` + `apiKey` + a top-level default `model = "<provider>/<id>"`.
  *     Key written directly into the workspace file (same trust model as codex's
- *     `.codex/env.json`). OpenAlice owns only `provider.workspace`, the matching
+ *     `.codex/env.json`). OpenAlpha owns only `provider.workspace`, the matching
  *     top-level model, and its schema marker; unrelated opencode config survives
  *     both writes and reset.
  *
@@ -337,7 +337,7 @@ export const opencodeAdapter: CliAdapter = {
       if (ai && (ai.apiKey || ai.baseUrl)) {
         env['OPENCODE_CONFIG_CONTENT'] = JSON.stringify({
           provider: {
-            [OPENCODE_SESSION_PROVIDER_NAME]: openCodeProvider(ai, 'OpenAlice Session provider'),
+            [OPENCODE_SESSION_PROVIDER_NAME]: openCodeProvider(ai, 'OpenAlpha Session provider'),
           },
           ...(selectedModel ? { model: selectedModel } : {}),
         });
@@ -527,7 +527,7 @@ export const opencodeAdapter: CliAdapter = {
       return;
     }
 
-    const provider = openCodeProvider(cred, 'OpenAlice workspace provider');
+    const provider = openCodeProvider(cred, 'OpenAlpha workspace provider');
 
     // Top-level default model is "<provider>/<id>" so opencode resolves the
     // workspace provider without a UI model picker. The reversible state keeps

@@ -244,7 +244,7 @@ describe('agent runtime readiness helpers', () => {
     expect(runtimeProbeSucceeded(result({ exitCode: 1, assistantText: 'Hello!' }))).toBe(false);
   });
 
-  it('distinguishes clean output OpenAlice cannot decode from a real reply', () => {
+  it('distinguishes clean output OpenAlpha cannot decode from a real reply', () => {
     expect(classifyRuntimeReadinessFailure(result({
       exitCode: 0,
       stdoutTail: '{"type":"future_event","message":"started"}',

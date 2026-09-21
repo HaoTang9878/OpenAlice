@@ -46,7 +46,7 @@ describe('Office map collision', () => {
     expect(ids).toContain('operations')
   })
 
-  it('keeps Alice out of the visible service cabinet body', () => {
+  it('keeps OpenAlpha out of the visible service cabinet body', () => {
     const service = officeServiceLandmarks(layout)[1]!
     const current = { x: service.x, y: service.y + 48 }
     const move = moveAliceOnOfficeMap(current, { x: 24, y: 0 }, layout)
@@ -59,7 +59,7 @@ describe('Office map collision', () => {
     })
   })
 
-  it('stops Alice before a workstation while keeping its employee interactable', () => {
+  it('stops OpenAlpha before a workstation while keeping its employee interactable', () => {
     const pod = layout.pods[0]!
     const desk = {
       x: pod.x + OFFICE_DESK_CENTERS[0].x,
@@ -126,7 +126,7 @@ describe('Office map collision', () => {
     )).toBeLessThan(84)
   })
 
-  it('keeps Alice on the floor below the generated wall', () => {
+  it('keeps OpenAlpha on the floor below the generated wall', () => {
     const current = { x: 480, y: 144 }
     expect(moveAliceOnOfficeMap(current, { x: 0, y: -24 }, layout)).toMatchObject({
       position: current,
@@ -135,7 +135,7 @@ describe('Office map collision', () => {
     })
   })
 
-  it('keeps Alice inside the visible side and bottom floor barriers', () => {
+  it('keeps OpenAlpha inside the visible side and bottom floor barriers', () => {
     const right = moveAliceOnOfficeMap(
       { x: layout.width - 48, y: layout.height - 96 },
       { x: 48, y: 0 },
@@ -167,7 +167,7 @@ describe('Office map collision', () => {
       .toBe(false)
   })
 
-  it('stops Alice at the operations board while keeping its log interaction in range', () => {
+  it('stops OpenAlpha at the operations board while keeping its log interaction in range', () => {
     const current = { x: layout.width / 2, y: 264 }
     expect(moveAliceOnOfficeMap(current, { x: 0, y: -24 }, layout)).toMatchObject({
       position: current,

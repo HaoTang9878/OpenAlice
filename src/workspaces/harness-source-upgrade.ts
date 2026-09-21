@@ -194,7 +194,7 @@ export class HarnessSourceUpgradeManager {
       try {
         await runGit(workspace.dir, [
           '-c', 'user.email=launcher@local',
-          '-c', 'user.name=OpenAlice',
+          '-c', 'user.name=OpenAlpha',
           'merge', '--no-ff', '--no-commit', target.commit,
         ])
         await atomicWriteJson(join(workspace.dir, RECEIPT_REL), {
@@ -205,7 +205,7 @@ export class HarnessSourceUpgradeManager {
         await runGit(workspace.dir, ['add', '--', RECEIPT_REL])
         await runGit(workspace.dir, [
           '-c', 'user.email=launcher@local',
-          '-c', 'user.name=OpenAlice',
+          '-c', 'user.name=OpenAlpha',
           'commit', '-q', '-m', `harness(${template.name}): upgrade ${receipt.version} -> ${target.version}`,
         ])
         const commit = (await runGit(workspace.dir, ['rev-parse', 'HEAD'])).trim()

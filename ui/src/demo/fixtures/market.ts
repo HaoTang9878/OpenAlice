@@ -1,4 +1,4 @@
-// Real AAPL market data captured from Alice's market-data-v1 endpoints on
+// Real AAPL market data captured from OpenAlpha's market-data-v1 endpoints on
 // 2026-05-29 (FMP via the embedded provider compatibility layer). Frozen as JSON
 // fixtures — re-snapshot if a downstream contract change forces it.
 //
@@ -35,5 +35,5 @@ export const demoMarketSearchAAPL = aaplSearch
 export const demoMarketEmpty = {
   results: null,
   provider: 'demo',
-  error: 'Demo mode — only AAPL data is snapshotted. Install OpenAlice locally to query other symbols.',
+  error: 'Demo mode — only AAPL data is snapshotted. Install OpenAlpha locally to query other symbols.',
 }

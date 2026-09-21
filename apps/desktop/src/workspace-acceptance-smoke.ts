@@ -29,7 +29,7 @@ const ACCEPTANCE_MARKER = 'OPENALICE_PACKAGED_WORKSPACE_CLI_ACCEPTANCE'
 const SHELL_ISSUE_ID = 'openalice-shell-cli-contract'
 const SCHEDULED_ISSUE_ID = 'openalice-scheduled-agent-acceptance'
 const AGENT_ISSUE_ID = 'openalice-agent-cli-acceptance'
-const ASSISTANT_TEXT = 'OpenAlice Workspace CLI acceptance completed.'
+const ASSISTANT_TEXT = 'OpenAlpha Workspace CLI acceptance completed.'
 
 /**
  * Execute the release acceptance path through the same sandboxed renderer,
@@ -214,7 +214,7 @@ export async function runRendererWorkspaceAcceptanceSmoke(
           "printf '__OPENALICE_%s_OK__\\\\n' 'CLI_MANIFESTS'",
           'git rev-parse --is-inside-work-tree | grep -qx true',
           "printf '__OPENALICE_%s_OK__\\\\n' 'GIT'",
-          'alice-workspace issue create --id ' + shellIssueId + ' --title "OpenAlice shell CLI contract" >/dev/null',
+          'alice-workspace issue create --id ' + shellIssueId + ' --title "OpenAlpha shell CLI contract" >/dev/null',
           'alice-workspace issue show --id ' + shellIssueId + ' >/dev/null',
           // Split the sentinel so terminal command echo cannot satisfy it.
           "printf '__OPENALICE_%s_OK__\\\\n' 'WORKSPACE_CLI_CONTRACT'",
@@ -252,7 +252,7 @@ export async function runRendererWorkspaceAcceptanceSmoke(
           'execute the requested Workspace CLI acceptance action, then report completion.'
         const scheduledCommand = [
           'alice-workspace issue create --id ' + scheduledIssueId +
-            ' --title "OpenAlice scheduled agent acceptance"' +
+            ' --title "OpenAlpha scheduled agent acceptance"' +
             ' --assignee @new-each-run --agent pi --when ' + shellQuote(schedule) +
             ' --what ' + shellQuote(scheduledWhat) + ' >/dev/null',
           "printf '__OPENALICE_%s_OK__\\\\n' 'SCHEDULED_ISSUE'",

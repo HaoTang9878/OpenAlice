@@ -122,7 +122,7 @@ export async function getAgentCredentialReadiness(opts: {
   }
   if (!requiresWorkspaceCredential(adapter)) {
     const cfg = await readWorkspaceConfig(meta, adapter)
-    // Native runtime readiness must not become dependent on OpenAlice's vault.
+    // Native runtime readiness must not become dependent on OpenAlpha's vault.
     // The vault lookup is only metadata for identifying an existing binding.
     const credentials = cfg === null
       ? {}
@@ -189,13 +189,13 @@ export async function getAgentCredentialReadiness(opts: {
     compatibleCredentialSlugs: compatible.map(([slug]) => slug),
     injectableCredentialSlugs: [],
     settingsTarget: 'ai-provider',
-    message: `agent "${agentId}" needs a workspace AI config or an Alice credential with a remembered/default model`,
+    message: `agent "${agentId}" needs a workspace AI config or an OpenAlpha credential with a remembered/default model`,
   }
 }
 
 /**
  * Apply a credential to native project configuration for compatibility with a
- * CLI launched outside OpenAlice.
+ * CLI launched outside OpenAlpha.
  *
  * @deprecated Managed probes, interactive Sessions, WebPi, and headless runs
  * must resolve a Session runtime binding instead of calling this mutating gate.
@@ -253,8 +253,8 @@ export async function ensureAgentCredentialReady(opts: {
     : null)
   if (!chosenSlug) {
     throw new AgentCredentialError(agentId, required
-      ? `agent "${agentId}" needs a workspace AI config or an Alice credential with a remembered/default model`
-      : `the selected Alice credential cannot be injected into agent "${agentId}"`)
+      ? `agent "${agentId}" needs a workspace AI config or an OpenAlpha credential with a remembered/default model`
+      : `the selected OpenAlpha credential cannot be injected into agent "${agentId}"`)
   }
   const chosen = injectableMap.get(chosenSlug)
   if (!chosen) throw new AgentCredentialError(agentId)

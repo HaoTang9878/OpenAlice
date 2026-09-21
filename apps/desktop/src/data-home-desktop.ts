@@ -36,11 +36,11 @@ export function dataHomeErrorDetail(error: unknown): string {
 
 export async function chooseDataHomeDirectory(currentHome?: string): Promise<PreparedDataHome | null> {
   const selection = await dialog.showOpenDialog({
-    title: 'Choose an OpenAlice data location',
+    title: 'Choose an OpenAlpha data location',
     buttonLabel: 'Use this folder',
     defaultPath: currentHome ?? homedir(),
     properties: ['openDirectory', 'createDirectory'],
-    message: 'OpenAlice keeps data, Workspaces, runtime locks, credentials, and optional Broker Packs together.',
+    message: 'OpenAlpha keeps data, Workspaces, runtime locks, credentials, and optional Broker Packs together.',
   })
   const requested = selection.filePaths[0]
   if (selection.canceled || !requested) return null
@@ -52,8 +52,8 @@ export async function chooseDataHomeDirectory(currentHome?: string): Promise<Pre
       const { response } = await dialog.showMessageBox({
         type: 'warning',
         title: 'Use a non-empty folder?',
-        message: 'This folder contains files that do not look like an OpenAlice data location.',
-        detail: `${prepared.path}\n\nOpenAlice will keep those files and create its own data beside them. A dedicated empty folder is safer.`,
+        message: 'This folder contains files that do not look like an OpenAlpha data location.',
+        detail: `${prepared.path}\n\nOpenAlpha will keep those files and create its own data beside them. A dedicated empty folder is safer.`,
         buttons: ['Choose another folder', 'Use this folder'],
         defaultId: 0,
         cancelId: 0,
@@ -64,8 +64,8 @@ export async function chooseDataHomeDirectory(currentHome?: string): Promise<Pre
     return prepared
   } catch (error) {
     dialog.showErrorBox(
-      'OpenAlice — data location unavailable',
-      `${dataHomeErrorDetail(error)}\n\nChoose an existing local folder that OpenAlice can read and write.`,
+      'OpenAlpha — data location unavailable',
+      `${dataHomeErrorDetail(error)}\n\nChoose an existing local folder that OpenAlpha can read and write.`,
     )
     return null
   }
@@ -105,9 +105,9 @@ export async function resolveDesktopDataHome(options: {
     } catch (error) {
       const { response } = await dialog.showMessageBox({
         type: 'warning',
-        title: 'OpenAlice data location is unavailable',
+        title: 'OpenAlpha data location is unavailable',
         message: 'The previously selected data location cannot be opened.',
-        detail: `${preferences.selectedHome}\n\n${dataHomeErrorDetail(error)}\n\nOpenAlice will not create an empty replacement at a missing saved path.`,
+        detail: `${preferences.selectedHome}\n\n${dataHomeErrorDetail(error)}\n\nOpenAlpha will not create an empty replacement at a missing saved path.`,
         buttons: ['Choose another folder', 'Use default location', 'Quit'],
         defaultId: 0,
         cancelId: 2,
@@ -138,10 +138,10 @@ export async function resolveDesktopDataHome(options: {
     const currentPath = selected?.path ?? options.defaultHome
     const { response } = await dialog.showMessageBox({
       type: 'question',
-      title: 'Choose where OpenAlice works',
+      title: 'Choose where OpenAlpha works',
       message: preferences.askOnStartup
-        ? 'Which data location should this AliceProject use?'
-        : 'Choose an OpenAlice data location before the first Workspace opens.',
+        ? 'Which data location should this OpenAlphaProject use?'
+        : 'Choose an OpenAlpha data location before the first Workspace opens.',
       detail: `${currentPath}\n\nEach location owns its data, Workspaces, credentials, Broker Packs, and runtime locks. Separate locations can run concurrently.`,
       buttons: [currentLabel, 'Choose another folder', 'Quit'],
       defaultId: 0,

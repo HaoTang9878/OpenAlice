@@ -279,7 +279,7 @@ function transportLabel(target: SupervisorConnectionChronicleTarget): string {
 
 function serviceRows(components?: Record<string, string>): [string, string, string] {
   return (['alice', 'uta', 'connector'] as const).map((key) => {
-    const label = key === 'alice' ? 'Alice' : key === 'uta' ? 'UTA' : 'Connector'
+    const label = key === 'alice' ? 'OpenAlpha' : key === 'uta' ? 'UTA' : 'Connector'
     const value = cleanValue(components?.[key] ?? 'not reported')
     const normalized = value.toLowerCase()
     const glyph = /\b(?:ready|running|connected|healthy|live)\b/u.test(normalized)
@@ -309,7 +309,7 @@ function compactRuntimeIdentityRow(
 
 function compactServiceRow(components?: Record<string, string>): string {
   const labels = [
-    ['alice', 'Alice'],
+    ['alice', 'OpenAlpha'],
     ['uta', 'UTA'],
     ['connector', 'Conn'],
   ] as const

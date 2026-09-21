@@ -1,7 +1,7 @@
 /**
  * Declaration merge: adds `aliceId` to IBKR Contract class.
  *
- * aliceId is Alice's system-level unique asset identifier:
+ * aliceId is OpenAlpha's system-level unique asset identifier:
  *   "{utaId}|{nativeKey}"
  * e.g. "alpaca-paper|META", "bybit-main|ETH/USDT:USDT", "ibkr|265598" (conId)
  *

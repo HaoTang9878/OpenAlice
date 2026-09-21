@@ -844,13 +844,13 @@ function WorkspaceShellSection() {
 function SettingsSection() {
   return (
     <div className="mx-auto w-full max-w-[1100px]">
-      {/* Installation + current AliceProject identity */}
+      {/* Installation + current OpenAlphaProject identity */}
       <AboutOpenAliceSection />
 
       {/* Language */}
       <LanguageSection />
 
-      {/* Complete OpenAlice home + runtime lock boundary */}
+      {/* Complete OpenAlpha home + runtime lock boundary */}
       <DataHomeSection />
 
       {/* Windows-only workspace shell */}

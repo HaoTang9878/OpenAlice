@@ -220,7 +220,7 @@ export class OfficeDayUnavailableError extends Error {
 }
 
 /**
- * AliceProject-owned daily diligence state. Domain completion remains in the
+ * OpenAlphaProject-owned daily diligence state. Domain completion remains in the
  * Inbox, Issue, and Decision Desk stores; this sidecar owns only the finite
  * patrol order and exact evidence receipts for one server-local calendar day.
  */

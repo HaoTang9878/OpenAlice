@@ -1,4 +1,4 @@
-/** Secret-plane helpers for AliceProject transfer.
+/** Secret-plane helpers for OpenAlphaProject transfer.
  *
  * Secret values are deliberately kept out of the ordinary file manifest.
  * They may exist only in source-process memory, the authenticated SSH stdin

@@ -625,7 +625,7 @@ describe('POST /quick-chat — native auth and explicit credential overrides', (
     expect(spawn).toHaveBeenCalledOnce();
   });
 
-  it('uses and updates the target Workspace Ask Alice recent binding', async () => {
+  it('uses and updates the target Workspace Ask OpenAlpha recent binding', async () => {
     const dir = await mkdtemp(join(tmpdir(), 'quick-chat-settings-'));
     try {
       const settings = emptyWorkspaceRuntimeSettings();

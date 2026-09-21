@@ -21,11 +21,11 @@ import { createWorkspaceConversationControl } from '../workspaces/conversation-c
 import { sessionCoworkerLabel } from '../workspaces/session-registry.js'
 
 /**
- * MCP Plugin — exposes OpenAlice tools via Streamable HTTP, plus the CLI gateway.
+ * MCP Plugin — exposes OpenAlpha tools via Streamable HTTP, plus the CLI gateway.
  *
  *   GET/POST /mcp           Workspace-independent surface (ToolCenter).
  *                           Trading / market / news / brain / etc. — what
- *                           OpenAlice provides to any MCP client. No
+ *                           OpenAlpha provides to any MCP client. No
  *                           identity required.
  *
  *   GET/POST /mcp/:wsId     Workspace-scoped surface (WorkspaceToolCenter).

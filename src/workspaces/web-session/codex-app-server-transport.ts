@@ -55,7 +55,7 @@ export class CodexAppServerTransport implements WebSessionTransport {
 
   async start(): Promise<void> {
     await this.peer.request('initialize', {
-      clientInfo: { name: 'openalice', title: 'OpenAlice', version: '1' },
+      clientInfo: { name: 'openalice', title: 'OpenAlpha', version: '1' },
       capabilities: {},
     })
     await this.peer.notify('initialized', {})
@@ -330,7 +330,7 @@ export class CodexAppServerTransport implements WebSessionTransport {
       case 'item/tool/requestUserInput':
         return this.userInput(p)
       default: {
-        const error = new Error(`OpenAlice does not implement ${method}`) as Error & { code: number }
+        const error = new Error(`OpenAlpha does not implement ${method}`) as Error & { code: number }
         error.code = -32601
         throw error
       }

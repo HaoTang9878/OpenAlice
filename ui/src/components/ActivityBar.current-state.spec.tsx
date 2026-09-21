@@ -158,7 +158,7 @@ describe('ActivityBar current destination', () => {
     })
   })
 
-  it('leaves global toggling to the top bar without duplicating the Alice portrait when compact', () => {
+  it('leaves global toggling to the top bar without duplicating the OpenAlpha portrait when compact', () => {
     mocks.railCollapsed = true
     render(<ActivityBar open onClose={vi.fn()} />)
     const activityBar = screen.getByTestId('activity-bar')

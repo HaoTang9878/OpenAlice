@@ -14,11 +14,11 @@ describe('Supervisor terminal clipboard', () => {
   })
 
   it('caps UTF-8 content without splitting a code point', () => {
-    const payload = supervisorClipboardPayload('Alice 爱你', 8)
+    const payload = supervisorClipboardPayload('OpenAlpha 爱你', 8)
 
-    expect(payload.text).toBe('Alice ')
+    expect(payload.text).toBe('OpenAlpha ')
     expect(Buffer.byteLength(payload.text)).toBe(6)
     expect(payload.truncated).toBe(true)
-    expect(payload.sequence).toContain(Buffer.from('Alice ').toString('base64'))
+    expect(payload.sequence).toContain(Buffer.from('OpenAlpha ').toString('base64'))
   })
 })

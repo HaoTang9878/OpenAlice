@@ -24,7 +24,7 @@ export interface OptionalCarrierProbeOptions<T> {
 /**
  * One health probe contract shared by optional service carriers. Disabled is
  * an intentional state, while configured-but-unreachable is degraded. The
- * caller owns policy; this function never throws or decides to stop Alice.
+ * caller owns policy; this function never throws or decides to stop OpenAlpha.
  */
 export async function probeOptionalCarrier<T>(
   options: OptionalCarrierProbeOptions<T>,

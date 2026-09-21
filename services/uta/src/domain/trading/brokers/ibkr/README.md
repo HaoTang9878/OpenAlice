@@ -34,7 +34,7 @@ Understanding which channel we use (and don't use) is critical for debugging pri
 - **Behavior**: One-time batch of current market data. Auto-cancels after `tickSnapshotEnd`.
 - **Coverage**: Any contract, including ones you don't hold. Includes overnight session data from Blue Ocean ATS.
 - **Limitation**: Counts against TWS market data line limit (~100 concurrent). Snapshot mode is short-lived so typically not a problem.
-- **Entitlement boundary**: OpenAlice always sends `regulatorySnapshot=false`; it never opts the account into per-request paid US regulatory snapshots. Ordinary live snapshots still need the corresponding market-data entitlement. Free delayed data may be returned after `reqMarketDataType(3)`; otherwise the option overlay falls back to `updatePortfolio()` without failing the account read.
+- **Entitlement boundary**: OpenAlpha always sends `regulatorySnapshot=false`; it never opts the account into per-request paid US regulatory snapshots. Ordinary live snapshots still need the corresponding market-data entitlement. Free delayed data may be returned after `reqMarketDataType(3)`; otherwise the option overlay falls back to `updatePortfolio()` without failing the account read.
 - **Timing**: IBKR documents `tickSnapshotEnd()` at about 11 seconds. Ordinary quotes wait for that end marker with a 12.5 second timeout. Option mark refreshes may resolve earlier once both positive bid and ask ticks arrive.
 
 ### `reqMktData` — streaming mode (not currently used)

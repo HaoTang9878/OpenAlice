@@ -1,8 +1,8 @@
 /**
- * Internal provider-compatibility entry point for OpenAlice.
+ * Internal provider-compatibility entry point for OpenAlpha.
  *
  * This package is not a standalone OpenBB product or external SDK. New product
- * contracts belong to TraderHub, BarService, and OpenAlice's typed domain
+ * contracts belong to TraderHub, BarService, and OpenAlpha's typed domain
  * services; this module carries the remaining provider/model/router adapters.
  */
 

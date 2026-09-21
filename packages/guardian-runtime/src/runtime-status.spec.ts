@@ -16,11 +16,11 @@ describe('Guardian runtime status envelope', () => {
           pid: 42,
           instanceId: 'dev-instance',
           startedAt: '2026-08-07T04:00:00.000Z',
-          launchRoot: '/src/OpenAlice',
+          launchRoot: '/src/OpenAlpha',
           mode: 'foreground',
         },
         endpoints: { web: 'http://127.0.0.1:5173' },
-        provider: { kind: 'source', root: '/src/OpenAlice' },
+        provider: { kind: 'source', root: '/src/OpenAlpha' },
         startedAtMs: Date.parse('2026-08-07T04:00:00.000Z'),
         components: { alice: 'ready', uta: 'disabled', connector: 'disabled' },
         componentDetail: {

@@ -1761,9 +1761,9 @@ describe('Web surface routes', () => {
     expect(web.respond).toHaveBeenCalledWith(TOKEN, 'acp-7', 'allow_once', undefined);
     const bad = await post(app, `/ws-1/sessions/${TOKEN}/web/respond`, { requestId: 'acp-7' });
     expect(bad.status).toBe(400);
-    const answer = await post(app, `/ws-1/sessions/${TOKEN}/web/respond`, { requestId: 'q1', optionId: '', text: 'Alice' });
+    const answer = await post(app, `/ws-1/sessions/${TOKEN}/web/respond`, { requestId: 'q1', optionId: '', text: 'OpenAlpha' });
     expect(answer.status).toBe(200);
-    expect(web.respond).toHaveBeenCalledWith(TOKEN, 'q1', '', 'Alice');
+    expect(web.respond).toHaveBeenCalledWith(TOKEN, 'q1', '', 'OpenAlpha');
     const invalid = await post(app, `/ws-1/sessions/${TOKEN}/web/respond`, { requestId: 'q1', optionId: '', text: 123 });
     expect(invalid.status).toBe(400);
   });
@@ -2116,7 +2116,7 @@ describe('Workspace manager surface routes', () => {
       },
     });
     expect(result.body).toMatchObject({ session: { title: 'Map ownership.' } });
-    expect(spawnedContext.initialPrompt).toContain('OpenAlice Workspace Manager');
+    expect(spawnedContext.initialPrompt).toContain('OpenAlpha Workspace Manager');
     expect(spawnedContext.initialPrompt).toContain('User request:\nMap ownership.');
     expect(startWebSession).not.toHaveBeenCalled();
 

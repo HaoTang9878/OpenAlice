@@ -80,7 +80,7 @@ export { resolveChatWorkspaceTarget } from '../lib/chat-workspace-target'
 
 /**
  * Quick-chat landing — the "type a message → you're in" front door for the
- * "Ask Alice" activity. A new Alice Project with no Chat workspace first
+ * "Ask OpenAlpha" activity. A new OpenAlpha Project with no Chat workspace first
  * shows the shared harness setup page (same chrome as AutoQuant, without a
  * pinned version). After that, a single composer: the user types a first
  * message and hits send; `quickChat` reuses the Chat workspace, spawns a

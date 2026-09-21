@@ -150,7 +150,7 @@ function resolveIssueAssignee(
 
 /**
  * "Who creates it owns it" only applies when the caller is an actual product
- * Session that Alice can resume. Shell PTYs also carry an interactive
+ * Session that OpenAlpha can resume. Shell PTYs also carry an interactive
  * SessionRecord/resumeId for terminal bookkeeping, but they have no native
  * Agent Runtime conversation to continue. Treating those as owners creates an
  * Issue that cannot ever run; an omitted owner therefore falls back to
@@ -337,7 +337,7 @@ export const issueUpdateFactory: WorkspaceToolFactory = {
           .optional()
           .describe('@new-each-run, @new-then-resume, @human, @unassigned, @me, or an exact @resumeId.'),
         agent: z.string().min(1).nullable().optional().describe('Runtime id for @new-each-run/@new-then-resume; null inherits the Workspace default.'),
-        credential: z.string().min(1).nullable().optional().describe('OpenAlice vault slug for the fresh Session; null inherits Workspace/native auth.'),
+        credential: z.string().min(1).nullable().optional().describe('OpenAlpha vault slug for the fresh Session; null inherits Workspace/native auth.'),
         credentialSource: z.literal('native').nullable().optional().describe('Use the Agent runtime login explicitly; null inherits the Workspace headless preference.'),
         model: z.string().min(1).nullable().optional().describe('Native one-run model id; null inherits the Workspace/runtime default.'),
         effort: z.enum(MODEL_REASONING_EFFORTS).nullable().optional().describe('One-run reasoning effort; null inherits the Workspace/runtime default.'),
@@ -410,7 +410,7 @@ export const issueCommentFactory: WorkspaceToolFactory = {
         'The markdown comment is appended to the Issue’s structured JSON sidecar,',
         'signed by the current product Session when available. It never mutates',
         'the canonical What or changes the next scheduled prompt. If the Issue',
-        'has a different fixed @resumeId owner, OpenAlice asks that Session in',
+        'has a different fixed @resumeId owner, OpenAlpha asks that Session in',
         'the background and records its final reply in Activity. Human comments',
         'without a fixed owner ask the creator or a reconstructed Workspace Agent.',
         'Agent-authored comments without a fixed owner remain durable notes.',
@@ -525,7 +525,7 @@ export const issueCreateFactory: WorkspaceToolFactory = {
           .describe('Schedule shape — { kind:"at", at } | { kind:"every", every } | { kind:"cron", cron, timezone?:"local"|IANA }. Present iff the issue self-schedules.'),
         what: z.string().min(1).optional().describe('Markdown work definition; exact scheduled prompt. Defaults to title.'),
         agent: z.string().min(1).optional().describe('Adapter id when assignee is @new-each-run or @new-then-resume; an exact Session owns its runtime.'),
-        credential: z.string().min(1).optional().describe('OpenAlice vault slug to freeze into the fresh Session binding.'),
+        credential: z.string().min(1).optional().describe('OpenAlpha vault slug to freeze into the fresh Session binding.'),
         credentialSource: z.literal('native').optional().describe('Use the Agent runtime login explicitly instead of inheriting Workspace access.'),
         model: z.string().min(1).optional().describe('Native model id for the selected credential/runtime source.'),
         effort: z.enum(MODEL_REASONING_EFFORTS).optional().describe('Reasoning effort for one scheduled run.'),

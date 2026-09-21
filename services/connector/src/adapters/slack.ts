@@ -69,7 +69,7 @@ export class SlackConnectorAdapter implements ConnectorAdapter {
         const channelId = body.channel_id
         if (!channelId) return
         if (!isSlackDirectMessage(channelId)) {
-          await this.replyInChannel(channelId, 'Run this command in a direct message with the OpenAlice app.')
+          await this.replyInChannel(channelId, 'Run this command in a direct message with the OpenAlpha app.')
             .catch(() => undefined)
           return
         }
@@ -81,7 +81,7 @@ export class SlackConnectorAdapter implements ConnectorAdapter {
           reply: async (message) => { await this.replyInChannel(channelId, message) },
         }).catch(async (error) => {
           this.tracker.degraded(error)
-          await this.replyInChannel(channelId, 'Connector command failed. Check OpenAlice logs.')
+          await this.replyInChannel(channelId, 'Connector command failed. Check OpenAlpha logs.')
             .catch(() => undefined)
           return true
         })
@@ -185,11 +185,11 @@ export class SlackConnectorAdapter implements ConnectorAdapter {
       this.ownerUserId = userId
       await context.updateSettings({ ownerUserId: userId })
       this.tracker.healthy(userId)
-      await reply('Slack is linked to this OpenAlice installation.')
+      await reply('Slack is linked to this OpenAlpha installation.')
     })
     context.commands.register('status', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply(`OpenAlice Connector Service: ${context.getServiceStatus()}. Slack: ${this.health().status}.`)
+      await reply(`OpenAlpha Connector Service: ${context.getServiceStatus()}. Slack: ${this.health().status}.`)
     })
     context.commands.register('test', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
@@ -198,15 +198,15 @@ export class SlackConnectorAdapter implements ConnectorAdapter {
     })
     context.commands.register('inbox', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('Inbox browsing is not implemented for Slack yet. Open Inbox in OpenAlice.')
+      await reply('Inbox browsing is not implemented for Slack yet. Open Inbox in OpenAlpha.')
     })
     context.commands.register('settings', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('Slack settings buttons are not implemented yet. Change Inbox push in OpenAlice → Settings → Connectors.')
+      await reply('Slack settings buttons are not implemented yet. Change Inbox push in OpenAlpha → Settings → Connectors.')
     })
     context.commands.register('uta', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('UTA review buttons are not implemented for Slack yet. Approve pending trades in OpenAlice → Trading as Git.')
+      await reply('UTA review buttons are not implemented for Slack yet. Approve pending trades in OpenAlpha → Trading as Git.')
     })
   }
 

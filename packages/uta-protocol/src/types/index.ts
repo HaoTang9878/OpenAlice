@@ -1,5 +1,5 @@
 /**
- * Wire types — the shapes that travel over the UTA-Alice HTTP boundary.
+ * Wire types — the shapes that travel over the UTA-OpenAlpha HTTP boundary.
  *
  * Distinct from in-process domain types (`Contract`, `OpenOrder`, `IBroker`,
  * `TradingGit`) which live inside UTA and never cross the wire. Wire types

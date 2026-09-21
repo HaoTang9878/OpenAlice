@@ -80,13 +80,13 @@ describe('cursor composeCommand', () => {
     }))).toEqual(['cursor-agent', '--trust', '--force', '--sandbox', 'disabled', '--continue']);
   });
 
-  it('trusts Alice-managed workspaces and enables unrestricted execution', () => {
+  it('trusts OpenAlpha-managed workspaces and enables unrestricted execution', () => {
     expect(cursorAdapter.composeCommand(['cursor-agent'], ctx({ approveProject: true })))
       .toEqual(['cursor-agent', '--trust', '--force', '--sandbox', 'disabled', ]);
     expect(cursorAdapter.composeCommand(['cursor-agent'], ctx())).toEqual(['cursor-agent', '--trust', '--force', '--sandbox', 'disabled']);
   });
 
-  it('ignores Alice skills and role prompts (no native flags)', () => {
+  it('ignores OpenAlpha skills and role prompts (no native flags)', () => {
     expect(cursorAdapter.composeCommand(['cursor-agent'], ctx({
       appendSystemPrompt: 'Stay in the Workspace.',
       skills: ['/tmp/skill'],

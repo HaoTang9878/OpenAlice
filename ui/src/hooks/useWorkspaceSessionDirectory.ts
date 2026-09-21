@@ -43,7 +43,7 @@ export function useWorkspaceSessionDirectory(
 }
 
 /**
- * Directory snapshots for the desks currently visible in Ask Alice / Quant.
+ * Directory snapshots for the desks currently visible in Ask OpenAlpha / Quant.
  * Polls with the Workspace list so occupancy locks stay live.
  */
 export function useWorkspaceSessionDirectories(

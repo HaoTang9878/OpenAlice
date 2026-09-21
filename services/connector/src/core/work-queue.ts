@@ -43,7 +43,7 @@ const DEFAULT_LIMITS: Record<ConnectorWorkKind, number> = {
   uta: 20,
 }
 
-/** Private sealed queue for Connector -> Alice work. Mutations are serialized
+/** Private sealed queue for Connector -> OpenAlpha work. Mutations are serialized
  * in process and committed through atomic rename before platform callbacks are
  * allowed to acknowledge the external event. */
 export class ConnectorWorkQueue implements ConnectorWorkQueueStore {

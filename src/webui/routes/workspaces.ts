@@ -2016,7 +2016,7 @@ export function createWorkspaceRoutes(
   });
 
   // Conversational harness launch — the "type a message → you're in" front
-  // door shared by Ask Alice and AutoQuant. The harness chooses only the
+  // door shared by Ask OpenAlpha and AutoQuant. The harness chooses only the
   // Workspace template; the native Coding Agent remains the worker.
   // Body: { prompt, agent?, targetWsId?, template? }
   app.post('/quick-chat', async (c) => {
@@ -2051,7 +2051,7 @@ export function createWorkspaceRoutes(
       const rawEffort = fields['reasoningEffort'];
       if (isModelReasoningEffort(rawEffort)) reasoningEffort = rawEffort;
       // Optional: spawn into THIS existing workspace instead of today's. The
-      // chat sidebar's per-workspace "+" ("Ask Alice, but in this workspace").
+      // chat sidebar's per-workspace "+" ("Ask OpenAlpha, but in this workspace").
       const rawTarget = fields['targetWsId'];
       if (typeof rawTarget === 'string' && rawTarget.length > 0) targetWsId = rawTarget;
       const rawTemplate = fields['template'];
@@ -3028,7 +3028,7 @@ export function createWorkspaceRoutes(
 
 
   // Central credential store, surfaced to the workspace AI-config modal. The
-  // "Load from saved credential" picker reads this list; the "Save to Alice"
+  // "Load from saved credential" picker reads this list; the "Save to OpenAlpha"
   // dialog POSTs here so a hand-entered provider becomes reusable. apiKey is
   // returned so the picker can flash it into the form (same exposure as the
   // legacy agent-profiles route; both are behind the admin-token gate).

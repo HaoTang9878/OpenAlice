@@ -47,10 +47,10 @@ const openAiPreset: Preset = {
 
 const onboardingTestPreset: Preset = {
   id: 'openalice-onboarding-test',
-  label: 'OpenAlice Test Provider',
+  label: 'OpenAlpha Test Provider',
   description: 'Local mock for onboarding test mode',
   category: 'custom',
-  defaultName: 'OpenAlice Test Provider',
+  defaultName: 'OpenAlpha Test Provider',
   schema: {
     type: 'object',
     properties: {
@@ -76,7 +76,7 @@ const geminiPreset: Preset = {
   description: 'Google AI via API key',
   category: 'third-party',
   defaultName: 'Google Gemini',
-  hint: 'OpenAlice uses Google’s native Gemini API.',
+  hint: 'OpenAlpha uses Google’s native Gemini API.',
   setup: {
     apiKeyLabel: 'Google AI API key',
     apiKeyPlaceholder: 'AQ... or AIza...',
@@ -482,7 +482,7 @@ describe('CredentialModal', () => {
     await waitFor(() => expect(api.config.addCredential).toHaveBeenCalled())
     expect(api.config.addCredential).toHaveBeenCalledWith(expect.objectContaining({
       vendor: 'custom',
-      label: 'OpenAlice Test Provider',
+      label: 'OpenAlpha Test Provider',
       apiKey: 'oa_test_ok',
       lastModel: 'openalice-onboarding-test',
     }))

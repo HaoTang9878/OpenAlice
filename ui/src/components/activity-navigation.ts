@@ -73,7 +73,7 @@ export function filterNavSections(
 }
 
 export const NAV_SECTIONS: NavSection[] = [
-  // Ask Alice is the product front door. Workspaces is deliberately absent:
+  // Ask OpenAlpha is the product front door. Workspaces is deliberately absent:
   // it is the engineering container/debug surface beneath conversations.
   {
     id: 'primary',

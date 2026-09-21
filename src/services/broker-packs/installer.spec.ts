@@ -330,7 +330,7 @@ describe('broker-pack installer', () => {
   })
 
   it.each([
-    ['OpenAlice version', { catalogVersion: '0.0.0-other' }],
+    ['OpenAlpha version', { catalogVersion: '0.0.0-other' }],
     ['platform', { catalogPlatform: process.platform === 'win32' ? 'linux' : 'win32' }],
     ['architecture', { catalogArch: `${process.arch}-other` }],
   ] as const)('rejects a catalog for the wrong %s', async (_label, options) => {

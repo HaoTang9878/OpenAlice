@@ -136,7 +136,7 @@ function renderHelpMissionConsole(
     'NOW · Fast routes',
     '[ Enter ] Start / connect / open',
     '[ / ] Find any command',
-    '[ i ] Choose an AliceProject',
+    '[ i ] Choose an OpenAlphaProject',
     '',
     'SYSTEMS · ↑↓ or hover to inspect',
   ]
@@ -264,11 +264,11 @@ function renderStackedHelp(
     ? []
     : width >= 64
       ? [
-          'NOW · [ Enter ] Start/connect/open · [ / ] Find · [ i ] AliceProject',
+          'NOW · [ Enter ] Start/connect/open · [ / ] Find · [ i ] OpenAlphaProject',
         ]
       : [
           'NOW · [ Enter ] Act',
-          '[ / ] Find · [ i ] AliceProject',
+          '[ / ] Find · [ i ] OpenAlphaProject',
         ]
   const selectorRows = groupRows(groups, state)
   const lines = renderSupervisorPanel(
@@ -330,7 +330,7 @@ function helpGroups(recovery: boolean): HelpGroup[] {
         glyph: '◇',
         title: 'Exit',
         summary: 'Leave unchanged',
-        description: 'Detach without reading or mutating the incompatible AliceProject.',
+        description: 'Detach without reading or mutating the incompatible OpenAlphaProject.',
         commands: [
           { key: 'q / Esc', label: 'Detach only' },
           { key: '?', label: 'Close safe controls' },
@@ -369,11 +369,11 @@ function helpGroups(recovery: boolean): HelpGroup[] {
     },
     {
       glyph: '◇',
-      title: 'AliceProject',
+      title: 'OpenAlphaProject',
       summary: 'Shape the workspace',
       description: 'Choose identity and source here; Workspaces, trading, and chat stay in the Web UI.',
       commands: [
-        { key: 'i', label: 'Choose or create an AliceProject' },
+        { key: 'i', label: 'Choose or create an OpenAlphaProject' },
         { key: 'p', label: 'Review layered setup' },
         { key: 'c', label: 'Choose the source checkout' },
         { key: 'm', label: 'Transfer or prepare managed source' },

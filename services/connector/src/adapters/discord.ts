@@ -70,7 +70,7 @@ export class DiscordConnectorAdapter implements ConnectorAdapter {
           },
         }).catch(async (error) => {
           this.tracker.degraded(error)
-          if (!interaction.replied) await interaction.reply('Connector command failed. Check OpenAlice logs.').catch(() => undefined)
+          if (!interaction.replied) await interaction.reply('Connector command failed. Check OpenAlpha logs.').catch(() => undefined)
           return true
         })
         if (!handled && !interaction.replied) await interaction.reply('Unknown connector command.').catch(() => undefined)
@@ -175,11 +175,11 @@ export class DiscordConnectorAdapter implements ConnectorAdapter {
       this.ownerUserId = userId
       await context.updateSettings({ ownerUserId: userId })
       this.tracker.healthy(userId)
-      await reply('Discord is linked to this OpenAlice installation.')
+      await reply('Discord is linked to this OpenAlpha installation.')
     })
     context.commands.register('status', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply(`OpenAlice Connector Service: ${context.getServiceStatus()}. Discord: ${this.health().status}.`)
+      await reply(`OpenAlpha Connector Service: ${context.getServiceStatus()}. Discord: ${this.health().status}.`)
     })
     context.commands.register('test', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
@@ -188,15 +188,15 @@ export class DiscordConnectorAdapter implements ConnectorAdapter {
     })
     context.commands.register('inbox', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('Inbox browsing is not implemented for Discord yet. Open Inbox in OpenAlice.')
+      await reply('Inbox browsing is not implemented for Discord yet. Open Inbox in OpenAlpha.')
     })
     context.commands.register('settings', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('Discord settings buttons are not implemented yet. Change Inbox push in OpenAlice → Settings → Connectors.')
+      await reply('Discord settings buttons are not implemented yet. Change Inbox push in OpenAlpha → Settings → Connectors.')
     })
     context.commands.register('uta', async ({ userId, reply }) => {
       if (!this.isOwner(userId)) return reply('This command is only available to the linked owner.')
-      await reply('UTA review buttons are not implemented for Discord yet. Approve pending trades in OpenAlice → Trading as Git.')
+      await reply('UTA review buttons are not implemented for Discord yet. Approve pending trades in OpenAlpha → Trading as Git.')
     })
   }
 

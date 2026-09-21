@@ -29,7 +29,7 @@ Usage:
   openalice machine inspect [key] [--json]
 
 The local Machine is implicit. Registered SSH Machines are stored outside every
-AliceProject. inspect performs one aggregate SSH request per remote Machine and
+OpenAlphaProject. inspect performs one aggregate SSH request per remote Machine and
 never scans arbitrary remote directories.
 
 Options:

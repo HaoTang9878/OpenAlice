@@ -314,7 +314,7 @@ describe('runtime lock ownership', () => {
   })
 })
 
-describe('OpenAlice global + legacy lock composition', () => {
+describe('OpenAlpha global + legacy lock composition', () => {
   it('keeps exactly one Guardian in front of child startup and supports explicit replacement', async () => {
     controller.add(101, 10_000)
     controller.add(202, 20_000)
@@ -406,7 +406,7 @@ describe('OpenAlice global + legacy lock composition', () => {
     await lock.release()
   })
 
-  it('Guardian preflight targets the recorded Guardian tree before Alice', async () => {
+  it('Guardian preflight targets the recorded Guardian tree before OpenAlpha', async () => {
     controller.add(100, 5_000)
     controller.add(101, 10_000)
     controller.cascade.set(100, [101])

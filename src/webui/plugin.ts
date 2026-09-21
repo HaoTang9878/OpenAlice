@@ -128,7 +128,7 @@ export class WebPlugin implements Plugin {
     })
 
     // ==================== Public-mode safety net ====================
-    // Refuse to start if Alice is bound to a non-localhost interface
+    // Refuse to start if OpenAlpha is bound to a non-localhost interface
     // without an admin token configured. Prevents the "I set
     // OPENALICE_BIND_HOST=0.0.0.0 for testing and forgot auth" footgun.
     const bindHost = (process.env['OPENALICE_BIND_HOST'] ?? '127.0.0.1').trim()
@@ -137,11 +137,11 @@ export class WebPlugin implements Plugin {
       const tokenInfo = await getTokenInfo()
       if (!tokenInfo.exists && process.env['OPENALICE_DISABLE_AUTH'] !== '1') {
         throw new Error(
-          `Refusing to start: OPENALICE_BIND_HOST="${bindHost}" exposes Alice ` +
+          `Refusing to start: OPENALICE_BIND_HOST="${bindHost}" exposes OpenAlpha ` +
           `to non-localhost callers, but no admin token has been provisioned. ` +
           `Start once with OPENALICE_BIND_HOST=127.0.0.1 to generate the token, ` +
           `then re-set the bind. Set OPENALICE_DISABLE_AUTH=1 only when you ` +
-          `understand the implication (no protection at the Alice boundary).`
+          `understand the implication (no protection at the OpenAlpha boundary).`
         )
       }
     }
@@ -182,8 +182,8 @@ export class WebPlugin implements Plugin {
       return c.json({ error: err.message }, 500)
     })
 
-    // Harness web surfaces use opaque host routing. Resolve them before Alice
-    // auth/static routes so no OpenAlice cookie or API surface crosses into a
+    // Harness web surfaces use opaque host routing. Resolve them before OpenAlpha
+    // auth/static routes so no OpenAlpha cookie or API surface crosses into a
     // Harness-owned process.
     app.use('*', async (c, next) => {
       const target = this.workspaceService?.harnessSurfaces.resolveHost(c.req.header('host'))
@@ -327,7 +327,7 @@ export class WebPlugin implements Plugin {
     )
 
     // ==================== Embedded market-data compatibility HTTP ====================
-    // Remaining provider routes share Alice's port and auth boundary. New
+    // Remaining provider routes share OpenAlpha's port and auth boundary. New
     // product contracts belong to TraderHub and BarService.
     mountMarketDataCompat(app, ctx.bbEngine, {
       basePath: '/api/market-data-v1',
@@ -352,7 +352,7 @@ export class WebPlugin implements Plugin {
     if (this.config.listen === false && this.workspaceService) {
       // Electron's main UI remains app:// + IPC. Harness Studios need native
       // streaming/SSE/WS, so expose only the opaque Surface Router on a
-      // separate loopback listener; Alice APIs and UI assets are not mounted.
+      // separate loopback listener; OpenAlpha APIs and UI assets are not mounted.
       const gateway = new Hono()
       gateway.all('*', (c) => {
         const target = this.workspaceService?.harnessSurfaces.resolveHost(c.req.header('host'))

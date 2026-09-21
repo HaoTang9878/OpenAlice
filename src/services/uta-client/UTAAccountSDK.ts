@@ -1,6 +1,6 @@
 /**
  * UTAAccountSDK — HTTP-backed adapter that mimics
- * `UnifiedTradingAccount`'s public surface so Alice consumers
+ * `UnifiedTradingAccount`'s public surface so OpenAlpha consumers
  * (telegram-plugin, tool/trading, etc.) keep working unchanged after
  * UTA-split v1.
  *
@@ -67,7 +67,7 @@ export interface UTAAccountSDKDeps {
 
 /**
  * Proxy implementation. NOT a subclass of `UnifiedTradingAccount` — the
- * SDK lives in Alice and `UnifiedTradingAccount` lives in UTA after the
+ * SDK lives in OpenAlpha and `UnifiedTradingAccount` lives in UTA after the
  * physical move. They share method *shapes*, not class identity.
  */
 export class UTAAccountSDK {
@@ -100,7 +100,7 @@ export class UTAAccountSDK {
   async getHealthInfo(): Promise<BrokerHealthInfo> {
     // UTA exposes account-level health implicitly via the `/uta` list
     // (each list entry carries health info). For now return a minimal
-    // optimistic shape; tighten once Alice's SDK caches per-UTA state.
+    // optimistic shape; tighten once OpenAlpha's SDK caches per-UTA state.
     return {
       status: 'healthy',
       reach: 'readable',
@@ -362,7 +362,7 @@ export class UTAAccountSDK {
   }
 
   refreshCatalog(): Promise<void> {
-    // Catalog refresh happens internally inside UTA's 6h loop. Alice's
+    // Catalog refresh happens internally inside UTA's 6h loop. OpenAlpha's
     // SDK no-ops to keep callers working without forcing a round-trip.
     return Promise.resolve()
   }
@@ -382,7 +382,7 @@ export class UTAAccountSDK {
   }
 
   getPendingOrderIds(): Array<{ orderId: string; symbol: string }> {
-    // Used internally by the snapshot builder which lives in UTA — Alice
+    // Used internally by the snapshot builder which lives in UTA — OpenAlpha
     // shouldn't need this.
     return []
   }

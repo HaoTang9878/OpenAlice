@@ -25,7 +25,7 @@ export interface ResolveAliceProjectIdentityOptions {
 }
 
 /**
- * Resolve the top-level OpenAlice runtime identity.
+ * Resolve the top-level OpenAlpha runtime identity.
  *
  * Supervisor-launched projects carry explicit metadata. Direct dev and
  * Electron launches derive the same stable fallback from their complete home,
@@ -90,7 +90,7 @@ function normalizeProjectKey(value: string): string {
   const key = value.trim()
   if (!/^[a-z][a-z0-9_-]{0,31}$/.test(key)) {
     throw new Error(
-      'AliceProject key must begin with a lowercase letter and contain only lowercase letters, numbers, "_", or "-".',
+      'OpenAlphaProject key must begin with a lowercase letter and contain only lowercase letters, numbers, "_", or "-".',
     )
   }
   return key
@@ -99,7 +99,7 @@ function normalizeProjectKey(value: string): string {
 function normalizeDisplayName(value: string): string {
   const displayName = value.trim()
   if (displayName.length < 1 || displayName.length > 80) {
-    throw new Error('AliceProject display name must contain 1-80 characters.')
+    throw new Error('OpenAlphaProject display name must contain 1-80 characters.')
   }
   return displayName
 }
@@ -111,7 +111,7 @@ function normalizeOptionalPath(value: string | null | undefined): string | null 
 
 function defaultProjectDisplayName(key: string): string {
   if (key !== 'default') return fitDisplayName(humanizeProjectKey(key))
-  return 'Default AliceProject'
+  return 'Default OpenAlphaProject'
 }
 
 function fitDisplayName(value: string): string {

@@ -109,7 +109,7 @@ describe('Chat setup', () => {
     expect(screen.queryByPlaceholderText('Describe the task, question, or decision…')).toBeNull()
     expect(screen.queryByText('v9.9.9')).toBeNull()
     expect(screen.queryByText('Pinned Harness version')).toBeNull()
-    fireEvent.click(screen.getByRole('button', { name: 'Initialize Ask Alice' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Initialize Ask OpenAlpha' }))
     await waitFor(() => expect(mocks.initializeChat).toHaveBeenCalledOnce())
   })
 
@@ -122,7 +122,7 @@ describe('Chat setup', () => {
     mocks.useWorkspaces.mockReturnValue(failed)
     render(<ChatSetupPage />)
 
-    expect(screen.getByRole('button', { name: 'Initialize Ask Alice' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Initialize Ask OpenAlpha' })).toBeTruthy()
     expect(screen.queryByRole('heading', { name: 'Workspace templates are unavailable' })).toBeNull()
   })
 

@@ -1,4 +1,4 @@
-// OpenAlice process-local Pi provider projection.
+// OpenAlpha process-local Pi provider projection.
 // Loaded explicitly with `pi --extension`; the secret-bearing provider payload
 // arrives only through the child environment and is never written to argv or a
 // product Session record.
@@ -17,7 +17,7 @@ export default function openAliceSessionProvider(pi: {
     || typeof provider !== 'object'
     || Array.isArray(provider)
   ) {
-    throw new Error('Invalid OpenAlice Pi Session provider projection')
+    throw new Error('Invalid OpenAlpha Pi Session provider projection')
   }
   const models = Array.isArray((provider as Record<string, unknown>)['models'])
     ? (provider as Record<string, unknown>)['models'] as Array<Record<string, unknown>>

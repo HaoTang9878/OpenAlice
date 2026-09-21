@@ -126,10 +126,10 @@ describe('Telegram UTA controls', () => {
     const resolution = transitionTelegramUta(undefined, { kind: 'refresh' }, { isOwner: true })
     expect(resolution).toMatchObject({ kind: 'enqueue', action: 'review' })
     if (resolution.kind !== 'enqueue') return
-    expect(resolution.form.text).toContain('Asking OpenAlice')
+    expect(resolution.form.text).toContain('Asking OpenAlpha')
     expect(resolution.session.view).toEqual({
       kind: 'loading',
-      reason: 'Asking OpenAlice for the current UTA review…',
+      reason: 'Asking OpenAlpha for the current UTA review…',
     })
   })
 

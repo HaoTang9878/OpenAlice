@@ -194,7 +194,7 @@ export function createTradingRoutes(ctx: UTAEngineContext) {
   // Setup-wizard probe: instantiate a broker from the supplied preset
   // config, connect, query account + positions to prove credentials are
   // valid, then disconnect. Ephemeral — does NOT register the broker
-  // with UTAManager. Alice's `/api/trading/config/test-connection`
+  // with UTAManager. OpenAlpha's `/api/trading/config/test-connection`
   // endpoint forwards here.
   app.post('/test-connection', async (c) => {
     let broker: { init: () => Promise<void>; getAccount: () => Promise<unknown>; getPositions: () => Promise<unknown>; close: () => Promise<void> } | null = null

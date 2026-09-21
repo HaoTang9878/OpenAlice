@@ -1,7 +1,7 @@
 /**
  * Offline model-semantics registry.
  *
- * Credentials answer "how can Alice reach this provider?". This registry
+ * Credentials answer "how can OpenAlpha reach this provider?". This registry
  * answers the separate question "what does this exact model support?". Keep
  * fields optional: an absent fact is unknown, never an implicit `false`.
  *
@@ -94,7 +94,7 @@ const GEMINI_3_CONTEXT = 1_048_576
  * GLM 5.2's reasoning capability is also covered by the provider announcement;
  * its exact context limit is intentionally omitted because public surfaces do
  * not currently agree. Kimi K2.7's required mode is additionally verified by
- * OpenAlice's live provider probe (the API rejects `thinking: disabled`).
+ * OpenAlpha's live provider probe (the API rejects `thinking: disabled`).
  */
 export const MODEL_SEMANTICS_BY_VENDOR: Registry = {
   anthropic: {

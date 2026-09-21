@@ -2,7 +2,7 @@
  * Machine-wide registry for SSH hosts shown by the Supervisor fleet.
  *
  * This document lives beneath the Supervisor root, outside every selectable
- * AliceProject home. It stores only OpenSSH connection metadata; credentials,
+ * OpenAlphaProject home. It stores only OpenSSH connection metadata; credentials,
  * private-key bytes, host keys, and remote project state never belong here.
  */
 import { randomUUID } from 'node:crypto'
@@ -204,7 +204,7 @@ export function parseMachineRegistry(value: unknown): MachineRegistryDocument {
       && root['schemaVersion'] > MACHINE_SCHEMA_VERSION
     ) {
       throw machineRegistryError(
-        `Machine registry schema ${String(root['schemaVersion'])} requires a newer OpenAlice.`,
+        `Machine registry schema ${String(root['schemaVersion'])} requires a newer OpenAlpha.`,
         'ENEWERMACHINECONFIG',
       )
     }

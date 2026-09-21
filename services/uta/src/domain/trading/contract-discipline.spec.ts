@@ -27,7 +27,7 @@ describe('SecType taxonomy', () => {
       // IBKR canonical taxonomy (mirrors TWS API)
       'STK', 'OPT', 'FUT', 'FOP', 'IND', 'CASH', 'BOND', 'CMDTY',
       'WAR', 'IOPT', 'FUND', 'BAG', 'NEWS', 'CFD', 'CRYPTO',
-      // OpenAlice extension (only allowed deviation from IBKR)
+      // OpenAlpha extension (only allowed deviation from IBKR)
       'CRYPTO_PERP',
     ])
   })

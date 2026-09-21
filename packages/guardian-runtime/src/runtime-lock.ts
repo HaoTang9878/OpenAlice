@@ -91,8 +91,8 @@ export class RuntimeAlreadyRunningError extends Error {
   constructor(readonly inspection: RuntimeLockInspection) {
     const owner = inspection.owner
     super(owner
-      ? `OpenAlice ${owner.launcher} is already running as pid ${owner.pid} (last heartbeat ${owner.heartbeatAt})`
-      : `OpenAlice runtime lock is not available: ${inspection.lockDir} (${inspection.reason})`)
+      ? `OpenAlpha ${owner.launcher} is already running as pid ${owner.pid} (last heartbeat ${owner.heartbeatAt})`
+      : `OpenAlpha runtime lock is not available: ${inspection.lockDir} (${inspection.reason})`)
     this.name = 'RuntimeAlreadyRunningError'
   }
 }
@@ -262,7 +262,7 @@ export async function inspectOpenAliceInstance(opts: PrepareOpenAliceRuntimeOpti
 }
 
 /** Acquire the control-plane singleton before a Guardian reads or mutates the
- * selected home, then reconcile any standalone/orphaned Alice writer. */
+ * selected home, then reconcile any standalone/orphaned OpenAlpha writer. */
 export async function acquireGuardianRuntime(opts: GuardianRuntimeOptions): Promise<RuntimeProcessLock> {
   const guardianLock = await acquireRuntimeLock(guardianLockDir(opts.userDataHome), {
     ...opts,
@@ -279,8 +279,8 @@ export async function acquireGuardianRuntime(opts: GuardianRuntimeOptions): Prom
 
 /**
  * Guardian preflight. It never deletes a live owner's lock: takeover first
- * terminates the recorded process tree and waits for the Alice owner to exit.
- * The next Alice process performs the atomic stale-lock reclamation itself.
+ * terminates the recorded process tree and waits for the OpenAlpha owner to exit.
+ * The next OpenAlpha process performs the atomic stale-lock reclamation itself.
  */
 export async function prepareOpenAliceRuntime(opts: PrepareOpenAliceRuntimeOptions): Promise<RuntimeLockInspection[]> {
   const inspections = await inspectOpenAliceRuntime(opts)
@@ -298,7 +298,7 @@ export async function recoverRuntimeOwner(
 ): Promise<void> {
   const controller = opts.processController ?? defaultProcessController
   if (owner.machineId && owner.machineId !== await controller.machineId()) {
-    throw new Error(`OpenAlice owner ${owner.pid} belongs to another machine; refusing to signal it`)
+    throw new Error(`OpenAlpha owner ${owner.pid} belongs to another machine; refusing to signal it`)
   }
   if (!controller.isAlive(owner.pid)) return
   if (!(await isSameProcess(owner.pid, owner.processStartedAt, controller))) return
@@ -316,7 +316,7 @@ export async function recoverRuntimeOwner(
     await terminateProcessTree(owner.pid, { controller })
   }
   if (controller.isAlive(owner.pid)) {
-    throw new Error(`OpenAlice owner pid ${owner.pid} is still alive; refusing to unlock`)
+    throw new Error(`OpenAlpha owner pid ${owner.pid} is still alive; refusing to unlock`)
   }
 }
 

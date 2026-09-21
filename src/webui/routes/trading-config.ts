@@ -338,7 +338,7 @@ export function createTradingConfigRoutes(ctx: EngineContext) {
 
   // ==================== Test Connection ====================
   // BFF passthrough — the actual broker instantiation lives in UTA
-  // (it owns broker code). Alice forwards the wizard's payload over.
+  // (it owns broker code). OpenAlpha forwards the wizard's payload over.
 
   app.post('/test-connection', async (c) => {
     const policy = ctx.tradingModePolicy()

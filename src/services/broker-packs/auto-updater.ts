@@ -1,5 +1,5 @@
 /**
- * Reconcile previously installed Broker Packs with the running OpenAlice
+ * Reconcile previously installed Broker Packs with the running OpenAlpha
  * release without turning optional integrations into implicit installs.
  *
  * A compatible older Pack remains loadable while the replacement downloads.
@@ -95,7 +95,7 @@ export function scheduleInstalledBrokerPackReconciliation(): void {
       .then((result) => {
         if (result.updated.length > 0) {
           console.log(
-            `[broker-packs] updated ${result.updated.join(', ')} for OpenAlice ${getCurrentVersion()}`,
+            `[broker-packs] updated ${result.updated.join(', ')} for OpenAlpha ${getCurrentVersion()}`,
           )
         }
         for (const failure of result.failed) {

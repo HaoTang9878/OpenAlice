@@ -4,14 +4,14 @@ import { describe, expect, it } from 'vitest'
 
 import { createAliceProjectRoutes } from './alice-project.js'
 
-describe('AliceProject routes', () => {
+describe('OpenAlphaProject routes', () => {
   it('projects the stable identity of the complete-home runtime boundary', async () => {
     const response = await createAliceProjectRoutes({
       home: '/tmp/openalice-project-a',
       appRoot: '/tmp/openalice-source-a',
       env: {
         OPENALICE_PROJECT_KEY: 'research',
-        OPENALICE_PROJECT_NAME: 'Research AliceProject',
+        OPENALICE_PROJECT_NAME: 'Research OpenAlphaProject',
       },
     }).request('/')
 
@@ -20,7 +20,7 @@ describe('AliceProject routes', () => {
       project: {
         id: expect.stringMatching(/^alice-project-/),
         key: 'research',
-        displayName: 'Research AliceProject',
+        displayName: 'Research OpenAlphaProject',
         home: resolve('/tmp/openalice-project-a'),
         appRoot: resolve('/tmp/openalice-source-a'),
         product: 'trader',

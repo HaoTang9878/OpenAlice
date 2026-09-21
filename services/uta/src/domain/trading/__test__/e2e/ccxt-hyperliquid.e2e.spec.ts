@@ -1,7 +1,7 @@
 /**
  * CcxtBroker e2e — real orders against Hyperliquid testnet.
  *
- * Reads Alice's config, picks the first CCXT Hyperliquid account on a
+ * Reads OpenAlpha's config, picks the first CCXT Hyperliquid account on a
  * sandbox (testnet) platform. If none configured, entire suite skips.
  *
  * Required configuration in data/config/accounts.json:

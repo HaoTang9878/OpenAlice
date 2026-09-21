@@ -15,7 +15,7 @@ runs governed Studies and Research Sessions, commits research changes, and
 returns evidence-bound Reports or Dossiers through ordinary Agent
 communication.
 
-OpenAlice supplies the native Agent Session, collaboration log, peer
+OpenAlpha supplies the native Agent Session, collaboration log, peer
 conversation, Inbox, market-data tools, and optional UTA access around the
 desk. It does not reproduce AutoQuant's Project, Study, Session, Run, Report,
 or Dossier lifecycle.
@@ -40,9 +40,9 @@ The Coding Agent should:
 4. clarify caller-owned ambiguity through ordinary conversation;
 5. create or continue the appropriate Project and maintain its research brief;
 6. return useful positive or negative evidence through the delegating Agent or
-   OpenAlice Inbox.
+   OpenAlpha Inbox.
 
-AutoQuant's own `AGENTS.md` remains authoritative inside the desk. OpenAlice
+AutoQuant's own `AGENTS.md` remains authoritative inside the desk. OpenAlpha
 injects discoverable collaboration, market-data, Inbox, and UTA skills without
 replacing that instruction file.
 
@@ -50,7 +50,7 @@ replacing that instruction file.
 
 - The Coding Agent owns dependency installation and quantitative iteration.
 - AutoQuant owns historical research truth and durable evidence.
-- OpenAlice owns Workspace/Agent lifecycle and authenticated collaboration.
+- OpenAlpha owns Workspace/Agent lifecycle and authenticated collaboration.
 - UTA alone owns live accounts, approvals, and trading writes.
 - Existing Auto-Quant Classic Workspaces are not migrated or reinterpreted.
 - Harness upgrades are never automatic; create-time source selection is exact.

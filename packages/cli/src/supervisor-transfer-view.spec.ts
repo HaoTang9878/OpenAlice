@@ -18,14 +18,14 @@ describe('Supervisor Transfer Flight Deck', () => {
   it('pairs the full flight path with a wide Mission Brief', () => {
     const rendered = renderSupervisorTransferFlightDeck({
       phase: 'credentials',
-      sourceName: 'Default AliceProject',
+      sourceName: 'Default OpenAlphaProject',
       destinationName: 'Cloud Dev',
       content: ['Credentials', '', '› Transfer and re-seal', '  Leave credentials behind'],
       message: 'Choose how private values cross the SSH boundary.',
     }, 100)
     const output = rendered.lines.join('\n')
     expect(output).toContain('Flight Deck · 4/8 · SECRETS')
-    expect(output).toContain('Mission Brief · Default AliceProject → Cloud Dev')
+    expect(output).toContain('Mission Brief · Default OpenAlphaProject → Cloud Dev')
     expect(output).toContain('✓ 03 Remote Home')
     expect(output).toContain('◆ 04 Credentials')
     expect(output).toContain('· 05 Issue Owners')
@@ -40,7 +40,7 @@ describe('Supervisor Transfer Flight Deck', () => {
   it('compresses completed, current, and next stages above a narrow Brief', () => {
     const rendered = renderSupervisorTransferFlightDeck({
       phase: 'home',
-      sourceName: 'Default AliceProject',
+      sourceName: 'Default OpenAlphaProject',
       destinationName: 'Cloud',
       content: ['Destination complete Home', '', '/srv/alice'],
       message: 'Must be a new absolute POSIX path.',
@@ -48,7 +48,7 @@ describe('Supervisor Transfer Flight Deck', () => {
     const output = rendered.lines.join('\n')
     expect(output).toContain('Transfer Flight Deck · 3/8 · LOCATION')
     expect(output).toContain('✓ Project ID  ◆ Remote Home  → Credentials')
-    expect(output).toContain('Mission Brief · Default AliceProject → Cloud')
+    expect(output).toContain('Mission Brief · Default OpenAlphaProject → Cloud')
     expect(output).toContain('◆ SAFETY · Remote Home')
     expect(rendered.lines).toHaveLength(11)
     expect(rendered.contentFirstRow).toBe(6)
@@ -68,7 +68,7 @@ describe('Supervisor Transfer Flight Deck', () => {
         '',
         '◆ [ Enter ] Choose  │  [ Esc ] Back',
       ],
-      message: 'Choose the SSH Machine that will own the new AliceProject.',
+      message: 'Choose the SSH Machine that will own the new OpenAlphaProject.',
     }, 44)
     const output = rendered.lines.join('\n')
 
@@ -110,14 +110,14 @@ describe('Supervisor Transfer Flight Deck', () => {
 
   it('projects entry controls as semantic Mission Console content', () => {
     expect(renderSupervisorTransferInput(
-      'Destination AliceProject key',
+      'Destination OpenAlphaProject key',
       ['> research'],
-      'Existing remote AliceProjects are never replaced.',
+      'Existing remote OpenAlphaProjects are never replaced.',
     )).toEqual([
-      '◆ Destination AliceProject key',
+      '◆ Destination OpenAlphaProject key',
       '> research',
       '',
-      'Existing remote AliceProjects are never replaced.',
+      'Existing remote OpenAlphaProjects are never replaced.',
       '',
       '◆ [ Enter ] Continue  │  [ Esc ] Back',
     ])
@@ -148,7 +148,7 @@ describe('Supervisor Transfer Flight Deck', () => {
     expect(planning.every((line) => displayWidth(line) <= 44)).toBe(true)
 
     const review = renderSupervisorTransferReview([
-      'Review AliceProject transfer',
+      'Review OpenAlphaProject transfer',
       '',
       'From      Research (research)',
       'To        cloud / Research',
@@ -160,7 +160,7 @@ describe('Supervisor Transfer Flight Deck', () => {
     expect(review[0]).toBe('◆ Transfer manifest · READY')
     expect(review).toContain('✓ Boundaries checked; ready to transfer.')
     expect(review).toContain('◆ [ Enter ] Transfer  │  [ Esc ] Cancel')
-    expect(review.join('\n')).not.toContain('Review AliceProject transfer')
+    expect(review.join('\n')).not.toContain('Review OpenAlphaProject transfer')
   })
 
   it('renders responsive streaming, recovery, and arrival status cards', () => {
@@ -185,14 +185,14 @@ describe('Supervisor Transfer Flight Deck', () => {
     expect(recovery.every((line) => displayWidth(line) <= 38)).toBe(true)
 
     const arrival = renderSupervisorTransferArrival([
-      'AliceProject transfer complete',
+      'OpenAlphaProject transfer complete',
       '',
       'Cloud / research',
       '/home/alice/.openalice-research',
       '',
       '[ s ] Start · [ o ] Connect/Open · [ Enter ] Done',
     ], 56)
-    expect(arrival[0]).toBe('✓ AliceProject arrived · PUBLISHED')
+    expect(arrival[0]).toBe('✓ OpenAlphaProject arrived · PUBLISHED')
     expect(arrival).toContain('◆ Remote Runtime is stopped · source unchanged')
     expect(arrival).toContain('◆ [ s ] Start  │  [ o ] Open  │  [ Enter ] Done')
   })

@@ -36,7 +36,7 @@ describe('Supervisor confirmation modal', () => {
       action: 'update' as const,
       title: 'Confirm Update',
       meta: '0.92.0',
-      prompt: 'Install OpenAlice 0.92.0?',
+      prompt: 'Install OpenAlpha 0.92.0?',
       impact: ['The running Supervisor will not reload.'],
       confirmLabel: 'Install update',
       cancelLabel: 'Not now',
@@ -66,7 +66,7 @@ describe('Supervisor confirmation modal', () => {
       action: 'update',
       title: 'Confirm Update',
       meta: '0.92.0-beta.1',
-      prompt: 'Switch stable → beta and install OpenAlice 0.92.0-beta.1?',
+      prompt: 'Switch stable → beta and install OpenAlpha 0.92.0-beta.1?',
       impact: [
         'Current CLI: 0.91.0-beta.3.',
         'The release installer is downloaded, SHA-256 verified, then the installed command is atomically replaced.',

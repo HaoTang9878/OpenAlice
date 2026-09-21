@@ -76,7 +76,7 @@ function maybeHandleOnboardingMockCredentialTest(body: {
   if (body.apiKey.trim() !== credential.apiKey) {
     return { ok: false, error: `Use the onboarding test key "${credential.apiKey}".` }
   }
-  return { ok: true, response: 'OpenAlice onboarding mock credential is ready.' }
+  return { ok: true, response: 'OpenAlpha onboarding mock credential is ready.' }
 }
 
 /** Config routes: GET /, PUT /:section, profile CRUD, presets, test */
@@ -108,7 +108,7 @@ export function createConfigRoutes(opts?: ConfigRouteOpts) {
 
   // ==================== Credential Vault ====================
   //
-  // Alice's central api-key credentials — resolved into per-process Session
+  // OpenAlpha's central api-key credentials — resolved into per-process Session
   // bindings when a Workspace launch explicitly selects one.
   // Subscription logins (claude login / codex login) are NOT stored here; they
   // live in the CLI's own auth. The list never returns the raw key (only

@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { resolve } from 'node:path'
 
 /**
- * Standalone CLI projection of the AliceProject identity contract.
+ * Standalone CLI projection of the OpenAlphaProject identity contract.
  *
  * The public CLI installer deliberately ships without the monorepo package
  * graph, so this tiny module mirrors `@traderalice/guardian-runtime` rather
@@ -69,7 +69,7 @@ export function aliceProjectEnvironment(project: AliceProjectIdentity): NodeJS.P
 
 function normalizeProjectId(value: string): string {
   if (!/^alice-project-[a-z0-9][a-z0-9_-]{7,95}$/.test(value)) {
-    throw new Error('OPENALICE_PROJECT_ID is not a valid AliceProject id.')
+    throw new Error('OPENALICE_PROJECT_ID is not a valid OpenAlphaProject id.')
   }
   return value
 }
@@ -77,7 +77,7 @@ function normalizeProjectId(value: string): string {
 function normalizeProjectKey(value: string): string {
   const key = value.trim()
   if (!/^[a-z][a-z0-9_-]{0,31}$/.test(key)) {
-    throw new Error('AliceProject key must begin with a lowercase letter and use only letters, numbers, "_", or "-".')
+    throw new Error('OpenAlphaProject key must begin with a lowercase letter and use only letters, numbers, "_", or "-".')
   }
   return key
 }
@@ -85,14 +85,14 @@ function normalizeProjectKey(value: string): string {
 function normalizeDisplayName(value: string): string {
   const displayName = value.trim()
   if (displayName.length < 1 || displayName.length > 80) {
-    throw new Error('AliceProject display name must contain 1-80 characters.')
+    throw new Error('OpenAlphaProject display name must contain 1-80 characters.')
   }
   return displayName
 }
 
 function defaultProjectDisplayName(key: string): string {
   if (key !== 'default') return fitDisplayName(humanizeProjectKey(key))
-  return 'Default AliceProject'
+  return 'Default OpenAlphaProject'
 }
 
 function fitDisplayName(value: string): string {

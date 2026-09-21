@@ -20,7 +20,7 @@ export function registerConnectorModelRoutes(app: Hono, service: () => Workspace
     try {
       const request = connectorModelRequestSchema.parse(await c.req.json())
       const svc = service()
-      if (!svc) throw new Error('Alice is not ready')
+      if (!svc) throw new Error('OpenAlpha is not ready')
       const connectorId = c.req.param('connectorId')
       const desk = await svc.connectorDesk(connectorId)
       const resumeId = desk && issueAssigneeResumeId(desk.issue.assignee)
@@ -31,7 +31,7 @@ export function registerConnectorModelRoutes(app: Hono, service: () => Workspace
       const adapter = svc.adapters.get(identity.agent)
       if (!adapter?.capabilities.aiProvider) throw new Error('This runtime does not support managed model selection.')
       const binding = identity.runtimeBinding
-      if (!binding) throw new Error('This Session has no AI binding. Open its settings in OpenAlice first.')
+      if (!binding) throw new Error('This Session has no AI binding. Open its settings in OpenAlpha first.')
       const revision = revisionOf(binding)
       if ((request.resumeId && request.resumeId !== resumeId) || (request.revision && request.revision !== revision)) {
         throw new Error('Session or configuration changed. Reopen /model before saving.')
@@ -43,7 +43,7 @@ export function registerConnectorModelRoutes(app: Hono, service: () => Workspace
         credential: binding.credential.source === 'vault' ? `vault:${binding.credential.credentialSlug}` : binding.credential.source,
         model: binding.model ?? null, effort: binding.reasoningEffort ?? null,
       }
-      if (request.selection && !credentials.some(row => row.id === selected.credential)) throw new Error('Select a compatible credential in OpenAlice first.')
+      if (request.selection && !credentials.some(row => row.id === selected.credential)) throw new Error('Select a compatible credential in OpenAlpha first.')
       const catalog = runtimeModelOptions({ agent: identity.agent,
         credential: selected.credential === 'native' ? null : vault[selected.credential.slice(6)] ?? null,
         defaultModel: selected.credential === (binding.credential.source === 'vault' ? `vault:${binding.credential.credentialSlug}` : binding.credential.source) ? binding.model ?? null : null,

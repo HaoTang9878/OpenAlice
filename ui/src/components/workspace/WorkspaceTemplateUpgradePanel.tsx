@@ -131,7 +131,7 @@ export function WorkspaceTemplateUpgradePanel({
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 text-[12px] font-semibold text-muted-foreground">
                     <FileDiff size={14} />
-                    {projection ? projection.skill : layer === 'alice-harness' ? 'Alice Harness' : t('workspace.upgradeManagedAssets')}
+                    {projection ? projection.skill : layer === 'alice-harness' ? 'OpenAlpha Harness' : t('workspace.upgradeManagedAssets')}
                   </div>
                   <div className="mt-2 flex flex-wrap items-center gap-2 text-[18px] font-semibold text-foreground">
                     {projection ? t(`skillManager.${projection.action}`) : <>
@@ -236,7 +236,7 @@ export function WorkspaceTemplateUpgradePanel({
                   <Button type="button" variant="outline" className="mt-3" onClick={() => {
                     openOrFocus({ kind: 'chat-landing', params: {
                       targetWsId: wsId,
-                      initialPrompt: `Upgrade this Workspace's ${layer === 'alice-harness' ? 'Alice Harness Skills' : 'managed template files'} to the current Project version. Run alice ${layer === 'alice-harness' ? 'harness' : 'template'} upgrade${projection ? ` --skill ${projection.skill} --action ${projection.action}` : ''} --mode detailed. Git could not merge some edits automatically. Compare the base, local and incoming files; preserve my custom intent while adopting current instructions and CLI syntax. Edit the conflicting files, preview again, then apply the same scoped command using --keep-workspace for files you resolved. Do not change unrelated files or Skill enablement preferences.`,
+                      initialPrompt: `Upgrade this Workspace's ${layer === 'alice-harness' ? 'OpenAlpha Harness Skills' : 'managed template files'} to the current Project version. Run alice ${layer === 'alice-harness' ? 'harness' : 'template'} upgrade${projection ? ` --skill ${projection.skill} --action ${projection.action}` : ''} --mode detailed. Git could not merge some edits automatically. Compare the base, local and incoming files; preserve my custom intent while adopting current instructions and CLI syntax. Edit the conflicting files, preview again, then apply the same scoped command using --keep-workspace for files you resolved. Do not change unrelated files or Skill enablement preferences.`,
                     } })
                     onClose()
                   }}>{t('workspace.upgradeResolveInChat')}</Button>

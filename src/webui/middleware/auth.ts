@@ -1,6 +1,6 @@
 /**
  * Auth middleware — the single gate between the public internet and the
- * rest of Alice's HTTP surface.
+ * rest of OpenAlpha's HTTP surface.
  *
  * Order of operations on every request:
  *   1. Public allowlist  — `/api/auth/*`, `/api/version`, static assets,
@@ -74,7 +74,7 @@ export function createAuthMiddleware(opts: AuthMiddlewareOptions): MiddlewareHan
 
     // Localhost passthrough — only honored when no trusted proxy is
     // configured. With a trusted proxy in front, the proxy IS at 127.0.0.1
-    // from Alice's view, so trusting "localhost requests" would let every
+    // from OpenAlpha's view, so trusting "localhost requests" would let every
     // public request through. See safe/playbooks/03-localhost-spoofing.md.
     if (trustedProxies.size === 0) {
       const clientIp = getSocketRemoteAddress(c)
@@ -148,7 +148,7 @@ export function isLoopbackIp(ip: string): boolean {
   return false
 }
 
-/** Browser origins that are owned by a local OpenAlice surface. This keeps
+/** Browser origins that are owned by a local OpenAlpha surface. This keeps
  * localhost, Vite, and the packaged Electron app frictionless without letting
  * an arbitrary public page inherit the socket-level loopback bypass (including
  * while an SSH tunnel is open). */

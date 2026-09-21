@@ -2,7 +2,7 @@
  * The app-global terminal appearance and renderer → headless view bridge.
  *
  * The query-relevant composition follows stablyai/orca's implementation
- * (MIT, Lovecast Inc.). OpenAlice's source theme is its semantic CSS card, so
+ * (MIT, Lovecast Inc.). OpenAlpha's source theme is its semantic CSS card, so
  * the product and terminal share one color vocabulary instead of two stores.
  */
 import { useMemo } from 'react'

@@ -267,7 +267,7 @@ export function registerOpenAliceIpc(opts: OpenAliceIpcOptions): void {
           connectionId,
           event: 'close',
           code: 1011,
-          reason: 'Alice IPC unavailable',
+          reason: 'OpenAlpha IPC unavailable',
         })
         ptyConnections.delete(connectionId)
         return
@@ -342,7 +342,7 @@ export function registerOpenAliceIpc(opts: OpenAliceIpcOptions): void {
 
 export async function fetchAliceWebRequest(request: Request, child: ChildProcess | null, timeoutMs = 30_000): Promise<Response> {
   if (!child || !child.connected) {
-    return new Response('Alice IPC unavailable', { status: 503 })
+    return new Response('OpenAlpha IPC unavailable', { status: 503 })
   }
   const id = randomId()
   const method = request.method.toUpperCase()
@@ -353,7 +353,7 @@ export async function fetchAliceWebRequest(request: Request, child: ChildProcess
   return new Promise<Response>((resolvePromise, rejectPromise) => {
     const timer = setTimeout(() => {
       pendingWebRequests.delete(id)
-      rejectPromise(new Error(`Alice IPC request timed out: ${method} ${request.url}`))
+      rejectPromise(new Error(`OpenAlpha IPC request timed out: ${method} ${request.url}`))
     }, timeoutMs)
     pendingWebRequests.set(id, { resolve: resolvePromise, reject: rejectPromise, timer })
     child.send({

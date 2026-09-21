@@ -8,7 +8,7 @@
  *
  * HTML is a human-facing presentation asset. It uses an isolated static-report
  * iframe so page-level CSS and SVG render faithfully without joining the
- * OpenAlice document or gaining script/network privileges.
+ * OpenAlpha document or gaining script/network privileges.
  */
 
 import type { ReactElement } from 'react'

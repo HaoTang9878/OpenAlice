@@ -68,7 +68,7 @@ describe('workspace_template_upgrade', () => {
     expect(templateUpgrades.apply).toHaveBeenCalledWith('ws-1', { planDigest: 'digest-1', projection: { skill: 'alice', action: 'update' } })
   })
 
-  it('applies Alice Harness configuration changes at the same source version', async () => {
+  it('applies OpenAlpha Harness configuration changes at the same source version', async () => {
     const { tool, templateUpgrades } = setup(plan({ template: 'alice-harness', fromVersion: '1.0.0', toVersion: '1.0.0' }))
     const result = await run(tool, { apply: true, mode: 'summary' })
     expect(result.action).toBe('applied')

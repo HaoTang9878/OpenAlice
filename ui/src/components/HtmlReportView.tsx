@@ -4,7 +4,7 @@
  * HTML reports are presentation assets, not trusted application UI. They run
  * in an origin-less sandbox with no scripts, forms, navigation, or network.
  * Inline CSS, SVG, and data images remain available so a self-contained report
- * can keep its intended visual hierarchy without reaching outside OpenAlice.
+ * can keep its intended visual hierarchy without reaching outside OpenAlpha.
  */
 
 import DOMPurify from 'dompurify'

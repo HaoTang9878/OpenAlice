@@ -54,13 +54,13 @@ export interface EngineContext {
    *  (Phase 3) the /api/bars chart route. */
   barService: BarService
   /** Reference-data contract (low-frequency boards: movers, macro, calendar,
-   *  …). OpenAlice's own standard replacing the OpenBB-compatible
+   *  …). OpenAlpha's own standard replacing the OpenBB-compatible
    *  passthrough; the future hosted-hub seam. Served at /api/reference. */
   reference: ReferenceDataService
 
   // Trading — HTTP-backed SDK that talks to the co-located UTA service.
   // FxService and SnapshotService live entirely inside UTA after Step 6;
-  // anything Alice used to read off `ctx.fxService` / `ctx.snapshotService`
+  // anything OpenAlpha used to read off `ctx.fxService` / `ctx.snapshotService`
   // now goes through the SDK (e.g. `await utaManager.getAggregatedEquity()`
   // for FX-converted totals).
   utaManager: UTAManagerSDK

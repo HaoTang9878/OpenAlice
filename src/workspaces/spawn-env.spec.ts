@@ -159,7 +159,7 @@ describe('buildSpawnEnv', () => {
     }
   })
 
-  it('prepends OpenAlice shim, managed Pi, then managed toolchain paths', () => {
+  it('prepends OpenAlpha shim, managed Pi, then managed toolchain paths', () => {
     const root = mkdtempSync(join(tmpdir(), 'openalice-managed-runtime-'))
     try {
       const shim = join(root, 'cli-bin')
@@ -202,7 +202,7 @@ describe('buildSpawnEnv', () => {
         PATH: '/usr/bin:/bin',
         OPENALICE_WORKSPACE_CLI_BIN_PATH: shim,
         OPENALICE_MANAGED_PI_PATH: piCli,
-        OPENALICE_MANAGED_PI_NODE_PATH: '/Applications/OpenAlice.app/Contents/MacOS/OpenAlice',
+        OPENALICE_MANAGED_PI_NODE_PATH: '/Applications/OpenAlpha.app/Contents/MacOS/OpenAlpha',
         OPENALICE_MANAGED_TOOLCHAIN_PATH: toolBin,
       }).split(delimiter)
 

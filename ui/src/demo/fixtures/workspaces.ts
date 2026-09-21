@@ -231,7 +231,7 @@ export const chatTemplate: TemplateInfo = {
   name: 'chat',
   displayName: 'Chat',
   description:
-    "General-purpose Alice workspace — Alice's full tool surface (market/research data + trading) via the alice*/traderhub CLIs on PATH.",
+    "General-purpose OpenAlpha workspace — OpenAlpha's full tool surface (market/research data + trading) via the alice*/traderhub CLIs on PATH.",
   groupOrder: 10,
   defaultAgents: ['pi'],
   version: '0.2.0',

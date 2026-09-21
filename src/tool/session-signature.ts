@@ -12,7 +12,7 @@ export const sessionSignatureFactory: WorkspaceToolFactory = {
   build(ctx) {
     return tool({
       description: [
-        'Show this Agent Session’s OpenAlice signature.',
+        'Show this Agent Session’s OpenAlpha signature.',
         'Structured Inbox/Issue actions are signed automatically. Add the returned',
         '`@resumeId` to standalone Markdown reports as `Signed-by: @resumeId` so',
         'another Agent or the user can return to the exact accountable Session.',
@@ -24,7 +24,7 @@ export const sessionSignatureFactory: WorkspaceToolFactory = {
           return {
             ok: false as const,
             error: 'no attributable Session is attached to this CLI call',
-            hint: 'Run this inside an OpenAlice interactive or headless Session.',
+            hint: 'Run this inside an OpenAlpha interactive or headless Session.',
           }
         }
         return {

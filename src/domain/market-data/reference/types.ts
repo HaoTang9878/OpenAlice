@@ -1,11 +1,11 @@
 /**
- * Reference-data contract — OpenAlice's OWN low-frequency data standard.
+ * Reference-data contract — OpenAlpha's OWN low-frequency data standard.
  *
  * This is the seam that replaces the OpenBB-compatible passthrough
  * (`/api/market-data-v1`, OBBject envelope, widgets.json). The contract is
- * shaped by what OpenAlice actually consumes (boards + detail panels), not
+ * shaped by what OpenAlpha actually consumes (boards + detail panels), not
  * by what any provider happens to expose. Two implementations are planned:
- * in-process (this module, user's own keys) and the hosted OpenAlice hub
+ * in-process (this module, user's own keys) and the hosted OpenAlpha hub
  * (same shapes over HTTP, shared cache) — clients must not be able to tell
  * the difference except through `meta`.
  *

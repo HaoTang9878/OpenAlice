@@ -192,14 +192,14 @@ function stageDefinitions(kind: SupervisorLaunchFlightKind): Array<{
 }> {
   if (kind === 'local-start') {
     return [
-      { id: 'validate-target', label: 'Validate local target', detail: 'Confirm the selected AliceProject and launch context' },
-      { id: 'start-runtime', label: 'Prepare and start Runtime', detail: 'Wait for Guardian and OpenAlice readiness' },
+      { id: 'validate-target', label: 'Validate local target', detail: 'Confirm the selected OpenAlphaProject and launch context' },
+      { id: 'start-runtime', label: 'Prepare and start Runtime', detail: 'Wait for Guardian and OpenAlpha readiness' },
       { id: 'bind-target', label: 'Bind local target', detail: 'Promote the ready loopback endpoint into the workbench' },
     ]
   }
   if (kind === 'remote-start') {
     return [
-      { id: 'validate-target', label: 'Revalidate remote target', detail: 'Refresh Machine capability and AliceProject availability' },
+      { id: 'validate-target', label: 'Revalidate remote target', detail: 'Refresh Machine capability and OpenAlphaProject availability' },
       { id: 'start-runtime', label: 'Start remote Runtime', detail: 'Use the registered Machine lifecycle route' },
       { id: 'refresh-inventory', label: 'Refresh remote inventory', detail: 'Wait for the advertised Web endpoint' },
       { id: 'open-forward', label: 'Open SSH forward', detail: 'Create the TUI-owned loopback transport' },

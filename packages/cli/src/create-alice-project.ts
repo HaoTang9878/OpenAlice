@@ -1,6 +1,6 @@
 import { parseProjectWorkspaces, type ProjectWorkspace } from './project-workspaces.ts'
 /**
- * `openalice create alice-project` — interactive or scripted AliceProject birth.
+ * `openalice create alice-project` — interactive or scripted OpenAlphaProject birth.
  */
 import { createInterface } from 'node:readline/promises'
 import { stdin as input, stdout as output } from 'node:process'
@@ -18,7 +18,7 @@ import {
 } from './supervisor-config.ts'
 
 export function formatCreateAliceProjectHelp(): string {
-  return `Create a named AliceProject
+  return `Create a named OpenAlphaProject
 
 Usage:
   openalice create alice-project
@@ -128,7 +128,7 @@ export async function runCreateAliceProjectCommand(
 
   if (interactive && !options.yes) {
     stdout.write(
-      `Create AliceProject "${name}" as ${product === 'nano' ? 'NanoAlice' : 'TraderAlice'} at ${home}?\n`,
+      `Create OpenAlphaProject "${name}" as ${product === 'nano' ? 'NanoAlice' : 'TraderAlice'} at ${home}?\n`,
     )
     const confirm = (await prompt('Proceed? [Y/n]: ')).trim().toLowerCase()
     if (confirm === 'n' || confirm === 'no') {
@@ -145,7 +145,7 @@ export async function runCreateAliceProjectCommand(
     cwd: home,
   })
   stdout.write(
-    `Created AliceProject ${name} (${product === 'nano' ? 'NanoAlice' : 'TraderAlice'}).\n`
+    `Created OpenAlphaProject ${name} (${product === 'nano' ? 'NanoAlice' : 'TraderAlice'}).\n`
     + `Home: ${home}\n`
     + `Workspaces: ${workspaces.join(', ') || 'none (set up later)'}. Prepared automatically on first start; no Agent is launched.\n`
     + `Selected as the next bare-start default. Start with: openalice up --project ${name}\n`,

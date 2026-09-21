@@ -440,7 +440,7 @@ export async function runHeadlessTask(args: HeadlessTaskArgs): Promise<HeadlessT
     return finishLaunchFailure(
       'unsupported_windows_batch_shim',
       `Windows Agent runtime "${commandName(argv0)}" is a batch-only shim. ` +
-        `OpenAlice could not find a verified JavaScript entrypoint or an ` +
+        `OpenAlpha could not find a verified JavaScript entrypoint or an ` +
         `extensionless sibling that can run through Workspace Bash, and will ` +
         `not route an unattended task prompt through cmd.exe.`,
       { launchMode: resolved.mode },

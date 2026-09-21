@@ -126,7 +126,7 @@ describe('MissingBrokerPacksNotice', () => {
       onInstall={vi.fn().mockResolvedValue(undefined)}
     />)
 
-    expect(screen.getByText('Installed support is from OpenAlice 0.84.0-beta')).toBeTruthy()
+    expect(screen.getByText('Installed support is from OpenAlpha 0.84.0-beta')).toBeTruthy()
     expect(screen.getByRole('button', { name: 'Update' })).toBeTruthy()
   })
 
@@ -233,7 +233,7 @@ describe('ExternalOrderMonitoringRow', () => {
       'External order monitoring',
     )
     expect(describedBy.some((id) =>
-      document.getElementById(id)?.textContent?.includes('orders placed outside Alice'),
+      document.getElementById(id)?.textContent?.includes('orders placed outside OpenAlpha'),
     )).toBe(true)
 
     fireEvent.change(select, { target: { value: '5m' } })

@@ -399,13 +399,13 @@ describe('ChatLandingPage Workspace inventory states', () => {
     expect(failed.refresh).toHaveBeenCalledOnce()
   })
 
-  it('shows Initialize Ask Alice instead of the composer when no Chat workspace exists', () => {
+  it('shows Initialize Ask OpenAlpha instead of the composer when no Chat workspace exists', () => {
     mocks.useWorkspaces.mockReturnValue(context([]))
 
     render(<ChatLandingPage spec={{ params: {} }} />)
 
-    expect(screen.getByRole('heading', { name: 'Initialize Ask Alice' })).toBeTruthy()
-    expect(screen.getByRole('button', { name: 'Initialize Ask Alice' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Initialize Ask OpenAlpha' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Initialize Ask OpenAlpha' })).toBeTruthy()
     expect(screen.queryByPlaceholderText('Describe the task, question, or decision…')).toBeNull()
     expect(screen.queryByText('Pinned Harness version')).toBeNull()
   })

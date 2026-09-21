@@ -111,13 +111,13 @@ export function supervisorCommandDeckItems(
         healthy ? 'Open active Web UI' : 'Retry connection',
         healthy
           ? 'Open the verified Web UI through this SSH forward'
-          : 'Probe the forwarded OpenAlice endpoint now',
+          : 'Probe the forwarded OpenAlpha endpoint now',
         'Primary', true, healthy
           ? ['open', 'remote', '打开', '远程']
           : ['retry', 'probe', '重试', '恢复'],
       ),
       command(
-        'c', 'Connections', 'Choose another Machine or AliceProject target',
+        'c', 'Connections', 'Choose another Machine or OpenAlphaProject target',
         'Navigate', false, ['switch', 'target', '连接', '切换'],
       ),
       command(
@@ -129,7 +129,7 @@ export function supervisorCommandDeckItems(
         'Navigate', false, ['帮助'],
       ),
       command(
-        'x', 'Disconnect remote target', 'Close this SSH forward without stopping OpenAlice',
+        'x', 'Disconnect remote target', 'Close this SSH forward without stopping OpenAlpha',
         'Manage', false, ['disconnect', 'ssh', '断开'],
       ),
     ]
@@ -144,7 +144,7 @@ export function supervisorCommandDeckItems(
         'Primary', true, ['retry', 'probe', '重试', '恢复'],
       ),
       command(
-        'c', 'Connections', 'Choose another Machine or AliceProject target',
+        'c', 'Connections', 'Choose another Machine or OpenAlphaProject target',
         'Navigate', false, ['switch', 'target', '连接', '切换'],
       ),
       command(
@@ -160,8 +160,8 @@ export function supervisorCommandDeckItems(
       'enter',
       context.primaryLabel,
       context.runtimeState === 'absent'
-        ? 'Start the selected AliceProject and open its Workspace'
-        : 'Open the selected AliceProject Workspace',
+        ? 'Start the selected OpenAlphaProject and open its Workspace'
+        : 'Open the selected OpenAlphaProject Workspace',
       'Primary',
       true,
       ['start', 'open', '启动', '打开'],
@@ -191,7 +191,7 @@ export function supervisorCommandDeckItems(
       'Navigate', false, ['帮助'],
     ),
     command(
-      'i', 'AliceProjects', 'Select or create a complete local home',
+      'i', 'OpenAlphaProjects', 'Select or create a complete local home',
       'Manage', false, ['项目', '工作区'],
     ),
     command(

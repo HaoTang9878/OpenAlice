@@ -234,7 +234,7 @@ export function formatTelegramInboxConfirmPage(displayName: string): TelegramFor
     text: [
       `Send the current version of ${safe}?`,
       '',
-      'OpenAlice will read the live Workspace file now. This does not mark the Inbox item read.',
+      'OpenAlpha will read the live Workspace file now. This does not mark the Inbox item read.',
     ].join('\n'),
     actions: [[button('Send', 'i:y'), button('Cancel', 'i:x')]],
   }
@@ -256,7 +256,7 @@ export function formatTelegramSettingsPage(inboxPush: boolean): TelegramForm {
       `Inbox push: ${inboxPush ? 'On' : 'Off'}`,
       inboxPush
         ? 'New Inbox items arrive in this chat as they land.'
-        : 'New Inbox items stay in OpenAlice. Use /inbox when you want to look.',
+        : 'New Inbox items stay in OpenAlpha. Use /inbox when you want to look.',
     ].join('\n'),
     actions: [[
       inboxPush

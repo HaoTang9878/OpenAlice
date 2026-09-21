@@ -1,5 +1,5 @@
 /**
- * Polling endpoints in OpenAlice return JSON-only DTOs. A successful request
+ * Polling endpoints in OpenAlpha return JSON-only DTOs. A successful request
  * is not automatically a state change: preserve the current identity when the
  * serialized snapshot is unchanged so React/Zustand selectors stay quiet.
  */

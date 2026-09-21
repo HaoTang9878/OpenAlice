@@ -56,7 +56,7 @@ describe('loadConfig (workspaces)', () => {
     expect(cfg.allowAnyOrigin).toBe(true)
   })
 
-  it('keeps workspaces inside an explicitly selected OpenAlice home', () => {
+  it('keeps workspaces inside an explicitly selected OpenAlpha home', () => {
     const cfg = loadConfig({
       webPort: 4444,
       env: { OPENALICE_HOME: '/tmp/openalice-isolated' },

@@ -242,7 +242,7 @@ describe('fetchLatestRelease (mocked manifest fetch)', () => {
     const second = await fetchLatestRelease({ channel: 'stable' })
 
     expect(first.result).toBeNull()
-    expect(first.error).toBe('OpenAlice stable manifest 404 Not Found')
+    expect(first.error).toBe('OpenAlpha stable manifest 404 Not Found')
     expect(second.error).toBe(first.error)
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
@@ -448,7 +448,7 @@ describe('getVersionInfo', () => {
       updateAuthority: 'none',
       latest: null,
       hasUpdate: false,
-      error: 'Installed OpenAlice update metadata is invalid',
+      error: 'Installed OpenAlpha update metadata is invalid',
     })
     expect(fetchMock).not.toHaveBeenCalled()
   })

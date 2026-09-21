@@ -44,7 +44,7 @@ const OFFICE_POSES: Record<OfficeAlicePose, OfficeSpritePose> = {
 
 export const defaultOfficeSpritePack: OfficeSpritePack = {
   id: 'alice-overworld',
-  displayName: 'Alice',
+  displayName: 'OpenAlpha',
   pose(action) {
     return OFFICE_POSES[action]
   },

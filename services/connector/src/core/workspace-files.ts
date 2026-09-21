@@ -2,7 +2,7 @@ import { request } from 'node:http'
 import { createHash } from 'node:crypto'
 import { connectorAttachmentSchema, type ConnectorAttachment } from '@traderalice/connector-protocol'
 
-/** Calls Alice's generic file API. Neither paths nor URLs come from model-selected hosts. */
+/** Calls OpenAlpha's generic file API. Neither paths nor URLs come from model-selected hosts. */
 export async function fetchWorkspaceAttachment(workspaceId: string, path: string): Promise<ConnectorAttachment> {
   const raw = await fetchAliceJson(`/cli/workspace-files/${encodeURIComponent(workspaceId)}?${new URLSearchParams({ path })}`)
   const file = JSON.parse(raw) as { filename: string; contentBase64: string }
@@ -29,7 +29,7 @@ export async function fetchAliceJson(route: string, body?: unknown): Promise<str
       const chunks: Buffer[] = []
       res.on('data', (chunk: Buffer) => {
         size += chunk.length
-        if (size > 1_500_000) { req.destroy(new Error('Alice response too large')); return }
+        if (size > 1_500_000) { req.destroy(new Error('OpenAlpha response too large')); return }
         chunks.push(chunk)
       })
       res.on('error', reject)
@@ -40,10 +40,10 @@ export async function fetchAliceJson(route: string, body?: unknown): Promise<str
         if (res.statusCode === 400 && route.startsWith('/cli/connector-model/')) {
           try { const result = JSON.parse(text); if (typeof result.error === 'string') { reject(new Error(result.error)); return } } catch { /* generic transport error */ }
         }
-        reject(new Error(`Alice resource unavailable (${res.statusCode})`))
+        reject(new Error(`OpenAlpha resource unavailable (${res.statusCode})`))
       })
     })
-    req.setTimeout(10_000, () => req.destroy(new Error('Alice request timed out')))
+    req.setTimeout(10_000, () => req.destroy(new Error('OpenAlpha request timed out')))
     req.on('error', reject)
     req.end(body === undefined ? undefined : JSON.stringify(body))
   })

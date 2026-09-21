@@ -210,7 +210,7 @@ describe('auth middleware — playbook 03 (localhost spoofing)', () => {
   it('03.4: when trusted proxy is configured, localhost passthrough disabled entirely', async () => {
     // With a trusted proxy configured, even a true-localhost socket
     // remoteAddress doesn't grant bypass — because the trusted proxy IS
-    // at 127.0.0.1 from Alice's view, accepting localhost would let
+    // at 127.0.0.1 from OpenAlpha's view, accepting localhost would let
     // every public request through.
     const app = makeApp({ trustedProxies: ['10.0.0.5'], csrfTrustedOrigins: [] })
     const res = await app.request('/api/trading/uta', undefined, envWithIp('127.0.0.1'))

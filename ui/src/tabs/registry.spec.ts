@@ -14,7 +14,7 @@ it.each(['chat', 'auto-quant', 'prediction'] as const)('keeps %s Workspace detai
 })
 
 describe('file-viewer URL projection', () => {
-  it('projects Ask Alice artifacts into the chat route with Session context', () => {
+  it('projects Ask OpenAlpha artifacts into the chat route with Session context', () => {
     expect(getView('file-viewer').toUrl({
       kind: 'file-viewer',
       params: {
@@ -118,7 +118,7 @@ describe('Settings URL projection', () => {
 })
 
 describe('shared product shells', () => {
-  it('assigns every Ask Alice surface to the shared chat shell', () => {
+  it('assigns every Ask OpenAlpha surface to the shared chat shell', () => {
     expect(getViewShell({ kind: 'chat-landing', params: {} })).toBe('chat')
     expect(getViewShell({ kind: 'workspace-manager', params: {} })).toBe('chat')
     expect(getViewShell({
@@ -131,7 +131,7 @@ describe('shared product shells', () => {
     })).toBe('chat')
   })
 
-  it('keeps generic Workspace surfaces outside the Ask Alice shell', () => {
+  it('keeps generic Workspace surfaces outside the Ask OpenAlpha shell', () => {
     expect(getViewShell({
       kind: 'workspace',
       params: { wsId: 'workspace-1' },

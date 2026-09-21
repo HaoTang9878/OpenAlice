@@ -487,7 +487,7 @@ export interface TemplateInfo {
    *  a declared `groupOrder` sort after declared ones, by name. */
   readonly groupOrder?: number;
   /** Community-tier: bundles a third-party ecosystem maintained outside
-   *  OpenAlice. Rendered under a separate "Community" section. */
+   *  OpenAlpha. Rendered under a separate "Community" section. */
   readonly community?: boolean;
   readonly defaultAgents: readonly string[];
   /** Template version, declared in README frontmatter. "0.0.0" when missing. */
@@ -810,7 +810,7 @@ export interface SessionRecord {
   readonly title: string | null;
   /** Workspace-owned coworker nametag. Missing means unnamed. */
   readonly displayName?: string;
-  /** First headless run associated with this stable Alice Session. */
+  /** First headless run associated with this stable OpenAlpha Session. */
   readonly sourceRunId?: string | null;
   /** Visibility projected with the roster so first paint needs no second join. */
   readonly presence?: 'active' | 'archived' | 'deleted';
@@ -1096,7 +1096,7 @@ export interface OpenHeadlessSessionResult {
   readonly created: boolean;
 }
 
-/** Resolve the persistent Session row and attach it to the Ask Alice surface. */
+/** Resolve the persistent Session row and attach it to the Ask OpenAlpha surface. */
 export async function openResumeSession(
   wsId: string,
   resumeId: string,
@@ -1215,7 +1215,7 @@ export async function initializeChatWorkspace(): Promise<Workspace> {
     | { workspace?: Workspace; message?: string; error?: string }
     | null
   if (!res.ok || !body?.workspace) {
-    throw new Error(body?.message ?? body?.error ?? `Ask Alice initialization failed: ${res.status}`)
+    throw new Error(body?.message ?? body?.error ?? `Ask OpenAlpha initialization failed: ${res.status}`)
   }
   return body.workspace
 }
@@ -1810,8 +1810,8 @@ export interface AgentReadinessBundle {
 
 // ── Central credential store ──────────────────────────────────────────────
 //
-// Alice's reusable credentials (`data/config/ai-provider-manager.json`). The
-// modal's "Load from saved credential" picker reads these; "Save to Alice"
+// OpenAlpha's reusable credentials (`data/config/ai-provider-manager.json`). The
+// modal's "Load from saved credential" picker reads these; "Save to OpenAlpha"
 // writes a new one. apiKey is returned so a picked credential can be flashed
 // into the form (same exposure as agent-profiles; admin-token gated).
 

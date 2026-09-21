@@ -444,7 +444,7 @@ function insufficientStorageResult(availableBytes: number | null = null): Create
   return {
     ok: false,
     code: 'insufficient_storage',
-    message: `Not enough free space to create this Workspace${available}. Free disk space or choose another OpenAlice data location, then retry.`,
+    message: `Not enough free space to create this Workspace${available}. Free disk space or choose another OpenAlpha data location, then retry.`,
   };
 }
 
@@ -486,10 +486,10 @@ interface RunResult {
 }
 
 const WINDOWS_BASH_HINT =
-  'hint: this template ships a bash bootstrap script. OpenAlice\'s built-in ' +
+  'hint: this template ships a bash bootstrap script. OpenAlpha\'s built-in ' +
   'templates (chat, auto-quant) need no bash — only third-party templates do. ' +
   'To use this one, install Git for Windows from https://gitforwindows.org/ so ' +
-  'bash is on PATH, or run OpenAlice from inside WSL2.';
+  'bash is on PATH, or run OpenAlpha from inside WSL2.';
 
 /**
  * Run a bootstrap script.
@@ -513,7 +513,7 @@ export function runScript(
   const isWindows = process.platform === 'win32';
 
   // `.mjs` (built-in templates): Node/Electron uses its bundled Node runtime.
-  // A Bun standalone re-enters the same Alice executable through a private
+  // A Bun standalone re-enters the same OpenAlpha executable through a private
   // bootstrap role because its process.execPath is the product binary, not a
   // general-purpose Bun interpreter. No system Node/Bun/bash is required.
   // ELECTRON_RUN_AS_NODE flips Electron to pure-Node mode and is harmless for

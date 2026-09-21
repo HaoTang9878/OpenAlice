@@ -32,10 +32,10 @@ export async function main(
       process.stdout.write(`Usage:
   openalice tui [options]
 
-Open the local OpenAlice Supervisor TUI. Detaching never stops the Runtime.
+Open the local OpenAlpha Supervisor TUI. Detaching never stops the Runtime.
 
 Options:
-  --project <key>    Select an AliceProject
+  --project <key>    Select an OpenAlphaProject
   --instance <key>   Deprecated alias for --project
   --home <path>      Override the selected complete home
   --port <port>      Runtime Web port for a start/restart

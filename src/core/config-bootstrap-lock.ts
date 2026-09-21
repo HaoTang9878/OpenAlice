@@ -27,12 +27,12 @@ function sleep(ms: number): Promise<void> {
 }
 
 /**
- * Serialize config bootstrap across Alice and UTA processes sharing one home.
+ * Serialize config bootstrap across OpenAlpha and UTA processes sharing one home.
  *
  * Both children legitimately call `loadConfig()` during startup. That path is
  * write-capable: it runs migrations and seeds missing defaults. A Guardian
- * runtime lock prevents a second OpenAlice instance, but it intentionally does
- * not prevent sibling Alice/UTA children from running together, so this
+ * runtime lock prevents a second OpenAlpha instance, but it intentionally does
+ * not prevent sibling OpenAlpha/UTA children from running together, so this
  * shorter critical-section lock is still required.
  *
  * A live owner is waited on and never taken over. Dead owners are reclaimed by

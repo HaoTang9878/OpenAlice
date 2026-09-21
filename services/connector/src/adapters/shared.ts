@@ -201,7 +201,7 @@ export interface DecodedConnectorAttachment {
   content: Buffer
 }
 
-/** Decode and verify the Alice-produced attachment before handing bytes to a
+/** Decode and verify the OpenAlpha-produced attachment before handing bytes to a
  * platform SDK. Size and digest checks keep malformed loopback payloads from
  * becoming opaque Discord/Telegram upload failures. */
 export function decodeConnectorAttachment(attachment: ConnectorAttachment): DecodedConnectorAttachment {

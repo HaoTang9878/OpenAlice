@@ -1,5 +1,5 @@
 /**
- * Electron web transport for the Alice Hono app.
+ * Electron web transport for the OpenAlpha Hono app.
  *
  * In desktop mode the renderer loads `app://openalice/...`; Electron main
  * forwards those requests over child_process IPC and this module dispatches

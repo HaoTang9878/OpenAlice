@@ -201,7 +201,7 @@ describe('semantic color contract', () => {
     expect(violations).toEqual([])
   })
 
-  it('rejects legacy OpenAlice names and palette-specific utility colors', () => {
+  it('rejects legacy OpenAlpha names and palette-specific utility colors', () => {
     const files = [
       ...productionStyleFiles(resolve(uiRoot, 'src')),
       resolve(repoRoot, 'packages/uta-protocol/src/brokers/preset-catalog.ts'),

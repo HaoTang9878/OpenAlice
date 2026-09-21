@@ -4,8 +4,8 @@
  * Tabs:
  *   1. Quick Tick      — symbol picker + tick buttons + set price input
  *   2. External Deposit — fund a position out of nowhere (bypasses orders)
- *   3. External Trade  — simulate user trading on the exchange app outside Alice
- *   4. Place Order     — go through the real Alice order pipeline (stage→commit→push)
+ *   3. External Trade  — simulate user trading on the exchange app outside OpenAlpha
+ *   4. Place Order     — go through the real OpenAlpha order pipeline (stage→commit→push)
  *
  * Every action funnels through `run(label, fn)` so the EventLog gets
  * uniform entries and state refresh is automatic. Tab content keeps its
@@ -30,9 +30,9 @@ type TabId = 'tick' | 'deposit' | 'trade' | 'order'
 
 const TABS: Array<{ id: TabId; label: string; hint: string }> = [
   { id: 'tick',    label: 'Quick Tick',       hint: 'Move a mark price' },
-  { id: 'deposit', label: 'External Deposit', hint: 'Funds appear outside Alice (airdrop / transfer-in)' },
+  { id: 'deposit', label: 'External Deposit', hint: 'Funds appear outside OpenAlpha (airdrop / transfer-in)' },
   { id: 'trade',   label: 'External Trade',   hint: 'User manually traded on the exchange app' },
-  { id: 'order',   label: 'Place Order',      hint: 'Stage → commit → push through Alice' },
+  { id: 'order',   label: 'Place Order',      hint: 'Stage → commit → push through OpenAlpha' },
 ]
 
 export function ActionPanel({ utaId, state, run, loading }: {
@@ -277,7 +277,7 @@ function TradeTab({ utaId, run, loading }: {
   )
 }
 
-// ==================== Place Order (through Alice trading API) ====================
+// ==================== Place Order (through OpenAlpha trading API) ====================
 
 function OrderTab({ utaId, knownKeys, run, loading }: {
   utaId: string

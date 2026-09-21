@@ -23,7 +23,7 @@ export const inboxAskFactory: WorkspaceToolFactory = {
       description: [
         'Ask the Session that produced one Inbox entry.',
         '',
-        'The entry id is enough: OpenAlice resolves server-stamped provenance. A known',
+        'The entry id is enough: OpenAlpha resolves server-stamped provenance. A known',
         'Session is resumed exactly. An entry without an attributable Session recruits a',
         'fresh worker only in its source Workspace and labels the answer reconstructed.',
         'Use --await for a reply needed now; omit it for asynchronous follow-up or',

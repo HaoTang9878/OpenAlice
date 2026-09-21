@@ -312,7 +312,7 @@ export class TemplateUpgradeManager {
     }
     const [available, installed] = await Promise.all([this.sourceVersionCache.value, this.currentVersion(workspace)]);
     if (available === installed) return;
-    return `Alice Harness Skills ${installed ?? 'unversioned'} -> ${available}. Run alice harness upgrade --apply to update the injected files. Non-overlapping edits merge automatically; if conflicts remain, inspect alice harness upgrade --mode detailed and resolve them before retrying. Workspace Skill preferences are preserved.`;
+    return `OpenAlpha Harness Skills ${installed ?? 'unversioned'} -> ${available}. Run alice harness upgrade --apply to update the injected files. Non-overlapping edits merge automatically; if conflicts remain, inspect alice harness upgrade --mode detailed and resolve them before retrying. Workspace Skill preferences are preserved.`;
   }
 
   async currentVersion(workspace: WorkspaceMeta): Promise<string | undefined> {
@@ -458,7 +458,7 @@ export class TemplateUpgradeManager {
       ].join('\n');
       await runGit(workspace.dir, [
         '-c', 'user.email=launcher@local',
-        '-c', 'user.name=OpenAlice',
+        '-c', 'user.name=OpenAlpha',
         'commit', '--allow-empty', '-q', '-m', message,
       ]);
       const commit = (await runGit(workspace.dir, ['rev-parse', 'HEAD'])).trim();

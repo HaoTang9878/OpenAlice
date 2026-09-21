@@ -11,7 +11,7 @@ export interface WorkspaceOperationGroupLease {
 }
 
 /**
- * Serializes directory-wide Workspace mutations inside the Alice process.
+ * Serializes directory-wide Workspace mutations inside the OpenAlpha process.
  *
  * Template Upgrade, offboarding, and a future Merge/Absorb flow have different
  * domain rules, but none may rename or reconcile the same checkout while

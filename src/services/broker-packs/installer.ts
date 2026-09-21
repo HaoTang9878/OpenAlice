@@ -173,7 +173,7 @@ function validateCatalog(raw: Partial<BrokerPackReleaseCatalog>): BrokerPackRele
     || raw.arch !== process.arch
     || !Array.isArray(raw.packs)
   ) {
-    throw new Error(`Broker-pack catalog is incompatible with OpenAlice ${version} on ${process.platform}-${process.arch}`)
+    throw new Error(`Broker-pack catalog is incompatible with OpenAlpha ${version} on ${process.platform}-${process.arch}`)
   }
   for (const asset of raw.packs) validateAsset(asset, version)
   if (new Set(raw.packs.map(asset => asset.engine)).size !== raw.packs.length) throw new Error('Duplicate broker-pack engine')
@@ -182,7 +182,7 @@ function validateCatalog(raw: Partial<BrokerPackReleaseCatalog>): BrokerPackRele
 
 function validateAsset(asset: BrokerPackReleaseAsset, currentVersion: string): void {
   if (!asset || !INSTALLABLE_BROKER_ENGINES.includes(asset.engine)) throw new Error('Invalid broker-pack engine')
-  if (asset.version !== currentVersion) throw new Error(`Broker-pack asset targets OpenAlice ${asset.version}; expected ${currentVersion}`)
+  if (asset.version !== currentVersion) throw new Error(`Broker-pack asset targets OpenAlpha ${asset.version}; expected ${currentVersion}`)
   if (asset.apiVersion !== BROKER_PACK_API_VERSION) throw new Error(`Broker-pack API ${asset.apiVersion} is unsupported`)
   if (!/^[A-Za-z0-9._-]+$/.test(asset.file) || basename(asset.file) !== asset.file) throw new Error('Invalid broker-pack asset name')
   if (!/^[a-f0-9]{64}$/.test(asset.sha256)) throw new Error('Invalid broker-pack checksum')

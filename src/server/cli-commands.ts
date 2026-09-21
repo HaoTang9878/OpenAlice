@@ -280,7 +280,7 @@ export const CLI_EXPORTS: Record<string, CliExport> = {
   data: {
     ...BASE_EXPORTS.data,
     scope: 'mixed',
-    description: 'OpenAlice research, assets and Workspace collaboration',
+    description: 'OpenAlpha research, assets and Workspace collaboration',
     commands: { ...BASE_EXPORTS.data.commands, ...BASE_EXPORTS.workspace.commands },
     groupDescriptions: { ...BASE_EXPORTS.data.groupDescriptions, ...BASE_EXPORTS.workspace.groupDescriptions },
   },

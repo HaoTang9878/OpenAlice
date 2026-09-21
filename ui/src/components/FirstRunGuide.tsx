@@ -54,10 +54,10 @@ const ONBOARDING_TEST_AI_BASE_URL = import.meta.env.VITE_OPENALICE_ONBOARDING_AI
 
 const ONBOARDING_TEST_PRESET: Preset = {
   id: ONBOARDING_TEST_PRESET_ID,
-  label: 'OpenAlice Test Provider',
+  label: 'OpenAlpha Test Provider',
   description: 'Local mock for onboarding test mode',
   category: 'custom',
-  defaultName: 'OpenAlice Test Provider',
+  defaultName: 'OpenAlpha Test Provider',
   hint: 'Development-only. This provider exists only in onboarding test mode and never calls an external AI service.',
   setup: {
     apiKeyLabel: 'Onboarding test API key',

@@ -1,11 +1,11 @@
 /**
  * Client-owned description of the Runtime behind this presentation surface.
  *
- * Remote SSH identity cannot come from Alice: once the tunnel is down, the
+ * Remote SSH identity cannot come from OpenAlpha: once the tunnel is down, the
  * remote backend is unreachable, and the remote process does not know which
  * local SSH alias opened it. The CLI therefore bootstraps this tab through a
  * client-only URL fragment. We validate it, persist it in sessionStorage, and
- * immediately scrub the fragment so it is never sent to Alice or left visible.
+ * immediately scrub the fragment so it is never sent to OpenAlpha or left visible.
  */
 
 const REMOTE_CONTEXT_MARKER = 'openalice-remote'

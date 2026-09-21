@@ -37,7 +37,7 @@ export function describeBarFreshness(latest: string, historical: boolean, now = 
       status: basis === 'source_classification' ? 'possible' : 'unknown', estimatedSeconds: null, basis,
       explanation: basis === 'historical_request' ? 'Historical request; record age is not a live delay signal.'
         : basis === 'no_records' ? 'No returned records to assess.'
-        : `${basis === 'source_classification' ? 'OpenAlice classifies this source as potentially delayed; this is not a per-response provider declaration. ' : ''}Record age is not feed latency. Trading sessions and bar timestamp boundaries are not verified; actual delay is unknown.`,
+        : `${basis === 'source_classification' ? 'OpenAlpha classifies this source as potentially delayed; this is not a per-response provider declaration. ' : ''}Record age is not feed latency. Trading sessions and bar timestamp boundaries are not verified; actual delay is unknown.`,
     },
     fetchedAt: now.toISOString(), latestRecordAt: latest || null, timestampKind,
     recordAgeSeconds: age !== null && age >= 0 ? Math.floor(age) : null,

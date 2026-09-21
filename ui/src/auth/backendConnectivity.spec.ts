@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { createBackendObservedFetch } from './backendConnectivity'
 
 describe('backend request observer', () => {
-  it('asks for a core probe after an OpenAlice API network failure', async () => {
+  it('asks for a core probe after an OpenAlpha API network failure', async () => {
     const requestProbe = vi.fn()
     const failure = new TypeError('Failed to fetch')
     const observed = createBackendObservedFetch(
@@ -29,7 +29,7 @@ describe('backend request observer', () => {
     expect(requestProbe).toHaveBeenCalledTimes(1)
   })
 
-  it('ignores auth probes, cancellations, and requests outside the OpenAlice API', async () => {
+  it('ignores auth probes, cancellations, and requests outside the OpenAlpha API', async () => {
     const requestProbe = vi.fn()
     const abort = new DOMException('cancelled', 'AbortError')
     const observed = createBackendObservedFetch(

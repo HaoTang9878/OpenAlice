@@ -1,5 +1,5 @@
 /**
- * UTA client SDK — HTTP transport from Alice to the UTA service.
+ * UTA client SDK — HTTP transport from OpenAlpha to the UTA service.
  *
  * `createUTAClient({ baseUrl })` returns a low-level HTTP helper. Higher-
  * level adapters (`UTAManagerSDK`, `UTAAccountSDK` in

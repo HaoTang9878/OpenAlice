@@ -116,7 +116,7 @@ describe('Supervisor Command Dock', () => {
     expect(wide.lines.join('\n')).toContain('⌕  ▌ Type to filter commands')
     expect(wide.targets[1]).toEqual({ row: 4, startColumn: 2, endColumn: 99, index: 1 })
     expect(wide.lines).toHaveLength(9)
-    expect(wide.lines.join('\n')).not.toContain('AliceProjects')
+    expect(wide.lines.join('\n')).not.toContain('OpenAlphaProjects')
 
     const scrolled = renderSupervisorCommandDeck(items, { selected: 9, hovered: null }, 'running', 100)
     expect(scrolled.lines.join('\n')).toContain('Command Dock · 10/11 · RUNNING')

@@ -14,7 +14,7 @@ export const workspaceSessionsFactory: WorkspaceToolFactory = {
         'Do not choose an arbitrary old Session when an artifact has no exact owner: that means',
         'the future collaboration flow should recruit a fresh Session at that workspace.',
         '',
-        'Adapter-native session ids are intentionally hidden. Pass only resumeId to OpenAlice',
+        'Adapter-native session ids are intentionally hidden. Pass only resumeId to OpenAlpha',
         'resume/collaboration commands; the backend owns the runtime-specific mapping.',
       ].join('\n'),
       inputSchema: z.object({

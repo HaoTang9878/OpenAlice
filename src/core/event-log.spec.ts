@@ -416,7 +416,7 @@ describe('event-log', () => {
   // ==================== domain-neutral payloads ====================
 
   describe('domain-neutral payloads', () => {
-    it('stores payloads without imposing the retired Alice event registry', async () => {
+    it('stores payloads without imposing the retired OpenAlpha event registry', async () => {
       const entry = await log.append('snapshot.taken', {
         accountId: 'paper-1',
         trigger: 'schedule',

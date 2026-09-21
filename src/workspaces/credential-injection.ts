@@ -1,5 +1,5 @@
 /**
- * Deprecated compatibility bridge from Alice's central credential store to a
+ * Deprecated compatibility bridge from OpenAlpha's central credential store to a
  * Workspace's per-CLI native project config.
  *
  * The central store (`aiProviderSchema.credentials` in `core/config.ts`) holds

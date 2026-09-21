@@ -1,5 +1,5 @@
 /**
- * Credential inference helpers for the workspace "save to Alice" path.
+ * Credential inference helpers for the workspace "save to OpenAlpha" path.
  *
  * Given a CLI agent + the entered baseUrl, infer the credential vendor and the
  * Anthropic auth-header mode. Used by the workspace AI-config modal's save-back

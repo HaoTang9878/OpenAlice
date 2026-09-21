@@ -60,7 +60,7 @@ it('preserves the Chat Harness landing route', async () => {
   expect(mocks.setSidebar).toHaveBeenCalledWith('chat')
 })
 
-it.each(['/workspaces', '/workspaces/templates', '/workspaces/templates/chat'])('retires %s into Ask Alice', async path => {
+it.each(['/workspaces', '/workspaces/templates', '/workspaces/templates/chat'])('retires %s into Ask OpenAlpha', async path => {
   render(<MemoryRouter initialEntries={[path]}><UrlAdopter /></MemoryRouter>)
   await waitFor(() => expect(mocks.openOrFocus).toHaveBeenCalledWith({ kind: 'chat-landing', params: {} }))
   expect(mocks.setSidebar).toHaveBeenCalledWith('chat')
@@ -96,7 +96,7 @@ describe('UrlAdopter file provenance', () => {
     expect(mocks.setSidebar).toHaveBeenCalledWith('prediction')
   })
 
-  it('restores an Ask Alice file deep link with its Session return context', async () => {
+  it('restores an Ask OpenAlpha file deep link with its Session return context', async () => {
     render(
       <MemoryRouter initialEntries={[
         '/chat/workspaces/chat-1/view/research%2Fnote.md?sessionId=pi-crisp-granite-pencil',

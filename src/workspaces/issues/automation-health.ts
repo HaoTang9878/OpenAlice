@@ -126,7 +126,7 @@ export function issueAutomationHealth(input: IssueAutomationHealthInput): IssueA
   if (latest?.status === 'interrupted' || latest?.failure?.kind === 'system_paused') {
     return {
       state: 'interrupted',
-      message: latest.failure?.message ?? 'OpenAlice stopped while the latest scheduled run was active. It was not automatically retried.',
+      message: latest.failure?.message ?? 'OpenAlpha stopped while the latest scheduled run was active. It was not automatically retried.',
       latestTaskId: latest.taskId,
     }
   }

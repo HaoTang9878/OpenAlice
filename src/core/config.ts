@@ -351,7 +351,7 @@ const marketDataSchema = z.object({
   }).default({ enabled: true, baseUrl: 'https://traderhub.openalice.ai' }),
 })
 
-/** MCP server config — exports OpenAlice's ToolCenter to MCP clients. */
+/** MCP server config — exports OpenAlpha's ToolCenter to MCP clients. */
 const mcpSchema = z.object({
   enabled: z.boolean().default(false),
   port: z.number().int().positive().default(3001),
@@ -393,7 +393,7 @@ const tradingSchema = z.object({
   mode: tradingModeSchema.optional(),
   /**
    * External-order observation cadence — how often UTA lists the broker's
-   * open orders to catch ones placed outside Alice (exchange app, direct
+   * open orders to catch ones placed outside OpenAlpha (exchange app, direct
    * API). Duration string ('1m' / '5m' / '10m' / '15m'); 'off' disables.
    * Default 15m: untracked orders are a narrative-fidelity feature, not a
    * primary flow — keep the standing request rate negligible (96/day per
@@ -570,7 +570,7 @@ async function loadConfigUnlocked(): Promise<Config> {
 
   // Guardian injects the ports it claimed as env. Env wins over the file.
   // Explicit file/env pins fail loud when occupied; only an absent file is
-  // allowed to probe. Standalone Alice (no Guardian env) uses the in-memory
+  // allowed to probe. Standalone OpenAlpha (no Guardian env) uses the in-memory
   // default or the file as written by the user / Settings.
   const envWebPort = parseEnvPort(process.env['OPENALICE_WEB_PORT'])
   if (envWebPort !== null) config.ports.web = envWebPort
@@ -920,7 +920,7 @@ export async function writeCredential(slug: string, credential: Credential): Pro
  *
  * Standalone counterpart to `extractCredentialFromProfile` for credentials that
  * don't come from a profile — e.g. the workspace AI-config modal's "save to
- * Alice" path.
+ * OpenAlpha" path.
  */
 export async function addCredential(credential: Credential): Promise<string> {
   const config = await readAIProviderConfig()
@@ -932,7 +932,7 @@ export async function addCredential(credential: Credential): Promise<string> {
   )
   if (match) {
     // Upgrade the existing record's wire capabilities in place (don't
-    // duplicate). A per-Workspace "save to Alice" contributes one shape at a
+    // duplicate). A per-Workspace "save to OpenAlpha" contributes one shape at a
     // time, so merge rather than replace or a later save would silently erase
     // the other protocol selected by Workspace defaults.
     const existing = match[1]

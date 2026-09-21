@@ -222,7 +222,7 @@ describe('POST /credentials/test', () => {
 
     const { body } = await req(routes, 'POST', '/credentials/test', mockBody)
 
-    expect(body).toEqual({ ok: true, response: 'OpenAlice onboarding mock credential is ready.' })
+    expect(body).toEqual({ ok: true, response: 'OpenAlpha onboarding mock credential is ready.' })
     expect(probeByWireShapeMock).not.toHaveBeenCalled()
   })
 

@@ -16,7 +16,7 @@ export interface HarnessPreferencesState {
 }
 
 /**
- * Installation-wide Ask Alice / Auto Quant harness preferences.
+ * Installation-wide Ask OpenAlpha / Auto Quant harness preferences.
  * Missing reads keep the default (hide headless-born never-TUI Sessions)
  * so the sidebar never flashes those rows on first paint.
  */

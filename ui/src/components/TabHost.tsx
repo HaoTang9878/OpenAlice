@@ -43,7 +43,7 @@ export function TabHost() {
           <>
             {/* Active-only views share one unkeyed slot. Moving between two
                 views with the same product shell replaces only the content;
-                the shell (notably Ask Alice's navigator) stays mounted. */}
+                the shell (notably Ask OpenAlpha's navigator) stays mounted. */}
             {activeTab && !activeUsesPersistentFrame && (
               <TabFrame tab={activeTab} visible />
             )}

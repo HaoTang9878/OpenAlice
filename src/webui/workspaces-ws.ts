@@ -1,7 +1,7 @@
 /**
  * WebSocket upgrade handler for /api/workspaces/pty.
  *
- * OpenAlice serves HTTP via Hono on @hono/node-server, which exposes the
+ * OpenAlpha serves HTTP via Hono on @hono/node-server, which exposes the
  * underlying Node http.Server. We attach a `ws.WebSocketServer({ noServer:
  * true })` and listen for `upgrade` events ourselves so the launcher's
  * existing raw-`ws` PTY frame handling (binary frames, backpressure,
@@ -71,7 +71,7 @@ export function attachWorkspacesWS(httpServer: HttpServer, svc: WorkspaceService
   const onUpgrade = (req: IncomingMessage, socket: import('node:net').Socket, head: Buffer): void => {
     const url = new URL(req.url ?? '/', `http://${req.headers.host ?? 'localhost'}`);
     if (url.pathname !== WS_PATH) {
-      // Not ours — leave for other upgrade listeners (none currently in OpenAlice).
+      // Not ours — leave for other upgrade listeners (none currently in OpenAlpha).
       return;
     }
 

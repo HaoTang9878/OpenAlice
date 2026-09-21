@@ -27,7 +27,7 @@ const CODEX_SESSION_KEY_ENV_NAME = 'OPENALICE_SESSION_KEY';
 const CODEX_PROVIDER_NAME = 'workspace';
 const CODEX_SESSION_PROVIDER_NAME = 'openalice_session';
 const CODEX_DEFAULT_BASE_URL = 'https://api.openai.com/v1';
-// Alice already composes the Workspace PATH. Login profiles can replace it
+// OpenAlpha already composes the Workspace PATH. Login profiles can replace it
 // (notably /etc/profile on Linux), hiding every injected CLI from shell tools.
 const CODEX_SHELL_ARGS = ['-c', 'allow_login_shell=false'] as const;
 const CODEX_INTERACTIVE_PERMISSION_ARGS = [
@@ -150,14 +150,14 @@ function readCodexSessionTitleIndex(cwd: string): Promise<ReadonlyMap<string, st
  *   stall on the prompt.
  * - Terminal appearance: Codex has no project UI-theme default to replace.
  *   Its TUI probes OSC 10/11 at startup and derives contrast-sensitive colors
- *   from the terminal defaults supplied by OpenAlice's shared PTY layer.
+ *   from the terminal defaults supplied by OpenAlpha's shared PTY layer.
  *
  * AI provider model — three modes, selected explicitly:
  *
  *   1. **Default (no override).** Workspace has no `.codex/` directory.
  *      Adapter doesn't set `CODEX_HOME`. Codex reads the user's global
  *      `~/.codex/auth.json` + `~/.codex/config.toml` — exactly what a
- *      vanilla `codex` invocation in any project does. The OpenAlice MCP
+ *      vanilla `codex` invocation in any project does. The OpenAlpha MCP
  *      servers are wired via per-invocation `-c mcp_servers...url=...`
  *      flags in `composeCommand` below, so MCP is visible without polluting
  *      the user's global config.
@@ -170,7 +170,7 @@ function readCodexSessionTitleIndex(cwd: string): Promise<ReadonlyMap<string, st
  *      live under `.codex/openalice-home/`; only this explicit mode sets
  *      `CODEX_HOME` to that isolated directory.
  *
- * The `-c` flag is OpenAlice's "local MCP registration" — analogous to
+ * The `-c` flag is OpenAlpha's "local MCP registration" — analogous to
  * claude's `.mcp.json` cwd discovery, but driven via codex's CLI override flag
  * since codex has no cwd-MCP convention of its own.
  */
@@ -214,7 +214,7 @@ export const codexAdapter: CliAdapter = {
       if (ai?.apiKey || ai?.baseUrl) {
         args.push(
           '-c', `model_provider=${tomlString(CODEX_SESSION_PROVIDER_NAME)}`,
-          '-c', `model_providers.${CODEX_SESSION_PROVIDER_NAME}.name=${tomlString('OpenAlice Session provider')}`,
+          '-c', `model_providers.${CODEX_SESSION_PROVIDER_NAME}.name=${tomlString('OpenAlpha Session provider')}`,
           '-c', `model_providers.${CODEX_SESSION_PROVIDER_NAME}.base_url=${tomlString(ai.baseUrl || CODEX_DEFAULT_BASE_URL)}`,
           '-c', `model_providers.${CODEX_SESSION_PROVIDER_NAME}.env_key=${tomlString(CODEX_SESSION_KEY_ENV_NAME)}`,
           '-c', `model_providers.${CODEX_SESSION_PROVIDER_NAME}.wire_api=${tomlString('responses')}`,
@@ -229,7 +229,7 @@ export const codexAdapter: CliAdapter = {
    * Every OpenAlice-owned interactive Codex launch explicitly selects full
    * host access and disables command approvals. Without launch-time flags,
    * Codex inherits its global/project defaults and can silently start in a
-   * sandbox that blocks the injected `alice*` CLIs from reaching Alice.
+   * sandbox that blocks the injected `alice*` CLIs from reaching OpenAlpha.
    *
    * MCP server flags remain optional. The default tool path is CLI-mode
    * (`alice*` shell commands), so a workspace must still spawn when no MCP URL
@@ -499,7 +499,7 @@ export const codexAdapter: CliAdapter = {
     toml += `model_provider = "${CODEX_PROVIDER_NAME}"\n`;
     toml += '\n';
     toml += `[model_providers.${CODEX_PROVIDER_NAME}]\n`;
-    toml += `name = "OpenAlice workspace provider"\n`;
+    toml += `name = "OpenAlpha workspace provider"\n`;
     toml += `base_url = ${tomlString(providerBaseUrl)}\n`;
     toml += `env_key = "${CODEX_KEY_ENV_NAME}"\n`;
     // Codex 0.130+ only speaks the OpenAI Responses API — it hard-rejects
@@ -581,12 +581,12 @@ export const codexAdapter: CliAdapter = {
    * A normal `.codex/config.toml` is Codex's native project layer and must keep
    * the user's global home/login/session state.
    *
-   * `.codex/env.json` is OpenAlice's per-workspace key bridge. Codex's
+   * `.codex/env.json` is OpenAlpha's per-workspace key bridge. Codex's
    * `[model_providers.X].env_key` field indirects through an env var; the
    * UI writes the chosen key into `env.json` and the adapter exports it
    * at spawn so codex's `env_key` lookup resolves. This is the only place
    * we bridge file → env, and the source of truth is still the workspace
-   * file (not OpenAlice's internal state).
+   * file (not OpenAlpha's internal state).
    */
   composeEnv(ctx: SpawnContext): Record<string, string> {
     const result: Record<string, string> = {};

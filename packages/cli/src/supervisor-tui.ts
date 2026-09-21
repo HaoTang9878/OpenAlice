@@ -296,7 +296,7 @@ const SILENT_OUTPUT = Object.freeze({ write: () => true })
 const INHERIT_SETTING = 'Inherit'
 const ENABLED_SETTING = 'Enabled'
 const DISABLED_SETTING = 'Disabled'
-const PROJECT_SCOPE = 'This AliceProject'
+const PROJECT_SCOPE = 'This OpenAlphaProject'
 const MACHINE_SCOPE = 'Machine defaults'
 const WIDE_OVERVIEW_RESERVED_CHROME_HEIGHT = 5
 const FLEET_VIEWPORT_RESERVED_HEIGHT = 12
@@ -957,7 +957,7 @@ export async function runSupervisorTui(
       const url = activeTarget?.clientUrl ?? activeTarget?.endpoint
       if (!url) return
       void openBrowser(url).then(
-        () => screen.update({ notice: 'Opened the active AliceProject Web UI.' }),
+        () => screen.update({ notice: 'Opened the active OpenAlphaProject Web UI.' }),
         (error: unknown) => screen.update({ diagnostic: safeError(error) }),
       )
     },
@@ -1051,7 +1051,7 @@ export async function runSupervisorTui(
     if (!target) throw new Error(`Machine "${machine.key}" is no longer registered.`)
     const remotePort = loopbackEndpointPort(project.runtime.webEndpoint)
     if (remotePort === null) {
-      throw new Error(`AliceProject "${project.key}" does not advertise a loopback Web endpoint.`)
+      throw new Error(`OpenAlphaProject "${project.key}" does not advertise a loopback Web endpoint.`)
     }
     return connectSsh({
       destination: target.sshTarget,
@@ -1223,7 +1223,7 @@ export async function runSupervisorTui(
         : !reachable && transitioned
           ? {
               notice: phase === 'unreachable'
-                ? `OpenAlice at ${target.machineName} / ${target.projectName} is unreachable. Retry or disconnect.`
+                ? `OpenAlpha at ${target.machineName} / ${target.projectName} is unreachable. Retry or disconnect.`
                 : `Connection to ${target.machineName} / ${target.projectName} is degraded; retrying automatically.`,
             }
           : {}),
@@ -1310,13 +1310,13 @@ export async function runSupervisorTui(
         connectionEvents,
         inbox,
         ...(activeTarget && !previousTarget && screen.snapshot.panel === 'fleet'
-          ? { panel: 'overview' as const, notice: 'Runtime started. Connected to this AliceProject.' }
+          ? { panel: 'overview' as const, notice: 'Runtime started. Connected to this OpenAlphaProject.' }
           : {}),
         ...(localTargetLost && !forceHomeStart
           ? {
               panel: 'fleet' as const,
               notice: nextRuntime.class === 'absent'
-                ? 'Runtime stopped. Choose an AliceProject to start or connect.'
+                ? 'Runtime stopped. Choose an OpenAlphaProject to start or connect.'
                 : 'Connection to the local Runtime was lost. Choose a target to continue.',
             }
           : {}),
@@ -1457,7 +1457,7 @@ export async function runSupervisorTui(
                   context.project,
                 )
               : screen.snapshot.fleet,
-            notice: `Selected local AliceProject ${project.key}.`,
+            notice: `Selected local OpenAlphaProject ${project.key}.`,
             diagnostic: undefined,
           })
           await refreshFleet({ quiet: true })
@@ -1508,7 +1508,7 @@ export async function runSupervisorTui(
     }
     if (!machine.capabilities.openTunnel || !project.runtime.webEndpoint) {
       screen.update({
-        notice: 'This remote AliceProject is not running with an advertised Web endpoint. Start it on the remote Machine first.',
+        notice: 'This remote OpenAlphaProject is not running with an advertised Web endpoint. Start it on the remote Machine first.',
       })
       return
     }
@@ -1642,8 +1642,8 @@ export async function runSupervisorTui(
       const remoteProject = remote?.projects.find((entry) => entry.key === project.key)
       if (!remote || remote.connection !== 'online') throw new Error('The selected Machine is no longer online.')
       if (!remote.capabilities.lifecycle) throw new Error('The selected Machine does not support remote lifecycle actions.')
-      if (!remoteProject?.available) throw new Error('The selected remote AliceProject is no longer available.')
-      if (remoteProject.runtime.class !== 'absent') throw new Error('The selected remote AliceProject is not stopped.')
+      if (!remoteProject?.available) throw new Error('The selected remote OpenAlphaProject is no longer available.')
+      if (remoteProject.runtime.class !== 'absent') throw new Error('The selected remote OpenAlphaProject is not stopped.')
       const registry = await loadMachines()
       const registered = registry.machines.find((entry) => entry.key === machine.key)
       if (!registered) throw new Error(`Machine "${machine.key}" is no longer registered.`)
@@ -1909,7 +1909,7 @@ export async function runSupervisorTui(
       } else if (action === 'apply-update') {
         const update = screen.snapshot.update
         if (update?.status !== 'available') {
-          throw new Error('No verified OpenAlice update is ready to install. Press u to check again.')
+          throw new Error('No verified OpenAlpha update is ready to install. Press u to check again.')
         }
         await services.applyUpdate(update)
         screen.update({
@@ -1940,10 +1940,10 @@ export async function runSupervisorTui(
           try {
             await services.open({ homeRoot, waitMs: 2_000 })
             screen.update({
-              notice: 'OpenAlice started and opened in your browser.',
+              notice: 'OpenAlpha started and opened in your browser.',
             })
           } catch (error: unknown) {
-            actionFailure = `OpenAlice is running, but the browser did not open: ${safeError(error)}`
+            actionFailure = `OpenAlpha is running, but the browser did not open: ${safeError(error)}`
           }
         } else {
           screen.update({ notice: 'Runtime started in the background.' })
@@ -2130,8 +2130,8 @@ export async function runSupervisorTui(
     } as const, 'source')
     const input = new (class extends piTui.Input {
       detail = reason
-        ? `Start needs an OpenAlice source checkout. ${reason}`
-        : 'Choose the OpenAlice source checkout for this AliceProject.'
+        ? `Start needs an OpenAlpha source checkout. ${reason}`
+        : 'Choose the OpenAlpha source checkout for this OpenAlphaProject.'
 
       setDetail(detail: string, nextPhase: SupervisorSourcePhase = phase): void {
         this.detail = detail
@@ -2240,7 +2240,7 @@ export async function runSupervisorTui(
     ) return
     actionRunning = true
     screen.update({
-      busy: 'Loading AliceProject settings',
+      busy: 'Loading OpenAlphaProject settings',
       notice: undefined,
       diagnostic: undefined,
     })
@@ -2253,7 +2253,7 @@ export async function runSupervisorTui(
       ])
     } catch (error: unknown) {
       screen.update({
-        diagnostic: `Could not load AliceProject settings: ${safeError(error)}`,
+        diagnostic: `Could not load OpenAlphaProject settings: ${safeError(error)}`,
       })
       return
     } finally {
@@ -2270,7 +2270,7 @@ export async function runSupervisorTui(
     let activeSettingsInput: Component | null = null
     let settingsHoveredCommand: string | undefined
     let scope: typeof PROJECT_SCOPE | typeof MACHINE_SCOPE = PROJECT_SCOPE
-    let message = 'Changes apply to this AliceProject. Environment and command-line overrides remain locked.'
+    let message = 'Changes apply to this OpenAlphaProject. Environment and command-line overrides remain locked.'
     const items: SettingItem[] = []
     let settings: InstanceType<typeof piTui.SettingsList>
 
@@ -2321,7 +2321,7 @@ export async function runSupervisorTui(
             fieldLines: super.render(supervisorSetupWorkbenchFieldWidth(width)),
             detail: sanitize(this.detail),
             message: scope === MACHINE_SCOPE
-              ? 'Blank values fall through to OpenAlice defaults; AliceProject overrides remain above.'
+              ? 'Blank values fall through to OpenAlpha defaults; OpenAlphaProject overrides remain above.'
               : 'Blank values inherit from Machine defaults; environment and command-line overrides remain above.',
           }, width)
         }
@@ -2374,8 +2374,8 @@ export async function runSupervisorTui(
       const portEditable = !portLocked
         && (runtimeStopped || !portAffectsRunning)
       const layerDescription = editingMachine
-        ? 'Default for AliceProjects that do not set their own value.'
-        : `Overrides machine defaults for AliceProject "${settingsContext.aliceProject.displayName}".`
+        ? 'Default for OpenAlphaProjects that do not set their own value.'
+        : `Overrides machine defaults for OpenAlphaProject "${settingsContext.aliceProject.displayName}".`
       const homeItem: SettingItem = {
         id: 'home',
         label: 'Data home',
@@ -2389,27 +2389,27 @@ export async function runSupervisorTui(
             homeEditable
               ? (
                   editingMachine
-                    ? 'Default complete home for the implicit AliceProject. Blank uses ~/.openalice.'
+                    ? 'Default complete home for the implicit OpenAlphaProject. Blank uses ~/.openalice.'
                     : settingsContext.project === 'default'
-                    ? 'Where this AliceProject keeps settings, credentials, workspaces, and runtime state. Blank uses the inherited location.'
-                    : 'Where this named AliceProject keeps its separate settings, credentials, workspaces, and runtime state.'
+                    ? 'Where this OpenAlphaProject keeps settings, credentials, workspaces, and runtime state. Blank uses the inherited location.'
+                    : 'Where this named OpenAlphaProject keeps its separate settings, credentials, workspaces, and runtime state.'
                 )
-              : 'Stop OpenAlice before changing the complete home used by this running AliceProject.'
+              : 'Stop OpenAlpha before changing the complete home used by this running OpenAlphaProject.'
           ),
       }
       if (homeEditable) {
         homeItem.submenu = (_currentValue, done) => inputSubmenu(
-          editingMachine ? 'Set machine-default complete home' : 'Set AliceProject complete home',
+          editingMachine ? 'Set machine-default complete home' : 'Set OpenAlphaProject complete home',
           stored.home ?? '',
           (value) => (
             !editingMachine && settingsContext.project !== 'default' && value === ''
-              ? 'Named AliceProjects require an explicit complete home.'
+              ? 'Named OpenAlphaProjects require an explicit complete home.'
               : undefined
           ),
           done,
           editingMachine || settingsContext.project === 'default'
             ? 'Leave blank to inherit from the next lower-priority layer.'
-            : 'Named AliceProjects require a separate complete home.',
+            : 'Named OpenAlphaProjects require a separate complete home.',
         )
       }
       const portItem: SettingItem = {
@@ -2424,12 +2424,12 @@ export async function runSupervisorTui(
           ?? (
             portEditable
               ? `${layerDescription} Blank chooses an available port automatically.`
-              : 'Stop OpenAlice before changing the browser port used by this running AliceProject.'
+              : 'Stop OpenAlpha before changing the browser port used by this running OpenAlphaProject.'
           ),
       }
       if (portEditable) {
         portItem.submenu = (_currentValue, done) => inputSubmenu(
-          editingMachine ? 'Set machine-default browser port' : 'Set AliceProject browser port',
+          editingMachine ? 'Set machine-default browser port' : 'Set OpenAlphaProject browser port',
           stored.port?.toString() ?? '',
           validatePortSetting,
           done,
@@ -2444,7 +2444,7 @@ export async function runSupervisorTui(
             ? machineBooleanSettingValue(stored.updateChecks)
             : booleanSettingValue(stored.updateChecks),
         description: updatesLocked
-          ?? `${layerDescription} This AliceProject currently resolves to ${settingsContext.updateChecks ? 'enabled' : 'disabled'}.`,
+          ?? `${layerDescription} This OpenAlphaProject currently resolves to ${settingsContext.updateChecks ? 'enabled' : 'disabled'}.`,
       }
       if (!updatesLocked) {
         updateItem.values = [
@@ -2457,7 +2457,7 @@ export async function runSupervisorTui(
         ? {
             id: 'source',
             label: 'Installed Runtime',
-            currentValue: `OpenAlice ${screen.snapshot.version} · ${settingsContext.runtimeProvider.contentIdentity ?? 'verified'}`,
+            currentValue: `OpenAlpha ${screen.snapshot.version} · ${settingsContext.runtimeProvider.contentIdentity ?? 'verified'}`,
             description: `Managed by the installer at ${settingsContext.appDir ?? 'an unavailable path'}. No source checkout is needed.`,
           }
         : {
@@ -2473,8 +2473,8 @@ export async function runSupervisorTui(
           currentValue: scope,
           values: [PROJECT_SCOPE, MACHINE_SCOPE],
           description: editingMachine
-            ? 'Machine defaults are inherited by AliceProjects without their own value.'
-            : 'AliceProject values override machine defaults. Environment and command-line values remain higher priority.',
+            ? 'Machine defaults are inherited by OpenAlphaProjects without their own value.'
+            : 'OpenAlphaProject values override machine defaults. Environment and command-line values remain higher priority.',
         },
         homeItem,
         portItem,
@@ -2484,7 +2484,7 @@ export async function runSupervisorTui(
           id: 'config',
           label: 'Advanced config',
           currentValue: join(settingsContext.supervisorRoot, 'config.json'),
-          description: 'Read-only location for machine defaults and named AliceProject settings.',
+          description: 'Read-only location for machine defaults and named OpenAlphaProject settings.',
         },
       )
     }
@@ -2511,8 +2511,8 @@ export async function runSupervisorTui(
         updateDisplayedValues()
         setMessage(
           scope === MACHINE_SCOPE
-            ? 'Editing machine defaults. AliceProject, environment, and command-line layers remain above them.'
-            : `Editing AliceProject "${settingsContext.aliceProject.displayName}". Environment and command-line layers remain above it.`,
+            ? 'Editing machine defaults. OpenAlphaProject, environment, and command-line layers remain above them.'
+            : `Editing OpenAlphaProject "${settingsContext.aliceProject.displayName}". Environment and command-line layers remain above it.`,
         )
         return
       }
@@ -2535,7 +2535,7 @@ export async function runSupervisorTui(
           || machineDefaultAffectsCurrent(field, settingsContext)
         )
       ) {
-        setMessage(`Stop OpenAlice before changing its ${field === 'home' ? 'data home' : 'browser port'}.`)
+        setMessage(`Stop OpenAlpha before changing its ${field === 'home' ? 'data home' : 'browser port'}.`)
         restoreDisplayedValue(id)
         return
       }
@@ -2555,7 +2555,7 @@ export async function runSupervisorTui(
             }
       saving = true
       actionRunning = true
-      const layerLabel = editingMachine ? 'machine default' : `AliceProject "${settingsContext.aliceProject.displayName}"`
+      const layerLabel = editingMachine ? 'machine default' : `OpenAlphaProject "${settingsContext.aliceProject.displayName}"`
       setMessage(`Saving ${settingLabel(field)} for ${layerLabel}…`)
       try {
         settingsContext = editingMachine
@@ -2667,7 +2667,7 @@ export async function runSupervisorTui(
         }))
         const studio = renderSupervisorSetupStudio({
           projectName: settingsContext.aliceProject.displayName,
-          scope: scope === MACHINE_SCOPE ? 'Machine defaults' : 'AliceProject',
+          scope: scope === MACHINE_SCOPE ? 'Machine defaults' : 'OpenAlphaProject',
           runtimeClass: screen.snapshot.runtime?.class,
           message: sanitize(message),
           items: studioItems,
@@ -2737,7 +2737,7 @@ export async function runSupervisorTui(
     ) return
     actionRunning = true
     screen.update({
-      busy: 'Loading AliceProjects',
+      busy: 'Loading OpenAlphaProjects',
       notice: undefined,
       diagnostic: undefined,
     })
@@ -2746,7 +2746,7 @@ export async function runSupervisorTui(
       registry = await loadProjectRegistry(projectContext)
     } catch (error: unknown) {
       screen.update({
-        diagnostic: `Could not load AliceProjects: ${safeError(error)}`,
+        diagnostic: `Could not load OpenAlphaProjects: ${safeError(error)}`,
       })
       return
     } finally {
@@ -2759,7 +2759,7 @@ export async function runSupervisorTui(
     screen.update({ focusTask: 'projects' })
     let changing = false
     let projectsHoveredCommand: string | undefined
-    let message = 'Selecting an AliceProject also makes it the next bare-start default. Copy AI credentials with openalice project copy-ai-creds.'
+    let message = 'Selecting an OpenAlphaProject also makes it the next bare-start default. Copy AI credentials with openalice project copy-ai-creds.'
     const lock = instanceSelectionOverrideLock(projectContext)
     if (lock) message = lock
     const createValue = '__create_alice_project__'
@@ -2792,7 +2792,7 @@ export async function runSupervisorTui(
     if (!lock) {
       items.push({
         value: createValue,
-        label: '+ Create AliceProject…',
+        label: '+ Create OpenAlphaProject…',
         description: 'Register a separate complete home and select it.',
       })
     }
@@ -2809,7 +2809,7 @@ export async function runSupervisorTui(
     if (!lock) {
       switchboardItems.push({
         key: createValue,
-        label: '+ Create AliceProject…',
+        label: '+ Create OpenAlphaProject…',
         kind: 'create',
       })
     }
@@ -2844,7 +2844,7 @@ export async function runSupervisorTui(
       message = next
       ui.requestRender()
     }
-    const close = (notice = 'AliceProject selection closed.') => {
+    const close = (notice = 'OpenAlphaProject selection closed.') => {
       if (!projectsActive) return
       projectsActive = false
       closeProjects = null
@@ -2862,7 +2862,7 @@ export async function runSupervisorTui(
       projectListActive = true
       creatorView = null
       projectsHoveredCommand = undefined
-      setMessage(lock ?? 'Selecting an AliceProject also makes it the next bare-start default. Copy AI credentials with openalice project copy-ai-creds.')
+      setMessage(lock ?? 'Selecting an OpenAlphaProject also makes it the next bare-start default. Copy AI credentials with openalice project copy-ai-creds.')
     }
     const activateContext = async (
       operation: () => Promise<ResolvedLaunchContext>,
@@ -2872,7 +2872,7 @@ export async function runSupervisorTui(
       if (changing) return
       changing = true
       actionRunning = true
-      setMessage('Switching AliceProject…')
+      setMessage('Switching OpenAlphaProject…')
       try {
         const next = await operation()
         projectContext = next
@@ -2885,7 +2885,7 @@ export async function runSupervisorTui(
         })
         close(notice(next))
       } catch (error: unknown) {
-        setMessage(`Could not switch AliceProject: ${safeError(error)}`)
+        setMessage(`Could not switch OpenAlphaProject: ${safeError(error)}`)
       } finally {
         actionRunning = false
         changing = false
@@ -2961,7 +2961,7 @@ export async function runSupervisorTui(
       input.onSubmit = (value) => {
         const home = value.trim()
         if (!home) {
-          input.setDetail('Enter a complete home for this AliceProject.')
+          input.setDetail('Enter a complete home for this OpenAlphaProject.')
           return
         }
         input.focused = false
@@ -2973,9 +2973,9 @@ export async function runSupervisorTui(
         currentProjectName: projectContext.aliceProject.displayName,
         projectKey: name,
         detail: sanitize(input.detail),
-        message: 'The new AliceProject owns only its registry entry; existing data is never copied or deleted.',
+        message: 'The new OpenAlphaProject owns only its registry entry; existing data is never copied or deleted.',
       }
-      setMessage('The new AliceProject owns only its registry entry; existing data is never copied or deleted.')
+      setMessage('The new OpenAlphaProject owns only its registry entry; existing data is never copied or deleted.')
     }
     const showCreateNameInput = () => {
       projectListActive = false
@@ -3009,7 +3009,7 @@ export async function runSupervisorTui(
           return
         }
         if (registry.projects.some((entry) => entry.key === name)) {
-          input.setDetail(`AliceProject "${name}" is already registered.`)
+          input.setDetail(`OpenAlphaProject "${name}" is already registered.`)
           return
         }
         input.focused = false
@@ -3020,9 +3020,9 @@ export async function runSupervisorTui(
         step: 'identity',
         currentProjectName: projectContext.aliceProject.displayName,
         detail: sanitize(input.detail),
-        message: 'Create a named AliceProject without leaving the Supervisor.',
+        message: 'Create a named OpenAlphaProject without leaving the Supervisor.',
       }
-      setMessage('Create a named AliceProject without leaving the Supervisor.')
+      setMessage('Create a named OpenAlphaProject without leaving the Supervisor.')
     }
 
     list.onCancel = () => close()
@@ -3039,12 +3039,12 @@ export async function runSupervisorTui(
         item.value === projectContext.project
         && item.value === registry.defaultProject
       ) {
-        close(`AliceProject ${projectContext.aliceProject.displayName} is already selected.`)
+        close(`OpenAlphaProject ${projectContext.aliceProject.displayName} is already selected.`)
         return
       }
       void activateContext(
         () => selectProject(projectContext, item.value),
-        (next) => `Selected AliceProject ${next.aliceProject.displayName}; future bare starts use it.`,
+        (next) => `Selected OpenAlphaProject ${next.aliceProject.displayName}; future bare starts use it.`,
       )
     }
 
@@ -3158,7 +3158,7 @@ export async function runSupervisorTui(
     try {
       const sourceRuntime = await inspectTransferSource(source.home)
       if (sourceRuntime.class !== 'absent') {
-        screen.update({ notice: `Stop local AliceProject ${source.key} before transfer. No source process was changed.` })
+        screen.update({ notice: `Stop local OpenAlphaProject ${source.key} before transfer. No source process was changed.` })
         return
       }
     } catch (error: unknown) {
@@ -3171,7 +3171,7 @@ export async function runSupervisorTui(
 
     const state = createSupervisorTransferWizard(source, fleetState.machines)
     if (state.destinations.length === 0) {
-      screen.update({ notice: 'No online compatible SSH Machine can receive an AliceProject.' })
+      screen.update({ notice: 'No online compatible SSH Machine can receive an OpenAlphaProject.' })
       return
     }
     transferActive = true
@@ -3182,7 +3182,7 @@ export async function runSupervisorTui(
       list: InstanceType<typeof piTui.SelectList>
       maxVisible: number
     } | null = null
-    let message = 'Choose the SSH Machine that will own the new AliceProject.'
+    let message = 'Choose the SSH Machine that will own the new OpenAlphaProject.'
     let transferController: AbortController | null = null
     let transferHoveredCommand: string | undefined
     const theme: SelectListTheme = {
@@ -3267,7 +3267,7 @@ export async function runSupervisorTui(
       state.destinations.map((machine) => ({
         value: machine.key,
         label: machine.displayName,
-        description: `${machine.sshTarget ?? machine.key} · ${machine.projects.length} AliceProject(s)`,
+        description: `${machine.sshTarget ?? machine.key} · ${machine.projects.length} OpenAlphaProject(s)`,
       })),
       (value) => {
         selectTransferDestination(state, value)
@@ -3277,8 +3277,8 @@ export async function runSupervisorTui(
       () => close(),
     )
     const showProjectKey = () => showInput(
-      'Destination AliceProject key', state.projectKey,
-      'A new registry key; existing remote AliceProjects are never replaced.',
+      'Destination OpenAlphaProject key', state.projectKey,
+      'A new registry key; existing remote OpenAlphaProjects are never replaced.',
       (value) => validateSupervisorAliceProjectKey(value),
       (value) => { state.projectKey = value; state.phase = 'home'; showHome() },
       showDestination,
@@ -3320,7 +3320,7 @@ export async function runSupervisorTui(
         const remote = latest.machines.find((machine) => machine.key === destination.key)
         if (!remote || remote.connection !== 'online') throw new Error('Destination Machine is no longer online.')
         if (remote.projects.some((project) => project.key === state.projectKey || remoteHomesOverlap(project.home, state.destinationHome))) {
-          throw new Error('Destination key or Home now conflicts with a registered remote AliceProject.')
+          throw new Error('Destination key or Home now conflicts with a registered remote OpenAlphaProject.')
         }
         state.plan = await planTransfer({
           source: { id: source.id, key: source.key, displayName: source.displayName, home: source.home, port: source.port, portAutomatic: source.portAutomatic, isDefault: source.isDefault },
@@ -3433,7 +3433,7 @@ export async function runSupervisorTui(
           const remote = screen.snapshot.fleet?.machines.find((entry) => entry.key === machine.key)
           const project = remote?.projects.find((entry) => entry.key === state.projectKey)
           if (remote && project) { close(`Transferred ${machine.key}/${state.projectKey}.`); await activateFleetProject(remote, project) }
-          else setMessage('Refresh did not find the transferred AliceProject yet.')
+          else setMessage('Refresh did not find the transferred OpenAlphaProject yet.')
         })()
       },
       invalidate: () => undefined,
@@ -4079,7 +4079,7 @@ export class SupervisorScreen implements Component {
     const machine = selectedFleetMachine(fleet)
     const project = selectedFleetProject(fleet)
     if (!machine || !project) {
-      this.update({ notice: 'No AliceProject is available on the selected Machine.' })
+      this.update({ notice: 'No OpenAlphaProject is available on the selected Machine.' })
       return
     }
     if (machine.key !== 'local' && project.runtime.class === 'absent') {
@@ -4213,27 +4213,27 @@ export class SupervisorScreen implements Component {
       }
       if (matchesKey(data, 'o') && remote) {
         if (machine && project) this.onActivateFleet?.(machine, project)
-        else this.update({ notice: 'No remote AliceProject is available to connect.' })
+        else this.update({ notice: 'No remote OpenAlphaProject is available to connect.' })
         return true
       }
       if (matchesKey(data, 's') && remote) {
-        if (!machine || !project) this.update({ notice: 'No remote AliceProject is available to start.' })
+        if (!machine || !project) this.update({ notice: 'No remote OpenAlphaProject is available to start.' })
         else if (machine.connection !== 'online') this.update({ notice: 'The selected Machine is not online.' })
         else if (!machine.capabilities.lifecycle) this.update({ notice: 'This Machine does not support remote lifecycle actions.' })
-        else if (!project.available || project.runtime.class !== 'absent') this.update({ notice: 'Start is available only for a stopped remote AliceProject.' })
+        else if (!project.available || project.runtime.class !== 'absent') this.update({ notice: 'Start is available only for a stopped remote OpenAlphaProject.' })
         else this.onStartFleet?.(machine, project)
         return true
       }
       if (matchesKey(data, 'm') && !remote) {
         if (project?.available) this.onTransferFleet?.(project)
-        else if (project) this.update({ notice: 'Transfer requires an available AliceProject home.' })
-        else this.update({ notice: 'Select a local AliceProject to transfer.' })
+        else if (project) this.update({ notice: 'Transfer requires an available OpenAlphaProject home.' })
+        else this.update({ notice: 'Select a local OpenAlphaProject to transfer.' })
         return true
       }
       const remoteMutationKeys: KeyId[] = ['x', 'd', 'l', 'p', 'c', 'm']
       if (remote && remoteMutationKeys.some((key) => matchesKey(data, key))) {
         this.update({
-          notice: 'That mutation is not available for a remote selection. Use r to refresh or Enter/o to connect a running AliceProject.',
+          notice: 'That mutation is not available for a remote selection. Use r to refresh or Enter/o to connect a running OpenAlphaProject.',
         })
         return true
       }
@@ -5124,7 +5124,7 @@ export class SupervisorScreen implements Component {
       const home = renderSupervisorHome({
         projectName: this.snapshot.activeTarget?.projectName
           ?? this.snapshot.context?.aliceProject.displayName
-          ?? 'Default AliceProject',
+          ?? 'Default OpenAlphaProject',
         machineName: this.snapshot.activeTarget?.machineName ?? 'This computer',
         targetKind: this.snapshot.activeTarget?.kind ?? 'local',
         transport: this.snapshot.activeTarget?.transport ?? 'loopback',
@@ -5328,23 +5328,23 @@ export class SupervisorScreen implements Component {
     }
     if (this.hoveredRail?.surface === 'fleet-projects') {
       const total = selectedFleetMachine(this.snapshot.fleet)?.projects.length ?? 0
-      return `AliceProject ${this.hoveredRail.index + 1}/${total} · drag to select.`
+      return `OpenAlphaProject ${this.hoveredRail.index + 1}/${total} · drag to select.`
     }
     if (this.headerReleaseHovered) {
       return `Release ${this.snapshot.channel} · inspect lane and update.`
     }
     if (this.hoveredPanel) {
       return {
-        overview: 'Return to the selected AliceProject launch and Runtime overview.',
-        inbox: 'Review reports and open their Workspace in the active AliceProject.',
-        fleet: 'Browse local and remote Machines and their AliceProjects.',
+        overview: 'Return to the selected OpenAlphaProject launch and Runtime overview.',
+        inbox: 'Review reports and open their Workspace in the active OpenAlphaProject.',
+        fleet: 'Browse local and remote Machines and their OpenAlphaProjects.',
         logs: 'Inspect the bounded, redacted Runtime event lens.',
         doctor: 'Inspect read-only Runtime ownership and readiness checks.',
         help: 'Explore contextual controls and keyboard routes.',
       }[this.hoveredPanel]
     }
     if (this.hoveredHomeHotspot === 'project') {
-      return 'AliceProject Switchboard · Runtime unchanged.'
+      return 'OpenAlphaProject Switchboard · Runtime unchanged.'
     }
     if (this.hoveredHomeHotspot === 'web') {
       return 'Open the verified Web UI for this running Runtime.'
@@ -5353,17 +5353,17 @@ export class SupervisorScreen implements Component {
       return 'Choose and validate the source checkout used by this stopped Runtime.'
     }
     if (this.hoveredHomeHotspot === 'inbox') {
-      return 'Open Inbox reports for the selected AliceProject.'
+      return 'Open Inbox reports for the selected OpenAlphaProject.'
     }
     if (this.hoveredHomeHotspot === 'connection') {
       return 'Open Connections to inspect or switch the active target.'
     }
     if (this.homePrimaryHovered) {
       if (this.snapshot.activeTarget && !activeTargetIsReachable(this.snapshot.activeTarget)) {
-        return 'Probe the selected OpenAlice endpoint and recover this target in place.'
+        return 'Probe the selected OpenAlpha endpoint and recover this target in place.'
       }
       return runtimeClass === 'absent'
-        ? 'Prepare the Runtime, start OpenAlice, and open its verified Web UI.'
+        ? 'Prepare the Runtime, start OpenAlpha, and open its verified Web UI.'
         : runtimeClass === 'running' || runtimeClass === 'owned_elsewhere'
           ? 'Open the verified Web UI for this running Runtime.'
           : 'Run read-only Runtime Doctor checks before making changes.'
@@ -5706,7 +5706,7 @@ function renderGuidance(
 ): string[] {
   if (target?.health?.phase === 'checking') {
     return [
-      'Checking the active OpenAlice endpoint now.',
+      'Checking the active OpenAlpha endpoint now.',
       target.kind === 'ssh'
         ? 'The SSH forward stays open while readiness is verified.'
         : 'The local Runtime stays selected while readiness is verified.',
@@ -5715,8 +5715,8 @@ function renderGuidance(
   if (target?.health?.phase === 'degraded') {
     return [
       target.kind === 'ssh'
-        ? 'The SSH forward is open, but the OpenAlice endpoint missed a health check.'
-        : 'The local OpenAlice endpoint missed a Runtime inspection.',
+        ? 'The SSH forward is open, but the OpenAlpha endpoint missed a health check.'
+        : 'The local OpenAlpha endpoint missed a Runtime inspection.',
       target.kind === 'ssh'
         ? 'Press Enter or r to retry now; automatic probes will continue.'
         : 'Automatic Runtime inspection will continue.',
@@ -5725,7 +5725,7 @@ function renderGuidance(
   if (target?.health?.phase === 'unreachable') {
     return [
       target.kind === 'ssh'
-        ? 'The SSH forward is open, but OpenAlice is currently unreachable.'
+        ? 'The SSH forward is open, but OpenAlpha is currently unreachable.'
         : 'The selected local Runtime cannot currently be inspected.',
       target.kind === 'ssh'
         ? 'Press Enter or r to retry, or x to disconnect without stopping the remote Runtime.'
@@ -5736,7 +5736,7 @@ function renderGuidance(
   if (runtime.class === 'absent') {
     if (context?.runtimeProvider.kind === 'bundle') {
       return [
-        'The TUI will prepare OpenAlice, verify readiness, and open the Web UI.',
+        'The TUI will prepare OpenAlpha, verify readiness, and open the Web UI.',
         'Review setup first with p.',
       ]
     }
@@ -5749,7 +5749,7 @@ function renderGuidance(
     return ['The running Guardian is incompatible. Read Doctor before changing it.']
   }
   if (runtime.class === 'running') {
-    return ['OpenAlice is ready. Press Enter or o to open the Web UI.']
+    return ['OpenAlpha is ready. Press Enter or o to open the Web UI.']
   }
   return [`Runtime is ${runtime.class ?? runtime.state ?? 'unknown'}; status will refresh automatically.`]
 }
@@ -5827,12 +5827,12 @@ function clamp(value: number, minimum: number, maximum: number): number {
 
 function renderConfigRecovery(snapshot: SupervisorSnapshot): string[] {
   return [
-    'AliceProject configuration cannot be read.',
+    'OpenAlphaProject configuration cannot be read.',
     snapshot.recoveryReason === 'newer-schema'
-      ? 'This file requires a newer OpenAlice than the running CLI.'
-      : 'It may be corrupt, or it may require a newer OpenAlice.',
+      ? 'This file requires a newer OpenAlpha than the running CLI.'
+      : 'It may be corrupt, or it may require a newer OpenAlpha.',
     'This Supervisor will not inspect, start, open, stop, restart, or configure a project.',
-    'Press u to choose a channel and check for an OpenAlice update, or ? for help.',
+    'Press u to choose a channel and check for an OpenAlpha update, or ? for help.',
   ]
 }
 
@@ -5851,8 +5851,8 @@ function confirmationView(
       title: 'Confirm Update',
       meta: target,
       prompt: sourceChannel === targetChannel
-        ? `Install OpenAlice ${target} from ${targetChannel} now?`
-        : `Switch ${sourceChannel} → ${targetChannel} and install OpenAlice ${target}?`,
+        ? `Install OpenAlpha ${target} from ${targetChannel} now?`
+        : `Switch ${sourceChannel} → ${targetChannel} and install OpenAlpha ${target}?`,
       impact: [
         `Current CLI: ${update?.currentVersion ?? 'this running process'}.`,
         'The release installer is downloaded, SHA-256 verified, then the installed command is atomically replaced.',
@@ -5870,9 +5870,9 @@ function confirmationView(
       action,
       title: 'Confirm Managed Source',
       meta: managedSource?.state ?? 'prepare',
-      prompt: `Prepare and use installer-managed OpenAlice source ${selector}?`,
+      prompt: `Prepare and use installer-managed OpenAlpha source ${selector}?`,
       impact: [
-        `Destination: ${managedSource?.appDir ?? 'the OpenAlice install root'}`,
+        `Destination: ${managedSource?.appDir ?? 'the OpenAlpha install root'}`,
         'First start may install dependencies and build the Runtime.',
       ],
       confirmLabel: 'Prepare source',
@@ -5973,7 +5973,7 @@ function unavailableActionMessage(
 function actionName(action: SupervisorAction): string {
   return {
     start: 'Starting Runtime',
-    'start-open': 'Starting and opening OpenAlice',
+    'start-open': 'Starting and opening OpenAlpha',
     open: 'Opening Web UI',
     stop: 'Stopping Runtime',
     restart: 'Restarting Runtime',
@@ -5993,7 +5993,7 @@ function primaryAction(
 }
 
 function primaryActionLabel(runtime: RuntimeSummary | null): string {
-  if (runtime?.class === 'absent') return 'Start OpenAlice & open Workspace'
+  if (runtime?.class === 'absent') return 'Start OpenAlpha & open Workspace'
   if (runtime?.endpoints?.web) return 'Open Workspace'
   return 'Run Runtime Doctor'
 }
@@ -6010,11 +6010,11 @@ function formatUpdateNotice(
   if (update.status === 'available') {
     const version = formatUpdateCandidate(update)
     return kind === 'discover'
-      ? `OpenAlice ${version} is available on ${update.channel}; press u to review and install it.`
-      : `OpenAlice ${version} is available on ${update.channel}. Confirm below to install it now.`
+      ? `OpenAlpha ${version} is available on ${update.channel}; press u to review and install it.`
+      : `OpenAlpha ${version} is available on ${update.channel}. Confirm below to install it now.`
   }
   if (update.status === 'current') {
-    return `OpenAlice is current on ${update.channel ?? 'this channel'}.`
+    return `OpenAlpha is current on ${update.channel ?? 'this channel'}.`
   }
   return update.message ?? 'Automatic update is unavailable for this install channel.'
 }
@@ -6053,12 +6053,12 @@ function hasExplicitProjectOrHomeSelection(
 
 function configRecoveryNotice(error: unknown): string {
   return isNewerSupervisorSchemaError(error)
-    ? 'AliceProject configuration requires a newer OpenAlice and cannot be read by this CLI. This shell will not inspect, start, or configure a project. Press u to check for and install an update, then exit and run openalice again.'
-    : 'AliceProject configuration cannot be read. It may be corrupt or require a newer OpenAlice. This shell will not inspect, start, or configure a project. Press u to check for and install an update, or repair the Supervisor config.'
+    ? 'OpenAlphaProject configuration requires a newer OpenAlpha and cannot be read by this CLI. This shell will not inspect, start, or configure a project. Press u to check for and install an update, then exit and run openalice again.'
+    : 'OpenAlphaProject configuration cannot be read. It may be corrupt or require a newer OpenAlpha. This shell will not inspect, start, or configure a project. Press u to check for and install an update, or repair the Supervisor config.'
 }
 
 function configRecoveryBlockedNotice(): string {
-  return 'AliceProject configuration cannot be used. This Supervisor will not inspect, start, open, stop, restart, or configure a guessed project.'
+  return 'OpenAlphaProject configuration cannot be used. This Supervisor will not inspect, start, open, stop, restart, or configure a guessed project.'
 }
 
 async function applyVerifiedSupervisorUpdate(
@@ -6068,7 +6068,7 @@ async function applyVerifiedSupervisorUpdate(
   const layout = resolveInstalledLayout(import.meta.url)
   if (!layout) {
     throw new Error(
-      'This OpenAlice CLI is running from source, not an installed release. Re-run the public installer to update the installed command.',
+      'This OpenAlpha CLI is running from source, not an installed release. Re-run the public installer to update the installed command.',
     )
   }
   const updateChannel = normalizeSupervisorUpdateChannel(result.channel)
@@ -6128,7 +6128,7 @@ function formatComponents(runtime: RuntimeSummary | null): string {
   const components = runtime?.components
   if (!components) return 'not reported'
   return [
-    `Alice ${components.alice ?? 'unknown'}`,
+    `OpenAlpha ${components.alice ?? 'unknown'}`,
     `UTA ${components.uta ?? 'optional'}`,
     `Connector ${components.connector ?? 'optional'}`,
   ].join(' · ')
@@ -6181,10 +6181,10 @@ function instanceSelectionOverrideLock(
   context: ResolvedLaunchContext,
 ): string | undefined {
   const projectLock = settingOverrideLock(context.provenance.project)
-  if (projectLock) return `AliceProject selection is read-only. ${projectLock}`
+  if (projectLock) return `OpenAlphaProject selection is read-only. ${projectLock}`
   const homeLock = settingOverrideLock(context.provenance.home)
   if (homeLock) {
-    return `AliceProject selection is read-only while this session's complete home is fixed. ${homeLock}`
+    return `OpenAlphaProject selection is read-only while this session's complete home is fixed. ${homeLock}`
   }
   return undefined
 }
@@ -6258,10 +6258,10 @@ function storedHomeRecoveryNotice(
   const message = error instanceof Error ? error.message : String(error)
   const match = message.match(/for AliceProject "([^"]+)" (is missing|is unavailable or not writable)/)
   const unavailable = match
-    ? `AliceProject "${match[1]}" ${match[2]}.`
-    : 'The remembered AliceProject home is unavailable.'
+    ? `OpenAlphaProject "${match[1]}" ${match[2]}.`
+    : 'The remembered OpenAlphaProject home is unavailable.'
   return sanitize(
-    `${unavailable} Using "${fallbackProject}"; press i AliceProjects to recover.`,
+    `${unavailable} Using "${fallbackProject}"; press i OpenAlphaProjects to recover.`,
   )
 }
 
@@ -6295,7 +6295,7 @@ async function runRemoteProjectStart(
   machine: RegisteredMachine,
   projectKey: string,
 ): Promise<void> {
-  if (!/^[a-z][a-z0-9_-]{0,31}$/u.test(projectKey)) throw new Error('Invalid remote AliceProject key.')
+  if (!/^[a-z][a-z0-9_-]{0,31}$/u.test(projectKey)) throw new Error('Invalid remote OpenAlphaProject key.')
   const command = `set -eu
 cli=$(command -v openalice 2>/dev/null || { [ ! -x "$HOME/.openalice/bin/openalice" ] || printf '%s\\n' "$HOME/.openalice/bin/openalice"; })
 [ -n "$cli" ] || exit 127

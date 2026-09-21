@@ -870,7 +870,7 @@ ONLY if the operator has enabled "Allow AI to push trades" in Settings → Agent
     }),
 
     orderHistory: tool({
-      description: 'Order history — one row per order with its lifecycle collapsed (submitted → filled/cancelled/rejected, fill price+qty, source "external" for orders placed outside Alice). Prefer this over tradingLog when analyzing what happened to orders.',
+      description: 'Order history — one row per order with its lifecycle collapsed (submitted → filled/cancelled/rejected, fill price+qty, source "external" for orders placed outside OpenAlpha). Prefer this over tradingLog when analyzing what happened to orders.',
       inputSchema: z.object({
         source: z.string().optional().describe(sourceDesc(false)),
         limit: z.number().int().min(1).max(200).optional().describe('Max rows per account (default 50)'),

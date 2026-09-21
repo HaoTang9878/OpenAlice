@@ -15,7 +15,7 @@ describe('Supervisor Help control atlas', () => {
 
     expect(output).toContain('Control atlas · 2/3')
     expect(output).toContain('› ● Runtime')
-    expect(output).toContain('» ◇ AliceProject')
+    expect(output).toContain('» ◇ OpenAlphaProject')
     expect(output).toContain('Runtime · Read state, then act')
     expect(output).toContain('[ r ] Restart local / check remote target')
     expect(output).toContain('[ x ] Stop local / disconnect remote target')
@@ -36,10 +36,10 @@ describe('Supervisor Help control atlas', () => {
     expect(output).toContain('NOW · Fast routes')
     expect(output).toContain('[ Enter ] Start / connect / open')
     expect(output).toContain('[ / ] Find any command')
-    expect(output).toContain('[ i ] Choose an AliceProject')
+    expect(output).toContain('[ i ] Choose an OpenAlphaProject')
     expect(output).toContain('  ◆ Navigation  Move with intent')
     expect(output).toContain('› ● Runtime  Read state, then act')
-    expect(output).toContain('» ◇ AliceProject  Shape the workspace')
+    expect(output).toContain('» ◇ OpenAlphaProject  Shape the workspace')
     expect(output).toContain('● SELECTED · RUNTIME')
     expect(output).toContain('Runtime leads with the session Connection Chronicle; local mutations')
     expect(output).toContain('keep confirmation while remote targets expose only safe link controls.')
@@ -67,9 +67,9 @@ describe('Supervisor Help control atlas', () => {
 
     expect(output).toContain('Help · START · SEARCH · SWITCH · 3/3')
     expect(output).toContain('NOW · [ Enter ] Act')
-    expect(output).toContain('[ / ] Find · [ i ] AliceProject')
-    expect(output).toContain('› ◇ AliceProject')
-    expect(output).toContain('[ i ] Choose or create an AliceProject')
+    expect(output).toContain('[ / ] Find · [ i ] OpenAlphaProject')
+    expect(output).toContain('› ◇ OpenAlphaProject')
+    expect(output).toContain('[ i ] Choose or create an OpenAlphaProject')
     expect(output).toContain('[ / ] Open the Command Dock')
     expect(output).toContain('◆ [ ? ] Close Help')
     expect(rendered.targets).toHaveLength(3)
@@ -81,7 +81,7 @@ describe('Supervisor Help control atlas', () => {
     const baselineOutput = baseline.lines.join('\n')
     expect(baselineOutput).toContain('Help · START · SEARCH · SWITCH · 1/3')
     expect(baselineOutput).toContain(
-      'NOW · [ Enter ] Start/connect/open · [ / ] Find · [ i ] AliceProject',
+      'NOW · [ Enter ] Start/connect/open · [ / ] Find · [ i ] OpenAlphaProject',
     )
     expect(baseline.targets[0]?.row).toBe(3)
     expect(baseline.lines.length).toBeLessThanOrEqual(19)
@@ -96,7 +96,7 @@ describe('Supervisor Help control atlas', () => {
     expect(output).toContain('NEXT  [ Tab / → ] Next view')
     expect(output).toContain('› ◆ Navigation  Move with intent')
     expect(output).toContain('  ● Runtime  Read state, then act')
-    expect(output).toContain('  ◇ AliceProject  Shape the workspace')
+    expect(output).toContain('  ◇ OpenAlphaProject  Shape the workspace')
     expect(output).toContain('◆ [ ? ] Close Help')
     expect(rendered.targets).toEqual([
       { index: 0, row: 3, startColumn: 2, endColumn: 45 },

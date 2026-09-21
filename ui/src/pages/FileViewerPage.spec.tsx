@@ -69,7 +69,7 @@ afterEach(() => {
 })
 
 describe('FileViewerPage back navigation', () => {
-  it('returns an Ask Alice artifact to the exact Session', () => {
+  it('returns an Ask OpenAlpha artifact to the exact Session', () => {
     render(
       <FileViewerPage
         spec={{

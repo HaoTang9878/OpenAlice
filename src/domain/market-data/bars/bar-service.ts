@@ -116,7 +116,7 @@ function isFullBar(d: Record<string, unknown>): boolean {
 }
 
 function dateOf(bar: Bar, interval?: string): string {
-  // Bar.timestamp is typed Date, but it crosses the Alice↔UTA HTTP wire as an
+  // Bar.timestamp is typed Date, but it crosses the OpenAlpha↔UTA HTTP wire as an
   // ISO string (JSON has no Date) — normalize either form before formatting.
   const iso = new Date(bar.timestamp).toISOString()
   // A daily/weekly bar is a calendar day, not an instant — render date-only even

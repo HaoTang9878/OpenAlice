@@ -1,6 +1,6 @@
 /**
  * `openalice project` — list, select, and copy AI credentials between
- * registered AliceProjects.
+ * registered OpenAlphaProjects.
  */
 import { createInterface } from 'node:readline/promises'
 import { stdin as input, stdout as output } from 'node:process'
@@ -47,7 +47,7 @@ import {
 } from './supervisor-config.ts'
 
 export function formatProjectHelp(): string {
-  return `Manage registered AliceProjects
+  return `Manage registered OpenAlphaProjects
 
 Usage:
   openalice project
@@ -65,14 +65,14 @@ launch preferences, broker accounts, and sealing keys are never copied.
 Secrets are never printed.
 
 transfer copies portable configuration and Workspace repositories to a
-registered SSH Machine. Native/OpenAlice Sessions, Runtime state, ports, auth,
+registered SSH Machine. Native/OpenAlpha Sessions, Runtime state, ports, auth,
 and the source sealing key are excluded. Apply uses remote staging, checksums,
-and atomic publication; the source AliceProject is never deleted.
+and atomic publication; the source OpenAlphaProject is never deleted.
 
 Options:
   --json         Machine-readable list
-  --from <key>   Source AliceProject
-  --to <key>     Destination AliceProject
+  --from <key>   Source OpenAlphaProject
+  --to <key>     Destination OpenAlphaProject
   --yes          Non-interactive copy; requires --from and --to
   --plan         Print the transfer plan without changing either Machine
   --without-credentials  Do not transfer AI, broker, Connector, or provider keys
@@ -156,10 +156,10 @@ async function runProjectList(
   }
   stdout.write(formatProjectList(registry))
   if (!options.select || !isInteractive(io)) return 0
-  const answer = (await prompt(io, `Select AliceProject [${registry.defaultProject}]: `)).trim()
+  const answer = (await prompt(io, `Select OpenAlphaProject [${registry.defaultProject}]: `)).trim()
   if (!answer || answer === registry.defaultProject) return 0
   await selectProject(io, context, registry, answer)
-  stdout.write(`Selected AliceProject ${answer}; future bare starts use it.\n`)
+  stdout.write(`Selected OpenAlphaProject ${answer}; future bare starts use it.\n`)
   return 0
 }
 
@@ -170,7 +170,7 @@ async function runProjectUse(argv: string[], io: ProjectCommandIo): Promise<numb
   const { context, registry } = await loadRegistry(io)
   await selectProject(io, context, registry, key)
   ;(io.stdout ?? process.stdout).write(
-    `Selected AliceProject ${key}; future bare starts use it.\n`,
+    `Selected OpenAlphaProject ${key}; future bare starts use it.\n`,
   )
   return 0
 }
@@ -191,7 +191,7 @@ async function runProjectCopyAiCreds(argv: string[], io: ProjectCommandIo): Prom
   const from = requireProject(registry, fromKey)
   const to = requireProject(registry, toKey)
   if (from.key === to.key) {
-    throw usageError('Source and destination AliceProjects must be different.')
+    throw usageError('Source and destination OpenAlphaProjects must be different.')
   }
   const sourceVault = await readAiProviderVault(from.home)
   const sourceCount = Object.keys(sourceVault.credentials).length
@@ -252,7 +252,7 @@ async function runProjectTransfer(argv: string[], io: ProjectCommandIo): Promise
     throw transferBlocked(`Machine ${machine.key} is ${remote.connection}: ${remote.issue?.message ?? 'SSH inventory is unavailable.'}`)
   }
   if (!remote.capabilities.transferReceive) {
-    throw transferBlocked(`Machine ${machine.key} does not advertise compatible AliceProject transfer support.`)
+    throw transferBlocked(`Machine ${machine.key} does not advertise compatible OpenAlphaProject transfer support.`)
   }
 
   const inspectSource = io.inspectSourceRuntime ?? (async (home) => inspectRuntime({ homeRoot: home, waitMs: 2_000 }))
@@ -261,7 +261,7 @@ async function runProjectTransfer(argv: string[], io: ProjectCommandIo): Promise
   let sourceRunningBlocker = sourceRuntime.class !== 'absent'
   if (sourceRunningBlocker && sourceRuntime.owner?.surface !== 'cli-server') {
     throw transferBlocked(
-      `Source AliceProject is owned by ${sourceRuntime.owner?.surface ?? 'another Runtime'}; close that owner normally before transfer.`,
+      `Source OpenAlphaProject is owned by ${sourceRuntime.owner?.surface ?? 'another Runtime'}; close that owner normally before transfer.`,
     )
   }
   if (sourceRunningBlocker && !options.planOnly) {
@@ -269,7 +269,7 @@ async function runProjectTransfer(argv: string[], io: ProjectCommandIo): Promise
     if (!allowStop && isInteractive(io)) {
       const answer = (await prompt(
         io,
-        `Source AliceProject ${source.key} is ${sourceRuntime.class ?? 'active'}. Stop it for a consistent transfer? [y/N]: `,
+        `Source OpenAlphaProject ${source.key} is ${sourceRuntime.class ?? 'active'}. Stop it for a consistent transfer? [y/N]: `,
       )).trim().toLowerCase()
       allowStop = answer === 'y' || answer === 'yes'
     }
@@ -300,7 +300,7 @@ async function runProjectTransfer(argv: string[], io: ProjectCommandIo): Promise
   if (sourceRunningBlocker) {
     plan.blockers.unshift({
       code: 'ESOURCERUNNING',
-      message: `Source AliceProject Runtime is ${sourceRuntime.class ?? 'active'}; apply requires a separate stop confirmation.`,
+      message: `Source OpenAlphaProject Runtime is ${sourceRuntime.class ?? 'active'}; apply requires a separate stop confirmation.`,
     })
   }
   plan.blockers.push(...remoteDestinationBlockers(remote, options.project, options.home))
@@ -316,7 +316,7 @@ async function runProjectTransfer(argv: string[], io: ProjectCommandIo): Promise
   if (!options.yes) {
     if (!isInteractive(io)) throw usageError('Transfer apply requires --yes when stdin is not a TTY.')
     stdout.write(formatProjectTransferPlan(plan))
-    const answer = (await prompt(io, 'Transfer this AliceProject now? [y/N]: ')).trim().toLowerCase()
+    const answer = (await prompt(io, 'Transfer this OpenAlphaProject now? [y/N]: ')).trim().toLowerCase()
     if (answer !== 'y' && answer !== 'yes') {
       stdout.write('Cancelled. Nothing changed.\n')
       return 0
@@ -357,7 +357,7 @@ async function runProjectTransferReceive(argv: string[], io: ProjectCommandIo): 
       const existing = registry.projects.find((project) => project.key === plan.destination.key)
       if (existing) {
         if (resolve(existing.home) !== resolve(plan.destination.home)) {
-          throw transferBlocked(`Remote AliceProject key ${plan.destination.key} is already registered to another Home.`)
+          throw transferBlocked(`Remote OpenAlphaProject key ${plan.destination.key} is already registered to another Home.`)
         }
         return
       }
@@ -414,7 +414,7 @@ function parseTransferArgs(argv: string[]): TransferCommandOptions {
     throw usageError('transfer requires --from, --to-machine, --to-project, and --to-home')
   }
   const projectError = validateSupervisorAliceProjectKey(project)
-  if (projectError) throw usageError(`Invalid destination AliceProject key: ${projectError}`)
+  if (projectError) throw usageError(`Invalid destination OpenAlphaProject key: ${projectError}`)
   if (!posix.isAbsolute(home) || /[\u0000-\u001f\u007f-\u009f]/u.test(home)) {
     throw usageError('--to-home must be an absolute, control-character-free remote path')
   }
@@ -433,7 +433,7 @@ export function formatProjectTransferPlan(plan: ProjectTransferPlan): string {
     ? 'omitted by request'
     : `${plan.credentials.ai.count} AI, ${plan.credentials.broker.count} broker, ${plan.credentials.connector.count} Connector, ${plan.credentials.providerKeys.count} provider key(s)`
   const lines = [
-    'AliceProject transfer plan',
+    'OpenAlphaProject transfer plan',
     '',
     `  Source       ${plan.source.displayName} (${plan.source.key})`,
     `  Source Home  ${plan.source.home}`,
@@ -450,13 +450,13 @@ export function formatProjectTransferPlan(plan: ProjectTransferPlan): string {
   if (plan.blockers.length > 0) {
     lines.push('', 'Blockers:', ...plan.blockers.map((blocker) => `  - ${blocker.message}`))
   }
-  lines.push('', 'The source AliceProject is left unchanged.', 'Nothing has changed yet.', '')
+  lines.push('', 'The source OpenAlphaProject is left unchanged.', 'Nothing has changed yet.', '')
   return `${lines.join('\n')}\n`
 }
 
 function formatProjectTransferReceipt(receipt: ProjectTransferReceipt): string {
   return [
-    'AliceProject transfer complete.',
+    'OpenAlphaProject transfer complete.',
     `Remote Home: ${receipt.destinationHome}`,
     `Published ${receipt.files} files (${formatBytes(receipt.bytes)}); Sessions imported: 0.`,
     `Receipt: ${receipt.transferId}`,
@@ -488,10 +488,10 @@ function remoteDestinationBlockers(
   const blockers: ProjectTransferPlan['blockers'] = []
   for (const project of inventory.projects) {
     if (project.key === projectKey) {
-      blockers.push({ code: 'EDESTPROJECT', message: `Remote AliceProject key ${projectKey} is already registered.` })
+      blockers.push({ code: 'EDESTPROJECT', message: `Remote OpenAlphaProject key ${projectKey} is already registered.` })
     }
     if (remotePathOverlaps(project.home, home)) {
-      blockers.push({ code: 'EDESTHOME', message: `Destination Home overlaps remote AliceProject ${project.key}.` })
+      blockers.push({ code: 'EDESTHOME', message: `Destination Home overlaps remote OpenAlphaProject ${project.key}.` })
     }
   }
   return blockers
@@ -556,7 +556,7 @@ function requireProject(
   const project = registry.projects.find((entry) => entry.key === key)
   if (!project) {
     throw usageError(
-      `AliceProject "${key}" is not registered.\n\n${formatProjectList(registry)}`,
+      `OpenAlphaProject "${key}" is not registered.\n\n${formatProjectList(registry)}`,
     )
   }
   return project
@@ -564,7 +564,7 @@ function requireProject(
 
 export function formatProjectList(registry: SupervisorAliceProjectRegistry): string {
   const width = Math.max(7, ...registry.projects.map((entry) => entry.key.length))
-  const lines = ['AliceProjects', '']
+  const lines = ['OpenAlphaProjects', '']
   for (const entry of registry.projects) {
     const marks = [
       entry.isDefault ? 'default' : undefined,

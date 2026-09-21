@@ -2,7 +2,7 @@
  * App version awareness — current version + latest channel release.
  *
  * The current version comes from package.json#version (read once at module
- * load). The latest stable or beta version comes from the matching OpenAlice
+ * load). The latest stable or beta version comes from the matching OpenAlpha
  * CDN manifest and is cached in memory with separate success/error TTLs.
  * Explicit runtime identity and installed provenance, rather than package
  * semver alone, select the channel and update authority. Source development
@@ -42,7 +42,7 @@ function readPackageJson(): PackageJson {
         return _packageJson
       }
     } catch {
-      // Packaged Alice/UTA and source execution have different import.meta.url
+      // Packaged OpenAlpha/UTA and source execution have different import.meta.url
       // roots; continue through the explicit app home, cwd, and source fallbacks.
     }
   }
@@ -221,7 +221,7 @@ function parseReleaseManifest(value: unknown, channel: ReleaseChannel): LatestRe
 }
 
 /**
- * Fetch the latest release from the requested OpenAlice CDN channel manifest.
+ * Fetch the latest release from the requested OpenAlpha CDN channel manifest.
  * Returns null + an error string when the manifest is unreachable or invalid.
  * Successes and failures are cached independently per channel so repeated UI
  * loads do not flap the discovery endpoint.
@@ -246,7 +246,7 @@ export async function fetchLatestRelease(
       signal: AbortSignal.timeout(10_000),
     })
     if (!res.ok) {
-      const error = `OpenAlice ${channel} manifest ${res.status} ${res.statusText}`
+      const error = `OpenAlpha ${channel} manifest ${res.status} ${res.statusText}`
       cache.set(channel, { fetchedAt: now, result: null, error })
       return { result: null, error }
     }
@@ -357,7 +357,7 @@ function resolveUpdateContext(
     ? readInstalledChannel(installedSourcePath, readTextFile)
     : null
   const provenanceError = installedSourcePath && installedChannel === null
-    ? 'Installed OpenAlice update metadata is invalid'
+    ? 'Installed OpenAlpha update metadata is invalid'
     : null
   const channel = installedChannel ?? (
     installedSourcePath

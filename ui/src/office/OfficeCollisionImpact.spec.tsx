@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 import { OfficeCollisionImpact, officeCollisionImpactPosition } from './OfficeCollisionImpact'
 
 describe('OfficeCollisionImpact', () => {
-  it('places the effect between Alice and the blocked tile', () => {
+  it('places the effect between OpenAlpha and the blocked tile', () => {
     expect(officeCollisionImpactPosition(
       { x: 480, y: 264 },
       { x: 0, y: -24, direction: 'up' },

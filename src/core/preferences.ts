@@ -34,7 +34,7 @@ const quickChatLaunchSchema = z.object({
 
 const quickChatPreferencesSchema = z.object({
   lastCredentialByAgent: z.record(z.string(), z.string()).default({}),
-  /** Stable workspace id used by the global Ask Alice composer. */
+  /** Stable workspace id used by the global Ask OpenAlpha composer. */
   recentChatWorkspaceId: z.string().nullable().default(null),
   /** The most recently chosen Session launch tuple. It is never a Workspace default. */
   recentLaunch: quickChatLaunchSchema.nullable().default(null),
@@ -55,13 +55,13 @@ const autoPredictionPreferencesSchema = z.object({
 
 const harnessPreferencesSchema = z.object({
   /**
-   * Ask Alice and Auto Quant share one roster. Headless-born Sessions that
+   * Ask OpenAlpha and Auto Quant share one roster. Headless-born Sessions that
    * have never opened a TUI/WebPi stay off that roster unless this is true.
    */
   showHeadlessBornSessions: z.boolean().default(false),
   /** Keep Sessions currently owned or occupied by an Issue off shared Harness rosters. */
   showIssueAttachedSessions: z.boolean().default(false),
-  /** Also discover stable upstream tags outside OpenAlice's verified catalog. */
+  /** Also discover stable upstream tags outside OpenAlpha's verified catalog. */
   showUnverifiedHarnessReleases: z.boolean().default(false),
 })
 
@@ -186,7 +186,7 @@ export async function readAgentRuntimesPreferences(
   }
 }
 
-// Alice is single-writer at the process level, but two UI requests can still
+// OpenAlpha is single-writer at the process level, but two UI requests can still
 // arrive together. Serialize the read-modify-write cycle so neither update is
 // lost, then use temp+rename so a crash cannot leave truncated JSON behind.
 let mutationQueue: Promise<unknown> = Promise.resolve()

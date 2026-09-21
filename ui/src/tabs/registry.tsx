@@ -485,7 +485,7 @@ const workspaceDetailsModule: ViewModule<'workspace-details'> = {
 const workspaceListModule: ViewModule<'workspace-list'> = {
   kind: 'workspace-list',
   shell: 'chat',
-  title: () => 'Ask Alice',
+  title: () => 'Ask OpenAlpha',
   toUrl: () => '/chat',
   Component: () => <ChatLandingPage spec={{ params: {} }} />,
 }
@@ -528,7 +528,7 @@ const workspaceModule: ViewModule<'workspace'> = {
 const templateCatalogModule: ViewModule<'template-catalog'> = {
   kind: 'template-catalog',
   shell: 'chat',
-  title: () => 'Ask Alice',
+  title: () => 'Ask OpenAlpha',
   toUrl: () => '/chat',
   Component: () => <ChatLandingPage spec={{ params: {} }} />,
 }
@@ -537,7 +537,7 @@ const templateCatalogModule: ViewModule<'template-catalog'> = {
 const templateDetailModule: ViewModule<'template-detail'> = {
   kind: 'template-detail',
   shell: 'chat',
-  title: () => 'Ask Alice',
+  title: () => 'Ask OpenAlpha',
   toUrl: () => '/chat',
   Component: () => <ChatLandingPage spec={{ params: {} }} />,
 }

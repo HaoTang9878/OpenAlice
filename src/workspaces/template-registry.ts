@@ -7,7 +7,7 @@ import type { CredentialWireShape } from '@/core/config.js';
 
 /**
  * A template's declaration that a registered agent should be seeded, at
- * workspace-create time, from a named credential in Alice's central store.
+ * workspace-create time, from a named credential in OpenAlpha's central store.
  * `credentialSlug` points into `aiProviderSchema.credentials`; `model` and the
  * adapter-specific knobs feed `credentialToWorkspaceAiCred`. Sourced from
  * `template.json`'s `agentCredentials` map (agentId → decl).
@@ -64,7 +64,7 @@ export interface TemplateMeta {
   readonly groupOrder?: number;
   /**
    * Community-tier template: bundles a third-party ecosystem maintained
-   * outside OpenAlice (satellite/upstream repos). UI surfaces render these
+   * outside OpenAlpha (satellite/upstream repos). UI surfaces render these
    * under a separate "Community" section so the official/community
    * priority split stays legible. Absent = official.
    */
@@ -113,7 +113,7 @@ export interface TemplateMeta {
   readonly bundledSkills: readonly string[];
   /**
    * Optional immutable upstream-source catalog. This is deliberately separate
-   * from the OpenAlice template README version: one versions launcher-owned
+   * from the OpenAlpha template README version: one versions launcher-owned
    * guidance, the other pins the external Harness tree materialized into a
    * newly created Workspace.
    */
@@ -241,7 +241,7 @@ interface ParsedTemplateMeta {
   readonly displayName?: string;
   readonly groupOrder?: number;
   /** Community-tier template: bundles a third-party ecosystem maintained
-   *  outside OpenAlice. UI surfaces separate these from official templates. */
+   *  outside OpenAlpha. UI surfaces separate these from official templates. */
   readonly community?: boolean;
   readonly defaultAgents: readonly string[];
   readonly injectTools: boolean;

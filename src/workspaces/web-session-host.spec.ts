@@ -260,7 +260,7 @@ function acpProcess(options: { loadSession?: boolean; failAuth?: boolean } = {})
       const outcome = ((command['result'] as Json)['outcome'] as Json)
       const promptId = (self as FakeProcess & { promptId?: unknown }).promptId
       if (outcome['outcome'] === 'selected' && outcome['optionId'] === 'allow-once') {
-        self.line({ jsonrpc: '2.0', method: 'session/update', params: { sessionId: 'ses_new', update: { sessionUpdate: 'tool_call_update', toolCallId: 'call_1', status: 'completed', content: [{ type: 'content', content: { type: 'text', text: '# OpenAlice' } }] } } })
+        self.line({ jsonrpc: '2.0', method: 'session/update', params: { sessionId: 'ses_new', update: { sessionUpdate: 'tool_call_update', toolCallId: 'call_1', status: 'completed', content: [{ type: 'content', content: { type: 'text', text: '# OpenAlpha' } }] } } })
         self.line({ jsonrpc: '2.0', method: 'session/update', params: { sessionId: 'ses_new', update: { sessionUpdate: 'agent_message_chunk', content: { type: 'text', text: 'the README.' } } } })
         self.line({ jsonrpc: '2.0', id: promptId, result: { stopReason: 'end_turn' } })
       } else {
@@ -616,12 +616,12 @@ describe('Codex question answers', () => {
     expect(first).toMatchObject({ allowText: true, options: [] })
     await expect(host.respond('record-1', first.id, '', '  ')).rejects.toThrow(/text/)
     expect(host.get('record-1')!.requests).toHaveLength(1)
-    await host.respond('record-1', first.id, '', 'Alice research')
+    await host.respond('record-1', first.id, '', 'OpenAlpha research')
     await settle()
     await host.respond('record-1', host.get('record-1')!.requests[0]!.id, 'Simple')
     await settle()
     expect(process.received.find((frame) => frame['id'] === 'questions')).toMatchObject({ result: { answers: {
-      name: { answers: ['Alice research'] }, style: { answers: ['Simple'] },
+      name: { answers: ['OpenAlpha research'] }, style: { answers: ['Simple'] },
     } } })
     await host.stopAll()
   })

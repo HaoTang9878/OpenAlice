@@ -53,7 +53,7 @@ describe('WorkspaceSourceUpgradePanel', () => {
   it('labels an upstream-only release and requires the explicit unverified action', async () => {
     const changed = vi.fn()
     render(<WorkspaceSourceUpgradePanel wsId="aq-1" onWorkspaceChanged={changed} />)
-    expect(await screen.findByText('Not verified by OpenAlice')).toBeTruthy()
+    expect(await screen.findByText('Not verified by OpenAlpha')).toBeTruthy()
     expect(screen.getByText('studio/server.ts')).toBeTruthy()
 
     fireEvent.click(screen.getByRole('button', { name: 'I understand — apply unverified upgrade' }))

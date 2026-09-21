@@ -12,7 +12,7 @@
  * not on the IBroker interface that let test/dev surfaces inject god-view
  * events: change markPrice, fill or partially fill pending orders, simulate
  * external deposits/withdrawals (空投, transfer-in) and external trades
- * (user manually trading on the exchange app outside Alice). Routes/UI
+ * (user manually trading on the exchange app outside OpenAlpha). Routes/UI
  * call these to drive scenarios without going through `placeOrder`.
  */
 
@@ -663,7 +663,7 @@ export class MockBroker implements IBroker {
   }
 
   /**
-   * Simulate an external balance change Alice didn't initiate (airdrop,
+   * Simulate an external balance change OpenAlpha didn't initiate (airdrop,
    * transfer-in, staking reward, off-exchange option assignment). Adds a
    * position without going through the order pipeline and tags
    * `avgCostSource: 'wallet'` so UTA's reconcile pipeline kicks in and
@@ -711,7 +711,7 @@ export class MockBroker implements IBroker {
   }
 
   /**
-   * Simulate the user manually trading on the exchange app (outside Alice's
+   * Simulate the user manually trading on the exchange app (outside OpenAlpha's
    * order log). Updates position + cash like a real fill, but tags the
    * position as wallet-sourced so UTA reconciles via observed price.
    */
@@ -733,7 +733,7 @@ export class MockBroker implements IBroker {
       // externalTrade models the user manually trading on the exchange app,
       // where opening a short (covered call's call leg, naked put, perp
       // short, etc.) is a legitimate action — distinct from placeOrder /
-      // _applyFill, which still rejects SELL-without-position because Alice
+      // _applyFill, which still rejects SELL-without-position because OpenAlpha
       // shouldn't silently flip a SELL intent into a short open.
       this._positions.set(params.nativeKey, {
         contract: this._buildContract(params.nativeKey, params.contract),

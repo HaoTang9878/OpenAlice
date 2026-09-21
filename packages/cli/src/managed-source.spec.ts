@@ -45,7 +45,7 @@ describe('managed local source', () => {
     const first = await prepareManagedSource({
       installSource: branchSource,
       layout: { installRoot },
-      repositoryUrl: '/fixture/OpenAlice.git',
+      repositoryUrl: '/fixture/OpenAlpha.git',
     }, { runGit })
 
     expect(first.created).toBe(true)
@@ -58,14 +58,14 @@ describe('managed local source', () => {
       '--branch',
       'dev',
       '--single-branch',
-      '/fixture/OpenAlice.git',
-      expect.stringContaining('.OpenAlice.prepare.'),
+      '/fixture/OpenAlpha.git',
+      expect.stringContaining('.OpenAlpha.prepare.'),
     ]])
 
     const reused = await prepareManagedSource({
       installSource: branchSource,
       layout: { installRoot },
-      repositoryUrl: '/fixture/OpenAlice.git',
+      repositoryUrl: '/fixture/OpenAlpha.git',
     }, { runGit })
     expect(reused).toEqual(expect.objectContaining({
       appDir: first.appDir,
@@ -90,13 +90,13 @@ describe('managed local source', () => {
         selector: { kind: 'version', value: 'v0.87.0' },
       },
       layout: { installRoot },
-      repositoryUrl: '/fixture/OpenAlice.git',
+      repositoryUrl: '/fixture/OpenAlpha.git',
     }, { runGit })
 
     expect(result.created).toBe(true)
     expect(runGit).toHaveBeenNthCalledWith(
       1,
-      ['clone', '/fixture/OpenAlice.git', expect.any(String)],
+      ['clone', '/fixture/OpenAlpha.git', expect.any(String)],
       expect.any(Object),
     )
     expect(runGit).toHaveBeenNthCalledWith(
@@ -118,7 +118,7 @@ describe('managed local source', () => {
     await expect(prepareManagedSource({
       installSource: branchSource,
       layout: { installRoot },
-    })).rejects.toThrow('exists but is not an OpenAlice checkout')
+    })).rejects.toThrow('exists but is not an OpenAlpha checkout')
   })
 
   it('reuses a valid checkout that wins a concurrent prepare race', async () => {
@@ -149,7 +149,7 @@ describe('managed local source', () => {
     await expect(inspectManagedSource({
       installSource: branchSource,
       layout: null,
-    })).rejects.toThrow('available from an installed OpenAlice CLI')
+    })).rejects.toThrow('available from an installed OpenAlpha CLI')
 
     const installRoot = await temporaryInstallRoot()
     expect(await inspectSourceCheckout(join(installRoot, 'missing'))).toBe('absent')

@@ -1,9 +1,9 @@
 /**
- * Secret-free Machine -> AliceProject inventory shared by the CLI and TUI.
+ * Secret-free Machine -> OpenAlphaProject inventory shared by the CLI and TUI.
  *
  * A remote inventory is collected with one SSH command. The remote CLI reads
  * its own Supervisor registry; the local process never scans arbitrary remote
- * directories or asks for one SSH connection per AliceProject.
+ * directories or asks for one SSH connection per OpenAlphaProject.
  */
 import { access, readFile } from 'node:fs/promises'
 import { hostname } from 'node:os'
@@ -121,7 +121,7 @@ export interface MachineInventoryOptions extends ResolveSupervisorRootOptions {
 
 const REMOTE_INVENTORY_COMMAND = `set -eu
 cli=$(command -v openalice 2>/dev/null || { [ ! -x "$HOME/.openalice/bin/openalice" ] || printf '%s\\n' "$HOME/.openalice/bin/openalice"; })
-[ -n "$cli" ] || { printf '%s\\n' 'OpenAlice CLI is not installed' >&2; exit 127; }
+[ -n "$cli" ] || { printf '%s\\n' 'OpenAlpha CLI is not installed' >&2; exit 127; }
 exec "$cli" machine inspect local --json`
 
 const NULL_OUTPUT = Object.freeze({ write: (_chunk: string): void => undefined })
@@ -254,12 +254,12 @@ export function parseMachineInspectEnvelope(text: string): MachineInspectEnvelop
   try {
     value = JSON.parse(text)
   } catch {
-    throw inventoryError('EINCOMPATIBLEINVENTORY', 'Remote OpenAlice returned invalid inventory JSON.')
+    throw inventoryError('EINCOMPATIBLEINVENTORY', 'Remote OpenAlpha returned invalid inventory JSON.')
   }
   if (!isRecord(value) || value['schemaVersion'] !== MACHINE_INVENTORY_SCHEMA_VERSION) {
     throw inventoryError(
       'EINCOMPATIBLEINVENTORY',
-      'Remote OpenAlice uses an incompatible Machine inventory schema.',
+      'Remote OpenAlpha uses an incompatible Machine inventory schema.',
     )
   }
   if (
@@ -267,7 +267,7 @@ export function parseMachineInspectEnvelope(text: string): MachineInspectEnvelop
     || Number.isNaN(Date.parse(value['generatedAt']))
     || !isMachineInventory(value['machine'])
   ) {
-    throw inventoryError('EINCOMPATIBLEINVENTORY', 'Remote OpenAlice returned an invalid Machine inventory.')
+    throw inventoryError('EINCOMPATIBLEINVENTORY', 'Remote OpenAlpha returned an invalid Machine inventory.')
   }
   return value as unknown as MachineInspectEnvelope
 }
@@ -413,7 +413,7 @@ function classifyRemoteInventoryError(error: unknown): {
     return { connection: 'unauthorized', code: 'ESSHAUTH', message: 'SSH authentication was rejected.' }
   }
   if (/not installed|not found|exit 127/i.test(detail)) {
-    return { connection: 'incompatible', code: 'ECLIMISSING', message: 'A compatible OpenAlice CLI is not installed on the remote machine.' }
+    return { connection: 'incompatible', code: 'ECLIMISSING', message: 'A compatible OpenAlpha CLI is not installed on the remote machine.' }
   }
   return { connection: 'offline', code: 'ESSHUNAVAILABLE', message: 'The machine could not be reached over SSH.' }
 }

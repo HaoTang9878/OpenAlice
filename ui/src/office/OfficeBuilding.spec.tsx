@@ -427,7 +427,7 @@ describe('OfficeBuilding', () => {
     )
 
     const floor = screen.getByTestId('office-floor')
-    const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+    const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
     expect(document.activeElement).toBe(floor)
     const topBeforeMove = alice.style.top
     await userEvent.keyboard('{ArrowDown}')
@@ -509,14 +509,14 @@ describe('OfficeBuilding', () => {
     expect(screen.queryByTestId('office-shift-harvest-hud')).toBeNull()
     expect(screen.queryByTestId('office-shift-harvest-board')).toBeNull()
     const replayVisitor = screen.getByTestId('office-replay-visitor')
-    const replayAlice = screen.getByRole('img', { name: 'Alice on the office map' })
+    const replayAlice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
     expect(replayVisitor.querySelector('img')?.getAttribute('src'))
       .toBe('/office/hud/replay-visitor-v1.png')
     expect(replayVisitor.style.left).toBe(replayAlice.style.left)
     expect(replayVisitor.style.top).toBe(replayAlice.style.top)
     expect(container.querySelector<HTMLImageElement>('.oa-office-hud__signal img')?.src)
       .toContain('/office/hud/occupancy-log-v2.png')
-    expect(screen.getByLabelText('Replay floor. Move Alice to inspect the snapshot; use Operations board to review it or Live to return.')).toBeTruthy()
+    expect(screen.getByLabelText('Replay floor. Move OpenAlpha to inspect the snapshot; use Operations board to review it or Live to return.')).toBeTruthy()
 
     const workspaceSign = screen.getByRole('button', { name: /Enter chat workspace/ }) as HTMLButtonElement
     const occupiedDesks = screen.getAllByTestId(/^office-desk-/) as HTMLButtonElement[]
@@ -538,10 +538,10 @@ describe('OfficeBuilding', () => {
       operations,
       screen.getByRole('button', { name: 'Inbox station' }),
       screen.getByRole('button', { name: 'News terminal' }),
-      screen.getByRole('button', { name: 'Move Alice up' }),
-      screen.getByRole('button', { name: 'Move Alice left' }),
-      screen.getByRole('button', { name: 'Move Alice right' }),
-      screen.getByRole('button', { name: 'Move Alice down' }),
+      screen.getByRole('button', { name: 'Move OpenAlpha up' }),
+      screen.getByRole('button', { name: 'Move OpenAlpha left' }),
+      screen.getByRole('button', { name: 'Move OpenAlpha right' }),
+      screen.getByRole('button', { name: 'Move OpenAlpha down' }),
       container.querySelector<HTMLButtonElement>('.oa-office-touch-action'),
     ].every((control) => control?.tabIndex === -1)).toBe(true)
     operations.focus()
@@ -629,7 +629,7 @@ describe('OfficeBuilding', () => {
     }
     const { rerender } = render(<OfficeBuilding building={building} {...commonProps} />)
     const floor = screen.getByTestId('office-floor')
-    const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+    const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
 
     await userEvent.keyboard('{ArrowRight}')
     const livePosition = { left: alice.style.left, top: alice.style.top }
@@ -764,7 +764,7 @@ describe('OfficeBuilding', () => {
     )
 
     const target = screen.getByTestId('office-desk-resume-target')
-    const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+    const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
     expect(target.dataset.route).toBe('true')
     expect(container.querySelector('.oa-office-route-trail__step')).toBeTruthy()
 
@@ -830,7 +830,7 @@ describe('OfficeBuilding', () => {
     expect(onOpenService).not.toHaveBeenCalled()
   })
 
-  it('keeps an empty Office inside the game world with Alice centered', () => {
+  it('keeps an empty Office inside the game world with OpenAlpha centered', () => {
     render(
       <OfficeBuilding
         building={{
@@ -852,10 +852,10 @@ describe('OfficeBuilding', () => {
     )
 
     const building = screen.getByTestId('office-building')
-    const map = screen.getByLabelText('Office map. Drag to pan; use arrows or WASD to move Alice; press Enter or Space to interact nearby.')
+    const map = screen.getByLabelText('Office map. Drag to pan; use arrows or WASD to move OpenAlpha; press Enter or Space to interact nearby.')
     expect(map.querySelector('.oa-office-map-stage')).toBeTruthy()
     expect(map.querySelector('.oa-office-room-grid')).toBeNull()
-    const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+    const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
     const spawnInlay = screen.getByTestId('office-spawn-inlay')
     const quietNotice = screen.getByRole('status')
     expect(map).toBeTruthy()
@@ -902,9 +902,9 @@ describe('OfficeBuilding', () => {
       )
 
       const map = screen.getByLabelText(
-        'Office map. Drag to pan; use arrows or WASD to move Alice; press Enter or Space to interact nearby.',
+        'Office map. Drag to pan; use arrows or WASD to move OpenAlpha; press Enter or Space to interact nearby.',
       )
-      const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+      const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
       fireEvent.keyDown(map, { key: 'w' })
       expect(`${alice.style.left}:${alice.style.top}`).toBe('480px:312px')
       fireEvent.keyDown(map, { key: 'd' })
@@ -946,7 +946,7 @@ describe('OfficeBuilding', () => {
 
       expect(screen.getByText('WASD/ARROWS · SHIFT RUN · ESC MENU')).toBeTruthy()
       const map = screen.getByTestId('office-floor')
-      const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+      const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
       fireEvent.keyDown(map, { key: 'Shift' })
       fireEvent.keyDown(map, { key: 'd', shiftKey: true })
       expect(`${alice.style.left}:${alice.style.top}`).toBe('528px:336px')
@@ -993,7 +993,7 @@ describe('OfficeBuilding', () => {
       />,
     )
 
-    const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+    const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
     expect(alice.style.left).toBe('456px')
     expect(alice.style.top).toBe('432px')
     expect(alice.dataset.direction).toBe('left')
@@ -1120,8 +1120,8 @@ describe('OfficeBuilding', () => {
         />,
       )
 
-      const alice = screen.getByRole('img', { name: 'Alice on the office map' })
-      const moveRight = screen.getByRole('button', { name: 'Move Alice right' })
+      const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
+      const moveRight = screen.getByRole('button', { name: 'Move OpenAlpha right' })
       fireEvent.pointerDown(moveRight, { pointerId: 3 })
       expect(alice.style.left).toBe('504px')
       act(() => vi.advanceTimersByTime(320))
@@ -1157,10 +1157,10 @@ describe('OfficeBuilding', () => {
         />,
       )
 
-      const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+      const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
       const initialTop = Number.parseInt(alice.style.top, 10)
-      const moveRight = screen.getByRole('button', { name: 'Move Alice right' })
-      const moveDown = screen.getByRole('button', { name: 'Move Alice down' })
+      const moveRight = screen.getByRole('button', { name: 'Move OpenAlpha right' })
+      const moveDown = screen.getByRole('button', { name: 'Move OpenAlpha down' })
       fireEvent.pointerDown(moveRight, { pointerId: 3 })
       fireEvent.pointerDown(moveDown, { pointerId: 4 })
       expect(alice.style.left).toBe('521px')
@@ -1216,7 +1216,7 @@ describe('OfficeBuilding', () => {
       )
 
       const map = screen.getByLabelText(
-        'Office map. Drag to pan; use arrows or WASD to move Alice; press Enter or Space to interact nearby.',
+        'Office map. Drag to pan; use arrows or WASD to move OpenAlpha; press Enter or Space to interact nearby.',
       )
       for (let index = 0; index < 9; index += 1) {
         fireEvent.keyDown(map, { key: 'w' })
@@ -1233,21 +1233,21 @@ describe('OfficeBuilding', () => {
 
       fireEvent.keyDown(map, { key: 'w' })
       expect(Number(screen.getByTestId('office-collision-impact').dataset.serial)).toBe(firstSerial + 1)
-      expect(screen.getByRole('img', { name: 'Alice on the office map' }).dataset.pushing).toBe('true')
-      expect(screen.getByRole('img', { name: 'Alice on the office map' }).dataset.walking).toBe('true')
+      expect(screen.getByRole('img', { name: 'OpenAlpha on the office map' }).dataset.pushing).toBe('true')
+      expect(screen.getByRole('img', { name: 'OpenAlpha on the office map' }).dataset.walking).toBe('true')
       act(() => vi.advanceTimersByTime(192))
       expect(Number(screen.getByTestId('office-collision-impact').dataset.serial)).toBe(firstSerial + 1)
-      expect(screen.getByRole('img', { name: 'Alice on the office map' }).dataset.pushing).toBe('true')
-      expect(screen.getByRole('img', { name: 'Alice on the office map' }).dataset.walking).toBe('true')
+      expect(screen.getByRole('img', { name: 'OpenAlpha on the office map' }).dataset.pushing).toBe('true')
+      expect(screen.getByRole('img', { name: 'OpenAlpha on the office map' }).dataset.walking).toBe('true')
       fireEvent.keyUp(map, { key: 'w' })
-      expect(screen.getByRole('img', { name: 'Alice on the office map' }).dataset.pushing).toBe('false')
-      expect(screen.getByRole('img', { name: 'Alice on the office map' }).dataset.walking).toBe('false')
+      expect(screen.getByRole('img', { name: 'OpenAlpha on the office map' }).dataset.pushing).toBe('false')
+      expect(screen.getByRole('img', { name: 'OpenAlpha on the office map' }).dataset.walking).toBe('false')
       fireEvent.keyDown(map, { key: 'w' })
       fireEvent.keyUp(map, { key: 'w' })
       expect(Number(screen.getByTestId('office-collision-impact').dataset.serial)).toBe(firstSerial + 2)
       act(() => vi.advanceTimersByTime(400))
       expect(screen.queryByTestId('office-collision-impact')).toBeNull()
-      expect(screen.getByRole('img', { name: 'Alice on the office map' }).dataset.bumped).toBe('false')
+      expect(screen.getByRole('img', { name: 'OpenAlpha on the office map' }).dataset.bumped).toBe('false')
     } finally {
       vi.useRealTimers()
     }
@@ -1313,7 +1313,7 @@ describe('OfficeBuilding', () => {
         />,
       )
 
-      const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+      const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
       const target = screen.getByTestId('office-desk-resume-route')
       const closerNeighbor = screen.getByTestId('office-desk-resume-neighbor-2')
       fireEvent.click(target)
@@ -1342,7 +1342,7 @@ describe('OfficeBuilding', () => {
     }
   })
 
-  it('walks Alice to a distant world object before activating it', () => {
+  it('walks OpenAlpha to a distant world object before activating it', () => {
     vi.useFakeTimers()
     vi.stubGlobal('matchMedia', vi.fn(() => ({
       matches: false,
@@ -1385,7 +1385,7 @@ describe('OfficeBuilding', () => {
         />,
       )
 
-      const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+      const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
       const controls = screen.getByTestId('office-floor').parentElement
         ?.querySelector<HTMLElement>('.oa-office-map-controls')
       expect(controls?.dataset.learned).toBe('false')
@@ -1414,7 +1414,7 @@ describe('OfficeBuilding', () => {
         .toBe('/office/furniture/route-destination-v1.png')
       expect(`${alice.style.left}:${alice.style.top}`).not.toBe('480px:336px')
       const routePosition = `${alice.style.left}:${alice.style.top}`
-      expect(screen.queryByRole('button', { name: 'Center map on Alice' })).toBeNull()
+      expect(screen.queryByRole('button', { name: 'Center map on OpenAlpha' })).toBeNull()
       expect(`${alice.style.left}:${alice.style.top}`).toBe(routePosition)
       expect(sign.dataset.route).toBe('true')
       expect(screen.getByTestId('office-route-trail')).toBeTruthy()
@@ -1457,7 +1457,7 @@ describe('OfficeBuilding', () => {
       fireEvent.click(quantSign)
       expect(screen.getByTestId('office-route-trail')).toBeTruthy()
       const map = screen.getByLabelText(
-        'Office map. Drag to pan; use arrows or WASD to move Alice; press Enter or Space to interact nearby.',
+        'Office map. Drag to pan; use arrows or WASD to move OpenAlpha; press Enter or Space to interact nearby.',
       )
       quantSign.focus()
       expect(document.activeElement).toBe(quantSign)
@@ -1550,7 +1550,7 @@ describe('OfficeBuilding', () => {
     }
   })
 
-  it('keeps the auto-route status on the screen edge opposite Alice', () => {
+  it('keeps the auto-route status on the screen edge opposite OpenAlpha', () => {
     expect(officeRouteStatusEdge(
       { x: 120, y: 600 },
       { x: 0, y: 0 },
@@ -1605,7 +1605,7 @@ describe('OfficeBuilding', () => {
     expect(screen.getByTestId('office-pod-sleeping-1')).toBeTruthy()
   })
 
-  it('filters sleeping groups and lets Alice move around the continuous map', async () => {
+  it('filters sleeping groups and lets OpenAlpha move around the continuous map', async () => {
     const onOpenWorkspace = vi.fn()
     const onOpenFiles = vi.fn()
     const onOpenRoster = vi.fn()
@@ -1666,7 +1666,7 @@ describe('OfficeBuilding', () => {
     expect(screen.getByTestId('office-wall')).toBeTruthy()
     expect(screen.getByTestId('office-wall').querySelector('.oa-office-hud__status')?.getAttribute('title'))
       .toBe('2 on floor · 1 recent · 3 total')
-    const map = screen.getByLabelText('Office map. Drag to pan; use arrows or WASD to move Alice; press Enter or Space to interact nearby.')
+    const map = screen.getByLabelText('Office map. Drag to pan; use arrows or WASD to move OpenAlpha; press Enter or Space to interact nearby.')
     expect(map).toBeTruthy()
     expect(map.querySelector<HTMLImageElement>('.oa-office-map-service[data-kind="inbox"] img')?.src)
       .toContain('/office/furniture/inbox-terminal-v1.png')
@@ -1697,15 +1697,15 @@ describe('OfficeBuilding', () => {
     expect(controls?.dataset.actionReady).toBeUndefined()
     expect(controls?.querySelector<HTMLImageElement>('.oa-office-map-controls__move img')?.src)
       .toContain('/office/hud/move-pad-v3.png')
-    const touchPad = screen.getByRole('group', { name: 'Move Alice' })
+    const touchPad = screen.getByRole('group', { name: 'Move OpenAlpha' })
     expect(touchPad.querySelector('img')?.getAttribute('src'))
       .toBe('/office/hud/move-pad-v3.png')
     expect(screen.getAllByRole('button', { name: /Move Alice (up|right|down|left)/ })).toHaveLength(4)
     expect(screen.getByTestId('office-building').querySelector<HTMLImageElement>('.oa-office-hud__signal img')?.src)
       .toContain('/office/hud/signal-receiver-v2.png')
     expect(screen.getByTestId('office-building').querySelector('svg')).toBeNull()
-    expect(screen.queryByRole('button', { name: 'Center map on Alice' })).toBeNull()
-    const alice = screen.getByRole('img', { name: 'Alice on the office map' })
+    expect(screen.queryByRole('button', { name: 'Center map on OpenAlpha' })).toBeNull()
+    const alice = screen.getByRole('img', { name: 'OpenAlpha on the office map' })
     expect(alice.style.left).toBe('480px')
     const spawnInlay = screen.getByTestId('office-spawn-inlay')
     expect((spawnInlay as HTMLImageElement).src).toContain('/office/furniture/spawn-inlay-v1.png')
@@ -1786,12 +1786,12 @@ describe('OfficeBuilding', () => {
     fireEvent(window, new Event('resize'))
     expect(map.querySelector<HTMLElement>('.oa-office-map')?.style.transform)
       .toBe('translate3d(-210px, 86px, 0)')
-    const recenter = screen.getByRole('button', { name: 'Center map on Alice' })
+    const recenter = screen.getByRole('button', { name: 'Center map on OpenAlpha' })
     expect(recenter.querySelector('img')?.src).toContain('/office/hud/reset-compass-v2.png')
     await userEvent.click(recenter)
     expect(map.querySelector<HTMLElement>('.oa-office-map')?.style.transform)
       .toBe('translate3d(-309px, 86px, 0)')
-    expect(screen.queryByRole('button', { name: 'Center map on Alice' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Center map on OpenAlpha' })).toBeNull()
     expect(document.activeElement).toBe(map)
     vi.mocked(map.getBoundingClientRect).mockReturnValue({
       width: 1200,
@@ -1809,7 +1809,7 @@ describe('OfficeBuilding', () => {
       .toBe('translate3d(120px, 64px, 0)')
     expect(map.dataset.pannable).toBeUndefined()
     expect(map.getAttribute('aria-label'))
-      .toBe('Office map. Use arrows or WASD to move Alice; press Enter or Space to interact nearby.')
+      .toBe('Office map. Use arrows or WASD to move OpenAlpha; press Enter or Space to interact nearby.')
     await userEvent.keyboard('aasss')
     const interactionPrompt = screen.getByRole('status', { name: 'Inspect chat files' })
     expect(controls?.dataset.actionReady).toBe('true')
@@ -1840,7 +1840,7 @@ describe('OfficeBuilding', () => {
     await userEvent.keyboard('{Enter}')
     expect(onOpenFiles).toHaveBeenCalledWith('chat-1')
     const cabinetPosition = `${alice.style.left}:${alice.style.top}`
-    expect(screen.queryByRole('button', { name: 'Center map on Alice' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Center map on OpenAlpha' })).toBeNull()
     expect(`${alice.style.left}:${alice.style.top}`).toBe(cabinetPosition)
     expect(controls?.dataset.learned).toBe('true')
     await userEvent.click(map)
@@ -1857,7 +1857,7 @@ describe('OfficeBuilding', () => {
     expect(operations.dataset.nearby).toBe('true')
     await userEvent.keyboard('{Enter}')
     expect(onOpenLog).toHaveBeenCalledWith('operations')
-    expect(screen.queryByRole('button', { name: 'Center map on Alice' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Center map on OpenAlpha' })).toBeNull()
     expect(alice.style.left).toBe('480px')
     expect(alice.style.top).toBe('264px')
     await userEvent.click(screen.getByTestId('office-desk-resume-alice'))
@@ -2118,7 +2118,7 @@ describe('OfficeBuilding', () => {
     const board = screen.getByRole('button', { name: 'Team roster · chat · 2 more teammates' })
     expect(board.querySelector('img')?.getAttribute('src')).toBe('/office/furniture/personnel-board-v2.png')
     expect(board.querySelector('.oa-office-pod__roster-count')?.textContent).toBe('+2')
-    const map = screen.getByLabelText('Office map. Drag to pan; use arrows or WASD to move Alice; press Enter or Space to interact nearby.')
+    const map = screen.getByLabelText('Office map. Drag to pan; use arrows or WASD to move OpenAlpha; press Enter or Space to interact nearby.')
 
     fireEvent.click(screen.getByRole('button', { name: 'Filing cabinet · chat' }))
     expect(screen.getByTestId('office-route-status').textContent)
@@ -3075,7 +3075,7 @@ describe('OfficeBuilding', () => {
     await waitFor(() => expect(onOpenService).toHaveBeenCalledWith('inbox', 11))
     await userEvent.click(news)
     await waitFor(() => expect(onOpenService).toHaveBeenCalledWith('news', 12))
-    expect(screen.getByRole('img', { name: 'Alice on the office map' }).dataset.direction)
+    expect(screen.getByRole('img', { name: 'OpenAlpha on the office map' }).dataset.direction)
       .toBe('up')
   })
 

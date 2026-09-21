@@ -206,7 +206,7 @@ function fixtureProject(index: number): MachineInventory['projects'][number] {
   return {
     key,
     id: `alice-project-${key}`,
-    displayName: index === 0 ? 'Default AliceProject' : `Local Project ${index + 1}`,
+    displayName: index === 0 ? 'Default OpenAlphaProject' : `Local Project ${index + 1}`,
     home: `/fixture/${key}`,
     port: 47_331 + index,
     portAutomatic: true,

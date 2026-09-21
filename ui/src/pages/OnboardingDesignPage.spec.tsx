@@ -82,7 +82,7 @@ describe('OnboardingDesignPage', () => {
 
     render(<OnboardingDesignPage />)
 
-    expect(await screen.findByRole('heading', { name: '让 Alice 一层一层准备就绪。' })).toBeTruthy()
+    expect(await screen.findByRole('heading', { name: '让 OpenAlpha 一层一层准备就绪。' })).toBeTruthy()
     expect(screen.getAllByText('Pro · 自动')).toHaveLength(2)
     expect(screen.getByText('4/4 个运行时')).toBeTruthy()
     expect(screen.getByText('凭证库中有 2 个凭证可供 Workspace Session 使用。')).toBeTruthy()

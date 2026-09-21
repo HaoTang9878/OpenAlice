@@ -107,11 +107,11 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         if (
           !hovered
           && plain.includes('OPENALICE LAUNCH · READY → START → CONNECT')
-          && plain.includes('◆ [ Enter ] Start OpenAlice')
+          && plain.includes('◆ [ Enter ] Start OpenAlpha')
         ) {
           hovered = true
           child.write('\u001b[<35;100;18M')
-        } else if (!started && plain.includes('› [ Enter ] Start OpenAlice')) {
+        } else if (!started && plain.includes('› [ Enter ] Start OpenAlpha')) {
           started = true
           child.write('\u001b[<0;100;18M')
         }
@@ -136,17 +136,17 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     const homeStart = plain.indexOf('◆ [Home] │ ● Inbox', flightStart)
     const flight = plain.slice(operationStart, homeStart)
     expect(operationStart).toBeGreaterThanOrEqual(0)
-    expect(plain).toContain('◆ IN FLIGHT · This computer → Default AliceProject')
+    expect(plain).toContain('◆ IN FLIGHT · This computer → Default OpenAlphaProject')
     expect(plain).toContain('✓ 01  Validate local target · DONE')
     expect(plain).toContain('◆ 02  Prepare and start Runtime · IN FLIGHT')
     expect(plain).toContain('◇ 03  Bind local target · WAITING')
     expect(plain).toContain('◇ CONTROL  Keep this terminal open')
     expect(plain).toContain('NEXT')
-    expect(plain).toContain('› [ Enter ] Start OpenAlice')
+    expect(plain).toContain('› [ Enter ] Start OpenAlpha')
     expect(plain).toContain('1 Start Runtime')
     expect(plain).toContain('2 Verify Web endpoint')
     expect(plain).toContain('3 Enter connected Home')
-    expect(plain).toContain('◆ [ Enter ] Start OpenAlice')
+    expect(plain).toContain('◆ [ Enter ] Start OpenAlpha')
     expect(flight).toContain('◆ OPERATION · LOCAL START')
     expect(flight).toContain('INPUT OWNED UNTIL READY')
     expect(flight).not.toContain('[Connect]')
@@ -211,19 +211,19 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     })
 
     const plain = stripSgr(transcript)
-    expect(plain).toContain('× RECOVERABLE FAILURE · This computer → Default AliceProject')
+    expect(plain).toContain('× RECOVERABLE FAILURE · This computer → Default OpenAlphaProject')
     expect(plain).toContain('× 02  Prepare and start Runtime · FAILED')
     expect(plain).toContain('Starting Runtime failed: Fixture Runtime…')
     expect(plain).toContain('[ Enter ] Retry selected target')
     expect(plain).toContain('[ Esc ] Back to targets')
     expect(plain).toContain('Enter retries; Esc returns to targets; q detaches this TUI.')
-    expect(plain).toContain('Default AliceProject · LOCAL › ○ COLD')
+    expect(plain).toContain('Default OpenAlphaProject · LOCAL › ○ COLD')
     expect(plain).toContain('FIXTURE_RESULT starts=1 opens=0 loads=0 diagnoses=0')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   }, 12_000)
 
-  it('opens a stopped AliceProject in the connection-first Launcher by default', async () => {
+  it('opens a stopped OpenAlphaProject in the connection-first Launcher by default', async () => {
     const isolatedHome = await mkdtemp(join(tmpdir(), 'openalice-cli-launcher-'))
     temporaryPaths.push(isolatedHome)
     const child = pty.spawn(process.execPath, [launchpadFixtureEntry], {
@@ -268,7 +268,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(plain).toContain('OPENALICE LAUNCH · READY → START → CONNECT')
     expect(plain).toContain('1 MACHINE ✓ This computer')
     expect(plain).toContain('2 ALICEPROJECT ✓ Default')
-    expect(plain).toContain('[ Enter ] Start OpenAlice')
+    expect(plain).toContain('[ Enter ] Start OpenAlpha')
     expect(plain).toContain('Launchpad · Default')
     expect(plain).toContain('◆ READY TO LAUNCH · READY TO START')
     expect(plain).toContain('1 Start Runtime')
@@ -447,7 +447,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
           skipped = true
           child.write('\u001b[<35;20;9M')
           child.write('\u001b[<0;20;9M')
-        } else if (skipped && !entered && output.includes('OpenAlice Supervisor')) {
+        } else if (skipped && !entered && output.includes('OpenAlpha Supervisor')) {
           entered = true
           setTimeout(() => child.write('q'), 100)
         }
@@ -461,7 +461,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
 
     expect(transcript).toContain('O P E N A L I C E')
     expect(transcript).toContain('◆ ALICEPROJECT')
-    expect(transcript).toContain('OpenAlice Supervisor')
+    expect(transcript).toContain('OpenAlpha Supervisor')
     expect(transcript).toContain('FIXTURE_RESULT starts=0 opens=0 loads=0 diagnoses=0')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
@@ -507,15 +507,15 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     })
 
     expect(transcript).toContain('O P E N A L I C E')
-    expect(transcript).not.toContain('OpenAlice Supervisor')
+    expect(transcript).not.toContain('OpenAlpha Supervisor')
     expect(transcript).toContain('FIXTURE_RESULT starts=0 opens=0 loads=0 diagnoses=0')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   }, 12_000)
 
   it.each([
-    ['wide', 110, 30, 90, 70, 10, 'OpenAlice is current on dev.'],
-    ['compact', 80, 24, null, 15, 16, 'OpenAlice is current on d…'],
+    ['wide', 110, 30, 90, 70, 10, 'OpenAlpha is current on dev.'],
+    ['compact', 80, 24, null, 15, 16, 'OpenAlpha is current on d…'],
   ] as const)('selects a release lane and clicks the %s Channel Brief action', async (
     _layout,
     cols,
@@ -618,7 +618,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!dockOpened && output.includes('Alice Session · OpenAlice')) {
+        if (!dockOpened && output.includes('OpenAlpha Session · OpenAlpha')) {
           dockOpened = true
           child.write('/')
         } else if (!queried && output.includes('Command Dock')) {
@@ -627,7 +627,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         } else if (!clicked && output.includes('›   Setup')) {
           clicked = true
           child.write('\r')
-        } else if (!closed && clicked && output.includes('╭ Setup Studio · Default AliceProject')) {
+        } else if (!closed && clicked && output.includes('╭ Setup Studio · Default OpenAlphaProject')) {
           closed = true
           const pausedAt = output.length
           setTimeout(() => {
@@ -646,13 +646,13 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       })
     })
 
-    expect(transcript).toContain('Alice Session · OpenAlice')
+    expect(transcript).toContain('OpenAlpha Session · OpenAlpha')
     expect(stripSgr(transcript)).not.toContain('Runtime Signal Deck')
-    expect(stripSgr(overlayIdleOutput)).not.toContain('OpenAlice Supervisor')
+    expect(stripSgr(overlayIdleOutput)).not.toContain('OpenAlpha Supervisor')
     expect(transcript).not.toContain('CONTROL CONSOLE')
     expect(transcript).toContain('MATCH “setup”')
     expect(transcript).toContain('›   Setup')
-    expect(transcript).toContain('╭ Setup Studio · Default AliceProject')
+    expect(transcript).toContain('╭ Setup Studio · Default OpenAlphaProject')
     expect(transcript).toContain('FIXTURE_RESULT starts=0 opens=0')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
@@ -686,7 +686,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('◆ [ Enter ]  Start OpenAlice')) {
+        if (!opened && output.includes('◆ [ Enter ]  Start OpenAlpha')) {
           opened = true
           child.write('l')
         } else if (!hovered && output.includes('Runtime Lens · QUIET · 0 EVENTS')) {
@@ -750,7 +750,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('◆ [ Enter ]  Start OpenAlice')) {
+        if (!opened && output.includes('◆ [ Enter ]  Start OpenAlpha')) {
           opened = true
           child.write('d')
         } else if (!hovered && output.includes('Diagnostic Radar · NO CHECKS · 0F/0W/0P')) {
@@ -810,7 +810,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('Alice Session · OpenAlice')) {
+        if (!opened && output.includes('OpenAlpha Session · OpenAlpha')) {
           opened = true
           child.write('l')
         } else if (!hovered && output.includes('Event Lens · LINE 10 · INFO · TEXT')) {
@@ -873,7 +873,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       child.onData((data) => {
         output += data
         const plain = stripSgr(output)
-        if (!opened && plain.includes('Alice Session · OpenAlice')) {
+        if (!opened && plain.includes('OpenAlpha Session · OpenAlpha')) {
           opened = true
           child.write('l')
         } else if (!moved && plain.includes('Event Lens · 10/10 · ALL · INFO')) {
@@ -930,7 +930,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('Alice Session · OpenAlice')) {
+        if (!opened && output.includes('OpenAlpha Session · OpenAlpha')) {
           opened = true
           child.write('l')
         } else if (!hovered && output.includes('4–10/10 · ALL · LATEST')) {
@@ -992,7 +992,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('Alice Session · OpenAlice')) {
+        if (!opened && output.includes('OpenAlpha Session · OpenAlpha')) {
           opened = true
           child.write('l')
         } else if (!hovered && output.includes('1–20/20 · ALL · LATEST')) {
@@ -1055,7 +1055,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         } else if (!clicked && stripSgr(output).includes('│ › [ Enter ]')) {
           clicked = true
           child.write('\u001b[<0;60;13M')
-        } else if (clicked && output.includes('OpenAlice started')) {
+        } else if (clicked && output.includes('OpenAlpha started')) {
           child.write('q')
         }
       })
@@ -1102,7 +1102,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!hovered && output.includes('Runtime is live; AliceProject home is missing') && output.includes('[ Enter ]')) {
+        if (!hovered && output.includes('Runtime is live; OpenAlphaProject home is missing') && output.includes('[ Enter ]')) {
           hovered = true
           child.write('\u001b[<35;70;13M')
         } else if (!clicked && stripSgr(output).includes('│ › [ Enter ]')) {
@@ -1192,7 +1192,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(transcript).toContain('\u001b[?25h')
   }, 12_000)
 
-  it('integrates the wide Alice mark without breaking Session Stage pointer geometry', async () => {
+  it('integrates the wide OpenAlpha mark without breaking Session Stage pointer geometry', async () => {
     const isolatedHome = await mkdtemp(join(tmpdir(), 'openalice-cli-integrated-launchpad-'))
     temporaryPaths.push(isolatedHome)
     const childEnv = { ...process.env }
@@ -1222,7 +1222,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         const plainOutput = output.replace(/\u001b\[[0-9;?<>]*[A-Za-z~]/gu, '')
         if (
           !hovered
-          && plainOutput.includes('Alice Session · OpenAlice')
+          && plainOutput.includes('OpenAlpha Session · OpenAlpha')
           && plainOutput.includes('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
         ) {
           hovered = true
@@ -1230,7 +1230,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         } else if (!clicked && plainOutput.includes('› [ Enter ]')) {
           clicked = true
           child.write('\u001b[<0;70;11M')
-        } else if (clicked && plainOutput.includes('OpenAlice started')) {
+        } else if (clicked && plainOutput.includes('OpenAlpha started')) {
           child.write('q')
         }
       })
@@ -1241,10 +1241,10 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       })
     })
 
-    expect(transcript).toContain('Alice Session · OpenAlice')
+    expect(transcript).toContain('OpenAlpha Session · OpenAlpha')
     expect(stripSgr(transcript)).toContain('▄▀▄ █   ▀█▀ ▄▀▀ █▀▀')
     expect(stripSgr(transcript)).toContain('Your workspace is one step away')
-    expect(stripSgr(transcript)).toContain('⌂ Default AliceProject')
+    expect(stripSgr(transcript)).toContain('⌂ Default OpenAlphaProject')
     expect(stripSgr(transcript)).toContain('STATUS')
     expect(stripSgr(transcript)).toContain('ACTIVITY')
     expect(stripSgr(transcript)).not.toContain('COMPONENT TELEMETRY')
@@ -1349,7 +1349,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
           closeOffset = output.length
           child.write('\u001b[<35;10;22M')
           child.write('\u001b[<0;10;22M')
-        } else if (closing && !closed && output.slice(closeOffset).includes('Alice Session · OpenAlice')) {
+        } else if (closing && !closed && output.slice(closeOffset).includes('OpenAlpha Session · OpenAlpha')) {
           closed = true
           child.write('q')
         }
@@ -1463,7 +1463,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
           output += data
           if (
             !openedFleet
-            && output.includes('Start OpenAlice & open Workspace')
+            && output.includes('Start OpenAlpha & open Workspace')
             && output.includes('◆ [Home]')
           ) {
             openedFleet = true
@@ -1482,7 +1482,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
             } else {
               child.write('\r')
             }
-          } else if (stage === 2 && output.includes('Destination AliceProject key')) {
+          } else if (stage === 2 && output.includes('Destination OpenAlphaProject key')) {
             if (scenario === 'success' && !compact) {
               stage = 22
               child.write('\u0005\u0015Bad Key')
@@ -1496,7 +1496,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
             }
           } else if (
             stage === 22
-            && output.includes('! Destination AliceProject key · FIX')
+            && output.includes('! Destination OpenAlphaProject key · FIX')
           ) {
             stage = 3
             child.write('\u0005\u0015source')
@@ -1540,7 +1540,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
             stage = 8
             child.write('\u001b[<35;50;10M')
             setTimeout(() => child.write('\u001b[<0;50;10M'), 300)
-          } else if ((stage === 7 || stage === 8) && output.includes('✓ AliceProject arrived · PUBLISHED')) {
+          } else if ((stage === 7 || stage === 8) && output.includes('✓ OpenAlphaProject arrived · PUBLISHED')) {
             stage = 20
             child.write('\r')
           } else if (stage === 10 && output.includes('Transfer cancelled.')) {
@@ -1565,7 +1565,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       if (scenario === 'success') {
         expect(transcript).toContain('Flight Deck · 1/8 · DESTINATION')
         expect(transcript).toContain('Mission Brief · Source → Cloud fixture')
-        if (!compact) expect(transcript).toContain('! Destination AliceProject key · FIX')
+        if (!compact) expect(transcript).toContain('! Destination OpenAlphaProject key · FIX')
       } else if (scenario === 'default-no') {
         expect(transcript).toContain('Transfer Flight Deck')
       }
@@ -1577,7 +1577,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         expect(transcript).toContain('◆ [ Enter ] Choose / next  │  [ ↑↓ ] Move choice')
         expect(transcript).toContain('◆ FOCUS WORKSPACE  ›  [ Esc ] Back')
       }
-      expect(transcript).toContain('◆ Destination AliceProject key')
+      expect(transcript).toContain('◆ Destination OpenAlphaProject key')
       expect(transcript).toContain('◆ Credentials')
       expect(transcript).toContain('◆ [ Enter ] Choose')
       if (scenario !== 'auth-loss' && scenario !== 'occupied' && scenario !== 'default-no') {
@@ -1596,7 +1596,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         expect(transcript).toContain('Sessions  0 imported')
       }
       if (scenario === 'success' || scenario === 'checksum-retry' || scenario === 'cancel-retry') {
-        expect(transcript).toContain('✓ AliceProject arrived · PUBLISHED')
+        expect(transcript).toContain('✓ OpenAlphaProject arrived · PUBLISHED')
         expect(transcript).toContain('◆ [ s ] Start')
       }
       expect(transcript).toContain('\u001b[?25h')
@@ -1645,7 +1645,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       })
     })
 
-    expect(transcript).toContain('OpenAlice Supervisor')
+    expect(transcript).toContain('OpenAlpha Supervisor')
     expect(transcript).toContain(`v${cliVersion} · DEV`)
     expect(transcript).toContain('○ STOPPED')
     expect(transcript).toContain('Help · START · SEARCH · SWITCH · 1/3')
@@ -1683,7 +1683,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         if (!setupOpened && output.includes('[ / ] Commands') && output.includes('[ q ] Detach')) {
           setupOpened = true
           child.write('p')
-        } else if (!clickedScope && output.includes('Setup Studio · Default AliceProject') && output.includes('Editing')) {
+        } else if (!clickedScope && output.includes('Setup Studio · Default OpenAlphaProject') && output.includes('Editing')) {
           clickedScope = true
           child.write('\u001b[<32;10;5M')
           child.write('\u001b[<0;10;5M')
@@ -1732,10 +1732,10 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('Alice Session · OpenAlice')) {
+        if (!opened && output.includes('OpenAlpha Session · OpenAlpha')) {
           opened = true
           child.write('p')
-        } else if (!hovered && output.includes('Setup Studio · Default AliceProject') && output.includes('Cycle value')) {
+        } else if (!hovered && output.includes('Setup Studio · Default OpenAlphaProject') && output.includes('Cycle value')) {
           hovered = true
           child.write('\u001b[<35;75;9M')
         } else if (!clicked && output.includes('› [ Enter ] Cycle value')) {
@@ -1912,7 +1912,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         if (!opened && output.includes('[ / ] Commands') && output.includes('○ COLD')) {
           opened = true
           child.write('/')
-        } else if (!typedSearch && output.includes('Command Dock') && output.includes('› ◆ Start OpenAlice')) {
+        } else if (!typedSearch && output.includes('Command Dock') && output.includes('› ◆ Start OpenAlpha')) {
           if (!typedUnicode) {
             typedUnicode = true
             child.write('日志')
@@ -1931,7 +1931,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
           clickedSetup = true
           child.write('\u001b[<32;32;19M')
           child.write('\u001b[<0;32;19M')
-        } else if (!setupOpened && output.includes('Setup Studio · Default AliceProject')) {
+        } else if (!setupOpened && output.includes('Setup Studio · Default OpenAlphaProject')) {
           setupOpened = true
           child.write('\u001b')
           setTimeout(() => child.write('q'), 50)
@@ -1949,8 +1949,8 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(transcript).toContain('⌕  日志')
     expect(transcript).toContain('MATCH “setup”')
     expect(transcript).toContain('⌕  setup▌')
-    expect(transcript).toContain('Alice Session · OpenAlice')
-    expect(transcript).toContain('Setup Studio · Default AliceProject')
+    expect(transcript).toContain('OpenAlpha Session · OpenAlpha')
+    expect(transcript).toContain('Setup Studio · Default OpenAlphaProject')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   }, 12_000)
@@ -1986,19 +1986,19 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         output += data
         if (
           !clickedProject
-          && output.includes('[ i ] Default AliceProject')
+          && output.includes('[ i ] Default OpenAlphaProject')
           && output.includes('○ COLD')
         ) {
           clickedProject = true
           child.write('\u001b[<32;56;23M')
           child.write('\u001b[<0;56;23M')
-        } else if (!closedOverlay && output.includes('AliceProject Switchboard · 1 PROJECT')) {
+        } else if (!closedOverlay && output.includes('OpenAlphaProject Switchboard · 1 PROJECT')) {
           closedOverlay = true
           child.write('\u001b')
         } else if (
           closedOverlay
           && !clickedAfterNotice
-          && output.includes('STATUS   AliceProject selection')
+          && output.includes('STATUS   OpenAlphaProject selection')
         ) {
           clickedAfterNotice = true
           child.write('\u001b[<0;6;23M')
@@ -2014,14 +2014,14 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       })
     })
 
-    expect(transcript).toContain('AliceProject Switchboard · 1 PROJECT')
-    expect(transcript).toContain('STATUS   AliceProject selection')
+    expect(transcript).toContain('OpenAlphaProject Switchboard · 1 PROJECT')
+    expect(transcript).toContain('STATUS   OpenAlphaProject selection')
     expect(transcript).toContain('Command Dock')
     expect(transcript).toContain('╰─ ')
     expect(transcript).toContain('  ›  ')
     expect(transcript).toContain(' ─╯')
     expect(transcript).toContain('\u001b[38;2;199;235;239;48;2;10;34;39m')
-    expect(transcript).toContain('\u001b[1;38;2;240;249;255;48;2;10;34;39m[ i ] Default AliceProject')
+    expect(transcript).toContain('\u001b[1;38;2;240;249;255;48;2;10;34;39m[ i ] Default OpenAlphaProject')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   }, 12_000)
@@ -2111,13 +2111,13 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       child.onData((data) => {
         output += data
         const plain = stripSgr(output)
-        if (!hovered && plain.includes('◆ [ Enter ] Start OpenAlice')) {
+        if (!hovered && plain.includes('◆ [ Enter ] Start OpenAlpha')) {
           hovered = true
           child.write('\u001b[<35;22;9M')
-        } else if (!clicked && plain.includes('› [ Enter ] Start OpenAlice')) {
+        } else if (!clicked && plain.includes('› [ Enter ] Start OpenAlpha')) {
           clicked = true
           child.write('\u001b[<0;22;9M')
-        } else if (!detached && clicked && plain.includes('Alice Session · OpenAlice') && plain.includes('● RUNNING')) {
+        } else if (!detached && clicked && plain.includes('OpenAlpha Session · OpenAlpha') && plain.includes('● RUNNING')) {
           detached = true
           child.write('q')
         }
@@ -2132,9 +2132,9 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     const plain = stripSgr(transcript)
     expect(plain).toContain('OPENALICE LAUNCH · ALICEPROJECT')
     expect(plain).toContain('1 MACHINE ✓ This computer')
-    expect(plain).toContain('2 ALICEPROJECT ✓ Default AliceProject')
+    expect(plain).toContain('2 ALICEPROJECT ✓ Default OpenAlphaProject')
     expect(plain).toContain('3 RUNTIME ○ READY TO START')
-    expect(plain).toContain('› [ Enter ] Start OpenAlice')
+    expect(plain).toContain('› [ Enter ] Start OpenAlpha')
     expect(plain).toContain('╰─ [Home] │ Inbox │ Link·1 │ Run')
     expect(plain).toContain('NEXT  Workspace is ready')
     expect(plain).toContain('◆ [ Enter ]  Open Workspace')
@@ -2174,7 +2174,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       child.onData((data) => {
         output += data
         const plain = stripSgr(output)
-        if (!opened && plain.includes('Alice Session · OpenAlice')) {
+        if (!opened && plain.includes('OpenAlpha Session · OpenAlpha')) {
           opened = true
           child.write('l')
         } else if (!hovered
@@ -2199,8 +2199,8 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(plain).toContain('╰─ Home │ Inbox │ Link·1 │ [Run]')
     expect(plain).toContain('Runtime · LIVE · LOCAL · QUIET')
     expect(plain).toContain('● OPENALICE READY · source')
-    expect(plain).toContain('⌁ This computer → Default AliceProject')
-    expect(plain).toContain('● Alice ready · ○ UTA off · ○ Conn off')
+    expect(plain).toContain('⌁ This computer → Default OpenAlphaProject')
+    expect(plain).toContain('● OpenAlpha ready · ○ UTA off · ○ Conn off')
     expect(plain).toContain('◆ [ o ] Open verified Web UI')
     expect(plain).toContain('› [ l ] Reload Runtime snapshot')
     expect(plain).toContain('◇  Tip: No Runtime events in this lens')
@@ -2259,7 +2259,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
           selectedRemote = true
           child.resize(48, 24)
           setTimeout(() => child.write('\u001b[B\u001b[C'), 120)
-        } else if (!drilledDown && output.includes('AliceProjects · Cloud fixture')) {
+        } else if (!drilledDown && output.includes('OpenAlphaProjects · Cloud fixture')) {
           drilledDown = true
           returnOffset = output.length
           setTimeout(() => child.write('\u001b[D'), 120)
@@ -2282,7 +2282,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
 
     expect(transcript).toContain('Cloud fixture')
     expect(transcript).toContain('offline')
-    expect(transcript).toContain('AliceProjects · Cloud fixture')
+    expect(transcript).toContain('OpenAlphaProjects · Cloud fixture')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   })
@@ -2326,7 +2326,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         } else if (!clickedSixth && output.includes('» Local Project 6')) {
           clickedSixth = true
           child.write('\u001b[<0;70;11M')
-        } else if (clickedSixth && output.includes('AliceProjects · This computer · 6/6')) {
+        } else if (clickedSixth && output.includes('OpenAlphaProjects · This computer · 6/6')) {
           child.write('q')
         }
       })
@@ -2341,7 +2341,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(stripSgr(expandedFleet)).not.toContain('█')
     expect(transcript).toContain('» Local Project 6')
     expect(transcript).toContain('▶ Local Project 6')
-    expect(transcript).toContain('AliceProjects · This computer · 6/6')
+    expect(transcript).toContain('OpenAlphaProjects · This computer · 6/6')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   }, 12_000)
@@ -2376,7 +2376,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       child.onData((data) => {
         output += data
         const plain = stripSgr(output)
-        if (!opened && plain.includes('Alice Session · OpenAlice')) {
+        if (!opened && plain.includes('OpenAlpha Session · OpenAlpha')) {
           opened = true
           child.write(']]')
         } else if (!clicked && plain.includes('Active Route · LIVE · LOCAL')) {
@@ -2395,7 +2395,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
 
     expect(stripSgr(transcript)).toContain('Active Route · LIVE · LOCAL')
     expect(stripSgr(transcript)).toContain('ACTIVE ROUTE')
-    expect(stripSgr(transcript)).toContain('Runtime is live; AliceProject home is missing')
+    expect(stripSgr(transcript)).toContain('Runtime is live; OpenAlphaProject home is missing')
     expect(stripSgr(transcript)).toContain('Web route.')
     expect(stripSgr(transcript)).toContain('◆ running · home missing')
     expect(stripSgr(transcript)).toContain('◆ LIVE · HOME MISSING')
@@ -2440,7 +2440,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       child.onData((data) => {
         output += data
         const plain = stripSgr(output)
-        if (stage === 0 && plain.includes('Alice Session · OpenAlice')) {
+        if (stage === 0 && plain.includes('OpenAlpha Session · OpenAlpha')) {
           stage = 1
           child.write(']]')
         } else if (stage === 1 && plain.includes('Machines · 1/2')) {
@@ -2462,7 +2462,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     })
 
     const plain = stripSgr(transcript)
-    expect(plain).toContain('AliceProjects · Cloud Lab · 1/1')
+    expect(plain).toContain('OpenAlphaProjects · Cloud Lab · 1/1')
     expect(plain).toContain('Switch Target')
     expect(plain).toContain('◇ SWITCH CANDIDATE')
     expect(plain).toContain('[ Enter ] Connect & Switch')
@@ -2506,7 +2506,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       child.onData((data) => {
         output += data
         const plain = stripSgr(output)
-        if (stage === 0 && plain.includes('Alice Session · OpenAlice')) {
+        if (stage === 0 && plain.includes('OpenAlpha Session · OpenAlpha')) {
           stage = 1
           child.write(']]')
         } else if (stage === 1 && plain.includes('Machines · 1/2')) {
@@ -2532,7 +2532,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
 
     const plain = stripSgr(transcript)
     expect(plain).toContain('Launch Flight Recorder · REMOTE CONNECT · IN FLIGHT')
-    expect(plain).toContain('● FROM  This computer / Default AliceProject · LOCAL · LIVE')
+    expect(plain).toContain('● FROM  This computer / Default OpenAlphaProject · LOCAL · LIVE')
     expect(plain).toContain('◆ TO    Cloud Lab / Research · SSH FORWARD')
     expect(plain).toContain('◆ 02  Open SSH forward · IN FLIGHT')
     expect(plain).toContain('◆ OPERATION ACTIVE')
@@ -2571,7 +2571,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!detached && output.includes('Research') && output.includes('Alice Session · OpenAlice')) {
+        if (!detached && output.includes('Research') && output.includes('OpenAlpha Session · OpenAlpha')) {
           detached = true
           child.write('q')
         }
@@ -2617,7 +2617,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!requestedStart && output.includes('Start OpenAlice & open Workspace')) {
+        if (!requestedStart && output.includes('Start OpenAlpha & open Workspace')) {
           requestedStart = true
           child.write('s')
         } else if (!submittedInvalidPath && output.includes('Source route · SELECT CHECKOUT')) {
@@ -2643,7 +2643,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     })
 
     expect(transcript).toContain('Source route · SELECT CHECKOUT')
-    expect(transcript).toContain('Runtime Source · AliceProject setting')
+    expect(transcript).toContain('Runtime Source · OpenAlphaProject setting')
     expect(transcript).toContain('› [ Enter ] Save & start')
     expect(transcript).toContain('Source route · REJECTED')
     expect(transcript).toContain('Could not use that checkout')
@@ -2681,7 +2681,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('Start OpenAlice & open Workspace')) {
+        if (!opened && output.includes('Start OpenAlpha & open Workspace')) {
           opened = true
           child.write('c')
         } else if (!closed && output.includes('Source Launch Bay · SELECT CHECKOUT')) {
@@ -2701,7 +2701,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
 
     expect(transcript).toContain('Source Launch Bay · SELECT CHECKOUT')
     expect(transcript).toContain('◆ Select  → Validate  → Save  → Launch')
-    expect(transcript).toContain('Runtime Source · AliceProject setting')
+    expect(transcript).toContain('Runtime Source · OpenAlphaProject setting')
     expect(transcript).toContain('◆ CONTRACT')
     expect(transcript).toContain('Source configuration')
     expect(transcript).toContain('\u001b[?25h')
@@ -2758,12 +2758,12 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!requestedStart && output.includes('Start OpenAlice & open Workspace')) {
+        if (!requestedStart && output.includes('Start OpenAlpha & open Workspace')) {
           requestedStart = true
           child.write('\r')
         } else if (
           !cancelledPlan
-          && output.includes('installer-managed OpenAlice source branch dev')
+          && output.includes('installer-managed OpenAlpha source branch dev')
         ) {
           cancelledPlan = true
           child.write('n')
@@ -2779,15 +2779,15 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       })
     })
 
-    expect(transcript).toContain('OpenAlice Supervisor')
+    expect(transcript).toContain('OpenAlpha Supervisor')
     expect(transcript).toContain(`v${cliVersion} · DEV`)
-    expect(transcript).toContain('installer-managed OpenAlice source branch dev')
-    expect(transcript).not.toContain('Runtime Source · AliceProject setting')
+    expect(transcript).toContain('installer-managed OpenAlpha source branch dev')
+    expect(transcript).not.toContain('Runtime Source · OpenAlphaProject setting')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   })
 
-  it('edits and persists selected-AliceProject settings inside the TUI', async () => {
+  it('edits and persists selected-OpenAlphaProject settings inside the TUI', async () => {
     const isolatedHome = await mkdtemp(join(tmpdir(), 'openalice-cli-settings-'))
     temporaryPaths.push(isolatedHome)
     const supervisorHome = join(isolatedHome, 'supervisor')
@@ -2821,13 +2821,13 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 10_000)
       child.onData((data) => {
         output += data
-        if (!openedSettings && output.includes('Alice Session · OpenAlice')) {
+        if (!openedSettings && output.includes('OpenAlpha Session · OpenAlpha')) {
           openedSettings = true
           child.write('p')
-        } else if (!selectedPort && output.includes('Setup Studio · Default AliceProject')) {
+        } else if (!selectedPort && output.includes('Setup Studio · Default OpenAlphaProject')) {
           selectedPort = true
           child.write('\u001b[B\u001b[B\r')
-        } else if (!submittedInvalidPort && output.includes('Set AliceProject browser port')) {
+        } else if (!submittedInvalidPort && output.includes('Set OpenAlphaProject browser port')) {
           submittedInvalidPort = true
           child.write('99999')
           setTimeout(() => {
@@ -2847,7 +2847,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
           }, 100)
         } else if (
           !closedSettings
-          && output.includes('Saved browser port for AliceProject "Default AliceProject".')
+          && output.includes('Saved browser port for OpenAlphaProject "Default OpenAlphaProject".')
         ) {
           closedSettings = true
           child.write('\u001b')
@@ -2870,13 +2870,13 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       await readFile(join(supervisorHome, 'config.json'), 'utf8'),
     )
     expect(config.projects.default.port).toBe(49_001)
-    expect(transcript).toContain('Setup Studio · Default AliceProject')
+    expect(transcript).toContain('Setup Studio · Default OpenAlphaProject')
     expect(transcript).toContain('Layer Context · PROJECT · EDIT')
-    expect(transcript).toContain('Set AliceProject browser port')
+    expect(transcript).toContain('Set OpenAlphaProject browser port')
     expect(transcript).toContain('› [ Enter ] Validate & save')
     expect(transcript).toContain('Layer Context · PROJECT · FIX')
     expect(transcript).toContain('Browser port must be a whole number')
-    expect(transcript).toContain('Saved browser port for AliceProject "Default AliceProject".')
+    expect(transcript).toContain('Saved browser port for OpenAlphaProject "Default OpenAlphaProject".')
     expect(transcript).toContain('STATUS   Setup closed.')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
@@ -2915,13 +2915,13 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 10_000)
       child.onData((data) => {
         output += data
-        if (!openedSetup && output.includes('Alice Session · OpenAlice')) {
+        if (!openedSetup && output.includes('OpenAlpha Session · OpenAlpha')) {
           openedSetup = true
           child.write('p')
         } else if (
           !selectedMachineScope
           && output.includes('Editing')
-          && output.includes('This AliceProject')
+          && output.includes('This OpenAlphaProject')
         ) {
           selectedMachineScope = true
           child.write('\r')
@@ -2970,7 +2970,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(transcript).toContain('STATUS   Setup closed.')
   }, 15_000)
 
-  it('creates, selects, remembers, and switches named AliceProjects inside the TUI', async () => {
+  it('creates, selects, remembers, and switches named OpenAlphaProjects inside the TUI', async () => {
     const isolatedHome = await mkdtemp(join(tmpdir(), 'openalice-cli-instances-'))
     temporaryPaths.push(isolatedHome)
     const supervisorHome = join(isolatedHome, 'supervisor')
@@ -3003,25 +3003,25 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       let detached = false
       const timeout = setTimeout(() => {
         child.kill()
-        reject(new Error(`Supervisor AliceProjects TUI timed out:\n${output}`))
+        reject(new Error(`Supervisor OpenAlphaProjects TUI timed out:\n${output}`))
       }, 12_000)
       child.onData((data) => {
         output += data
-        if (!openedProjects && output.includes('Start OpenAlice & open Workspace')) {
+        if (!openedProjects && output.includes('Start OpenAlpha & open Workspace')) {
           openedProjects = true
           child.write('i')
-        } else if (!requestedCreate && output.includes('+ Create AliceProject')) {
+        } else if (!requestedCreate && output.includes('+ Create OpenAlphaProject')) {
           requestedCreate = true
           child.write('\u001b[B\r')
         } else if (
           !submittedName
-          && output.includes('AliceProject key')
+          && output.includes('OpenAlphaProject key')
         ) {
           submittedName = true
           child.write('research\r')
         } else if (
           !acceptedHome
-          && output.includes('Create AliceProject · research')
+          && output.includes('Create OpenAlphaProject · research')
           && output.includes('Complete home')
         ) {
           acceptedHome = true
@@ -3031,7 +3031,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
           child.write('\u001b[B \r')
         } else if (
           !reopenedProjects
-          && output.includes('OpenAlice started and opened in your browser.')
+          && output.includes('OpenAlpha started and opened in your browser.')
           && output.includes('Research')
         ) {
           reopenedProjects = true
@@ -3049,14 +3049,14 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
         } else if (
           focusedDefault
           && !selectedDefault
-          && output.slice(defaultFocusOffset).includes('◆ Default AliceProject · 1/3')
+          && output.slice(defaultFocusOffset).includes('◆ Default OpenAlphaProject · 1/3')
         ) {
           selectedDefault = true
           child.write('\r')
         } else if (
           !detached
-          && output.includes('Selected AliceProject Default AliceProject')
-          && output.includes('Default AliceProject')
+          && output.includes('Selected OpenAlphaProject Default OpenAlphaProject')
+          && output.includes('Default OpenAlphaProject')
         ) {
           detached = true
           child.write('q')
@@ -3065,7 +3065,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       child.onExit(({ exitCode }) => {
         clearTimeout(timeout)
         if (exitCode === 0) resolve(output)
-        else reject(new Error(`Supervisor AliceProjects TUI exited ${exitCode}:\n${output}`))
+        else reject(new Error(`Supervisor OpenAlphaProjects TUI exited ${exitCode}:\n${output}`))
       })
     })
 
@@ -3077,12 +3077,12 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       name: 'research',
       home: await realpath(join(isolatedHome, '.openalice-research')),
     })
-    expect(transcript).toContain('AliceProject Switchboard · 1 PROJECT')
+    expect(transcript).toContain('OpenAlphaProject Switchboard · 1 PROJECT')
     expect(transcript).toContain('[ Enter ] Continue')
     expect(transcript).toContain('Create & start')
     expect(transcript).toContain('Choose workspaces')
     expect(JSON.parse(await readFile(join(isolatedHome, '.openalice-research/workspace-setup.json'), 'utf8')).pending).toEqual(['chat', 'auto-quant'])
-    expect(transcript).toContain('Selected AliceProject Default AliceProject')
+    expect(transcript).toContain('Selected OpenAlphaProject Default OpenAlphaProject')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   }, 15_000)
@@ -3117,19 +3117,19 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('Start OpenAlice & open Workspace')) {
+        if (!opened && output.includes('Start OpenAlpha & open Workspace')) {
           opened = true
           child.write('i')
-        } else if (!requestedCreate && output.includes('+ Create AliceProject')) {
+        } else if (!requestedCreate && output.includes('+ Create OpenAlphaProject')) {
           requestedCreate = true
           child.write('\u001b[B\r')
-        } else if (!foundry && output.includes('AliceProject Foundry · 1/3 · IDENTITY')) {
+        } else if (!foundry && output.includes('OpenAlphaProject Foundry · 1/3 · IDENTITY')) {
           foundry = true
           child.write('\u001b')
-        } else if (foundry && !returned && data.includes('AliceProject Switchboard')) {
+        } else if (foundry && !returned && data.includes('OpenAlphaProject Switchboard')) {
           returned = true
           child.write('\u001b')
-        } else if (returned && output.includes('AliceProject selection')) {
+        } else if (returned && output.includes('OpenAlphaProject selection')) {
           child.write('q')
         }
       })
@@ -3140,9 +3140,9 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       })
     })
 
-    expect(transcript).toContain('AliceProject Foundry · 1/3 · IDENTITY')
+    expect(transcript).toContain('OpenAlphaProject Foundry · 1/3 · IDENTITY')
     expect(transcript).toContain('◆ Identity  → Home  → Workspaces')
-    expect(transcript).toContain('Create AliceProject · Project key')
+    expect(transcript).toContain('Create OpenAlphaProject · Project key')
     expect(transcript).toContain('◆ CONTRACT')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
@@ -3192,12 +3192,12 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 10_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('[ i ] Default AliceProject')) {
+        if (!opened && output.includes('[ i ] Default OpenAlphaProject')) {
           opened = true
           child.write('i')
         } else if (
           !rowHovered
-          && output.includes('AliceProject Switchboard · 2 PROJECTS')
+          && output.includes('OpenAlphaProject Switchboard · 2 PROJECTS')
           && output.includes('Research')
         ) {
           rowHovered = true
@@ -3214,7 +3214,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
           child.write('\u001b[<0;75;10M')
         } else if (
           !detached
-          && output.includes('Selected AliceProject Research')
+          && output.includes('Selected OpenAlphaProject Research')
         ) {
           detached = true
           child.write('q')
@@ -3231,7 +3231,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(config.defaultProject).toBe('research')
     expect(transcript).toContain('› Research')
     expect(transcript).toContain('› [ Enter ] Select')
-    expect(transcript).toContain('Selected AliceProject Research')
+    expect(transcript).toContain('Selected OpenAlphaProject Research')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   }, 15_000)
@@ -3264,13 +3264,13 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!opened && output.includes('[ i ] Default AliceProject')) {
+        if (!opened && output.includes('[ i ] Default OpenAlphaProject')) {
           opened = true
           child.write('i')
         } else if (
           !closed
           && output.includes('Inspector · 1/2 · SELECT & CREATE')
-          && output.includes('Switchboard status · Default AliceProject')
+          && output.includes('Switchboard status · Default OpenAlphaProject')
           && output.includes('Copy AI credentials with openalice project copy-ai-creds.')
         ) {
           closed = true
@@ -3285,14 +3285,14 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       })
     })
 
-    expect(transcript).toContain('AliceProject Switchboard · 1 PROJECT')
+    expect(transcript).toContain('OpenAlphaProject Switchboard · 1 PROJECT')
     expect(transcript).toContain('Inspector · 1/2 · SELECT & CREATE')
-    expect(transcript).toContain('Switchboard status · Default AliceProject')
+    expect(transcript).toContain('Switchboard status · Default OpenAlphaProject')
     expect(transcript).toContain('\u001b[?25h')
     expect(transcript).toContain('\u001b[?2004l')
   }, 12_000)
 
-  it('recovers in the AliceProject picker when the remembered complete home is missing', async () => {
+  it('recovers in the OpenAlphaProject picker when the remembered complete home is missing', async () => {
     const isolatedHome = await mkdtemp(join(tmpdir(), 'openalice-cli-instance-recovery-'))
     temporaryPaths.push(isolatedHome)
     const supervisorHome = join(isolatedHome, 'supervisor')
@@ -3329,30 +3329,30 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       let detached = false
       const timeout = setTimeout(() => {
         child.kill()
-        reject(new Error(`Supervisor AliceProject recovery timed out:\n${output}`))
+        reject(new Error(`Supervisor OpenAlphaProject recovery timed out:\n${output}`))
       }, 10_000)
       child.onData((data) => {
         output += data
         if (
           !openedProjects
-          && output.includes('Using "default"; press i Alice')
-          && output.includes('Default AliceProject')
+          && output.includes('Using "default"; press i OpenAlpha')
+          && output.includes('Default OpenAlphaProject')
         ) {
           openedProjects = true
           child.write('i')
         } else if (
           openedProjects
           && !repairedDefault
-          && output.includes('AliceProject Switchboard')
-          && output.includes('Default AliceProject')
+          && output.includes('OpenAlphaProject Switchboard')
+          && output.includes('Default OpenAlphaProject')
           && output.includes('CURRENT')
-          && output.includes('+ Create AliceProject')
+          && output.includes('+ Create OpenAlphaProject')
         ) {
           repairedDefault = true
           child.write('\r')
         } else if (
           !detached
-          && output.includes('Selected AliceProject Default AliceProject')
+          && output.includes('Selected OpenAlphaProject Default OpenAlphaProject')
         ) {
           detached = true
           child.write('q')
@@ -3361,7 +3361,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       child.onExit(({ exitCode }) => {
         clearTimeout(timeout)
         if (exitCode === 0) resolve(output)
-        else reject(new Error(`Supervisor AliceProject recovery exited ${exitCode}:\n${output}`))
+        else reject(new Error(`Supervisor OpenAlphaProject recovery exited ${exitCode}:\n${output}`))
       })
     })
 
@@ -3370,10 +3370,10 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     )
     expect(config.defaultProject).toBeUndefined()
     expect(config.projects.missing.home).toBe(join(isolatedHome, 'disconnected-home'))
-    expect(transcript).toContain('AliceProject "missing" is missing.')
-    expect(transcript).toContain('Using "default"; press i Alice')
-    expect(transcript).toContain('+ Create AliceProject')
-    expect(transcript).toContain('Selected AliceProject Default AliceProject')
+    expect(transcript).toContain('OpenAlphaProject "missing" is missing.')
+    expect(transcript).toContain('Using "default"; press i OpenAlpha')
+    expect(transcript).toContain('+ Create OpenAlphaProject')
+    expect(transcript).toContain('Selected OpenAlphaProject Default OpenAlphaProject')
   }, 15_000)
 
   it('shows higher-priority CLI overrides as locked settings', async () => {
@@ -3407,10 +3407,10 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 10_000)
       child.onData((data) => {
         output += data
-        if (!openedSettings && output.includes('Alice Session · OpenAlice')) {
+        if (!openedSettings && output.includes('OpenAlpha Session · OpenAlpha')) {
           openedSettings = true
           child.write('p')
-        } else if (!selectedPort && output.includes('Setup Studio · Default AliceProject')) {
+        } else if (!selectedPort && output.includes('Setup Studio · Default OpenAlphaProject')) {
           selectedPort = true
           child.write('\u001b[B\u001b[B')
         } else if (
@@ -3438,7 +3438,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(transcript).not.toContain('Set browser port')
   })
 
-  it('shows CLI-selected AliceProjects as read-only instead of pretending to switch them', async () => {
+  it('shows CLI-selected OpenAlphaProjects as read-only instead of pretending to switch them', async () => {
     const isolatedHome = await mkdtemp(join(tmpdir(), 'openalice-cli-instance-lock-'))
     temporaryPaths.push(isolatedHome)
     const instanceHome = join(isolatedHome, 'research-home')
@@ -3469,7 +3469,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 10_000)
       child.onData((data) => {
         output += data
-        if (!openedInstances && output.includes('Start OpenAlice & open Workspace')) {
+        if (!openedInstances && output.includes('Start OpenAlpha & open Workspace')) {
           openedInstances = true
           child.write('i')
           setTimeout(() => {
@@ -3493,7 +3493,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
     expect(transcript).toContain('Research')
     expect(transcript).toContain('CURRENT')
     expect(transcript).toContain('READ ONLY')
-    expect(transcript).not.toContain('+ Create AliceProject')
+    expect(transcript).not.toContain('+ Create OpenAlphaProject')
   }, 15_000)
 
   it('explains when managed source is unavailable from a source-run CLI', async () => {
@@ -3522,7 +3522,7 @@ describe.skipIf(process.platform === 'win32')('Supervisor TUI PTY', () => {
       }, 8_000)
       child.onData((data) => {
         output += data
-        if (!openedOverview && output.includes('Start OpenAlice & open Workspace')) {
+        if (!openedOverview && output.includes('Start OpenAlpha & open Workspace')) {
           openedOverview = true
           child.write('m')
         } else if (!detached && output.includes('Managed source is unavailable')) {

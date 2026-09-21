@@ -1,7 +1,7 @@
 export const RECENT_SIDEBAR_WORKSET_LIMIT = 8
 
 /**
- * Bound the Ask Alice / AutoQuant quick sidebar to the newest recent rows.
+ * Bound the Ask OpenAlpha / AutoQuant quick sidebar to the newest recent rows.
  * `recent` must already be in roster order and must exclude running /
  * headless-occupying rows. If the active row sits past the cap, it replaces
  * the last visible row; retained rows keep their relative order.

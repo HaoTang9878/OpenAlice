@@ -42,7 +42,7 @@ describe('desktop data-home preferences', () => {
   it('normalizes, bounds, and de-duplicates recent locations', () => {
     const homes = Array.from({ length: 10 }, (_, index) => resolve(root, String(index)))
     expect(dedupeRecentDataHomes([homes[0], homes[0], ...homes])).toEqual(homes.slice(0, 8))
-    expect(dedupeRecentDataHomes(['/Alice', '/alice'], 'win32')).toEqual([resolve('/Alice')])
+    expect(dedupeRecentDataHomes(['/OpenAlpha', '/alice'], 'win32')).toEqual([resolve('/OpenAlpha')])
   })
 
   it('ignores relative and invalid persisted paths', () => {
@@ -125,14 +125,14 @@ describe('desktop data-home preferences', () => {
     expect(prepared).toEqual({ path: await import('node:fs/promises').then(({ realpath }) => realpath(target)), contents: 'empty' })
   })
 
-  it('recognizes existing OpenAlice homes and unrelated non-empty directories', async () => {
+  it('recognizes existing OpenAlpha homes and unrelated non-empty directories', async () => {
     const home = join(root, 'existing-home')
     const unrelated = join(root, 'unrelated')
     const genericData = join(root, 'generic-data')
     await mkdir(join(home, 'data', 'config'), { recursive: true })
     await mkdir(unrelated, { recursive: true })
     await mkdir(join(genericData, 'data'), { recursive: true })
-    await writeFile(join(unrelated, 'notes.txt'), 'not OpenAlice')
+    await writeFile(join(unrelated, 'notes.txt'), 'not OpenAlpha')
 
     expect((await prepareDataHome(home)).contents).toBe('openalice-home')
     expect((await prepareDataHome(unrelated)).contents).toBe('nonempty')

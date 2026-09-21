@@ -105,7 +105,7 @@ export class ClaudeStreamJsonTransport implements WebSessionTransport {
         request_id: pending.requestId,
         response: optionId === ALLOW
           ? { behavior: 'allow', updatedInput: pending.input }
-          : { behavior: 'deny', message: 'The user declined this tool use in OpenAlice.' },
+          : { behavior: 'deny', message: 'The user declined this tool use in OpenAlpha.' },
       },
     })
   }
@@ -215,7 +215,7 @@ export class ClaudeStreamJsonTransport implements WebSessionTransport {
     if (request['subtype'] !== 'can_use_tool') {
       void this.ctx.channel.send({
         type: 'control_response',
-        response: { subtype: 'error', request_id: requestId, error: `OpenAlice does not handle ${String(request['subtype'])}` },
+        response: { subtype: 'error', request_id: requestId, error: `OpenAlpha does not handle ${String(request['subtype'])}` },
       })
       return
     }

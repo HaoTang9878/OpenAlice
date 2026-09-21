@@ -44,13 +44,13 @@ export function supervisorCommandHoverPreview(
   if (label === 'q' || label === 'q / Esc') {
     return 'Detach from the Supervisor and restore terminal modes; the Runtime keeps its current ownership.'
   }
-  if (label === 'i') return 'Choose or create the complete AliceProject home used by future bare starts.'
+  if (label === 'i') return 'Choose or create the complete OpenAlphaProject home used by future bare starts.'
   if (label === 's') {
     return panel === 'fleet'
-      ? 'Start the selected remote AliceProject on its owning Machine.'
+      ? 'Start the selected remote OpenAlphaProject on its owning Machine.'
       : 'Start the selected Runtime without opening a browser.'
   }
-  if (label === 'p') return 'Setup Studio · review AliceProject and Machine defaults.'
+  if (label === 'p') return 'Setup Studio · review OpenAlphaProject and Machine defaults.'
   if (label === 'c') return 'Choose, validate, save, and launch a Runtime source checkout.'
   if (label === '?') return 'Open contextual controls and the complete keyboard reference.'
   if (label === 'l') return 'Inspect the bounded, redacted Runtime log snapshot.'
@@ -62,7 +62,7 @@ export function supervisorCommandHoverPreview(
       : 'Review impact before restarting the CLI-owned Runtime.'
   }
   if (label === 'x') return 'Review impact before stopping the CLI-owned Runtime.'
-  if (label === 'm') return 'Prepare transfer of the selected AliceProject to another Machine.'
+  if (label === 'm') return 'Prepare transfer of the selected OpenAlphaProject to another Machine.'
   if (label === 'f') return 'Cycle the visible Runtime log severity filter.'
   if (label === 'y') return 'Send the focused bounded, redacted Runtime event to the terminal clipboard.'
   if (label === '↑↓') return 'Move the current selection without activating it.'
@@ -76,8 +76,8 @@ export function supervisorCommandHoverPreview(
   if (label === 'Enter') {
     if (action) return `${action}; activation follows the existing Enter path.`
     return runtimeClass === 'absent'
-      ? 'Start the selected AliceProject and open its Workspace.'
-      : 'Open the selected AliceProject Workspace.'
+      ? 'Start the selected OpenAlphaProject and open its Workspace.'
+      : 'Open the selected OpenAlphaProject Workspace.'
   }
   return action
     ? `${action}; activation follows the existing ${label} key path.`

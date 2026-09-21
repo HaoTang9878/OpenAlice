@@ -57,7 +57,7 @@ describe('ChatPageShell', () => {
     render(<ChatPageShell><div>Chat content</div></ChatPageShell>)
 
     expect(screen.queryByTestId('harness-sidebar')).toBeNull()
-    expect(screen.queryByRole('button', { name: 'Collapse Ask Alice' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Collapse Ask OpenAlpha' })).toBeNull()
     expect(screen.queryByRole('separator')).toBeNull()
     expect(screen.getByText('Chat content')).toBeTruthy()
     expect(screen.queryByRole('group', { name: 'Workspace display mode' })).toBeNull()

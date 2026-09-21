@@ -1,5 +1,5 @@
 /**
- * AI Provider — Alice's credential vault.
+ * AI Provider — OpenAlpha's credential vault.
  *
  * Post-Workspace-pivot the in-process model loop is gone; the only thing this
  * page manages is the central set of api-key credentials that can be selected
@@ -11,7 +11,7 @@
  *
  * Subscription logins (Claude Pro/Max via `claude login`, ChatGPT via
  * `codex login`) are deliberately absent — those live in the CLI's own auth,
- * not in Alice. The preset catalog is reused here purely as an "add credential"
+ * not in OpenAlpha. The preset catalog is reused here purely as an "add credential"
  * helper: it carries each vendor's endpoint + model suggestions + request shape.
  */
 

@@ -9,7 +9,7 @@ export const workspaceListFactory: WorkspaceToolFactory = {
   build(ctx) {
     return tool({
       description: [
-        'List every active OpenAlice Workspace with its stable id, role shape, live workload counts, and recent attributable Session titles.',
+        'List every active OpenAlpha Workspace with its stable id, role shape, live workload counts, and recent attributable Session titles.',
         '',
         'Use this before auditing, delegating, consolidating, or upgrading desks. The result is the active office floor only; a missing Workspace may be departed rather than deleted.',
         'Use the recent Session titles to form a first-pass responsibility map. Use peer path or peer sessions only for a chosen Workspace that genuinely needs deeper inspection.',

@@ -26,7 +26,7 @@ afterEach(async () => {
 })
 
 describe('openalice project', () => {
-  it('lists registered AliceProjects and can select one', async () => {
+  it('lists registered OpenAlphaProjects and can select one', async () => {
     const env = await setupProjects()
     const listed: string[] = []
     await expect(runProjectCommand(['list'], {
@@ -160,7 +160,7 @@ describe('openalice project', () => {
     }))).resolves.toBe(0)
     expect(stop).toHaveBeenCalledWith(env.defaultHome)
     expect(send).toHaveBeenCalledOnce()
-    expect(stdout.join('')).toContain('AliceProject transfer complete')
+    expect(stdout.join('')).toContain('OpenAlphaProject transfer complete')
     expect(stdout.join('')).toContain('Sessions imported: 0')
   })
 
@@ -345,7 +345,7 @@ function transferIo(
   const source = {
     id: 'alice-project-source',
     key: 'default',
-    displayName: 'Default AliceProject',
+    displayName: 'Default OpenAlphaProject',
     home: env.defaultHome,
     port: 47331,
     portAutomatic: true,

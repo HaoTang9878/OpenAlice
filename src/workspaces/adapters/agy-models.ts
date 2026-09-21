@@ -6,7 +6,7 @@
  * Native auth is Google keyring / browser login. A vault Gemini key is
  * optional and is ignored by the CLI unless the user already set
  * `modelProvider: "gemini"` in `~/.gemini/antigravity-cli/settings.json` —
- * Alice does not write that file.
+ * OpenAlpha does not write that file.
  *
  * `agy models` is not a global catalog. Upstream says the list depends on
  * account and auth type

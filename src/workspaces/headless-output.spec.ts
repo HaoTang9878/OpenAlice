@@ -176,8 +176,8 @@ describe('headless structured output', () => {
 
   it('normalizes current Codex web-search, MCP, and collaboration items', () => {
     const output = parse(codexAdapter, [
-      { type: 'item.started', item: { id: 'w1', type: 'web_search', query: 'OpenAlice', action: { type: 'search' } } },
-      { type: 'item.completed', item: { id: 'w1', type: 'web_search', query: 'OpenAlice', action: { type: 'search' } } },
+      { type: 'item.started', item: { id: 'w1', type: 'web_search', query: 'OpenAlpha', action: { type: 'search' } } },
+      { type: 'item.completed', item: { id: 'w1', type: 'web_search', query: 'OpenAlpha', action: { type: 'search' } } },
       { type: 'item.started', item: { id: 'm1', type: 'mcp_tool_call', tool: 'lookup', arguments: { q: 'x' }, status: 'in_progress' } },
       { type: 'item.completed', item: { id: 'm1', type: 'mcp_tool_call', tool: 'lookup', error: { message: 'offline' }, status: 'failed' } },
       { type: 'item.started', item: { id: 'c1', type: 'collab_tool_call', tool: 'spawn_agent', receiver_thread_ids: [], prompt: 'inspect', status: 'in_progress' } },

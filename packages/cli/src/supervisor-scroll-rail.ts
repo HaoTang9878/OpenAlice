@@ -36,7 +36,7 @@ export function withSupervisorScrollRail(
   const maxOffset = total - viewport
   const offset = clamp(Math.trunc(options.offset), 0, maxOffset)
   // Thumb sizing and travel follow @oh-my-pi/pi-tui ScrollView's MIT-licensed
-  // geometry while retaining OpenAlice's existing list state and hit testing.
+  // geometry while retaining OpenAlpha's existing list state and hit testing.
   const thumbSize = Math.max(1, Math.min(Math.floor((viewport * viewport) / total), viewport))
   const travel = viewport - thumbSize
   const thumbStart = maxOffset === 0 ? 0 : Math.round((offset / maxOffset) * travel)

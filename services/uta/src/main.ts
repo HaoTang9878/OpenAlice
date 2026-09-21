@@ -2,10 +2,10 @@
  * UTA service entry — co-located v1.
  *
  * Owns the trading domain (broker connections, git-like approval state,
- * snapshots, FX). Bind 127.0.0.1-only — Alice talks to UTA via
+ * snapshots, FX). Bind 127.0.0.1-only — OpenAlpha talks to UTA via
  * `OPENALICE_UTA_URL`, never exposed externally.
  *
- * Startup path is also the reload path: when broker config changes, Alice
+ * Startup path is also the reload path: when broker config changes, OpenAlpha
  * touches `data/control/restart-uta.flag`, Guardian SIGTERMs this process
  * and respawns. There is no in-process hot-reload code path.
  */
@@ -57,7 +57,7 @@ export async function startUTAService(): Promise<void> {
 
   // ==================== Trading-only dependencies ====================
   // UTA needs eventLog (UTAManager journaling) + toolCenter (CCXT tool
-  // registration). Other infra Alice has (agentCenter, connectorCenter,
+  // registration). Other infra OpenAlpha has (agentCenter, connectorCenter,
   // listenerRegistry, ...) is not used by trading routes.
 
   const eventLog = await createEventLog()
@@ -89,7 +89,7 @@ export async function startUTAService(): Promise<void> {
 
   // ==================== FX (single-asset-class slice of market-data) ====================
   // UTA needs only the currency client for USD conversion in
-  // /api/trading/equity. The other market-data clients stay in Alice.
+  // /api/trading/equity. The other market-data clients stay in OpenAlpha.
 
   const { providers } = config.marketData
   const executor = getSDKExecutor()
@@ -117,7 +117,7 @@ export async function startUTAService(): Promise<void> {
   // Fast lane (10s): fill/cancel detection for known pending orders —
   // broker calls only when something is actually pending. Slow lane
   // (config.trading.observeExternalOrdersEvery, default 15m): list open
-  // orders to catch ones placed outside Alice.
+  // orders to catch ones placed outside OpenAlpha.
 
   const observeRaw = config.trading.observeExternalOrdersEvery
   const observeIntervalMs = observeRaw === 'off' ? 0 : parseDuration(observeRaw)
@@ -144,7 +144,7 @@ export async function startUTAService(): Promise<void> {
 
   const app = new Hono()
 
-  // Health probe — used by Guardian readiness gate and Alice BFF supervisor.
+  // Health probe — used by Guardian readiness gate and OpenAlpha BFF supervisor.
   app.get('/__uta/health', (c) => c.json({
     ok: true,
     startedAt,
@@ -154,7 +154,7 @@ export async function startUTAService(): Promise<void> {
   // Trading routes — UTA-side handlers, narrowly typed via UTAEngineContext.
   // Only utaManager / fxService / snapshotService are exposed because that's
   // all the route layer reads. See services/uta/src/types.ts and ANG-65 for
-  // history (this used to be cast through Alice's EngineContext).
+  // history (this used to be cast through OpenAlpha's EngineContext).
   const tradingCtx: UTAEngineContext = {
     utaManager,
     fxService,
@@ -164,7 +164,7 @@ export async function startUTAService(): Promise<void> {
   // Simulator endpoints — MockBroker-only god-view operations the
   // /dev/simulator UI tab drives. Lives next to the trading routes
   // because both need direct access to UTA's in-process MockBroker
-  // instances. Alice BFF proxies `/api/simulator/*` to here.
+  // instances. OpenAlpha BFF proxies `/api/simulator/*` to here.
   app.route('/api/simulator', createSimulatorRoutes(tradingCtx))
 
   // ==================== Bind + shutdown ====================

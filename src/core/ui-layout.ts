@@ -2,7 +2,7 @@
  * Home-scoped Activity Bar layout.
  *
  * This is user chrome, not operator/runtime configuration. It lives beside
- * `preferences.json` under `data/` so it follows the Alice home. Missing or
+ * `preferences.json` under `data/` so it follows the OpenAlpha home. Missing or
  * malformed files equal the default document (Dev Panel hidden).
  */
 

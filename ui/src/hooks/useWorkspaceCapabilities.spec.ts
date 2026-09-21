@@ -130,5 +130,5 @@ it('keeps files readable with unknown ownership when the Project inventory fails
   mocks.read.mockResolvedValue({ kind: 'ok', content: 'local text' })
   const data = await loadWorkspaceCapabilities('one')
   expect(data.skills[0]).toMatchObject({ owner: 'unknown', content: { kind: 'ok' } })
-  expect(data.errors).toContain('Alice Harness: offline')
+  expect(data.errors).toContain('OpenAlpha Harness: offline')
 })

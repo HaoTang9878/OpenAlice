@@ -41,11 +41,11 @@ export interface SessionRecord {
   /**
    * Preferred title discovered from the native runtime. This intentionally
    * stays separate from `fallbackTitle`: a runtime-generated or user-renamed
-   * title must win over the prompt OpenAlice happened to use at launch.
+   * title must win over the prompt OpenAlpha happened to use at launch.
    */
   readonly title?: string;
   /**
-   * OpenAlice's launch-time title candidate, normally the first user message.
+   * OpenAlpha's launch-time title candidate, normally the first user message.
    * Used only until the native runtime exposes a better title.
    */
   readonly fallbackTitle?: string;

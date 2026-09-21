@@ -3,7 +3,7 @@ import Decimal from 'decimal.js'
 import { ContractDescription, Order, OrderState, UNSET_DOUBLE, UNSET_DECIMAL } from '@traderalice/ibkr'
 // Co-located with the broker stubs it exercises — MockBroker +
 // UTAManager + UnifiedTradingAccount live in services/uta/src/domain/
-// trading/. The spec still tests Alice's tool layer (createTradingTools),
+// trading/. The spec still tests OpenAlpha's tool layer (createTradingTools),
 // imported via the `@/` alias (resolves to ../../src/* per services/uta
 // tsconfig.json).
 import type { OpenOrder } from '../domain/trading/brokers/types.js'

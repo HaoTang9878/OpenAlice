@@ -21,7 +21,7 @@ describe('DemoBanner', () => {
     expect(screen.getByText('录制预览')).toBeTruthy()
     expect(screen.getByText(/更改不会保存/)).toBeTruthy()
     expect(document.body.textContent).not.toContain('·')
-    expect(screen.getByRole('link', { name: '安装 OpenAlice' }).getAttribute('href')).toBe(
+    expect(screen.getByRole('link', { name: '安装 OpenAlpha' }).getAttribute('href')).toBe(
       'https://github.com/TraderAlice/OpenAlice',
     )
   })

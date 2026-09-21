@@ -2,7 +2,7 @@
  * One-time relocation of the packaged app's user data store.
  *
  * Until the global-root change, the packaged backend kept user data under
- * Electron's userData dir (~/Library/Application Support/OpenAlice/data on
+ * Electron's userData dir (~/Library/Application Support/OpenAlpha/data on
  * macOS). The user-data home is now ~/.openalice — shared with `pnpm dev`
  * and bare `pnpm start` — so an existing store must move once, before the
  * shell reads ports.json from the new root or spawns the backend (which
@@ -46,7 +46,7 @@ export async function relocateLegacyData(legacyRoot: string, newRoot: string): P
 
   await writeFile(
     join(legacyRoot, 'DATA-MOVED.txt'),
-    `OpenAlice user data moved to ${newData} on ${new Date().toISOString()}\n`,
+    `OpenAlpha user data moved to ${newData} on ${new Date().toISOString()}\n`,
   )
   return 'moved'
 }

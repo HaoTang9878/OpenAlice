@@ -33,7 +33,7 @@ import { homedir } from 'node:os'
 
 /** Default user-data root when OPENALICE_HOME is unset. Shared with the
  *  workspace launcher (~/.openalice/workspaces) and the global provider-key
- *  store (~/.openalice/provider-keys.json) — one OpenAlice home. */
+ *  store (~/.openalice/provider-keys.json) — one OpenAlpha home. */
 const DEFAULT_USER_DATA_HOME = resolve(homedir(), '.openalice')
 
 const USER_DATA_HOME = process.env['OPENALICE_HOME'] ?? DEFAULT_USER_DATA_HOME
@@ -45,7 +45,7 @@ export function dataPath(...parts: string[]): string {
 }
 
 /**
- * Machine-local, replaceable runtime payloads installed after OpenAlice.
+ * Machine-local, replaceable runtime payloads installed after OpenAlpha.
  * Broker packs belong here rather than in portable `data/` backups.
  */
 export function runtimePath(...parts: string[]): string {

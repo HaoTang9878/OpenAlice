@@ -1,7 +1,7 @@
 /**
  * Unified session store — JSONL format compatible with Claude Code.
  *
- * Historical Alice sessions used this store before Workspace-native Agent
+ * Historical OpenAlpha sessions used this store before Workspace-native Agent
  * CLIs became the model-loop owners. The reader remains for compatibility
  * with those durable JSONL records.
  *
@@ -58,7 +58,7 @@ export type ContentBlock =
 
 /**
  * Preserve the read semantics of historical compacted JSONL sessions without
- * retaining Alice's retired in-process compaction policy. Native Agent CLIs
+ * retaining OpenAlpha's retired in-process compaction policy. Native Agent CLIs
  * own context-window management for all new Workspace sessions.
  */
 function getActiveEntries(entries: SessionEntry[]): SessionEntry[] {

@@ -2,7 +2,7 @@
  * Session store.
  *
  * Sessions are file-as-truth (`data/config/sessions.json`) — fits the rest
- * of OpenAlice's persistence model, no Redis/SQLite required. A session
+ * of OpenAlpha's persistence model, no Redis/SQLite required. A session
  * is created on successful `POST /api/auth/login` and dies when:
  *   - Operator hits "logout" → explicit revoke
  *   - TTL expires (default 7 days from last touch)
