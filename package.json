@@ -1,6 +1,6 @@
 {
   "name": "open-alice",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "File-based trading agent engine",
   "type": "module",
   "imports": {
@@ -183,7 +183,7 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "include": "apps/desktop/build/installer.nsh",
-      "artifactName": "OpenAlice.Setup.${version}.${ext}"
+      "artifactName": "OpenAlpha.Setup.${version}.${ext}"
     },
     "publish": [
       {
