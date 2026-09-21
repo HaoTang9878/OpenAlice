@@ -1,0 +1,55 @@
+name: release-desktop
+
+# OpenAlpha Desktop 发布流程（基于 OpenAlice fork, AGPL-3.0）
+# 推 v* 标签 → windows-latest 构建 NSIS 安装包 → 发布到本仓库 Releases
+# （electron-builder 的 github publish 指向 HaoTang9878/OpenAlice，
+#   latest.yml 生成后 electron-updater 自动更新可用）
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Alice + UTA + desktop shell
+        run: pnpm electron:build
+
+      - name: Vendor managed workspace runtime
+        run: pnpm vendor:runtime
+
+      - name: Package Windows installer and publish
+        run: pnpm -F @traderalice/desktop exec electron-builder --projectDir ../.. --publish always --x64
+
+      - name: Upload build artifacts for troubleshooting
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: |
+            dist/electron-app/*.exe
+            dist/electron-app/*.yml
+            dist/electron-app/*.blockmap
+          if-no-files-found: ignore
+          retention-days: 14

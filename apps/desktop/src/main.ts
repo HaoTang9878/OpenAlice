@@ -1007,7 +1007,7 @@ app.whenReady().then(async () => {
   const win = new BrowserWindow({
     width: 1280,
     height: 800,
-    title: 'OpenAlice',
+    title: 'OpenAlpha',
     ...windowChromeOptions(),
     webPreferences: {
       preload: resolve(__dirname, 'preload.js'),
