@@ -79,7 +79,7 @@ describe('ActivityBarUtilityMenu', () => {
       onOpenSettings={vi.fn()} onOpenConnectors={onOpenConnectors} connectorsActive connectorWarnings={1} />)
     expect(screen.getByRole('status', { name: '1 connector needs attention' })).toBeTruthy()
     const trigger = screen.getByRole('button', { name: 'Your OpenAlpha: Open application menu' })
-    expect(trigger.querySelector('img')?.getAttribute('src')).toBe('/alice.ico')
+    expect(trigger.querySelector('img')?.getAttribute('src')).toBe('/openalpha.ico')
     expect(trigger.querySelector('img')?.parentElement?.classList.contains('rounded-full')).toBe(true)
     expect(trigger.textContent).toBe(compactRail ? '' : 'Your OpenAlpha')
     expect(trigger.className).not.toContain('bg-sidebar-accent text-sidebar-accent-foreground')

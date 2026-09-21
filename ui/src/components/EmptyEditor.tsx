@@ -8,7 +8,7 @@ export function EmptyEditor() {
   return (
     <div className="flex flex-col items-center justify-center h-full select-none px-6 gap-5 text-center">
       <img
-        src="/alice.ico"
+        src="/openalpha.ico"
         alt="OpenAlpha"
         className="w-16 h-16 rounded-2xl ring-1 ring-primary/25 shadow-[0_0_18px_var(--primary-muted)]"
         draggable={false}

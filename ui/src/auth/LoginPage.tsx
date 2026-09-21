@@ -44,7 +44,7 @@ export function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-[400px] rounded-lg border border-border bg-card px-6 py-7 shadow-sm">
-        <img src="/alice.ico" alt="" aria-hidden draggable={false} className="mb-4 size-8 object-contain" />
+        <img src="/openalpha.ico" alt="" aria-hidden draggable={false} className="mb-4 size-8 object-contain" />
         <h1 className="text-[18px] font-semibold text-foreground mb-1">{t('auth.heading')}</h1>
         <p className="text-[12px] text-muted-foreground leading-relaxed mb-5">
           {t('auth.instruction')}
@@ -98,7 +98,7 @@ export function NoTokenPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-[460px] rounded-lg border border-border bg-card px-6 py-7">
-        <img src="/alice.ico" alt="" aria-hidden draggable={false} className="mb-4 size-8 object-contain" />
+        <img src="/openalpha.ico" alt="" aria-hidden draggable={false} className="mb-4 size-8 object-contain" />
         <h1 className="text-[18px] font-semibold text-foreground mb-2">{t('auth.noTokenHeading')}</h1>
         <p className="text-[13px] text-foreground leading-relaxed mb-3">
           The backend did not generate <code className="font-mono">data/config/auth.json</code>.

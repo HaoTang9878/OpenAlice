@@ -482,7 +482,7 @@ export function HarnessLandingPage({
           )}
           <header className="flex flex-col items-center text-center">
             <img
-              src="/alice.ico"
+              src="/openalpha.ico"
               alt=""
               aria-hidden="true"
               draggable={false}

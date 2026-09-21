@@ -65,7 +65,7 @@ export function ActivityBarUtilityMenu({
         )}
       >
         <span aria-hidden className={`${denseRail ? 'size-6' : 'size-7'} flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-sidebar-foreground/15 bg-sidebar-accent/60 p-0.5`}>
-          <img src="/alice.ico" alt="" draggable={false} className="size-full object-contain" />
+          <img src="/openalpha.ico" alt="" draggable={false} className="size-full object-contain" />
         </span>
         {!compactRail && (
           <span className="min-w-0 flex-1 truncate font-medium">{t('nav.yourAlice')}</span>
